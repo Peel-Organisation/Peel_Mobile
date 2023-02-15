@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import {onDisplayNotification} from "../../functions/notification";
 
-import { SettingsView, Button_Settings, Button_Settings_Text, SettingsTitle } from './styles';
+import { SettingsView, SettingsList ,Button_Settings, Button_Settings_Text, SettingsTitle } from './styles';
 
 
 import "../../config/translationInit";
@@ -35,6 +35,7 @@ const Settings = ({ navigation }) => {
             <SettingsTitle> 
                 {t("settings.title")}
             </SettingsTitle>
+            <SettingsList>
             <Button_Settings  onPress={Logout} >
                 <Button_Settings_Text>{t("settings.logout")}</Button_Settings_Text>
             </Button_Settings>
@@ -56,6 +57,7 @@ const Settings = ({ navigation }) => {
             >
                 <Button_Settings_Text>Notification</Button_Settings_Text>
             </Button_Settings>
+            </SettingsList>
         </SettingsView >
     );
     }

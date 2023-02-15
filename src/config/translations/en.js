@@ -3,10 +3,10 @@ import Biographie from "../../screens/profile/profile_biographie";
 export default {
   translation: {
     home: {
-        title: "Page Home",
+        title: "Peel",
     },
     settings: {
-        title: "settings",
+        title: "Settings",
         profile_edit: "Edit profile",
         logout: "Logout",
         language: "Language",
@@ -26,7 +26,7 @@ export default {
         email: "Email",
         password: "Password",
         button_login: "Login",
-        no_account: "You do not have an account ?",
+        no_account: "Don't have an account yet ?",
         button_register: "Register",
     },
     register: {
@@ -44,33 +44,42 @@ export default {
         firstname: "Firstname",
         lastname: "Lastname",
         birth_date: "What is your birth date ?",
-        gender: "what is your gender ?",
+        gender: "What is your gender ?",
         male_gender: "Man",
         female_gender: "Woman",
         other_gender: "Other", 
-        min_age: "minimum age preferred",
-        max_age: "maximum age preferred",
-        age: "age preferred",
-        sexual_preference: "What is your sexal interest",
+        min_age: "Minimum age preferred",
+        max_age: "Maximum age preferred",
+        age: "Age preferred",
+        sexual_preference: "What is your sexual preference ?",
         homo_search: "Homosexual",
         hetero_search: "Heterosexual",
         bi_search: "Bisexual",
         biography: "Fill your biography",
-        interest:"please choose 5 interst centers",
+        interest:"Please choose 5 hobbies",
         search_zone:"Search area",
         question_title: "Describe yourself in 3 questions",
         question_select: "Select a question !"
     },
     profile_navigator: {
         title: "Profile",
-        next_button: "Next",
-        prev_button: "Previous",
+        next_button: "NEXT",
+        prev_button: "PREVIOUS",
     },
     Auth: {
         login: "Login",
         register: "Register",
         title: "Peel",
-        main_text: "To peel something other than an orange"
+        main_text: "To peel more than just an orange"
     },
+    Card: {
+        biography: "Biography",
+        interest: "Hobbies",
+        music: "Latest favorite music"
+    },
+    Contact: {
+        title: "Contacts",
+        newMatchs: "New matches",
+    }
   }
 };

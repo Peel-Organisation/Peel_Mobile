@@ -11,14 +11,20 @@ export const SettingsView =  styled.View`
     align-items: center;
     /* justify-content: center; */
     background-color: ${props => props.theme.background};
+    height: 100%;
 `
+
+export const SettingsList = styled.ScrollView`
+    width: 100%;
+    /* background-color: ${props => props.theme.background}; */
+    /* align-items: center; */
+`
+
 
 export const Button_Settings = styled.TouchableOpacity`
     width: 110%;
-    height: 50px;
-    border-style: solid;
-    border-color: ${props => props.theme.sub_text};
-    border-width: 1px;
+    height: 150px;
+    border: 1px solid ${props => props.theme.sub_text};
     /* margin: 10px; */
     background-color: ${props => props.theme.background};
 `
