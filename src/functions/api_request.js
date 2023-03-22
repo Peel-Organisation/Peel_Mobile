@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_LINK } from '@env';
 import  { addStorage, getStorage, Logout } from './storage';
 
 
@@ -8,8 +9,8 @@ export const GetUser = async (defaultUser) => {
     const requestOptions = {  
         headers: { 'Content-Type': 'application/json', "authorization": token  },
     };
-    const API_LINK = process.env['API_LINK'] + "/api/user/";
-    return axios.get(API_LINK ,requestOptions).then(res => {
+    const link = API_LINK + "/api/user/";
+    return axios.get(link ,requestOptions).then(res => {
         let user = res.data;
         console.log("User fetched : ", user);
         if (user.birthday == null) {
@@ -36,8 +37,8 @@ export const updateUser = async (user) => {
     const requestOptions = {
         headers: { 'Content-Type': 'application/json', "authorization": token},
     };
-    const API_LINK = process.env['API_LINK'] + "/api/user/";
-    return axios.put(API_LINK, body, requestOptions).then(res => {
+    const link = API_LINK + "/api/user/";
+    return axios.put(link, body, requestOptions).then(res => {
         if (res.status !== 200) {
             const error = (data && data.message) || res.status;
             console.log(error);
@@ -54,14 +55,14 @@ export  const  TestAuth = async () => {
     let userId = await getStorage('userId')
     let token = await  getStorage('token')
     let auth_bool = false;
-    const API_LINK = process.env['API_LINK'] + "/api/auth/protected";
-    console.log("get env : ", API_LINK)
+    const link = API_LINK + "/api/auth/protected";
+    console.log("get env : ", link)
     if (userId == null || token == null || userId == undefined || token == undefined) {
         console.log("User not authenticated");
         await Logout(); 
         return auth_bool;
     }
-    let response = await axios.get(API_LINK, {
+    let response = await axios.get(link, {
         headers: { authorization : token },
         body: {userId: userId} 
     })
@@ -82,8 +83,8 @@ export const GetMatchList = async () => {
     const requestOptions = {  
         headers: { 'Content-Type': 'application/json', "authorization": token },
     };
-    const API_LINK = process.env['API_LINK'] + "/api/match/swipeProfil" ;
-    return axios.get(API_LINK,requestOptions).then(res => {
+    const link = API_LINK + "/api/match/swipeProfil" ;
+    return axios.get(link,requestOptions).then(res => {
         console.log("match list : ", res.data)
         return (res.data);
     }).catch(error => {
@@ -101,8 +102,8 @@ export const GetContactList = async () => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', "authorization": token},
     };
-    const API_LINK = process.env['API_LINK'] + "/api/conversation/";
-    return axios.get(API_LINK,requestOptions).then(res => {
+    const link = API_LINK + "/api/conversation/";
+    return axios.get(link,requestOptions).then(res => {
         return (res.data);
     }).catch(error => {
         console.log("error : ", error)
@@ -119,8 +120,8 @@ export const sendSwipe = async (user_target, typeOfLike) => {
     const requestOptions = {
         headers: {"authorization": token }
     };
-    const API_LINK = process.env['API_LINK'] + "/api/match/like/ " + userId;
-    return axios.post(API_LINK, body, requestOptions).then(res => {
+    const link = API_LINK + "/api/match/like/ " + userId;
+    return axios.post(link, body, requestOptions).then(res => {
         if (res.status !== 200) {
             const error = (data && data.message) || res.status;
             console.log(error);
@@ -137,8 +138,8 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 
 export const loginRequest = async (email, password, navigation) => {
     console.log("\n\nlogin request")
-    const API_LINK = process.env['API_LINK'] + "/api/auth/login";
-    axios.post(API_LINK, {
+    const link = API_LINK + "/api/auth/login";
+    axios.post(link, {
         email: email, 
         password: password
     }).then(response => {
@@ -153,8 +154,8 @@ export const loginRequest = async (email, password, navigation) => {
 
 export const registerRequest = async (email, password, navigation) => {
     console.log("\n\nregister request")
-    const API_LINK = process.env['API_LINK'] + "/api/auth/register";
-    axios.post(API_LINK, {
+    const link = API_LINK + "/api/auth/register";
+    axios.post(link, {
         email: email, 
         password: password
     }).then(response => {
@@ -170,16 +171,16 @@ export const registerRequest = async (email, password, navigation) => {
 
 export const getInterestList = async () => {
     console.log("\n\n GetInterestList")
-    const API_LINK = process.env['API_LINK'] + "/api/interest";
-    return axios.get(API_LINK).then(res => {
+    const link = API_LINK + "/api/interest";
+    return axios.get(link).then(res => {
         return (res.data);
     })
 }
 
 export const getQuestionList = async () => {
     console.log("\n\n getQuestionList")
-    const API_LINK = process.env['API_LINK'] + "/api/question";
-    return axios.get(API_LINK).then(res => {
+    const link = API_LINK + "/api/question";
+    return axios.get(link).then(res => {
         let data = res.data;
         for (let i = 0; i < data.length; i++) {
             let newobj = {};
@@ -200,8 +201,8 @@ export const getMessageList = async (conversationId) => {
     const requestOptions = {  
         headers: { 'Content-Type': 'application/json', "authorization": token, "conversation_id": conversationId},
     };
-    const API_LINK = process.env['API_LINK'] + "/api/conversation/message/";
-    return axios.get(API_LINK,  requestOptions ).then(res => {
+    const link = API_LINK + "/api/conversation/message/";
+    return axios.get(link,  requestOptions ).then(res => {
         return (res.data);
     })
 }
