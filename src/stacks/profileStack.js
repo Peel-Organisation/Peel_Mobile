@@ -10,6 +10,7 @@ import Biographie from "../screens/profile/profile_biographie"
 import ProfileInterest from "../screens/profile/profile_interest"
 import Question from "../screens/profile/profile_question"
 import Location from "../screens/profile/profile_location"
+import Gif from "../screens/profile/profile_gif"
 
 import {GetUser} from "../functions/api_request"
 
@@ -41,7 +42,7 @@ const PublicStack = () => {
   return (
     <UserContext.Provider value={"user"}>
       <Stack.Navigator initialRouteName="Profile1" screenOptions={{headerShown: false}} >
-        <Stack.Screen name="Profile1" component={Profile1} />
+        <Stack.Screen name="Profile1" component={Gif} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Profile3} />
         <Stack.Screen name="Profile4" component={Biographie} />
