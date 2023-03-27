@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserMewssage, UserMewssageText, ContactMessage, ContactMessageText, CustomFlatList } from './styles';
+import { UserMessage, UserMessageText, ContactMessage, ContactMessageText, CustomFlatList } from './styles';
 
 import { getMessageList } from "../../functions/api_request";
 import { getStorage } from "../../functions/storage"; 
@@ -84,13 +84,13 @@ const Message_user = (params) => {
   if (message_UserId != undefined){
     if ( userId == message_UserId) {
       return (
-        <UserMewssage
+        <UserMessage
           key={message._id}
           title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
         >
-          <UserMewssageText>{message.content}</UserMewssageText>
-          <UserMewssageText>{new Date(message.createdAt).toLocaleTimeString()}</UserMewssageText>
-        </UserMewssage>
+          <UserMessageText>{message.content}</UserMessageText>
+          <UserMessageText>{new Date(message.createdAt).toLocaleTimeString()}</UserMessageText>
+        </UserMessage>
       );
     }else{
       return (

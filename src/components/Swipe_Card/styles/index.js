@@ -88,4 +88,5 @@ export const ResponseText = styled.Text`
     color: ${props => props.theme.text};
     margin-left: 5%;
     text-align: center;
+    padding: 5px;
 `
