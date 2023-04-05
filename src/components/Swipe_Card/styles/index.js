@@ -13,8 +13,7 @@ export const HomeCard =  styled.View`
     padding: 5%;
     height: 100%;
     max-height: 600px;
-
-`    /* width: 80%; */
+`
 
 export const Name = styled.Text`
     font-size: 20px;
