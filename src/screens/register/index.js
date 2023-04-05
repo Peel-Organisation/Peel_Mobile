@@ -85,7 +85,7 @@ const Register = ({ navigation }) => {
                 />
                 <ButtonOrange title={t("register.button_register")} onPress={() => SignIn()}>
                     <ButtonOrangeText>
-                        {t("register.button_register")}
+                        {t("register.button_register").toUpperCase()}
                     </ButtonOrangeText>
                 </ButtonOrange>
                 <MainText>{t("register.already_account")} </MainText>

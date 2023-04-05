@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View, Text } from "react-native";
-import {HomeCard, Name, Biography, BiographyText, InteretBox, InteretView, InteretText, QuestionText, ResponseText} from './styles';
+import {HomeCard, Name, BiographyTitle, Biography, BiographyText, InteretTitle, InteretBox, InteretView, InteretText, QuestionView, QuestionText, ResponseText} from './styles';
 
 
 
 
 const Swipe_Card = (props) => { 
+
+    const { t } = useTranslation();
 
     const [User, setUser] = useState(props.User)
 
@@ -32,11 +35,13 @@ const Swipe_Card = (props) => {
                 {User.firstName} {getAge(User.birthday)}
             </Name>
 
+            <BiographyTitle>{t("Card.biography")} </BiographyTitle>
             <Biography>
                 <BiographyText>
                     {User.biographie}
                 </BiographyText>
             </Biography>
+            <InteretTitle>{t("Card.interest")}</InteretTitle>
             <InteretView>
                 {User.interests?.map((interet) => {
                     return (
@@ -47,6 +52,7 @@ const Swipe_Card = (props) => {
                 })}
             </InteretView>
 
+            <QuestionView>
             {User.questions?.map((question) => {
                 return (
                     <View key={question._id}>
@@ -59,6 +65,7 @@ const Swipe_Card = (props) => {
                     </View>
                 ) 
             })}
+            </QuestionView>
         </HomeCard >
     );
     }

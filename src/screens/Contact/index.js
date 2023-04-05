@@ -8,9 +8,13 @@ import { ContactView, Button_Contact, Button_Contact_Text, ContactTitle, Contain
 import Loading from "../../components/loading";
 import  { getStorage } from '../../functions/storage';
 
+import { useTranslation } from "react-i18next";
 
  
 const Contact = ({navigation}) => {
+
+    const { t } = useTranslation();
+
     const [contactList, setContactList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState()
@@ -36,7 +40,7 @@ const Contact = ({navigation}) => {
     return (
         <ContactView className="message-app">
             <OrangeView>
-                <NewMatchTitle>Nouveaux matchs</NewMatchTitle>
+                <NewMatchTitle>{t("Contact.newMatchs")}</NewMatchTitle>
                 <NewMatchView>
                     {contactList.map((contact) => {
                         let name = ""
@@ -59,7 +63,7 @@ const Contact = ({navigation}) => {
                     })}
                 </NewMatchView>
             </OrangeView>
-            <ContactTitle>Contacts</ContactTitle>
+            <ContactTitle>{t("Contact.title")}</ContactTitle>
             {contactList.map((contact) => {
                 let name = ""
                     if (contact.members[0]._id == userId){

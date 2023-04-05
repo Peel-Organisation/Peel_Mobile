@@ -64,7 +64,7 @@ const Login = ({ navigation }) => {
                 />
                 <ButtonOrange title={t("login.button_login")} onPress={() => log()}>
                     <ButtonOrangeText>
-                        {t("login.button_login")}
+                        {t("login.button_login").toUpperCase()}
                     </ButtonOrangeText>
                 </ButtonOrange>
 

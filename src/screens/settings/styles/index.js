@@ -11,14 +11,20 @@ export const SettingsView =  styled.View`
     align-items: center;
     /* justify-content: center; */
     background-color: ${props => props.theme.background};
+    height: 100%;
 `
 
+export const SettingsList = styled.ScrollView`
+    width: 100%;
+    /* background-color: ${props => props.theme.background}; */
+    /* align-items: center; */
+`
+
+
 export const Button_Settings = styled.TouchableOpacity`
-    width: 110%;
+    width: 100%;
     height: 50px;
-    border-style: solid;
-    border-color: ${props => props.theme.sub_text};
-    border-width: 1px;
+    border: 1px solid ${props => props.theme.background_button_border};
     /* margin: 10px; */
     background-color: ${props => props.theme.background};
 `
@@ -31,7 +37,7 @@ export const Button_Settings_Text = styled.Text`
 `
 
 export const SettingsTitle = styled.Text`
-    font-size: 20px;
+    font-size: 25px;
     color: ${props => props.theme.primary};
     padding-top: 10px;
     padding-bottom: 10px;

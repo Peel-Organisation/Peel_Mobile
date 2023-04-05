@@ -23,12 +23,12 @@ const Auth = ({ navigation }) => {
             <ViewAuth>
                 <ButtonAuth onPress={() => navigation.navigate('Login')} >
                     <ButtonAuthText>
-                        {t("Auth.login")}
+                        {t("Auth.login").toUpperCase()}
                     </ButtonAuthText>
                 </ButtonAuth>
                 <ButtonAuth title={t("Auth.register")} onPress={() => navigation.navigate('Register')} >
                     <ButtonAuthText>
-                        {t("Auth.register")}
+                        {t("Auth.register").toUpperCase()}
                     </ButtonAuthText>
                 </ButtonAuth>
             </ViewAuth> 
