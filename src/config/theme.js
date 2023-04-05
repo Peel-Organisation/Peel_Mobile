@@ -6,7 +6,8 @@ const theme = {
     background: '#FFF5EC',
     white: '#FFFFFF',
     black: '#000000',
-    grey: '#A9A9A9'
+    grey: '#A9A9A9',
+    loadingbg: '#FE9330'
 };
 
 export default theme;

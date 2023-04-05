@@ -26,7 +26,7 @@ export const TitleView =  styled.View`
 `
 
 export const TitleText = styled.Text`
-    font-size: 20px;
+    font-size: 30px;
     color: ${props => props.theme.background};
     margin: 5%;
 `

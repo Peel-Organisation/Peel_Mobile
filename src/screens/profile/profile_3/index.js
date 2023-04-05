@@ -86,7 +86,7 @@ return (
       </InputView>
       <InputView>
         <MainText>
-          {t("profile.sexual_preferences")}
+          {t("profile.sexual_preference")}
         </MainText>
         <View>
         <SwitchSelectorCustom 
