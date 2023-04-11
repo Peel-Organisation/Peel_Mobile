@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android-clean": "react-native run-android --reset-cache",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "clean": "./android/gradlew clean",
