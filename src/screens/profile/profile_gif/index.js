@@ -31,7 +31,7 @@ const Gif = ({ route, navigation }) => {
 
     useEffect(() => {
        const requestOptions = {  
-            headers: { 'Content-Type': 'application/json', "api_key": GIFY_SDK_KEY, limit:20  },
+            params: { "api_key": GIFY_SDK_KEY, limit:20  },
         };
         const link = "api.giphy.com/v1/gifs/trending";
         axios.get(link ,requestOptions).then(res => {
