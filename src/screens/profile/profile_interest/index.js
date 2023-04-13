@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Update_Button from "../../../components/Update_User";
+import {Update_Button} from "../../../components/Update_User";
 import Loading from "../../../components/loading";
 
 
@@ -48,7 +48,7 @@ const ProfileInterest = ({ route, navigation }) => {
     if (user.interests?.length == 5 ){ 
       setNavButton(
         <>
-          <Update_Button user={user} prevPage="Profile4" nextPage="Profile6"  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile5" nextPage="Profile7"  navigation={navigation} />
         </>
       ) 
     } else {

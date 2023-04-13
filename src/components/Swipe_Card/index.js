@@ -25,7 +25,7 @@ const Swipe_Card = (props) => {
 
         return user_age
     }
-
+    console.log("User: ", User.gif)
     
 
 
