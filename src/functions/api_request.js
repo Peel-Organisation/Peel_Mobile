@@ -53,7 +53,7 @@ export const updateUser = async (user) => {
 export  const  TestAuth = async () => {
     console.log("\n\n TestAuth")
     let userId = await getStorage('userId')
-    let token = await  getStorage('token')
+    let token = await  getStorage('token')  
     let auth_bool = false;
     const link = API_LINK + "/api/auth/protected";
     console.log("get env : ", link)
