@@ -13,8 +13,7 @@ export const HomeCard =  styled.View`
     padding: 5%;
     height: 100%;
     max-height: 600px;
-
-`    /* width: 80%; */
+`
 
 export const Name = styled.Text`
     font-size: 20px;
@@ -88,6 +87,7 @@ export const ResponseText = styled.Text`
     color: ${props => props.theme.text};
     margin-left: 5%;
     text-align: center;
+    padding: 5px;
 `
 
 export const GifImage = styled.Image`

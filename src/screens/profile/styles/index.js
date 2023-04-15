@@ -149,7 +149,7 @@ export const SliderCustom = styled.View`
     width: 80%;
     height: 50px;
     background-color: ${props => props.theme.background};
-    color: ${props => props.theme.extt};
+    color: ${props => props.theme.text};
 
 `
 
