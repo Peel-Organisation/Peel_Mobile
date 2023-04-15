@@ -17,7 +17,6 @@ export const Button_Contact = styled.TouchableOpacity`
     height: 80px;
     border-style: solid;
     border-color: ${props => props.theme.sub_text};
-    border-width: 1px;
     background-color: ${props => props.theme.background};
 `
 export const Button_Contact_Text = styled.Text`
@@ -29,7 +28,7 @@ export const Button_Contact_Text = styled.Text`
 `
 
 export const Button_Contact_Sub_Text = styled.Text`
-    font-size: 15px;
+    font-size: 16px;
     color: ${props => props.theme.sub_text};
     margin-left: 50px;
     margin-right: 50px;
@@ -41,17 +40,17 @@ export const Container = styled.View`
 `
 
 export const ContactTitle = styled.Text`
-    font-size: 20px;
+    font-size: 24px;
     color: ${props => props.theme.primary};
     padding-top: 10px;
     padding-bottom: 10px;
 `
 
 export const NewMatchTitle = styled.Text`   
-    font-size: 20px;
+    font-size: 24px;
     color: ${props => props.theme.background};
     align-self: center;
-    padding-top: 10px;
+    margin-top: 20px;
 `
 
 export const NewMatchView = styled.View`
