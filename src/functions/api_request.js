@@ -1,6 +1,7 @@
-import axios from "axios";
 import { API_LINK } from '@env';
 import  { addStorage, getStorage, Logout } from './storage';
+import axios from 'axios';
+import useFetch from '../hooks/useFetch';
 
 
 export const GetUser = async (defaultUser) => {
@@ -139,10 +140,13 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 export const loginRequest = async (email, password, navigation) => {
     console.log("\n\nlogin request")
     const link = API_LINK + "/api/auth/login";
-    axios.post(link, {
+    const requestOptions = {
         email: email, 
         password: password
-    }).then(response => {
+    };
+    console.log("requestOptions : ", requestOptions)
+    console.log("link : ", link)
+    axios.post(link, requestOptions).then(response => {
         addStorage("token", response.data['token'].toString())
         addStorage("userId", response.data['userId'].toString())
         console.log("connecté")

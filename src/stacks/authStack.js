@@ -19,8 +19,7 @@ import SettingsSelectedImage from "../img/tabIcons/settingsSelected.png";
 import HomeScreen from '../screens/home';
 import ContactScreen from '../screens/Contact';
 import SettingsScreen from '../screens/settings';
-import Chat from '../screens/chat';
-// const Tab = createBottomTabNavigator();
+import Chat from '../screens/chat'; 
 
 const TabStack = createBottomTabNavigator();
 
@@ -58,7 +57,7 @@ const Icon = ({route, focused, color, size }) => {
   let iconName = "";
 
   
-
+ 
 
   if (color != "gray") {
     if (route.name === 'Home') {

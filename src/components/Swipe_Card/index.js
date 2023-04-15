@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { View, Text } from "react-native";
-import {HomeCard, Name, BiographyTitle, Biography, BiographyText, InteretTitle, InteretBox, InteretView, InteretText, QuestionView, QuestionText, ResponseText} from './styles';
+import { View, Text, Image } from "react-native";
+import {HomeCard, Name, BiographyTitle, Biography, BiographyText, InteretTitle, InteretBox, InteretView, InteretText, QuestionView, QuestionText, ResponseText, GifImage} from './styles';
 
 
 
@@ -25,7 +25,7 @@ const Swipe_Card = (props) => {
 
         return user_age
     }
-    console.log("User: ", User.gif)
+    // console.log("User: ", User)
     
 
 
@@ -34,8 +34,19 @@ const Swipe_Card = (props) => {
             <Name>
                 {User.firstName} {getAge(User.birthday)}
             </Name>
-
-            <BiographyTitle>{t("Card.biography")} </BiographyTitle>
+            {User.gif != undefined && User.gif != "" && User.gif != null ? (
+                <View>
+                    <GifImage
+                    source={{
+                        uri: `${User?.gif?.image?.webp}`,
+                    }}
+                    />
+                </View>
+            ) : (
+                <View>
+                    <Text>no gif</Text>
+                </View>
+            )}
             <Biography>
                 <BiographyText>
                     {User.biographie}

@@ -82,12 +82,13 @@ const Gif = ({ route, navigation }) => {
                 setGifs(jsonData.data)
             }
         } 
-    }
+    }   
 
 
     const updateGif = (gif) => {
         let newUser = user;
         newUser.gif = {id : gif.id, title : gif.title, url : gif.url, image: gif.images.original}
+        console.log("newUser : ", newUser)
         setUser(newUser);
         nextAction("Profile6", navigation, user);
     }
