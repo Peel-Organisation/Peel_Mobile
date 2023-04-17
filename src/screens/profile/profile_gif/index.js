@@ -57,7 +57,7 @@ const Gif = ({ route, navigation }) => {
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
-            if (jsonData != null && jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
+            if (jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
                 console.log("jsonData : ", jsonData)
                 let newGifs = []
                 if (page > 0) {
@@ -77,7 +77,7 @@ const Gif = ({ route, navigation }) => {
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
-            if (jsonData != null && jsonData.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
+            if (jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
                 setGifs(jsonData.data)
             }
         } 
