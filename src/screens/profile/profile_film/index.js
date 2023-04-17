@@ -1,139 +1,132 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import {Update_Button, nextAction} from "../../../components/Update_User";
-import {  GIFY_SDK_KEY } from '@env';
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {FlatList, TouchableOpacity, Image} from 'react-native';
+import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
+import {Update_Button, nextAction} from '../../../components/Update_User';
+import {getStorage} from '../../../functions/storage';
+import {ViewCustom, Title, MainText, FieldInput} from '../styles';
 
-import { getStorage } from "../../../functions/storage"; 
+const Film = ({route, navigation}) => {
+  const {t} = useTranslation();
+  const [user, setUser] = useState({});
+  const [searchText, setSearchText] = useState('');
+  const [page, setPage] = React.useState(1);
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+  useEffect(() => {
+    getStorage('user').then(fetchedUser => {
+      if (fetchedUser.biographie === undefined) {
+        fetchedUser.biographie = '';
+      }
+      setUser(fetchedUser);
+    });
+  }, []);
 
-import {FlatList, TouchableOpacity, Image } from "react-native"
+  useEffect(() => {
+    getPopularMovies();
+  }, [page]);
 
-
-import { BioInput, ViewCustom, Title, MainText, FieldInput } from "../styles";
-
- 
-const Gif = ({ route, navigation }) => {
-    const { t } = useTranslation();
-    const [user, setUser] = useState({});
-    const [searchText, setSearchText] = useState("")
-    const [page, setPage] = React.useState(0);
-
-
-    const [gifs, setGifs] = useState([]);
-
- 
-    useEffect(() => {
-        getStorage('user').then(fetchedUser => {
-            if (fetchedUser.biographie == undefined) {
-                fetchedUser.biographie = "";     
-            }
-            setUser(fetchedUser);
-        });
-    }, []);
-
-    useEffect( () =>  {
-        getPopularGifs()
-    } , [])
-
-    useEffect( () =>  {
-        getPopularGifs()
-    } , [page])
-
-    useEffect( () =>  {
-        setPage(0)
-        if (searchText.length > 0) {
-            searchGif()
-        } else {
-            getPopularGifs()
-        }
-    } , [searchText])
-
-    const getPopularGifs = async () => {
-        const limit = 20;
-        let link = ""
-        if (searchText.length > 0) {
-            link = `https://api.giphy.com/v1/gifs/search?api_key=${GIFY_SDK_KEY}&limit=${limit}&q=${searchText}&offset=${page*limit}`;
-        } else {
-            link = `https://api.giphy.com/v1/gifs/trending?api_key=${GIFY_SDK_KEY}&limit=${limit}&offset=${page*limit}`;
-        }
-        console.log("link : ", link)
-        const response = await fetch(link)
-        if (response.status == 200) {
-            const jsonData = await response.json();
-            if (jsonData != null && jsonData.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 && jsonData.data != undefined) {
-                let newGifs = []
-                if (page > 0) {
-                    newGifs = [...gifs, ...jsonData.data]
-                } else {
-                    newGifs = jsonData.data
-                }
-                setGifs(newGifs)
-            }
-        }
+  useEffect(() => {
+    setPage(1);
+    if (searchText.length > 0) {
+      searchMovies();
+    } else {
+      getPopularMovies();
     }
+  }, [searchText]);
 
-    const searchGif = async () => {
-        const limit = 20;
-        const link = `https://api.giphy.com/v1/gifs/search?api_key=${GIFY_SDK_KEY}&limit=${limit}&q=${searchText}`;
-        console.log("link : ", link)
-        const response = await fetch(link)
-        if (response.status == 200) {
-            const jsonData = await response.json();
-            if (jsonData != null && jsonData.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 && jsonData.data != undefined) {
-                setGifs(jsonData.data)
-            }
-        } 
-    }   
-
-
-    const updateGif = (gif) => {
-        let newUser = user;
-        newUser.gif = {id : gif.id, title : gif.title, url : gif.url, image: gif.images.original}
-        console.log("newUser : ", newUser)
-        setUser(newUser);
-        nextAction("Profile6", navigation, user);
+  const getPopularMovies = async () => {
+    const url = `${TMDB_API_PATH}/trending/movie/day?api_key=${TMDB_API_KEY}&page=${page}`;
+    console.log({url});
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log({data});
+      if (data != null && data.results != null && data.results.length > 0) {
+        if (page > 1) {
+          setMovies([...movies, ...data.results]);
+          setLoading(false);
+        } else {
+          setMovies(data.results);
+          setLoading(false);
+        }
+      }
+    } catch (error) {
+      console.log({error});
     }
+  };
 
+  const searchMovies = async () => {
+    const url = `${TMDB_API_PATH}/search/movie?api_key=${TMDB_API_KEY}&query=${searchText}&page=${page}`;
+    console.log({url});
+    setLoading(true);
+    const response = await fetch(url);
+    if (response.status === 200) {
+      const data = await response.json();
+      if (data != null && data.results != null && data.results.length > 0) {
+        setMovies(data.results);
+        setLoading(false);
+      }
+    }
+  };
 
-
-    const renderItem = ({item}) => {
-        return (
-        <TouchableOpacity onPress={() => updateGif(item)}>
-            <Image
-            style={{
-                width: 200,
-                height: 200,
-            }}
-            source={{
-                uri: `${item?.images?.original?.webp}`,
-            }}
-            />
-        </TouchableOpacity>
-        );
+  const updateMovie = movie => {
+    let newUser = user;
+    newUser.movie = {
+      id: movie.id,
+      title: movie.title,
+      image: `${imageBaseUrl}${movie.poster_path}`,
     };
+    console.log({newUser});
+    setUser(newUser);
+    nextAction('Profile6', navigation, user);
+  };
 
-   
- 
+  const renderItem = ({item}) => {
     return (
-      <ViewCustom>        
-            <Update_Button user={user} prevPage="Profile4" nextPage=""  navigation={navigation} />
-            <Title>Choix du gif</Title>
-            <FieldInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                value={searchText}
-                onChangeText={(text) => setSearchText(text)}
-            />
-            <FlatList
-                data={gifs}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                onEndReached={() => {
-                setPage(page + 1);
-                }}
-                onEndReachedThreshold={0.4}
-            />
-      </ViewCustom>
+      <TouchableOpacity onPress={() => updateMovie(item)}>
+        <Image
+          style={{
+            width: 200,
+            height: 200,
+          }}
+          source={{
+            uri: `${imageBaseUrl}${item.poster_path}`,
+          }}
+        />
+      </TouchableOpacity>
     );
-  }
+  };
 
+  if (loading) return <MainText>Loading...</MainText>;
 
-export default Gif;
+  return (
+    <ViewCustom>
+      <Update_Button
+        user={user}
+        prevPage="Profile4"
+        nextPage=""
+        navigation={navigation}
+      />
+      <Title>Choix du film</Title>
+      <FieldInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        value={searchText}
+        onChangeText={text => setSearchText(text)}
+      />
+      <FlatList
+        data={movies}
+        renderItem={renderItem}
+        keyExtractor={item => item.title}
+        onEndReached={() => {
+          setPage(page + 1);
+        }}
+        onEndReachedThreshold={0.4}
+      />
+    </ViewCustom>
+  );
+};
+
+export default Film;
