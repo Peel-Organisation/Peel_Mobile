@@ -64,5 +64,5 @@ buck-out/
 /vendor/bundle/
 
 
-#gitignore
-.gitignore
+#env
+.env
