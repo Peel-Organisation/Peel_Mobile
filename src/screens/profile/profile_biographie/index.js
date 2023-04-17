@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { useTranslation } from "react-i18next";
-import Update_Button from "../../../components/Update_User";
+import {Update_Button} from "../../../components/Update_User";
 
 
 import { getStorage } from "../../../functions/storage"; 

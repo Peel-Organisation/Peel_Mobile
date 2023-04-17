@@ -1,5 +1,3 @@
-import axios from "axios";
-import { API_LINK } from '@env';
 import  { addStorage, getStorage, Logout } from './storage';
 import { FetchPeelApi } from "./request_fetch";
 
@@ -99,10 +97,23 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 
 export const loginRequest = async (email, password, navigation) => {
     console.log("\n\nlogin request")
+<<<<<<< HEAD
     const body = { email: email, password: password }
     return FetchPeelApi({url : `/api/auth/login`, method:"POST", body:body}).then(res => {
         addStorage("token", res['token'].toString())
         addStorage("userId", res['userId'].toString())
+=======
+    const link = API_LINK + "/api/auth/login";
+    const requestOptions = {
+        email: email, 
+        password: password
+    };
+    console.log("requestOptions : ", requestOptions)
+    console.log("link : ", link)
+    axios.post(link, requestOptions).then(response => {
+        addStorage("token", response.data['token'].toString())
+        addStorage("userId", response.data['userId'].toString())
+>>>>>>> development
         console.log("connecté")
         navigation.navigate("Auth");
     }).catch(error => {

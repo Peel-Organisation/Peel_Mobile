@@ -89,3 +89,9 @@ export const ResponseText = styled.Text`
     text-align: center;
     padding: 5px;
 `
+
+export const GifImage = styled.Image`
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+`
