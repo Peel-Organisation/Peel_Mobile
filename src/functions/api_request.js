@@ -1,7 +1,6 @@
 import { API_LINK } from '@env';
 import  { addStorage, getStorage, Logout } from './storage';
 import axios from 'axios';
-import useFetch from '../hooks/useFetch';
 
 
 export const GetUser = async (defaultUser) => {
@@ -54,7 +53,7 @@ export const updateUser = async (user) => {
 export  const  TestAuth = async () => {
     console.log("\n\n TestAuth")
     let userId = await getStorage('userId')
-    let token = await  getStorage('token')  
+    let token = await  getStorage('token')
     let auth_bool = false;
     const link = API_LINK + "/api/auth/protected";
     console.log("get env : ", link)

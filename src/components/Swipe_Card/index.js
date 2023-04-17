@@ -25,7 +25,6 @@ const Swipe_Card = (props) => {
 
         return user_age
     }
-    // console.log("User: ", User)
     
 
 
@@ -34,7 +33,7 @@ const Swipe_Card = (props) => {
             <Name>
                 {User.firstName} {getAge(User.birthday)}
             </Name>
-            {User.gif != undefined && User.gif != "" && User.gif != null ? (
+            {!User.gif && !User.gif != "" ? (
                 <View>
                     <GifImage
                     source={{
