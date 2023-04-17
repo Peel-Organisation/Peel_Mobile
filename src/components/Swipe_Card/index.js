@@ -33,7 +33,7 @@ const Swipe_Card = (props) => {
             <Name>
                 {User.firstName} {getAge(User.birthday)}
             </Name>
-            {!User.gif && !User.gif != "" ? (
+            {User.gif != undefined && User.gif != "" && User.gif != null ? (
                 <View>
                     <GifImage
                     source={{

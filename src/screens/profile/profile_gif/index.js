@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {Update_Button, nextAction} from "../../../components/Update_User";
-import {  GIFY_SDK_KEY } from '@env';
+import {  GIPHY_API_KEY, GIPHY_PATH } from '@env';
 
 import { getStorage } from "../../../functions/storage"; 
 
@@ -49,15 +49,16 @@ const Gif = ({ route, navigation }) => {
         const limit = 20;
         let link = ""
         if (searchText.length > 0) {
-            link = `${GIPHY_PATH}/search?api_key=${GIFY_SDK_KEY}&limit=${limit}&q=${searchText}&offset=${page*limit}`;
+            link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${page*limit}`;
         } else {
-            link = `${GIPHY_PATH}/trending?api_key=${GIFY_SDK_KEY}&limit=${limit}&offset=${page*limit}`;
+            link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${page*limit}`;
         }
         console.log("link : ", link)
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
-            if (!jsonData && !jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 && !jsonData.data ) {
+            if (jsonData != null && !jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
+                console.log("jsonData : ", jsonData)
                 let newGifs = []
                 if (page > 0) {
                     newGifs = [...gifs, ...jsonData.data]
@@ -71,12 +72,12 @@ const Gif = ({ route, navigation }) => {
 
     const searchGif = async () => {
         const limit = 20;
-        const link = `${GIPHY_PATH}/search?api_key=${GIFY_SDK_KEY}&limit=${limit}&q=${searchText}`;
+        const link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}`;
         console.log("link : ", link)
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
-            if (!jsonData && !jsonData.data && jsonData.meta.status == 200 && jsonData.data.length > 0 && !jsonData.data) {
+            if (jsonData != null && jsonData.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
                 setGifs(jsonData.data)
             }
         } 
