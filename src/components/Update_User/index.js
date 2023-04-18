@@ -9,7 +9,7 @@ import { updateUser} from "../../functions/api_request"
 import { Next_Button, Next_Button_Text, Prev_Button, Prev_Button_Text, NavigatorView } from './styles';
 
 
-const Update_Button = (props) => {
+export const Update_Button = (props) => {
     const user = (props.user);
     const nextPage = props.nextPage;
     const prevPage = props.prevPage;
@@ -58,14 +58,13 @@ const PrevButton = (props) => {
     )
 }  
 
-const nextAction = (nextPage, navigation, user) => {
+export const nextAction = (nextPage, navigation, user) => {
     updateUser(user);
     navigation.navigate(nextPage);
 }
 
-const prevAction = (prevPage, navigation, user) => {
+export const prevAction = (prevPage, navigation, user) => {
     updateUser(user);
     navigation.navigate(prevPage);
 }
 
-export default Update_Button; 

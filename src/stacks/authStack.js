@@ -20,7 +20,6 @@ import HomeScreen from '../screens/home';
 import ContactScreen from '../screens/Contact';
 import SettingsScreen from '../screens/settings';
 import Chat from '../screens/chat';
-// const Tab = createBottomTabNavigator();
 
 const TabStack = createBottomTabNavigator();
 
@@ -56,10 +55,6 @@ export default AuthStack;
 
 const Icon = ({route, focused, color, size }) => {
   let iconName = "";
-
-  
-
-
   if (color != "gray") {
     if (route.name === 'Home') {
       iconName = <ImageLogo source={HomeSelectedImage} />;
@@ -82,7 +77,6 @@ const Icon = ({route, focused, color, size }) => {
   if (iconName != "") {
     return iconName;
   }
-  
 };
 
 

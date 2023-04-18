@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { FieldInput, ViewCustom, Title, MainText, InputView, ConditionText } from "../styles";
 
 
-import Update_Button from "../../../components/Update_User";
+import {Update_Button} from "../../../components/Update_User";
 
 import { getStorage } from "../../../functions/storage"; 
 
