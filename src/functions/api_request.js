@@ -104,6 +104,7 @@ export const GetContactList = async () => {
     };
     const link = API_LINK + "/api/conversation/";
     return axios.get(link,requestOptions).then(res => {
+        console.log("contact list : ", res.data)
         return (res.data);
     }).catch(error => {
         console.log("error : ", error)

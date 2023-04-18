@@ -48,11 +48,11 @@ const Chat = ({ route, navigation }) => {
     
 
     return (
-        <View className="message-app">
+        <View>
             { socket ? (
                 <View>
                     <MessageList conversation_id={conversation._id} socket={socket} />
-                    <MessageInput conversation_id={conversation._id}  socket={socket} />
+                    {/* <MessageInput conversation_id={conversation._id}  socket={socket} /> */}
                 </View>
             ) : (
                 <Loading />

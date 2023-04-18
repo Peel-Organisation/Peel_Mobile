@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FieldInput, MessageButton, MessageButtonText, ViewCustom, SendIcon } from './styles';
+import { FieldInput, MessageButton, ViewCustom, SendIcon } from './styles';
 import { sendMessageSocket } from '../../functions/message_sockets';
 const sendpng = require('./styles/send.png');
 
