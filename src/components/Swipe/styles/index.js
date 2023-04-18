@@ -21,7 +21,7 @@ export const ButtonStack = styled.View`
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    position: absolute;
+    position: relative;
     bottom: 5%;
 `
 
