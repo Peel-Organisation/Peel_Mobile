@@ -38,7 +38,6 @@ const Film = ({route, navigation}) => {
 
   const getPopularMovies = async () => {
     const url = `${TMDB_API_PATH}/trending/movie/day?api_key=${TMDB_API_KEY}&page=${page}`;
-    console.log({url});
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -59,7 +58,6 @@ const Film = ({route, navigation}) => {
 
   const searchMovies = async () => {
     const url = `${TMDB_API_PATH}/search/movie?api_key=${TMDB_API_KEY}&query=${searchText}&page=${page}`;
-    console.log({url});
     setLoading(true);
     const response = await fetch(url);
     if (response.status === 200) {
@@ -101,7 +99,7 @@ const Film = ({route, navigation}) => {
     );
   };
 
-  if (loading) return <MainText>Loading...</MainText>;
+  if (loading) return <MainText>Chargement...</MainText>;
 
   return (
     <ViewCustom>
