@@ -69,18 +69,36 @@ const Film = ({route, navigation}) => {
     }
   };
 
-  const updateMovie = movieToUpdate => {
-
-    const newUser = {
-      ...user,
-      movie: {
-        id: movieToUpdate.id,
-        title: movieToUpdate.title,
-        image: `${imageBaseUrl}${movieToUpdate.poster_path}`,
-      },
-    };
-    setUser(newUser);
-    nextAction('Profile6', navigation, user);
+  const updateMovie = async movieToUpdate => {
+    try {
+      const url = `${TMDB_API_PATH}/genre/movie/list?api_key=${TMDB_API_KEY}`;
+      const reponse = await fetch(url);
+      const data = await reponse.json();
+      const genres = data.genres;
+      const genres_ids = movieToUpdate.genre_ids.map(genre_id => {
+        const genre = genres.find(genre => genre.id === genre_id);
+        return {
+          id: genre_id,
+          name: genre.name,
+        };
+      });
+      const newUser = {
+        ...user,
+        movie: {
+          id: movieToUpdate.id,
+          title: movieToUpdate.title,
+          images: {
+            backdrop_path: `${imageBaseUrl}${movieToUpdate.backdrop_path}`,
+            poster_path: `${imageBaseUrl}${movieToUpdate.poster_path}`,
+          },
+          genres_ids,
+        },
+      };
+      setUser(newUser);
+      nextAction('Profile6', navigation, user);
+    } catch (error) {
+      console.log({error});
+    }
   };
 
   const renderItem = ({item}) => {
