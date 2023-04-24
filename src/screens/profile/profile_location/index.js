@@ -6,7 +6,7 @@ import { View, Dimensions,  Platform, PermissionsAndroid  } from "react-native";
 // import google from "google-maps"
 import Geolocation from 'react-native-geolocation-service';
 import  MapView, {Circle, PROVIDER_GOOGLE } from 'react-native-maps';
-import Update_Button from "../../../components/Update_User"; 
+import {Update_Button} from "../../../components/Update_User"; 
 import { useTranslation } from "react-i18next";
 import {Slider} from '@miblanchard/react-native-slider';
 // import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
@@ -46,7 +46,7 @@ const Location = ({ route, navigation }) => {
     if (user.position?.longitude != undefined && user.position?.longitude != 0 && user.position?.latitude != undefined && user.position?.latitude != 0 && user.preferences?.searchRange != undefined && user.preferences?.searchRange != 0 ){ 
         setNavButton(
             <>
-                <Update_Button user={user} prevPage="Profile5" nextPage="Profile7"  navigation={navigation} />
+                <Update_Button user={user} prevPage="Profile6" nextPage="Profile8"  navigation={navigation} />
             </>
         ) 
     } else {
