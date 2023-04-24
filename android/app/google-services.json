@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926557246591",
+    "project_id": "peel-e6ad0",
+    "storage_bucket": "peel-e6ad0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926557246591:android:131a51d9d1039a2c44db4a",
+        "android_client_info": {
+          "package_name": "com.peel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926557246591-0as89bdclpt8fhbnnuhbfaoc4bssqvgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRPHpBuK3oHIDyi8FA5cpnLo-lBP3eOAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926557246591-0as89bdclpt8fhbnnuhbfaoc4bssqvgb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

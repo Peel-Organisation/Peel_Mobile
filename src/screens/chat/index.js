@@ -16,47 +16,17 @@ const ENDPOINT = process.env['API_LINK']
  
 const Chat = ({ route, navigation }) => {
     const { conversation } = route.params;
-    const {name} = route.params;
-    const [socket, setSocket] = useState(null);
-    
 
-    useEffect(() => {
-        navigation.setOptions({ title: name });
-        const newSocket = io(ENDPOINT);
-        newSocket.on('connect', () => {
-            console.log('socket connected');
-        });
-        newSocket.on('disconnect', () => {
-            console.log('socket disconnected');
-        });
-        newSocket.on('message', (message) => {
-            console.log(message); 
-        });
-        newSocket.on('error', (error) => {
-            console.log(error);
-            showMessage({
-                message: "error with sockets : ", error,
-                type: "info",
-            });
-        });
-        setSocket(newSocket);
-        // console.log("socket", socket)
-        return () => newSocket.close(); 
-    }, [setSocket]);
 
 
     
 
     return (
         <View>
-            { socket ? (
-                <View>
-                    <MessageList conversation_id={conversation._id} socket={socket} />
-                    {/* <MessageInput conversation_id={conversation._id}  socket={socket} /> */}
-                </View>
-            ) : (
-                <Loading />
-            )}
+            <View>
+                <MessageList conversation_id={conversation._id} />
+                <MessageInput conversation_id={conversation._id} />
+            </View>
         </View>
     );
 

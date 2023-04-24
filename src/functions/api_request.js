@@ -3,6 +3,7 @@ import  { addStorage, getStorage, Logout } from './storage';
 import axios from 'axios';
 
 
+
 export const GetUser = async (defaultUser) => {
     console.log("\n\n GetUser")
     let token = await  getStorage('token')
@@ -205,8 +206,23 @@ export const getMessageList = async (conversationId) => {
     const requestOptions = {  
         headers: { 'Content-Type': 'application/json', "authorization": token, "conversation_id": conversationId},
     };
-    const link = API_LINK + "/api/conversation/message/";
+    const link = API_LINK + "/api/conversation/message";
     return axios.get(link,  requestOptions ).then(res => {
+        console.log("message list : ", res.data)
         return (res.data);
     })
 }
+
+export const sendMessage = async (conversationId, message) => {
+    console.log("\n\n sendMessage : ", message)
+    let token = await  getStorage('token')
+    const requestOptions = {
+        headers: {"authorization": token, "conversation_id": conversationId},
+    }
+    const body = {message: message}
+    const link = API_LINK + "/api/conversation/message";
+    return axios.post(link, body, requestOptions).then(res => {
+        console.log("message list : ", res.data)
+        return (res.data);
+    })
+};
