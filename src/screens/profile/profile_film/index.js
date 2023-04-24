@@ -43,7 +43,6 @@ const Film = ({route, navigation}) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log({data});
       if (data != null && data.results != null && data.results.length > 0) {
         if (page > 1) {
           setMovies([...movies, ...data.results]);
@@ -72,14 +71,16 @@ const Film = ({route, navigation}) => {
     }
   };
 
-  const updateMovie = movie => {
-    let newUser = user;
-    newUser.movie = {
-      id: movie.id,
-      title: movie.title,
-      image: `${imageBaseUrl}${movie.poster_path}`,
+  const updateMovie = movieToUpdate => {
+
+    const newUser = {
+      ...user,
+      movie: {
+        id: movieToUpdate.id,
+        title: movieToUpdate.title,
+        image: `${imageBaseUrl}${movieToUpdate.poster_path}`,
+      },
     };
-    console.log({newUser});
     setUser(newUser);
     nextAction('Profile6', navigation, user);
   };
