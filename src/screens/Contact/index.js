@@ -64,7 +64,7 @@ const Contact = ({navigation}) => {
                 </NewMatchView>
             </OrangeView>
             <ContactTitle>{t("Contact.title")}</ContactTitle>
-            {contactList.map((contact) => {
+            {contactList.map((contact, index) => {
                 let name = ""
                     if (contact.members[0]._id == userId){
                         name = contact?.members[1]?.firstName
@@ -73,7 +73,7 @@ const Contact = ({navigation}) => {
                     }
                 if (contact.last_message_content != undefined) {
                     return(
-                        <Container key={contact.id}>
+                        <Container key={index}>
                             <Button_Contact onPress={() => {
                                 navigation.navigate('Chat', {conversation : contact, name : name})
                             }}>

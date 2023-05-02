@@ -41,3 +41,44 @@ export const  addStorage = async (name, value) =>{
         return (false);
     });
 }
+
+export const  removeStorage = async (name) =>{
+    return AsyncStorage.removeItem(name).then(() => {
+        console.log(name, "removed from storage");
+        return (true);
+    }).catch((error) => {
+        console.log("storage error : ", error);
+        return (false);
+    });
+}
+
+export const  addStorageMessage = async (conversation_id, message) =>{
+    return getStorage(conversation_id).then((messages) => {
+        console.log("messages : ", messages)
+        if (messages == null){
+            messages = [];
+        }
+        messages.push(message);
+        addStorage(conversation_id, messages);
+    }).catch((error) => {
+        console.log("storage error : ", error);
+        return (false);
+    });
+}
+
+export const updateStorageMessage = async (conversation_id, messages) =>
+    addStorage(conversation_id, messages);
+
+
+export const  getStorageMessage = async (conversation_id) =>{
+    return getStorage(conversation_id).then((messages) => {
+        console.log("messages : ", messages)
+        if (messages == null){
+            messages = [];
+        }
+        return (messages);
+    }).catch((error) => {
+        console.log("storage error : ", error);
+        return (false);
+    });
+}

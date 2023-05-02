@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { FieldInput, MessageButton, ViewCustom, SendIcon } from './styles';
 const sendpng = require('./styles/send.png');
-import messaging from '@react-native-firebase/messaging';
-import { getStorage } from '../../functions/storage';
 import { sendMessage } from "../../functions/api_request";
+import { addStorageMessage, getStorage } from "../../functions/storage";
 
-
-
-const MessageInput = ({conversation_id}) => {
+const MessageInput = ({conversation_id, messages, setMessages}) => {
   const [value, setValue] = useState('');
+  const [userId, setUserId] = useState(0);
 
   const submitMessage = () => {
     sendMessage(conversation_id, value)
+    const newMessage = {sender: userId, content: value, createdAt: Date.now(), }
+    addStorageMessage(conversation_id, newMessage)
+    setMessages([...messages, newMessage]);
     setValue('');
   }; 
 
+  useEffect(() => {
+    getStorage('userId').then(data => {
+      setUserId(data);
+    });
+  }, []);
 
   return (
     <ViewCustom>
