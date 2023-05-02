@@ -28,7 +28,6 @@ const MessageList = ({conversation_id, messages, setMessages}) => {
       let index = messages.findIndex((message) => message._id == newMessage._id);
       if (index == -1 && newMessage.conversation_id == conversation_id && newMessage.sender != userId){
         setMessages([...messages, newMessage]);
-        addStorageMessage(conversation_id, newMessage);
       }
     });
   }, []);
@@ -39,7 +38,7 @@ const MessageList = ({conversation_id, messages, setMessages}) => {
         <FlatList 
           data={[...Object.values(messages)].sort((a, b) => a.time - b.time).reverse()}
           renderItem={({ item }) => <MessageUser message={item} userId={userId} key={userId} />}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item, index) => index}
           extraData={messages}
           inverted 
         />

@@ -6,13 +6,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {View, StatusBar} from 'react-native';
 import FlashMessage from "react-native-flash-message";
 import {ThemeProvider} from 'styled-components';
-
 import theme from './src/config/theme';
-
+import {messageLisner} from './src/functions/messaging';
 
 
 //On mets les routes dans un composant "Routes"
 const App = () => {
+  messageLisner();
   return (
     <>
       <NavigationContainer>

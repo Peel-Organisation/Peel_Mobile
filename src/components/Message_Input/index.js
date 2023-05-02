@@ -14,8 +14,7 @@ const MessageInput = ({conversation_id, messages, setMessages}) => {
     addStorageMessage(conversation_id, newMessage)
     setMessages([...messages, newMessage]);
     setValue('');
-  }; 
-
+  };
   useEffect(() => {
     getStorage('userId').then(data => {
       setUserId(data);
@@ -30,7 +29,7 @@ const MessageInput = ({conversation_id, messages, setMessages}) => {
         />
         <MessageButton onPress={() => submitMessage()}>
           <SendIcon source={sendpng}/>
-        </MessageButton>   
+        </MessageButton>
     </ViewCustom>
   );
 };

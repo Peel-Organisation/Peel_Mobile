@@ -9,7 +9,6 @@ export const MessageUser = (params) => {
     if ( userId == message_UserId) {
       return (
         <UserMessage
-          key={message._id}
           title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
         >
           <UserMessageText>{message.content}</UserMessageText>
@@ -19,7 +18,6 @@ export const MessageUser = (params) => {
     }else{
       return (
         <ContactMessage
-          key={message._id}
           title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
         >
           <ContactMessageText>{message.content}</ContactMessageText>
