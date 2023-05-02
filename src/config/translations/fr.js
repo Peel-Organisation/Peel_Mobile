@@ -8,11 +8,13 @@ export default {
     },
     settings: {
         title: "Paramètres",
-        profile_edit: "Editer profil",
+        preferences: "Préférences",
         logout: "Déconnexion",
         language: "Langue",
         language_fr: "Français",
-        language_en: "English"
+        language_en: "English",
+        edit_profile: "Éditer profil",
+        edit_profile_title: "Personnalisez votre profil"
     },
     navbar: {
         home: "Accueil",
@@ -62,7 +64,9 @@ export default {
         interest:"Merci de choisir cinq centres d'intérêts",
         search_zone:"Zone géographique",
         question_title: "Décrivez vous en répondant à ces trois questions",
-        question_select: "Sélectionnez une question !"
+        question_select: "Sélectionnez une question !",
+        custom_title: "Personnalisez votre profil !",
+        custom_text: "Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil"
     },
     profile_navigator: {
         title: "Profil",

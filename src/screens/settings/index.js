@@ -40,7 +40,7 @@ const Settings = ({ navigation }) => {
                 <Button_Settings_Text>{t("settings.logout")}</Button_Settings_Text>
             </Button_Settings>
             <Button_Settings  onPress={() => navigation.navigate('Profile')} >
-                <Button_Settings_Text>{t("settings.profile_edit")}</Button_Settings_Text>
+                <Button_Settings_Text>{t("settings.preferences")}</Button_Settings_Text>
             </Button_Settings>
             <Button_Settings
                 onPress={() => i18n.changeLanguage("fr")}
@@ -56,6 +56,9 @@ const Settings = ({ navigation }) => {
                 onPress={() => onDisplayNotification("settings", "Voici la notification de test")}
             >
                 <Button_Settings_Text>Notification</Button_Settings_Text>
+            </Button_Settings>
+            <Button_Settings onPress={() => navigation.navigate('EditProfile')}>
+                <Button_Settings_Text>{t("settings.edit_profile")}</Button_Settings_Text>
             </Button_Settings>
             </SettingsList>
         </SettingsView >

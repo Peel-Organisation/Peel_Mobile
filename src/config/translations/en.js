@@ -7,11 +7,13 @@ export default {
     },
     settings: {
         title: "Settings",
-        profile_edit: "Edit profile",
+        preferences: "Preferences",
         logout: "Logout",
         language: "Language",
         language_fr: "French",
-        language_en: "English"
+        language_en: "English",
+        edit_profile: "Edit profile",
+        edit_profile_title: "Customize your profile"
     },
     navbar: {
         home: "Home",
@@ -59,7 +61,9 @@ export default {
         interest:"Please choose 5 hobbies",
         search_zone:"Search area",
         question_title: "Describe yourself in 3 questions",
-        question_select: "Select a question !"
+        question_select: "Select a question !",
+        custom_title: "Customize your profile !",
+        custom_text: "Select the elements you want other users to see when they want to check on your profile"
     },
     profile_navigator: {
         title: "Profile",

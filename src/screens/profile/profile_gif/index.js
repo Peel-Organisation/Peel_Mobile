@@ -114,7 +114,7 @@ const Gif = ({ route, navigation }) => {
  
     return (
       <ViewCustom>        
-            <Update_Button user={user} prevPage="Profile4" nextPage=""  navigation={navigation} />
+            <Update_Button user={user} prevPage="Profile4" nextPage="Profile6"  navigation={navigation} />
             <Title>Choix du gif</Title>
             <FieldInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}

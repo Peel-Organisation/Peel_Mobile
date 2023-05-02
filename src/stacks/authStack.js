@@ -20,6 +20,7 @@ import HomeScreen from '../screens/home';
 import ContactScreen from '../screens/Contact';
 import SettingsScreen from '../screens/settings';
 import Chat from '../screens/chat';
+import EditProfile from '../screens/settings/editProfile';
 
 const TabStack = createBottomTabNavigator();
 
@@ -42,10 +43,12 @@ const TabStackScreen = () => {
 const Stack = createNativeStackNavigator();
 
 const AuthStack = ({navigation}) => {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator initialRouteName="HomeStack" >
       <Stack.Screen name="HomeStack" component={TabStackScreen} options={{title: 'Home', headerShown: false}} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{title: t("settings.edit_profile_title")}} />
     </Stack.Navigator>
   );
 };
