@@ -3,17 +3,25 @@ import { onDisplayNotification } from "./notification";
 import { addStorageMessage } from "./storage";
 
 const onMessageReceived = async (remoteMessage) => {
-  console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
-  const newMessage = JSON.parse(remoteMessage.data.message);
-  const newNotification = JSON.parse(remoteMessage.data.notification);
-  console.log('newMessage : ', newMessage);
-  console.log('newNotification : ', newNotification);
-  if (newNotification !== undefined && newNotification !== null) {
-    onDisplayNotification(newNotification.title, newNotification.body);
+  console.log('A new FCM message arrived in background!', JSON.stringify(remoteMessage));
+  try {
+    const newMessage = JSON.parse(remoteMessage.data.message);
+    if (newMessage !== undefined && newMessage !== null) {
+      const conversation_id = newMessage.conversation_id;
+      if (conversation_id !== undefined && conversation_id !== null && conversation_id !== ""){
+        addStorageMessage(conversation_id, newMessage);
+      }
+    }
+  } catch (error) {
+    console.log('error : ', error);
   }
-  if (newMessage !== undefined && newMessage !== null) {
-    const conversation_id = newMessage.conversation_id;
-    addStorageMessage(conversation_id, newMessage);
+  try {
+    const newNotification = JSON.parse(remoteMessage.data.notification);
+    if (newNotification !== undefined && newNotification !== null) {
+      onDisplayNotification(newNotification.title, newNotification.body);
+    }
+  } catch (error) {
+    console.log('error : ', error);
   }
 }
 

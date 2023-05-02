@@ -31,6 +31,7 @@ export const  getStorage = async (value) =>{
 
 export const  addStorage = async (name, value) =>{
     console.log("add to storage : ", name, value)
+    if (name === undefined || name === null || name === "") return (false);
     return AsyncStorage.setItem(name, JSON.stringify(value)).then(() => {
         return (true);
     }).catch((error) => {
