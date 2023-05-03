@@ -1,7 +1,5 @@
 import notifee from "@notifee/react-native";
 
-
-
 export const onDisplayNotification = async (title, body) => {
     await notifee.requestPermission()
     // Create a channel (required for Android)

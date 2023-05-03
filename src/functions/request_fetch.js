@@ -1,13 +1,17 @@
 
-export const FetchPeelApi = async ({ url, method, body, token }) => {
+export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) => {
 
     try {
         console.log(`${process.env.API_LINK}${url}`)
+        console.log("firebaseToken : ", firebaseToken)
         const response = await fetch(`${process.env.API_LINK}${url}`, {
             headers: {
             "Content-Type": "Application/json",
             ...token && {
                 "authorization":token
+            },
+            ...firebaseToken && {
+                "firebaseToken":firebaseToken
             }
             },
             method: method,
