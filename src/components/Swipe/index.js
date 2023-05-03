@@ -1,18 +1,8 @@
 import React, { useState } from "react";
 import { Card } from 'react-native-card-stack-swiper';
-import {Text, Image} from "react-native";
 import Swipe_Card from "../Swipe_Card";
 import {sendSwipe} from "../../functions/api_request"
-
-
-
-// import SVG from "./styles/cross.svg"
-
-
 import {CustomView, ButtonStack, CardStackView, Button, Icon} from "./styles";
-
-
-
 
 
 const Swipe = (props) => { 
