@@ -9,7 +9,6 @@
     "clean": "cd android && ./gradlew clean && cd ..",
     "deleteCache": "shx rm -r ./node_modules && npm cache clean --force && npm install",
     "deleteBuild": "shx rm -r android/app/build && shx rm -r android/build && shx rm -r android/.gradle && shx rm -r android/.idea && shx rm -r package-lock.json && shx rm -r nodes_modules && npm install",
-
     "test": "jest",
     "lint": "eslint .",
     "install-ios": "npm i && bundle install && cd ./ios && bundle exec pod install",
@@ -20,6 +19,7 @@
     "@notifee/react-native": "^7.6.1",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/geolocation": "^3.0.4",
+    "@react-native-firebase/crashlytics": "^17.4.3",
     "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/native": "^6.1.1",
