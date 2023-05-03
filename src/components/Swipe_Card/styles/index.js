@@ -8,59 +8,59 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const HomeCard =  styled.View`
     background-color: white;
-    border-radius: 20px;
-    margin: 5%;
-    padding: 5%;
+    width: 100%;
     height: 100%;
-    max-height: 600px;
+    overflow: hidden;
+    padding: 7%;
+`
+export const UserCont = styled.View `
+    margin: 0px 0px 15px 0px;
 `
 
 export const Name = styled.Text`
     font-size: 20px;
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.text};
     align-self: center;
 `
-
-export const BiographyTitle = styled.Text`
-    font-size: 20px;
-    color: ${props => props.theme.text};
-    margin: 5%;
+export const Locate = styled.Text`
+    font-size: 14px;
+    color: ${props => props.theme.sub_text};
+    align-self: center;
 `
 
 export const Biography = styled.View`
     background-color: ${props => props.theme.background};
     border-radius: 10px;
-    margin: 5%;
-`
+    border: 2px solid ${props => props.theme.background_button_border};
+    margin: 10px 0px;
+    `
 
 export const BiographyText = styled.Text`
     font-size: 15px;
     color: ${props => props.theme.text};
-    margin: 5%;
-`
+    `
 
 export const InteretTitle = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.text};
-    margin: 5%;
-`
+    `
 
 export const InteretView = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-
+    
     /* width: 100%; */
     /* display: block; */
     /* display:inline; */
-`
+    `
 
 export const InteretBox = styled.Text`
     background-color: ${props => props.theme.primary};
     border-radius: 30px;
-    margin: 1%;
     padding: 2%;
+    margin: 10px 0px;
 `
 
 export const InteretText = styled.Text`
@@ -71,13 +71,12 @@ export const InteretText = styled.Text`
 export const QuestionView = styled.View`
     background-color: ${props => props.theme.background};
     border-radius: 10px;
-    margin: 5%;
+    border: 2px solid ${props => props.theme.background_button_border};
 `
 
 export const QuestionText = styled.Text`
     font-size: 15px;
     color: ${props => props.theme.text};
-    margin-left: 5%; 
     font-weight: bold;
     text-align: center;
 `
@@ -85,13 +84,13 @@ export const QuestionText = styled.Text`
 export const ResponseText = styled.Text`
     font-size: 15px;
     color: ${props => props.theme.text};
-    margin-left: 5%;
     text-align: center;
     padding: 5px;
 `
 
 export const GifImage = styled.Image`
     width: 100%;
+    min-width: 100%;
     height: 200px;
-    border-radius: 10px;
+    border-radius: 13px;
 `
