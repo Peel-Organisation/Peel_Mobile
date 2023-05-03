@@ -6,43 +6,61 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const HomeSwiperView =  styled.View`
-    display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* width: 100%; */
-    height: 100%
+export const Background = styled.View`
+    position: absolute;
     background-color: ${props => props.theme.background};
-    `
-
-export const TitleView =  styled.View`
-    align-items: center;
+    width: 100%;
+    height: 100%;
+`
+export const BackgroundTop = styled.View`
     position: absolute;
     background-color: ${props => props.theme.primary};
     width: 100%;
-    height: 50%;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    `
+    height: 45%;
+    border-bottom-left-radius: 39px;
+    border-bottom-right-radius: 39px;
+`
+
+export const Container = styled.View`
+    width: 100%;
+    height: 100%;
+    /* border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px; */
+`
+
+export const Header =  styled.View`
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 export const TitleText = styled.Text`
     font-size: 30px;
     color: ${props => props.theme.background};
-    margin: 5%;
 `
 
 export const FilterIcon = styled.TouchableOpacity `
     position: absolute;
-    background-color: rgba(255, 251, 236, 0.35);
-    border-radius: 22.5px;
+    left: 7%;
     width: 45px;
     height: 45px;
-    top: 20px;
-    left: 20px;
+    border-radius: 50px;
+    background-color: rgba(255, 251, 236, 0.35);
+    justify-content: center;
     align-items: center;
 `
 export const FilterIconImg = styled.Image `
-    top: 8px;
     width: 30px;
     height: 30px;
+`
+
+export const Filter = styled.View `
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: ${props => props.theme.primary};
+    border-bottom-left-radius: 39px;
+    border-bottom-right-radius: 39px;
 `

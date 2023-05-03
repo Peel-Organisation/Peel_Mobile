@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
-import {HomeSwiperView, TitleView, TitleText, FilterIcon, FilterIconImg} from "./styles"
+import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg, Filter } from "./styles"
 import Swipe  from "../../components/Swipe";
 
 import { GetMatchList} from "../../functions/api_request"
@@ -38,17 +38,22 @@ const Match = () => {
 
     
     return (
-        <View>
-            <HomeSwiperView>
-                <TitleView>
+        <>
+            <Background><BackgroundTop/></Background>
+            <Container>
+                <StatusBar backgroundColor="#FC912F"/>
+                <Header>
                     <TitleText>{t("home.title")}</TitleText>
-                </TitleView>
+                    <FilterIcon>
+                        <FilterIconImg source={require('./styles/sort.png')}/>
+                    </FilterIcon>
+                </Header>
                 <Swipe userList={userList} />
-            </HomeSwiperView>
-            <FilterIcon>
-                <FilterIconImg source={require('./styles/sort.png')}/>
-            </FilterIcon>
-        </View>
+                {/* <Filter>
+
+                </Filter> */}
+            </Container>
+        </>
     )
 }
 
