@@ -1,43 +1,5 @@
-import { Dimensions } from "react-native";
 import styled from 'styled-components/native';
 
-
-
-const DIMENSION_WIDTH = Dimensions.get("window").width;
-const DIMENSION_HEIGHT = Dimensions.get("window").height;
-
-export const UserMessage = styled.View`
-    background-color: ${props => props.theme.user_message};
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    align-self: flex-end;
-    max-width: 70%;
-    right: 0px;
-    
-`
-
-
-export const UserMessageText = styled.Text`
-    font-size: 14px;
-    color: ${props => props.theme.background};
-    text-align: left;
-`
-
-export const ContactMessage = styled.View`
-    background-color: ${props => props.theme.contact_message};
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    align-self: flex-start;
-    max-width: 70%;
-`
-
-export const ContactMessageText = styled.Text`
-    font-size: 14px;
-    color: ${props => props.theme.black};
-    text-align: left;
-`
 
 export const CustomFlatList = styled.View`
     /* background-color: ${props => props.theme.background}; */
