@@ -1,10 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import './axiosInterceptor';
-
-
-
 import AuthStack from '../stacks/authStack';
 import PublicStack from '../stacks/publicStack';
 import ProfileStack from '../stacks/profileStack';

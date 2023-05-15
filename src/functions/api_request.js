@@ -1,17 +1,14 @@
-import { API_LINK } from '@env';
 import  { addStorage, getStorage, Logout } from './storage';
-import axios from 'axios';
+import { FetchPeelApi } from "./request_fetch";
+import messaging from '@react-native-firebase/messaging';
+import { update_messaging } from './update_messaging';
 
 
 export const GetUser = async (defaultUser) => {
     console.log("\n\n GetUser")
-    let token = await  getStorage('token')
-    const requestOptions = {  
-        headers: { 'Content-Type': 'application/json', "authorization": token  },
-    };
-    const link = API_LINK + "/api/user/";
-    return axios.get(link ,requestOptions).then(res => {
-        let user = res.data;
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : "/api/user/", method:"GET", token:token}).then(res => {
+        let user = res;
         console.log("User fetched : ", user);
         if (user.birthday == null) {
             user.birthday = new Date();
@@ -30,20 +27,9 @@ export const GetUser = async (defaultUser) => {
 export const updateUser = async (user) => {
     console.log("\n\n updateUser")
     addStorage('user', user);
-    console.log("user saved : ", user)
-    let token = await  getStorage('token')
-    const body = JSON.stringify(user)
-    console.log("body : ", body)
-    const requestOptions = {
-        headers: { 'Content-Type': 'application/json', "authorization": token},
-    };
-    const link = API_LINK + "/api/user/";
-    return axios.put(link, body, requestOptions).then(res => {
-        if (res.status !== 200) {
-            const error = (data && data.message) || res.status;
-            console.log(error);
-            return Promise.reject(error);
-        } 
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : "/api/user/", method:"PUT", body: user, token:token}).then(res => {
+        return (res);
     }).catch(error => {
         console.log("error : ", error)
     });
@@ -52,41 +38,32 @@ export const updateUser = async (user) => {
 
 export  const  TestAuth = async () => {
     console.log("\n\n TestAuth")
-    let userId = await getStorage('userId')
-    let token = await  getStorage('token')
-    let auth_bool = false;
-    const link = API_LINK + "/api/auth/protected";
-    console.log("get env : ", link)
-    if (userId == null || token == null || userId == undefined || token == undefined) {
+    const firebaseToken = await messaging().getToken()
+    const token = await  getStorage('token')
+    if (token == null || token == undefined) {
         console.log("User not authenticated");
         await Logout(); 
-        return auth_bool;
+        return false;
     }
-    let response = await axios.get(link, {
-        headers: { authorization : token },
-        body: {userId: userId} 
-    })
-    if (response == null || response == undefined || response == "") {
-        await Logout();
-        return auth_bool;
-    } else {
-        console.log("User authenticated : ", response.data);
-        auth_bool = true
-        return auth_bool;
-    }
+    return FetchPeelApi({url : "/api/auth/protected", method:"GET", token:token, firebaseToken:firebaseToken}).then(res => {
+        if (res == null || res == undefined || res == "") {
+            Logout();
+            return false;
+        } else {
+            update_messaging();
+            return true;
+        }
+    }).catch(error => {
+        console.log("error : ", error)
+        return false;
+    });
 }
 
 export const GetMatchList = async () => {
     console.log("\n\n GetMatchList")
-    let userId = await getStorage('userId')
-    let token = await  getStorage('token')
-    const requestOptions = {  
-        headers: { 'Content-Type': 'application/json', "authorization": token },
-    };
-    const link = API_LINK + "/api/match/swipeProfil" ;
-    return axios.get(link,requestOptions).then(res => {
-        console.log("match list : ", res.data)
-        return (res.data);
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : "/api/match/swipeProfil", method:"GET", token:token}).then(res => {
+        return (res);
     }).catch(error => {
         console.log("error : ", error)
     });
@@ -95,39 +72,15 @@ export const GetMatchList = async () => {
 
 
 
-export const GetContactList = async () => {
-    console.log("\n\n GetContactList")
-    let token = await  getStorage('token')
-    const requestOptions = {  
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', "authorization": token},
-    };
-    const link = API_LINK + "/api/conversation/";
-    return axios.get(link,requestOptions).then(res => {
-        return (res.data);
-    }).catch(error => {
-        console.log("error : ", error)
-    });
-}
+
 
 
 export const sendSwipe = async (user_target, typeOfLike) => {
     console.log("\n\n sendSwipe")
-    console.log("send swipe request : ", user_target.user_id, typeOfLike)
-    let userId = await getStorage('userId')
-    let token = await  getStorage('token')
-    const  body = JSON.stringify({ userId: userId, targetId: user_target.user_id, type: typeOfLike });
-    const requestOptions = {
-        headers: {"authorization": token }
-    };
-    const link = API_LINK + "/api/match/like/ " + userId;
-    return axios.post(link, body, requestOptions).then(res => {
-        if (res.status !== 200) {
-            const error = (data && data.message) || res.status;
-            console.log(error);
-            return Promise.reject(error);
-        } 
-        console.log("request success")
+    const token = await  getStorage('token')
+    const  body ={ type: typeOfLike }
+    return FetchPeelApi({url : `/api/match/like/${user_target._id}`, method:"POST", body:body, token:token}).then(res => {
+        return (res);
     }).catch(error => {
         console.log("error : ", error)
     });
@@ -138,18 +91,14 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 
 export const loginRequest = async (email, password, navigation) => {
     console.log("\n\nlogin request")
-    const link = API_LINK + "/api/auth/login";
-    const requestOptions = {
-        email: email, 
-        password: password
-    };
-    console.log("requestOptions : ", requestOptions)
-    console.log("link : ", link)
-    axios.post(link, requestOptions).then(response => {
-        addStorage("token", response.data['token'].toString())
-        addStorage("userId", response.data['userId'].toString())
+    const firebaseToken = await messaging().getToken()
+    const body = { email: email, password: password }
+    return FetchPeelApi({url : `/api/auth/login`, method:"POST", body:body, firebaseToken:firebaseToken}).then(res => {
+        addStorage("token", res['token'].toString())
+        addStorage("userId", res['userId'].toString())
         console.log("connecté")
         navigation.navigate("Auth");
+        update_messaging();
     }).catch(error => {
         console.log("api error : ", error);
     }); 
@@ -157,55 +106,65 @@ export const loginRequest = async (email, password, navigation) => {
 
 export const registerRequest = async (email, password, navigation) => {
     console.log("\n\nregister request")
-    const link = API_LINK + "/api/auth/register";
-    axios.post(link, {
-        email: email, 
-        password: password
-    }).then(response => {
-        addStorage("token", response.data['token'])
-        addStorage("userId", response.data['userId'].toString())
+    const firebaseToken = await messaging().getToken()
+    const body = { email: email, password: password }
+    return FetchPeelApi({url : `/api/auth/register`, method:"POST", body:body, firebaseToken:firebaseToken}).then(res => {
+        addStorage("token", res['token'])
+        addStorage("userId", res['userId'].toString())
         console.log("connecté")
         navigation.navigate("Profile");
-    }).catch(error => {
-        console.log("api error : ", error);
-    }); 
+    })
 }
 
 
 export const getInterestList = async () => {
     console.log("\n\n GetInterestList")
-    const link = API_LINK + "/api/interest";
-    return axios.get(link).then(res => {
-        return (res.data);
-    })
+    return FetchPeelApi({url : "/api/interest", method:"GET"}).then(res => {
+        return (res);
+    }).catch(error => {
+        console.log("api error : ", error);
+    }); 
 }
 
 export const getQuestionList = async () => {
     console.log("\n\n getQuestionList")
-    const link = API_LINK + "/api/question";
-    return axios.get(link).then(res => {
-        let data = res.data;
-        for (let i = 0; i < data.length; i++) {
+    return FetchPeelApi({url : "/api/question", method:"GET"}).then(res => {
+        for (let i = 0; i < res.length; i++) {
             let newobj = {};
-            console.log("old obj : ", data[i])
-            newobj.key = data[i]._id;
-            newobj.label = data[i].question;
-            data[i] = newobj;
+            console.log("old obj : ", res[i])
+            newobj.key = res[i]._id;
+            newobj.label = res[i].question;
+            res[i] = newobj;
             console.log("newobj : ", newobj)
       }
-        return (data);
+        return (res);
     })
+}
+
+export const GetContactList = async () => {
+    console.log("\n\n GetContactList")
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : "/api/conversation/", method:"GET", token:token}).then(res => {
+        return (res);
+    }).catch(error => {
+        console.log("error : ", error)
+    });
 }
 
 
 export const getMessageList = async (conversationId) => {
     console.log("\n\n getMessageList")
-    let token = await  getStorage('token')
-    const requestOptions = {  
-        headers: { 'Content-Type': 'application/json', "authorization": token, "conversation_id": conversationId},
-    };
-    const link = API_LINK + "/api/conversation/message/";
-    return axios.get(link,  requestOptions ).then(res => {
-        return (res.data);
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : `/api/conversation/message/${conversationId}`, method:"GET", token:token}).then(res => {
+        return (res);
     })
 }
+
+export const sendMessage = async (conversationId, message) => {
+    console.log("\n\n sendMessage : ", message)
+    const token = await  getStorage('token')
+    const body = {message: message}
+    return FetchPeelApi({url : `/api/conversation/message/${conversationId}`, method:"POST", token:token, body:body}).then(res => {
+        return (res);
+    })
+};

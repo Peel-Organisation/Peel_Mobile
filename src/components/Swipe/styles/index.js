@@ -7,30 +7,25 @@ const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-
-export const CustomView = styled.View`
-    font-size: 20px;
-    width: 100%;
-    padding-top: 15%;
-`
-
-
+export const CardStackView = styled(CardStack)`
+    margin-top: 12px;
+    width: 86%;
+    height: 77%;
+    align-self: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 13px;
+    border: 1px solid #DFD6CE;
+    `
 
 export const ButtonStack = styled.View`
+    margin-top: 30px;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
-    position: absolute;
-    bottom: 5%;
+    position: relative;
 `
-
-export const CardStackView = styled(CardStack)`
-    width: 100%;
-    height: 100%;
-`
-
-
 
 export const Button = styled.TouchableOpacity`
     background-color: white;

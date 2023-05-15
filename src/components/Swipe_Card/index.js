@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View, Text, Image } from "react-native";
-import {HomeCard, Name, BiographyTitle, Biography, BiographyText, InteretTitle, InteretBox, InteretView, InteretText, QuestionView, QuestionText, ResponseText, GifImage} from './styles';
+import {HomeCard, Name, Biography, BiographyText, InteretTitle, InteretBox, InteretView, InteretText, QuestionView, QuestionText, ResponseText, GifImage, Locate, UserCont} from './styles';
 
 
 
@@ -30,9 +30,12 @@ const Swipe_Card = (props) => {
 
     return (
         <HomeCard>
-            <Name>
-                {User.firstName} {getAge(User.birthday)}
-            </Name>
+            <UserCont>
+                <Name>
+                    {User.firstName} {getAge(User.birthday)}
+                </Name>
+                <Locate>? km de vous</Locate>
+            </UserCont>
             {User.gif != undefined && User.gif != "" && User.gif != null ? (
                 <View>
                     <GifImage
