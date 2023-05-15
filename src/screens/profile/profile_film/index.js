@@ -79,7 +79,7 @@ const Film = ({route, navigation}) => {
         const genre = genres.find(genre => genre.id === genre_id);
         return {
           id: genre_id,
-          name: genre.name,
+          name: genre?.name|| '',
         };
       });
       const updatedUser = {
@@ -100,7 +100,6 @@ const Film = ({route, navigation}) => {
       console.log({error});
     }
   };
-  const handlePress = item => updateMovie(item);
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => updateMovie(item)}>
