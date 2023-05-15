@@ -101,8 +101,9 @@ const Film = ({route, navigation}) => {
     }
   };
   const renderItem = ({item}) => {
+    const handlePress = item => updateMovie(item);
     return (
-      <TouchableOpacity onPress={() => updateMovie(item)}>
+      <TouchableOpacity onPress={handlePress(item)}>
         <Image
           style={{
             width: 200,
