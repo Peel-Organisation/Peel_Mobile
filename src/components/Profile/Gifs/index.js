@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import { nextAction } from '../../Update_User';
 import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
 
 import {getStorage} from '../../../functions/storage';

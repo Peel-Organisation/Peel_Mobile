@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import { nextAction } from '../../Update_User';
 
+import {updateUser} from '../../../functions/api_request';
 import {getStorage} from '../../../functions/storage';
-import { BioInput } from './styles';
-import { Text } from 'react-native';
+
+import {BioInput} from './styles';
+import {Text} from 'react-native';
 
 // Biography component that will be used in the edit profile screen
 const Biography = () => {
@@ -53,9 +54,7 @@ const Biography = () => {
 
   return (
     <>
-      {status.statusPrompt != '' && (
-        <Text>{status.statusPrompt}</Text>
-      )}
+      {status.statusPrompt != '' && <Text>{status.statusPrompt}</Text>}
       <BioInput
         multiline
         numberOfLines={10}
@@ -64,7 +63,9 @@ const Biography = () => {
           let newUser = {...user};
           newUser.biographie = text;
           setUser(newUser);
-          
+        }}
+        onEndEditing={() => {
+          updateUser(user);
         }}
         value={user.biographie}
         placeholder={t('profile.biography')}

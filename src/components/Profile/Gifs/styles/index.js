@@ -7,6 +7,6 @@ export const FieldInput = styled.TextInput`
     margin-top: 10px;
     border-radius: 10px;
     background-color: ${props => props.theme.background};
-    border: 1px solid ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.grey};
     color: ${props => props.theme.text};
 `
