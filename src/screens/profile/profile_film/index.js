@@ -82,7 +82,7 @@ const Film = ({route, navigation}) => {
           name: genre.name,
         };
       });
-      const newUser = {
+      const updatedUser = {
         ...user,
         movie: {
           id: movieToUpdate.id,
@@ -94,13 +94,13 @@ const Film = ({route, navigation}) => {
           genres_ids,
         },
       };
-      setUser(newUser);
+      setUser(updatedUser);
       nextAction('Profile6', navigation, user);
     } catch (error) {
       console.log({error});
     }
   };
-
+  const handlePress = item => updateMovie(item);
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => updateMovie(item)}>
@@ -131,12 +131,12 @@ const Film = ({route, navigation}) => {
       <FieldInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
-        onChangeText={text => setSearchText(text)}
+        onChangeText={setSearchText}
       />
       <FlatList
         data={movies}
         renderItem={renderItem}
-        keyExtractor={item => item.title}
+        keyExtractor={item => item.id.toString()}
         onEndReached={() => {
           setPage(page + 1);
         }}

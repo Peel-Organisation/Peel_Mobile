@@ -42,12 +42,13 @@ const PublicStack = () => {
 
   return (
     <UserContext.Provider value={"user"}>
-      <Stack.Navigator initialRouteName="Film" screenOptions={{headerShown: false}} >
-        <Stack.Screen name="Film" component={Film} />
+      <Stack.Navigator initialRouteName="Profile1" screenOptions={{headerShown: false}} >
+        <Stack.Screen name="Profile1" component={Profile1} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Profile3} />
         <Stack.Screen name="Profile4" component={Biographie} />
         <Stack.Screen name="Profile5" component={Gif} />
+        <Stack.Screen name="Film" component={Film} />
         <Stack.Screen name="Profile6" component={ProfileInterest} />
         <Stack.Screen name="Profile7" component={Location} /> 
         <Stack.Screen name="Profile8" component={Question} />
