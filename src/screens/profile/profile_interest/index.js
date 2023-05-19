@@ -4,12 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {Update_Button} from "../../../components/Update_User";
 import Loading from "../../../components/loading";
-
-
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from "../../../functions/storage"; 
 import { getInterestList } from "../../../functions/api_request";
-
 import { InterestButton, InterestButtonText, ViewCustom, Title, InterestButtonSelected, InterestButtonDisabled, InterestView, ConditionText } from "../styles";
 
 
@@ -25,12 +22,9 @@ const ProfileInterest = ({ route, navigation }) => {
           if (fetchedUser.interests == undefined) {
               fetchedUser.interests = [];
           }
-          for (let i = 0; i < fetchedUser.interests.length; i++) {
-            if(typeof fetchedUser.interests[i] == "string"){
-              fetchedUser.interests[i] = fetchedUser.interests[i];
-            }
-          }
           setUser(fetchedUser);
+      }).catch((error) => {
+        crashlytics().recordError(error)
       });
 
       getInterestList().then(data => {
@@ -41,6 +35,8 @@ const ProfileInterest = ({ route, navigation }) => {
         }
         setInterestList(data);
         setLoading(false);
+      }).catch((error) => {
+        crashlytics().recordError(error)
       });
   }, []);
 
@@ -48,14 +44,14 @@ const ProfileInterest = ({ route, navigation }) => {
     if (user.interests?.length == 5 ){ 
       setNavButton(
         <>
-          <Update_Button user={user} prevPage="Profile5" nextPage="Profile7"  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile6" nextPage="Profile8"  navigation={navigation} />
         </>
       ) 
     } else {
       setNavButton(
         <> 
           <ConditionText>{t("profile.fill")}</ConditionText>
-          <Update_Button user={user} prevPage="Profile4" nextPage=""  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile6" nextPage=""  navigation={navigation} />
         </>
       )
     }
@@ -64,7 +60,7 @@ const ProfileInterest = ({ route, navigation }) => {
 
   const addInterest = (interest) => {
     if (user.interests?.length < 5){
-      console.log("interest = ",interest)
+      crashlytics().log("interest = ",interest)
       let newUser = {...user};
       newUser.interests.push(interest);
       setUser(newUser)
@@ -76,7 +72,7 @@ const ProfileInterest = ({ route, navigation }) => {
     if (typeof interest == "string") {
       interest = JSON.parse(interest);
     }
-    console.log("interest = ",interest._id)
+    crashlytics().log("interest = ",interest._id)
     newUser.interests = newUser.interests?.filter(item => item._id !== interest._id);
     setUser( newUser)
   }
@@ -131,12 +127,11 @@ const ProfileInterest = ({ route, navigation }) => {
 }
 
 const containsObject = (obj, list) => {
-    var i;
+    let i;
     if (list == undefined) {
       return false;
     }
     for (i = 0; i < list.length; i++) {
-        // console.log(list[i]._id, obj._id)
         if (list[i]._id === obj._id) {
             return true;
         }

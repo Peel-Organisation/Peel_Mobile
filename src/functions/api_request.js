@@ -8,6 +8,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 export const GetUser = async (defaultUser) => {
     crashlytics().log("\n\n GetUser")
+    console.log("GetUser")
     const token = await  getStorage('token')
     return FetchPeelApi({url : "/api/user/", method:"GET", token:token}).then(res => {
         let user = res;
@@ -17,10 +18,12 @@ export const GetUser = async (defaultUser) => {
             user.birthday.setFullYear(user.birthday.getFullYear() - 18);
         }
         crashlytics().log("User authenticated : ", user);
+        crashlytics().setUserId(user._id);
+        console.log("User authenticated : ", user);
         addStorage("user", user)
         return user
     }).catch(error => {
-        crashlytics().recordError("error whith api : ",error)
+        crashlytics().recordError(error)
         addStorage("user", defaultUser)  
         return false
     });
@@ -40,8 +43,6 @@ export const updateUser = async (user) => {
 
 export  const  TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
-    console.log("crash")
-    crashlytics().crash()
     const firebaseToken = await messaging().getToken()
     const token = await  getStorage('token')
     if (token == null || token == undefined) {
@@ -55,16 +56,8 @@ export  const  TestAuth = async () => {
             return false;
         } else {
             crashlytics().log("User authenticated");
-            Promise.all([
-                crashlytics().setUserId(user.uid),
-                crashlytics().setAttributes("token", token)
-            ]).then(() => {
-                update_messaging();
-                return true;
-            }).catch(error => {
-                crashlytics().recordError(error)
-                return false;
-            });
+            update_messaging();
+            return true;
         }
     }).catch(error => {
         crashlytics().recordError(error)
@@ -126,6 +119,8 @@ export const registerRequest = async (email, password, navigation) => {
         addStorage("userId", res['userId'].toString())
         crashlytics().log("connecté")
         navigation.navigate("Profile");
+    }).catch((error) => {
+      crashlytics().recordError(error)
     })
 }
 
@@ -135,7 +130,7 @@ export const getInterestList = async () => {
     return FetchPeelApi({url : "/api/interest", method:"GET"}).then(res => {
         return (res);
     }).catch(error => {
-        crashlytics().recordError("apierror : ",error);
+        crashlytics().recordError(error);
     }); 
 }
 
@@ -148,9 +143,11 @@ export const getQuestionList = async () => {
             newobj.key = res[i]._id;
             newobj.label = res[i].question;
             res[i] = newobj;
-            crashlytics().recordError("newobj : ", newobj)
-      }
+            crashlytics().log("newobj : ", newobj)
+        }
         return (res);
+    }).catch((error) => {
+        crashlytics().recordError(error)
     })
 }
 

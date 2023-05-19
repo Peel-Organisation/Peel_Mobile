@@ -5,6 +5,7 @@ import messaging from '@react-native-firebase/messaging';
 import { getStorageMessage, getStorage } from "../../functions/storage";
 import { FlatList } from 'react-native';
 import { MessageUser } from '../Message_Card';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
@@ -14,15 +15,19 @@ const MessageList = ({conversation_id, messages, setMessages}) => {
   useEffect(() => {
     getStorageMessage(conversation_id).then(data => {
       setMessages(data);
-    });
+    }).catch((error) => {
+      crashlytics().recordError(error)
+    })
     
     getStorage('userId').then(data => {
       setUserId(data);
-    });
+    }).catch((error) => {
+      crashlytics().recordError(error)
+    })
   }, []);
 
   messaging().onMessage(async remoteMessage => {
-    console.log('A new FCM message arrived in front!', JSON.stringify(remoteMessage));
+    crashlytics().log('A new FCM message arrived in front!', JSON.stringify(remoteMessage));
     try {
       const newMessage = JSON.parse(remoteMessage?.data?.message);
       let index = messages.findIndex((message) => message._id == newMessage._id);
@@ -30,7 +35,7 @@ const MessageList = ({conversation_id, messages, setMessages}) => {
         setMessages([...messages, newMessage]);
       }
     } catch (error) {
-      console.log('error : ', error);
+      crashlytics().recordError(error);
     }
   });
 

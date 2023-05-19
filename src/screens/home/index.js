@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
-import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg, Filter } from "./styles"
+import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe  from "../../components/Swipe";
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { GetMatchList} from "../../functions/api_request"
 import Loading from "../../components/loading";
-import { Icon } from "../../components/Swipe/styles";
 
 
 
@@ -17,6 +16,7 @@ const Match = () => {
     const [userList, setUserList] = useState([{}]);
     
     useEffect(() => {
+        crashlytics().log("Match screen mounted");
         GetMatchList().then(matchList => {
             if (matchList != undefined) {
                 setUserList(matchList);
@@ -24,6 +24,8 @@ const Match = () => {
             } else {
                 navigation.navigate('Public');
             }
+        }).catch((error) => {
+            crashlytics().recordError(error)
         })
     }, []);
 
