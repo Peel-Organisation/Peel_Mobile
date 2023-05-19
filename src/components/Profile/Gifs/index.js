@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
 
+import {updateUser} from '../../../functions/api_request';
 import {getStorage} from '../../../functions/storage';
 
 import {FlatList, TouchableOpacity, Image} from 'react-native';
@@ -40,7 +41,7 @@ const Gif = () => {
   }, [searchText]);
 
   const getPopularGifs = async () => {
-    const limit = 20;
+    const limit = 10;
     let link = '';
     if (searchText.length > 0) {
       link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${
@@ -73,7 +74,7 @@ const Gif = () => {
   };
 
   const searchGif = async () => {
-    const limit = 20;
+    const limit = 10;
     const link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}`;
     console.log('link : ', link);
     const response = await fetch(link);
@@ -99,6 +100,7 @@ const Gif = () => {
     };
     console.log('newUser : ', newUser);
     setUser(newUser);
+    updateUser(newUser);
   };
 
   const renderItem = ({item}) => {

@@ -25,10 +25,11 @@ export const GetUser = async (defaultUser) => {
 }
 
 export const updateUser = async (user) => {
-    console.log("\n\n updateUser")
+    console.log("\n\n updateUser :", user)
     addStorage('user', user);
     const token = await  getStorage('token')
     return FetchPeelApi({url : "/api/user/", method:"PUT", body: user, token:token}).then(res => {
+        console.log(res);
         return (res);
     }).catch(error => {
         console.log("error : ", error)

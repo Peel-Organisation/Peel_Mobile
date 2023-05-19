@@ -91,10 +91,11 @@ const Question = ({route, navigation}) => {
           }}
         />
         <FieldInput
-          placeholder={t('profile.answer')}
+          placeholder={t('profile.question_placeholder')}
           onChangeText={text => {
             user.questions[0].answer = text;
             setUser(user);
+            updateUser(user);
           }}
           value={user.questions[0].answer}
         />
@@ -109,10 +110,11 @@ const Question = ({route, navigation}) => {
           }}
         />
         <FieldInput
-          placeholder={t('profile.answer')}
+          placeholder={t('profile.question_placeholder')}
           onChangeText={text => {
             user.questions[1].answer = text;
             setUser(user);
+            updateUser(user);
           }}
           value={user.questions[1].answer}
         />
@@ -124,10 +126,11 @@ const Question = ({route, navigation}) => {
           onChange={option => {
             user.questions[2].question = option.label;
             setUser(user);
+            updateUser(user);
           }}
         />
         <FieldInput
-          placeholder={t('profile.answer')}
+          placeholder={t('profile.question_placeholder')}
           onChangeText={text => {
             user.questions[2].answer = text;
             setUser(user);
@@ -143,7 +146,7 @@ const Question = ({route, navigation}) => {
             }
           });
         }}>
-        <ValidButtonText>{t('profile.save')}</ValidButtonText>
+        <ValidButtonText>{t('profile.question_save')}</ValidButtonText>
       </ValidButton>
     </InputView>
   );

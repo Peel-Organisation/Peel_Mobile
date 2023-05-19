@@ -9,4 +9,5 @@ export const FieldInput = styled.TextInput`
     background-color: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.grey};
     color: ${props => props.theme.text};
+    align-self: center;
 `
