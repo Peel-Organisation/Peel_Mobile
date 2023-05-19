@@ -13,9 +13,8 @@ export const CardStackView = styled(CardStack)`
     height: 77%;
     align-self: center;
     align-items: center;
-    overflow: hidden;
     border-radius: 13px;
-    border: 1px solid #DFD6CE;
+    
     `
 
 export const ButtonStack = styled.View`

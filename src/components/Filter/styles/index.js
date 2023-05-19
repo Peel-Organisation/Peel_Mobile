@@ -1,31 +1,11 @@
-import { Dimensions } from "react-native";
 import styled from 'styled-components/native';
 
-
-
-const DIMENSION_WIDTH = Dimensions.get("window").width;
-const DIMENSION_HEIGHT = Dimensions.get("window").height;
-
-export const Background = styled.View`
+export const Container = styled.View `
     position: absolute;
-    background-color: ${props => props.theme.background};
     width: 100%;
-    height: 100%;
-`
-export const BackgroundTop = styled.View`
-    position: absolute;
     background-color: ${props => props.theme.primary};
-    width: 100%;
-    height: 45%;
     border-bottom-left-radius: 39px;
     border-bottom-right-radius: 39px;
-`
-
-export const Container = styled.View`
-    width: 100%;
-    height: 100%;
-    /* border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px; */
 `
 
 export const Header =  styled.View`
@@ -54,4 +34,24 @@ export const FilterIcon = styled.TouchableOpacity `
 export const FilterIconImg = styled.Image `
     width: 30px;
     height: 30px;
+`
+
+export const FiltersView = styled.View `
+    width: 75%;
+    align-self: center;
+`
+
+export const Search = styled.Text `
+    font-size: 22px;
+    color: ${props => props.theme.background};
+    margin: 12px;
+`
+
+export const ButtonView = styled.View `
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 50px;
+    margin-top: 25px;
+    margin-bottom: 30px;
 `
