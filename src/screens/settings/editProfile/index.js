@@ -12,16 +12,18 @@ import {
   ModuleTitle,
   ModulePicker,
 } from './styles';
-import {GetUser} from '../../../functions/api_request';
+import {GetUser, updateUser} from '../../../functions/api_request';
+import { use } from 'i18next';
 
 const EditProfile = () => {
   const {t} = useTranslation();
   const [user, setUser] = useState({});
   const [selectedModules, setSelectedModules] = useState([]);
+  const [modules, setModules] = useState([]);
 
   useEffect(() => {
     GetUser(user).then(user_data => {
-      if (user_data != false) {
+      if (user_data) {
         console.log('user_data', user_data);
         setUser(user_data);
         // Pré-remplir les modules sélectionnés par l'utilisateur
@@ -35,13 +37,29 @@ const EditProfile = () => {
     });
   }, []);
 
+  useEffect(() => {
+    modulesList();
+  }, [selectedModules]);
+
+  const modulesList = () => {
+    let modules = [];
+    availableModules.forEach((module) => {
+      if (!isModuleSelected(module.value)) {
+        modules.push(module);
+      }
+    });
+    console.log('modules', modules);
+    setModules(modules);
+  };
+        
+
   // Tableau des modules disponibles dans l'API
   const availableModules = [
     {value: 'gif', label: t('profile.custom.gifs')},
     {value: 'biographie', label: t('profile.custom.biography')},
     {value: 'interests', label: t('profile.custom.interests')},
     {value: 'questions', label: t('profile.custom.questions')},
-    {value: 'movies', label: t('profile.custom.movies')},
+    {value: 'movie', label: t('profile.custom.movie')},
     {value: 'music', label: t('profile.custom.music')},
   ];
 
@@ -62,20 +80,31 @@ const EditProfile = () => {
       console.log('updatedModules', updatedModules);
       setSelectedModules(updatedModules);
     }
+
+
+    //  update user
+    const updatedUser = {...user};
+    updatedUser.profileModules = {
+      mainElement: updatedModules[0],
+      secondaryElement: updatedModules[1],
+      tertiaryElement: updatedModules[2],
+      quaternaryElement: updatedModules[3],
+    };
+    updateUser(updatedUser);
   };
 
   return (
     <ViewCustom>
       <Title>{t('profile.custom.title')}</Title>
       <MainText>{t('profile.custom.text')}</MainText>
-      {selectedModules.map((module, index) => (
+      {selectedModules && selectedModules.map((module, index) => (
         <ModuleView key={index}>
           <ModulePicker
             selectedValue={module}
             onValueChange={itemValue =>
               handleModuleSelection(itemValue, index)
             }>
-            {availableModules.map(availableModule => (
+            {modules.map((availableModule, index) => (
               <ModulePicker.Item
                 key={availableModule.value}
                 label={availableModule.label}
@@ -98,8 +127,8 @@ const EditProfile = () => {
           )}
           {module === 'questions' && (
             <>
-              <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
-              <Question user={user} setUser={setUser} />
+              {/* <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
+              <Question user={user} setUser={setUser} /> */}
             </>
           )}
           {module === 'gif' && (
@@ -108,9 +137,9 @@ const EditProfile = () => {
               <Gif user={user} setUser={setUser} />
             </>
           )}
-          {module === 'movies' && (
+          {module === 'movie' && (
             <>
-              <ModuleTitle>{t('profile.custom.movies')}</ModuleTitle>
+              <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
             </>
           )}
           {module === 'music' && (
