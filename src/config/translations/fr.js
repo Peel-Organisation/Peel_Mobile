@@ -4,7 +4,6 @@ export default {
   translation: {
     home: {
         title: "Peel",
-        filter: "Filtre"
     },
     settings: {
       title: 'Paramètres',
