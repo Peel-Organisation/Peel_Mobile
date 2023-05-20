@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
+import { uniqBy } from 'lodash';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 import {ViewCustom, Title, MainText, FieldInput} from '../styles';
@@ -13,7 +14,6 @@ const Music = ({route, navigation}) => {
   const [page, setPage] = React.useState(1);
   const [musics, setMusics] = useState([]);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     getStorage('user').then(fetchedUser => {
       if (fetchedUser.biographie === undefined) {
@@ -25,36 +25,34 @@ const Music = ({route, navigation}) => {
 
   useEffect(() => {
     if (searchText.length > 0) {
-      searchMusics();
+      searchMusics(searchText, page);
     }
-  }, [page]);
+  }, [searchText, page]);
 
-  useEffect(() => {
-    setPage(1);
-    if (searchText.length > 0) {
-      searchMusics();
-    }
-  }, [searchText]);
-
-  const searchMusics = async () => {
-    const url = `${GENIUS_API_PATH}/search?q=${searchText}&page=${page}`;
+  const searchMusics = async (currentText, currentPage) => {
+    const url = `https://${GENIUS_API_PATH}search?q=${currentText}&page=${currentPage}`;
     setLoading(true);
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${GENIUS_API_TOKEN}`,
-      },
-    });
-    if (response.status === 200) {
-      const data = await response.json();
-      if (
-        data != null &&
-        data.response != null &&
-        data.response.hits.length > 0
-      ) {
-        setMusics(data.response.hits);
-        setLoading(false);
+    console.log({ url, Authorization: `Bearer ${GENIUS_API_TOKEN}` });
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer VDoACK776IWvsMlkKcEixpSGu1gqPejwyRXcyri3gtGD3Xsh64mg3VWG5NGNG2mO`,
+        },
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        if (
+          data.response !== null &&
+          data.response.hits.length > 0
+        ) {
+          setMusics((oldMusics) => uniqBy([...oldMusics, ...data.response.hits], 'result.id'));
+          setLoading(false); 
+        }
       }
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -67,8 +65,8 @@ const Music = ({route, navigation}) => {
           artist: musicToUpdate.artist,
         },
       };
-      setUser(updatedUser);
-      nextAction('Profile6', navigation, user);
+      // setUser(updatedUser);
+      // nextAction('Profile6', navigation, user);
     } catch (error) {
       console.log({error});
     }
@@ -90,21 +88,29 @@ const Music = ({route, navigation}) => {
     );
   };
 
-  if (loading) return <MainText>Chargement...</MainText>;
 
+  const handleChangeText = (text) => {
+    console.log(text);
+    if(!text) {
+      return
+    }
+    setSearchText(text)
+  }
+
+  console.log(musics);
   return (
     <ViewCustom>
-      <Update_Button
+      {/* <Update_Button
         user={user}
         prevPage="Profile4"
         nextPage=""
         navigation={navigation}
-      />
-      <Title>Choix du film</Title>
+      /> */}
+      <Title>Rechercher une musique</Title>
       <FieldInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
-        onChangeText={setSearchText}
+        onChangeText={handleChangeText}
       />
       <FlatList
         data={musics}
@@ -115,6 +121,7 @@ const Music = ({route, navigation}) => {
         }}
         onEndReachedThreshold={0.4}
       />
+      {loading && <MainText>Chargement...</MainText>}
     </ViewCustom>
   );
 };
