@@ -12,6 +12,7 @@ import Question from "../screens/profile/profile_question"
 import Location from "../screens/profile/profile_location"
 import Film from "../screens/profile/profile_film"
 import Gif from "../screens/profile/profile_gif"
+import Music from "../screens/profile/profile_music";
 
 import {GetUser} from "../functions/api_request"
 
@@ -42,7 +43,8 @@ const PublicStack = () => {
 
   return (
     <UserContext.Provider value={"user"}>
-      <Stack.Navigator initialRouteName="Profile1" screenOptions={{headerShown: false}} >
+      <Stack.Navigator initialRouteName="Music" screenOptions={{headerShown: false}} >
+        <Stack.Screen name="Music" component={Music} />
         <Stack.Screen name="Profile1" component={Profile1} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Profile3} />
