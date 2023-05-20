@@ -56,6 +56,7 @@ export  const  TestAuth = async () => {
             return false;
         } else {
             crashlytics().log("User authenticated");
+            crashlytics().setUserId(res.userId.toString());
             update_messaging();
             return true;
         }
@@ -103,6 +104,7 @@ export const loginRequest = async (email, password, navigation) => {
         addStorage("token", res['token'].toString())
         addStorage("userId", res['userId'].toString())
         crashlytics().log("connecté")
+        crashlytics().setUserId(res['userId'].toString());
         navigation.navigate("Auth");
         update_messaging();
     }).catch(error => {
@@ -118,6 +120,7 @@ export const registerRequest = async (email, password, navigation) => {
         addStorage("token", res['token'])
         addStorage("userId", res['userId'].toString())
         crashlytics().log("connecté")
+        crashlytics().setUserId(res['userId'].toString());
         navigation.navigate("Profile");
     }).catch((error) => {
       crashlytics().recordError(error)
