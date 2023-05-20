@@ -104,6 +104,10 @@ const EditProfile = () => {
             onValueChange={itemValue =>
               handleModuleSelection(itemValue, index)
             }>
+            <ModulePicker.Item
+              label={module}
+              value=""
+            />
             {modules.map((availableModule, index) => (
               <ModulePicker.Item
                 key={availableModule.value}
