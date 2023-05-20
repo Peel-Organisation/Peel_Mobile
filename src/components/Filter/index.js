@@ -14,7 +14,7 @@ const Filter = ({ filter, setFilter }) => {
 
     useEffect(() => {
         setActiveFilter(filtersArray);
-    },[])
+    },[]) 
 
     const filtersArray = [
         {
