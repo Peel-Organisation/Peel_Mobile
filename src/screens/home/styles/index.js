@@ -55,3 +55,12 @@ export const FilterIconImg = styled.Image `
     width: 30px;
     height: 30px;
 `
+
+export const Filter = styled.View `
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: ${props => props.theme.primary};
+    border-bottom-left-radius: 39px;
+    border-bottom-right-radius: 39px;
+`
