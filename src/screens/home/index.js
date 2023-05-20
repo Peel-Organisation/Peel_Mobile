@@ -16,7 +16,7 @@ const Match = () => {
 
     const [loading, setLoading] = useState(true);
     const [userList, setUserList] = useState([{}]);
-    // const [filter, setFilter] = useState(false);
+    const [filter, setFilter] = useState(false);
     
     useEffect(() => {
         GetMatchList().then(matchList => {

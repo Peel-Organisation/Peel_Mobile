@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FilterButton from "../UI/FilterButton";
 import FilterSelector from "../UI/FilterSelector";
 import { ButtonView, Container, FilterIcon, FilterIconImg, FiltersView, Header, Search, TitleText } from "./styles";
@@ -10,8 +10,11 @@ const Filter = ({ filter, setFilter }) => {
     const { t } = useTranslation();
 
     const [FilterPage, setFilterPage] = useState(true);
-    const [FilterType, setFilterType] = useState('');
-    const [activeFilter, setActiveFilter] = useState(filtersArray);
+    const [activeFilter, setActiveFilter] = useState([]);
+
+    useEffect(() => {
+        setActiveFilter(filtersArray);
+    },[])
 
     const filtersArray = [
         {
@@ -52,7 +55,7 @@ const Filter = ({ filter, setFilter }) => {
                 {
                     FilterPage ?(
                         <>
-                            <FilterSelector title={"Mes centres d'intérêts"} setActiveFilter={setActiveFilter} onPress={console.log(activeFilter)}/>
+                            <FilterSelector title={"Mes centres d'intérêts"} activeFilter={activeFilter} setActiveFilter={setActiveFilter}/>
                             <FilterSelector title={"Musiques"} setFilterPage={setFilterPage}/>
                             <FilterSelector title={"Sports"} setFilterPage={setFilterPage}/>
                             <FilterSelector title={"Films"} setFilterPage={setFilterPage}/>
