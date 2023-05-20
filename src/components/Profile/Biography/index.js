@@ -7,7 +7,6 @@ import {getStorage} from '../../../functions/storage';
 import {BioInput} from './styles';
 import {Text} from 'react-native';
 
-// Biography component that will be used in the edit profile screen
 const Biography = () => {
   const {t} = useTranslation();
   const [user, setUser] = useState({});
@@ -57,8 +56,7 @@ const Biography = () => {
       {status.statusPrompt != '' && <Text>{status.statusPrompt}</Text>}
       <BioInput
         multiline
-        numberOfLines={10}
-        // style={styles.input}
+        numberOfLines={4}
         onChangeText={text => {
           let newUser = {...user};
           newUser.biographie = text;

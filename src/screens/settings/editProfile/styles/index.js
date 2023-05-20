@@ -1,9 +1,6 @@
-import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import {Picker} from '@react-native-picker/picker';
 
-const DIMENSION_WIDTH = Dimensions.get('window').width;
-const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
 export const ViewCustom = styled.ScrollView`
   flex: 1;
@@ -45,11 +42,9 @@ export const ModuleTitle = styled.Text`
 `;
 
 export const ModulePicker = styled(Picker)`
-    width: 100%;
-    height: 50px;
+    width: 50%;
     margin: 10px;
-    border-radius: 10px;
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.grey};
     color: ${props => props.theme.text};
     align-self: center;
 `;

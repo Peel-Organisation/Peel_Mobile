@@ -9,7 +9,6 @@ export const ModalSelectorCustom = styled(ModalSelector)`
 
 export const InputView = styled.View`
     width: 80%;
-    /* flex: 1; */
     align-self: center;
 `
 
@@ -20,7 +19,7 @@ export const FieldInput = styled.TextInput`
     height: 50px;
     margin: 10px 0px;
     border-radius: 10px;
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.white};
     color: ${props => props.theme.text};
 `
 

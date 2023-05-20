@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
 
 export const InterestButton = styled.TouchableOpacity`
-    /* width: 70%; */
-    padding: 2%;
+    padding: 4%;
     margin: 5%;
-    border-radius: 4px;
+    border-radius: 10px;
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
 `
@@ -16,19 +15,17 @@ export const InterestView = styled.View`
 `
 
 export const InterestButtonSelected = styled.TouchableOpacity`
-    /* width: 70%; */
-    padding: 2%;
+    padding: 4%;
     margin: 5%;
-    border-radius: 4px;
+    border-radius: 10px;
     background-color: red;
     color: ${props => props.theme.background};
 `
 
 export const InterestButtonDisabled = styled.TouchableOpacity`
-    /* width: 70%; */
-    padding: 2%;
+    padding: 4%;
     margin: 5%;
-    border-radius: 4px;
+    border-radius: 10px;
     background-color: grey;
     color: ${props => props.theme.background};
 `

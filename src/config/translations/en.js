@@ -3,7 +3,7 @@ import Biographie from '../../screens/profile/profile_biographie';
 export default {
   translation: {
     home: {
-        title: "Peel",
+      title: 'Peel',
     },
     settings: {
       title: 'Settings',
@@ -64,6 +64,7 @@ export default {
       question_select: 'Select a question !',
       question_placeholder: 'Answer the question !',
       question_save: 'Save',
+      gifs_placeholder: 'Search a gif',
       custom: {
         title: 'Customize your profile !',
         text: 'Select the elements you want other users to see when they want to check on your profile',

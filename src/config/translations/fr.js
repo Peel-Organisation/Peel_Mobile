@@ -66,6 +66,7 @@ export default {
       question_select: 'Sélectionnez une question !',
       question_placeholder: 'Répondez à la question !',
       question_save: 'Sauvegarder',
+      gifs_placeholder: 'Rechercher un gif',
       custom: {
         title: 'Personnalisez votre profil !',
         text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',

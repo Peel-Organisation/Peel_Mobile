@@ -124,6 +124,7 @@ const Gif = () => {
       <FieldInput
         value={searchText}
         onChangeText={text => setSearchText(text)}
+        placeholder={t('profile.custom.gifs')}
       />
       <FlatList
         data={gifs}
