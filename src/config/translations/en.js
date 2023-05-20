@@ -3,7 +3,8 @@ import Biographie from '../../screens/profile/profile_biographie';
 export default {
   translation: {
     home: {
-      title: 'Peel',
+        title: "Peel",
+        filter: "Filter"
     },
     settings: {
       title: 'Settings',

@@ -9,9 +9,11 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const HomeCard =  styled.View`
     background-color: white;
     width: 100%;
-    height: 100%;
+    max-height: ${DIMENSION_HEIGHT/1.4};
     overflow: hidden;
     padding: 7%;
+    border: 1px solid #DFD6CE;
+    border-radius: 13px;
 `
 export const UserCont = styled.View `
     margin: 0px 0px 15px 0px;
