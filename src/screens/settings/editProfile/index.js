@@ -107,7 +107,7 @@ const EditProfile = () => {
             <ModulePicker.Item
               label={module}
               value=""
-              enabled={false}
+              // enabled={false}
             />
             {modules.map((availableModule, index) => (
               <ModulePicker.Item
