@@ -14,12 +14,13 @@ export const onDisplayNotification = async (title, body) => {
   crashlytics().log('channel créer');
   crashlytics().log('title : ', title);
   crashlytics().log('body : ', body);
-  if (body === undefined) return;
-  if (body === null) return;
-  if (typeof body != "string") return;
-  if (title === undefined) return;
-  if (title === null) return;
-  if (typeof title != "string") return;
+
+
+
+  if (body === undefined || body === null || typeof body != "string" || title === undefined || title === null || typeof title != "string") {
+    crashlytics().log('body ou title undefined');
+    return;
+  }
 
   // Display a notification
   await notifee.displayNotification({

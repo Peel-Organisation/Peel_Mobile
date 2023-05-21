@@ -8,7 +8,6 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 export const GetUser = async (defaultUser) => {
     crashlytics().log("\n\n GetUser")
-    console.log("GetUser")
     const token = await  getStorage('token')
     return FetchPeelApi({url : "/api/user/", method:"GET", token:token}).then(res => {
         let user = res;
@@ -19,7 +18,6 @@ export const GetUser = async (defaultUser) => {
         }
         crashlytics().log("User authenticated : ", user);
         crashlytics().setUserId(user._id);
-        console.log("User authenticated : ", user);
         addStorage("user", user)
         return user
     }).catch(error => {
