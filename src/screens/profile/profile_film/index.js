@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
+import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 import {ViewCustom, Title, MainText, FieldInput} from '../styles';
 import crashlytics from '@react-native-firebase/crashlytics';
@@ -16,11 +17,13 @@ const Film = ({route, navigation}) => {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-    getStorage('user').then(fetchedUser => {
-      setUser(fetchedUser);
-    }).catch((error) => {
-      crashlytics().recordError(error)
-    });
+    getStorage('user')
+      .then(fetchedUser => {
+        setUser(fetchedUser);
+      })
+      .catch(error => {
+        crashlytics().recordError(error);
+      });
   }, []);
 
   useEffect(() => {

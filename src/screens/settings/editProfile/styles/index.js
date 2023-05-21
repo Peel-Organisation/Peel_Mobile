@@ -29,8 +29,8 @@ export const MainText = styled.Text`
 export const ModuleView = styled.View`
   background-color: ${props => props.theme.white};
   padding: 5px;
-  margin: 5%;
-  border-radius: 4px;
+  margin: 10%;
+  border-radius: 10px;
   flex: 1;
 `;
 

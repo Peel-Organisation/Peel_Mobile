@@ -72,7 +72,7 @@ export default {
         gifs: 'Gifs',
         interests: 'Interests',
         questions: 'Questions',
-        movie: 'movie',
+        movie: 'Movies',
         music: 'Music',
       },
     },

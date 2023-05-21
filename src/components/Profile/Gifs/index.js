@@ -108,8 +108,8 @@ const Gif = () => {
       <TouchableOpacity onPress={() => updateGif(item)}>
         <Image
           style={{
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           }}
           source={{
             uri: `${item?.images?.original?.webp}`,

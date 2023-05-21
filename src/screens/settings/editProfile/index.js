@@ -5,6 +5,7 @@ import Gif from '../../../components/Profile/Gifs';
 import Interest from '../../../components/Profile/Interest';
 import Question from '../../../components/Profile/Question';
 import Movie from '../../../components/Profile/Movie';
+import Music from '../../../components/Profile/Music';
 import {
   ViewCustom,
   Title,
@@ -106,7 +107,6 @@ const EditProfile = () => {
               <ModulePicker.Item
                 label={module}
                 value=""
-                // enabled={false}
               />
               {modules.map((availableModule, index) => (
                 <ModulePicker.Item
@@ -131,8 +131,8 @@ const EditProfile = () => {
             )}
             {module === 'questions' && (
               <>
-                {/* <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
-              <Question user={user} setUser={setUser} /> */}
+                <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
+              <Question user={user} setUser={setUser} />
               </>
             )}
             {module === 'gif' && (
@@ -150,6 +150,7 @@ const EditProfile = () => {
             {module === 'music' && (
               <>
                 <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
+                <Music user={user} setUser={setUser} />
               </>
             )}
           </ModuleView>

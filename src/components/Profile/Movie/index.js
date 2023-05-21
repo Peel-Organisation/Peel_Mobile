@@ -114,7 +114,7 @@ const Movie = () => {
           updateMovie(item);
         }}>
         <Image
-          style={{width: 200, height: 200}}
+          style={{width: 150, height: 150}}
           source={{
             uri: `${imageBaseUrl}${item.poster_path}`,
           }}
@@ -126,7 +126,7 @@ const Movie = () => {
   return (
     <>
       <FieldInput
-        placeholder={t('profile.search_film')}
+        placeholder={t('profile.custom.movie')}
         onChangeText={text => setSearchText(text)}
         value={searchText}
       />
