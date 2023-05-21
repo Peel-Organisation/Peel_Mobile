@@ -1,42 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import {Update_Button} from "../../../components/Update_User";
-import Loading from "../../../components/loading";
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Update_Button} from '../../../components/Update_User';
+import Loading from '../../../components/loading';
 import crashlytics from '@react-native-firebase/crashlytics';
-import { getStorage } from "../../../functions/storage"; 
-import { getInterestList } from "../../../functions/api_request";
-import { InterestButton, InterestButtonText, ViewCustom, Title, InterestButtonSelected, InterestButtonDisabled, InterestView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
+import {getStorage} from '../../../functions/storage';
+import {getInterestList} from '../../../functions/api_request';
+import {
+  InterestButton,
+  InterestButtonText,
+  ViewCustom,
+  Title,
+  InterestButtonSelected,
+  InterestButtonDisabled,
+  InterestView,
+  ConditionText,
+} from '../styles';
 
-
-const ProfileInterest = ({ route, navigation }) => {
-  const { t } = useTranslation();
+const ProfileInterest = ({route, navigation}) => {
+  const {t} = useTranslation();
   const [InterestList, setInterestList] = useState([{}]);
   const [user, setUser] = useState({interests: []});
   const [loading, setLoading] = React.useState(true);
-  const [navButton, setNavButton] = useState(null);   
- 
-    useEffect(() => {
-      getStorage('user').then(fetchedUser => {
-          if (fetchedUser.interests == undefined) {
-              fetchedUser.interests = [];
-          }
-          setUser(fetchedUser);
-      }).catch((error) => {
-        crashlytics().recordError(error)
+  const [navButton, setNavButton] = useState(null);
+
+  useEffect(() => {
+    getStorage('user')
+      .then(fetchedUser => {
+        if (fetchedUser.interests == undefined) {
+          fetchedUser.interests = [];
+        }
+        setUser(fetchedUser);
+      })
+      .catch(error => {
+        crashlytics().recordError(error);
       });
 
-      getInterestList().then(data => {
+    getInterestList()
+      .then(data => {
         for (let i = 0; i < data.length; i++) {
-          if(typeof data[i] == "string"){
+          if (typeof data[i] == 'string') {
             data[i] = JSON.parse(data[i]);
           }
         }
         setInterestList(data);
         setLoading(false);
-      }).catch((error) => {
-        crashlytics().recordError(error)
+      })
+      .catch(error => {
+        crashlytics().recordError(error);
       });
   }, []);
+
+  const containsObject = (obj, list) => {
+    let i;
+    if (list == undefined) {
+      return false;
+    }
+    for (i = 0; i < list.length; i++) {
+      if (list[i]._id === obj._id) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     if (user.interests?.length == 5) {
@@ -55,10 +81,9 @@ const ProfileInterest = ({ route, navigation }) => {
     }
   }, [user]);
 
-
-  const addInterest = (interest) => {
-    if (user.interests?.length < 5){
-      crashlytics().log("interest = ",interest)
+  const addInterest = interest => {
+    if (user.interests?.length < 5) {
+      crashlytics().log('interest = ', interest);
       let newUser = {...user};
       newUser.interests.push(interest);
       setUser(newUser);
@@ -70,11 +95,12 @@ const ProfileInterest = ({ route, navigation }) => {
     if (typeof interest == 'string') {
       interest = JSON.parse(interest);
     }
-    crashlytics().log("interest = ",interest._id)
-    newUser.interests = newUser.interests?.filter(item => item._id !== interest._id);
-    setUser( newUser)
-  }
-  
+    crashlytics().log('interest = ', interest._id);
+    newUser.interests = newUser.interests?.filter(
+      item => item._id !== interest._id,
+    );
+    setUser(newUser);
+  };
 
   if (loading) {
     return <Loading />;
@@ -117,20 +143,8 @@ const ProfileInterest = ({ route, navigation }) => {
       {navButton}
     </ViewCustom>
   );
-};
+}
 
-const containsObject = (obj, list) => {
-    let i;
-    if (list == undefined) {
-      return false;
-    }
-    for (i = 0; i < list.length; i++) {
-        if (list[i]._id === obj._id) {
-            return true;
-        }
-    }
-
-  return false;
 };
 
 export default ProfileInterest;

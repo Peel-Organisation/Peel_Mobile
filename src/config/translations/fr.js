@@ -36,7 +36,7 @@ export default {
       email: 'Email',
       password: 'Mot de passe',
       password_confirm: 'Confirmer le mot de passe',
-      button_register: 'Créer son son profil',
+      button_register: 'Créer son profil',
       already_account: 'Déjà un compte ?',
       button_login: 'Connexion',
     },
