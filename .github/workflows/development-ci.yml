@@ -1,14 +1,25 @@
-name: Build & Publish Release APK
+name: Build & Publish Release APK - Development
 
 on:
   push:
-    branches: [main, development]
+    branches: development
   pull_request:
-    branches: [main, development]
+    branches: development
 
 jobs:
+    Test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+          run: npm install --legacy-peer-deps
+        - name: Run Jests tests
+          run: npm run test  
+
     Gradle:
+        # needs: test
         runs-on: ubuntu-latest
+   
         steps:
             - name: Checkout source code
               uses: actions/checkout@v2
@@ -49,7 +60,7 @@ jobs:
 
             - name: Signed APK
               id: sign_app
-              uses: r0adkll/sign-android-release@v1
+              uses: bastienboutonnet/sign-android-release@v1
               with: 
                 releaseDirectory: 'app/build/outputs/bundle/release'
                 signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
@@ -58,10 +69,12 @@ jobs:
                 signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
-                  name: peelApp.apk
-                  path: app/build/outputs/apk/release/peelApp.apk
+                name: peelApp.apk
+                path: ${{ steps.sign_app.outputs.signedBundlePath }}
+              
+          
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
