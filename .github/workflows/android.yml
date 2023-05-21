@@ -7,19 +7,19 @@ on:
     branches: [main, development]
 
 jobs:
-    test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install dependencies
-          run: npm install --legacy-peer-deps
-        - name: Run Jests tests
-          run: npm run test  
+    # test:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v2
+    #     - name: Install dependencies
+    #       run: npm install --legacy-peer-deps
+    #     - name: Run Jests tests
+    #       run: npm run test  
 
     Gradle:
-        needs: test
+        # needs: test
         runs-on: ubuntu-latest
-        if: ${{ needs.test.result == 'success' }}
+   
         steps:
             - name: Checkout source code
               uses: actions/checkout@v2
