@@ -47,10 +47,10 @@ const PublicStack = () => {
         <Stack.Screen name="Profile4" component={Biographie} />
         <Stack.Screen name="Profile5" component={Gif} />
         <Stack.Screen name="Profile6" component={Film} />
-        <Stack.Screen name="Profile7" component={ProfileInterest} />
+        <Stack.Screen name="Profile7" component={Music} />
+        <Stack.Screen name="Profile8" component={ProfileInterest} />
         {/* <Stack.Screen name="Profile8" component={Location} />  */}
-        <Stack.Screen name="Profile8" component={Question} />
-        <Stack.Screen name="Music" component={Music} />
+        <Stack.Screen name="Profile9" component={Question} />
       </Stack.Navigator>
     </UserContext.Provider>
   );

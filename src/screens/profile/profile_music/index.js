@@ -6,6 +6,7 @@ import { uniqBy } from 'lodash';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const Music = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -16,28 +17,34 @@ const Music = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     getStorage('user').then(fetchedUser => {
-      if (fetchedUser.biographie === undefined) {
-        fetchedUser.biographie = '';
-      }
       setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
   }, []);
 
   useEffect(() => {
+    setPage(1);
+    setMusics([]);
     if (searchText.length > 0) {
-      searchMusics(searchText, page);
+      searchMusics();
     }
-  }, [searchText, page]);
+  }, [searchText]);
 
-  const searchMusics = async (currentText, currentPage) => {
-    const url = `https://${GENIUS_API_PATH}search?q=${currentText}&page=${currentPage}`;
+  useEffect(() => {
+    if (searchText.length > 0) {
+      searchMusics();
+    }
+  }, [page]);
+
+  const searchMusics = async () => {
+    const url = `https://${GENIUS_API_PATH}search?q=${searchText}&page=${page}`;
     setLoading(true);
-    console.log({ url, Authorization: `Bearer ${GENIUS_API_TOKEN}` });
     try {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer VDoACK776IWvsMlkKcEixpSGu1gqPejwyRXcyri3gtGD3Xsh64mg3VWG5NGNG2mO`,
+          Authorization: `Bearer ${GENIUS_API_TOKEN}`,
         },
       });
 
@@ -52,29 +59,41 @@ const Music = ({route, navigation}) => {
         }
       }
     } catch (error) {
-      console.log(error)
+      crashlytics().recordError(error);
     }
   };
 
-  const updateMusic = async musicToUpdate => {
+  const updateMusic = async (musicToUpdate) => {
     try {
+      const url = `https://${GENIUS_API_PATH}songs/${musicToUpdate.result.id}?text_format=plain&`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${GENIUS_API_TOKEN}`,
+        },
+      });
+      const data = await response.json();
+      let music = data.response.song
       const updatedUser = {
         ...user,
         music: {
-          title: musicToUpdate.title,
-          artist: musicToUpdate.artist,
+          id: music.id,
+          title: music.title,
+          artist: { id: music.primary_artist.id, name: music.primary_artist.name, image: music.primary_artist.image_url },
+          image: music.song_art_image_thumbnail_url,  
+          album: { id: music.album.id, title: music.album.name, image: music.album.cover_art_url } ,
         },
       };
       setUser(updatedUser);
       nextAction('Profile8', navigation, user);
     } catch (error) {
-      console.log({error});
+      crashlytics().recordError(error);
     }
   };
+
   const renderItem = ({item}) => {
-    const handlePress = item => updateMusic(item.result);
     return (
-      <TouchableOpacity onPress={handlePress(item)}>
+      <TouchableOpacity onPress={() => updateMusic(item)}>
         <Image
           style={{
             width: 200,
@@ -84,20 +103,13 @@ const Music = ({route, navigation}) => {
             uri: `${item.result.song_art_image_thumbnail_url}`,
           }}
         />
+        <MainText>{item.result.title}</MainText>
       </TouchableOpacity>
     );
   };
 
 
-  const handleChangeText = (text) => {
-    console.log(text);
-    if(!text) {
-      return
-    }
-    setSearchText(text)
-  }
 
-  console.log(musics);
   return (
     <ViewCustom>
       <Update_Button
@@ -110,7 +122,7 @@ const Music = ({route, navigation}) => {
       <FieldInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
-        onChangeText={handleChangeText}
+        onChangeText={setSearchText}
       />
       <FlatList
         data={musics}
