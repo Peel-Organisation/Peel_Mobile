@@ -27,7 +27,7 @@ jobs:
               run: npm ci
 
             - name: Build with Gradle
-              run: npx react-native run-android --variant=release
+              run: npx react-native run-android
             
             - name: Grant execute permission for gradlew
               run: chmod +x ./android/gradlew
