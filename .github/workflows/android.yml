@@ -7,8 +7,19 @@ on:
     branches: [main, development]
 
 jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+          run: npm install --legacy-peer-deps
+        - name: Run Jests tests
+          run: npm run test  
+
     Gradle:
+        needs: test
         runs-on: ubuntu-latest
+        if: ${{ needs.test.result == 'success' }}
         steps:
             - name: Checkout source code
               uses: actions/checkout@v2
@@ -47,15 +58,15 @@ jobs:
               run: |
                 cd android && ./gradlew bundleRelease --no-daemon
 
-            - name: Signed APK
-              id: sign_app
-              uses: r0adkll/sign-android-release@v1
-              with: 
-                releaseDirectory: 'app/build/outputs/bundle/release'
-                signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
-                signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
-                signingKeyAlias: ${{ secrets.KEY_ALIAS }}
-                signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
+            # - name: Signed APK
+            #   id: sign_app
+            #   uses: r0adkll/sign-android-release@v1
+            #   with: 
+            #     releaseDirectory: 'app/build/outputs/bundle/release'
+            #     signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+            #     signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+            #     signingKeyAlias: ${{ secrets.KEY_ALIAS }}
+            #     signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v2
