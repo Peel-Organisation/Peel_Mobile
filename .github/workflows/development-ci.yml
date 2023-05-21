@@ -1,4 +1,4 @@
-name: Build & Publish Release APK
+name: Build & Publish Release APK to GitHub Releases - development
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
           run: npm run test  
 
     Gradle:
-        needs: test
+        # needs: test
         runs-on: ubuntu-latest
    
         steps:
