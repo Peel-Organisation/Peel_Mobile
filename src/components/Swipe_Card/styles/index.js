@@ -94,3 +94,10 @@ export const GifImage = styled.Image`
     height: 200px;
     border-radius: 13px;
 `
+
+export const MovieImage = styled.Image`
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+    border-radius: 13px;
+`

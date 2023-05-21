@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
+import {updateUser} from '../../../functions/api_request';
 import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import {FieldInput} from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-const Film = ({route, navigation}) => {
+const Movie = () => {
   const {t} = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
@@ -100,7 +101,7 @@ const Film = ({route, navigation}) => {
         },
       };
       setUser(updatedUser);
-      nextAction('Profile7', navigation, user);
+      updateUser(updatedUser);
     } catch (error) {
       crashlytics().recordError(error);
     }
@@ -108,12 +109,12 @@ const Film = ({route, navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity onPress={() => updateMovie(item)}>
+      <TouchableOpacity
+        onPress={() => {
+          updateMovie(item);
+        }}>
         <Image
-          style={{
-            width: 200,
-            height: 200,
-          }}
+          style={{width: 200, height: 200}}
           source={{
             uri: `${imageBaseUrl}${item.poster_path}`,
           }}
@@ -122,33 +123,23 @@ const Film = ({route, navigation}) => {
     );
   };
 
-  if (loading) return <MainText>Chargement...</MainText>;
-
   return (
-    <ViewCustom>
-      <Update_Button
-        user={user}
-        prevPage="Profile5"
-        nextPage=""
-        navigation={navigation}
-      />
-      <Title>Choix du film</Title>
+    <>
       <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        placeholder={t('profile.search_film')}
+        onChangeText={text => setSearchText(text)}
         value={searchText}
-        onChangeText={setSearchText}
       />
       <FlatList
         data={movies}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
+        onEndReached={() => setPage(page + 1)}
         onEndReachedThreshold={0.4}
+        numColumns={2}
       />
-    </ViewCustom>
+    </>
   );
 };
 
-export default Film;
+export default Movie;
