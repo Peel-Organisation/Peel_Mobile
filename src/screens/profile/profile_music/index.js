@@ -65,8 +65,8 @@ const Music = ({route, navigation}) => {
           artist: musicToUpdate.artist,
         },
       };
-      // setUser(updatedUser);
-      // nextAction('Profile6', navigation, user);
+      setUser(updatedUser);
+      nextAction('Profile8', navigation, user);
     } catch (error) {
       console.log({error});
     }
@@ -100,12 +100,12 @@ const Music = ({route, navigation}) => {
   console.log(musics);
   return (
     <ViewCustom>
-      {/* <Update_Button
+      <Update_Button
         user={user}
-        prevPage="Profile4"
+        prevPage="Profile6"
         nextPage=""
         navigation={navigation}
-      /> */}
+      />
       <Title>Rechercher une musique</Title>
       <FieldInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
