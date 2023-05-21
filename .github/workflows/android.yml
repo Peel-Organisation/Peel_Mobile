@@ -69,10 +69,11 @@ jobs:
             #     signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
-                  name: peelApp.apk
-                  path: app/build/outputs/apk/release/peelApp.apk
+                name: release-apk
+                path: app/build/outputs/apk/release/app-release.apk
+          
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
