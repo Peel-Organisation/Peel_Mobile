@@ -50,7 +50,7 @@ const PublicStack = () => {
         <Stack.Screen name="Profile7" component={ProfileInterest} />
         {/* <Stack.Screen name="Profile8" component={Location} />  */}
         <Stack.Screen name="Profile8" component={Question} />
-        <Stack.Screen name="Profile9" component={Music} />
+        <Stack.Screen name="Music" component={Music} />
       </Stack.Navigator>
     </UserContext.Provider>
   );
