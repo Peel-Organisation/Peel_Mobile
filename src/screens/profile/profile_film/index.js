@@ -19,9 +19,6 @@ const Film = ({route, navigation}) => {
 
   useEffect(() => {
     getStorage('user').then(fetchedUser => {
-      if (fetchedUser.biographie === undefined) {
-        fetchedUser.biographie = '';
-      }
       setUser(fetchedUser);
     }).catch((error) => {
       crashlytics().recordError(error)
@@ -29,12 +26,16 @@ const Film = ({route, navigation}) => {
   }, []);
 
   useEffect(() => {
-    
-    getPopularMovies();
+    if (searchText.length > 0) {
+      searchMovies();
+    } else {
+      getPopularMovies();
+    }
   }, [page]);
 
   useEffect(() => {
     setPage(1);
+    setMovies([]);
     if (searchText.length > 0) {
       searchMovies();
     } else {
