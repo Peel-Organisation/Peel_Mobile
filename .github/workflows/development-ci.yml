@@ -70,12 +70,9 @@ jobs:
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v3
-              run: |
-                mkdir -p ${{ env.APP_FOLDER }}
-                cp ${{ steps.sign_app.outputs.signedBundlePath }} ${{ env.APP_FOLDER }}/peelApp.apk
               with:
                 name: peelApp.apk
-                path: ${{ env.APP_FOLDER }}
+                path: ${{ steps.sign_app.outputs.signedBundlePath }}
               
           
         env:
