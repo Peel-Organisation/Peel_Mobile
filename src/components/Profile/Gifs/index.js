@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Update_Button, nextAction} from '../../../components/Update_User';
 import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
-import {getStorage} from '../../../functions/storage';
-import crashlytics from '@react-native-firebase/crashlytics';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {ViewCustom, Title, FieldInput} from '../styles';
 
-const Gif = ({route, navigation}) => {
+import {updateUser} from '../../../functions/api_request';
+import {getStorage} from '../../../functions/storage';
+
+import {FlatList, TouchableOpacity, Image} from 'react-native';
+
+import {FieldInput} from './styles';
+
+const Gif = () => {
   const {t} = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
@@ -17,16 +19,12 @@ const Gif = ({route, navigation}) => {
 
   useEffect(() => {
     getPopularGifs();
-    getStorage('user')
-      .then(fetchedUser => {
-        if (fetchedUser.biographie == undefined) {
-          fetchedUser.biographie = '';
-        }
-        setUser(fetchedUser);
-      })
-      .catch(error => {
-        crashlytics().recordError(error);
-      });
+    getStorage('user').then(fetchedUser => {
+      if (fetchedUser.biographie == undefined) {
+        fetchedUser.biographie = '';
+      }
+      setUser(fetchedUser);
+    });
   }, []);
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const Gif = ({route, navigation}) => {
   }, [searchText]);
 
   const getPopularGifs = async () => {
-    const limit = 20;
+    const limit = 10;
     let link = '';
     if (searchText.length > 0) {
       link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${
@@ -54,7 +52,7 @@ const Gif = ({route, navigation}) => {
         page * limit
       }`;
     }
-    crashlytics().log('serach link : ', link);
+    console.log('link : ', link);
     const response = await fetch(link);
     if (response.status == 200) {
       const jsonData = await response.json();
@@ -63,7 +61,7 @@ const Gif = ({route, navigation}) => {
         jsonData.meta.status == 200 &&
         jsonData.data.length > 0
       ) {
-        crashlytics().log('jsonData : ', jsonData);
+        console.log('jsonData : ', jsonData);
         let newGifs = [];
         if (page > 0) {
           newGifs = [...gifs, ...jsonData.data];
@@ -76,9 +74,9 @@ const Gif = ({route, navigation}) => {
   };
 
   const searchGif = async () => {
-    const limit = 20;
+    const limit = 10;
     const link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}`;
-    crashlytics().log('serach link : ', link);
+    console.log('link : ', link);
     const response = await fetch(link);
     if (response.status == 200) {
       const jsonData = await response.json();
@@ -100,8 +98,9 @@ const Gif = ({route, navigation}) => {
       url: gif.url,
       image: gif.images.original,
     };
+    console.log('newUser : ', newUser);
     setUser(newUser);
-    nextAction('Profile6', navigation, user);
+    updateUser(newUser);
   };
 
   const renderItem = ({item}) => {
@@ -109,8 +108,8 @@ const Gif = ({route, navigation}) => {
       <TouchableOpacity onPress={() => updateGif(item)}>
         <Image
           style={{
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           }}
           source={{
             uri: `${item?.images?.original?.webp}`,
@@ -121,29 +120,21 @@ const Gif = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
-      <Update_Button
-        user={user}
-        prevPage="Profile4"
-        nextPage="Profile6"
-        navigation={navigation}
-      />
-      <Title>Choix du gif</Title>
+    <>
       <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
         onChangeText={text => setSearchText(text)}
+        placeholder={t('profile.custom.gifs')}
       />
       <FlatList
         data={gifs}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
+        onEndReached={() => setPage(page + 1)}
+        onEndReachedThreshold={0.5}
+        numColumns={2}
       />
-    </ViewCustom>
+    </>
   );
 };
 

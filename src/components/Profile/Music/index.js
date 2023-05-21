@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
-import {Update_Button, nextAction} from '../../../components/Update_User';
+import {updateUser} from '../../../functions/api_request';
 import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import {MainText, FieldInput} from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 const Music = ({route, navigation}) => {
@@ -107,7 +107,7 @@ const Music = ({route, navigation}) => {
         },
       };
       setUser(updatedUser);
-      nextAction('Profile8', navigation, user);
+      updateUser(updatedUser);
     } catch (error) {
       crashlytics().recordError(error);
     }
@@ -118,8 +118,8 @@ const Music = ({route, navigation}) => {
       <TouchableOpacity onPress={() => updateMusic(item)}>
         <Image
           style={{
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           }}
           source={{
             uri: `${item.result.song_art_image_thumbnail_url}`,
@@ -131,22 +131,15 @@ const Music = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
-      <Update_Button
-        user={user}
-        prevPage="Profile6"
-        nextPage=""
-        navigation={navigation}
-      />
-      <Title>Rechercher une musique</Title>
+    <>
       <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
         onChangeText={text => {
           setSearchText(text);
           setPage(1);
           setMusics([]);
         }}
+        placeholder={t('profile.custom.music')}
       />
       <FlatList
         data={musics}
@@ -156,9 +149,10 @@ const Music = ({route, navigation}) => {
           setPage(page + 1);
         }}
         onEndReachedThreshold={0.4}
+        numColumns={2}
       />
       {loading && <MainText>Chargement...</MainText>}
-    </ViewCustom>
+    </>
   );
 };
 
