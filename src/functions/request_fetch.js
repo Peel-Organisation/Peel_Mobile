@@ -1,9 +1,11 @@
+import crashlytics from '@react-native-firebase/crashlytics';
+import perf from '@react-native-firebase/perf';
+
 
 export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) => {
-
+    const trace = await perf().startTrace('FetchPeelApi');
     try {
-        console.log(`${process.env.API_LINK}${url}`)
-        console.log("firebaseToken : ", firebaseToken)
+        crashlytics().log("\n\n FetchPeelApi")
         const response = await fetch(`${process.env.API_LINK}${url}`, {
             headers: {
             "Content-Type": "Application/json",
@@ -25,11 +27,13 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
             throw new Error(dataJson.message);
         }
         dataJson.success = true;
-        console.log("dataJson : ", dataJson);
+        crashlytics().log("dataJson : ", dataJson);
+        trace.stop();
         return dataJson;
     }
     catch (error) {
-        console.log("error : ", error)
+        crashlytics().recordError(error);
+        trace.stop();
         return Promise.reject(error);
     }
 }

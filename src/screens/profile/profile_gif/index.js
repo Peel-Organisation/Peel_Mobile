@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {Update_Button, nextAction} from "../../../components/Update_User";
 import {  GIPHY_API_KEY, GIPHY_PATH } from '@env';
-
 import { getStorage } from "../../../functions/storage"; 
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import {FlatList, TouchableOpacity, Image } from "react-native"
-
-
-import { BioInput, ViewCustom, Title, MainText, FieldInput } from "../styles";
+import { ViewCustom, Title, FieldInput } from "../styles";
 
  
 const Gif = ({ route, navigation }) => {
@@ -28,6 +25,8 @@ const Gif = ({ route, navigation }) => {
                 fetchedUser.biographie = "";     
             }
             setUser(fetchedUser);
+        }).catch((error) => {
+            crashlytics().recordError(error)
         });
     }, []);
 
@@ -53,12 +52,12 @@ const Gif = ({ route, navigation }) => {
         } else {
             link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${page*limit}`;
         }
-        console.log("link : ", link)
+        crashlytics().log("serach link : ", link)
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
             if (jsonData?.data != null && jsonData.meta.status == 200 && jsonData.data.length > 0 ) {
-                console.log("jsonData : ", jsonData)
+                crashlytics().log("jsonData : ", jsonData)
                 let newGifs = []
                 if (page > 0) {
                     newGifs = [...gifs, ...jsonData.data]
@@ -73,7 +72,7 @@ const Gif = ({ route, navigation }) => {
     const searchGif = async () => {
         const limit = 20;
         const link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}`;
-        console.log("link : ", link)
+        crashlytics().log("serach link : ", link)
         const response = await fetch(link)
         if (response.status == 200) {
             const jsonData = await response.json();
@@ -87,7 +86,6 @@ const Gif = ({ route, navigation }) => {
     const updateGif = (gif) => {
         let newUser = user;
         newUser.gif = {id : gif.id, title : gif.title, url : gif.url, image: gif.images.original}
-        console.log("newUser : ", newUser)
         setUser(newUser);
         nextAction("Profile6", navigation, user);
     }
@@ -114,7 +112,7 @@ const Gif = ({ route, navigation }) => {
  
     return (
       <ViewCustom>        
-            <Update_Button user={user} prevPage="Profile4" nextPage=""  navigation={navigation} />
+            <Update_Button user={user} prevPage="Profile4" nextPage="Profile6"  navigation={navigation} />
             <Title>Choix du gif</Title>
             <FieldInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}

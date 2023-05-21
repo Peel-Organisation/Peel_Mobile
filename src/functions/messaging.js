@@ -1,9 +1,12 @@
 import messaging from '@react-native-firebase/messaging';
 import { onDisplayNotification } from "./notification";
 import { addStorageMessage } from "./storage";
+import perf from '@react-native-firebase/perf';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const onMessageReceived = async (remoteMessage) => {
-  console.log('A new FCM message arrived in background!', JSON.stringify(remoteMessage));
+  const trace = await perf().startTrace('onMessageReceived');
+  crashlytics().log('A new FCM message arrived in background!', JSON.stringify(remoteMessage));
   try {
     const newMessage = JSON.parse(remoteMessage.data.message);
     if (newMessage !== undefined && newMessage !== null) {
@@ -13,7 +16,7 @@ const onMessageReceived = async (remoteMessage) => {
       }
     }
   } catch (error) {
-    console.log('error : ', error);
+    crashlytics().recordError(error);
   }
   try {
     const newNotification = JSON.parse(remoteMessage.data.notification);
@@ -21,8 +24,9 @@ const onMessageReceived = async (remoteMessage) => {
       onDisplayNotification(newNotification.title, newNotification.body);
     }
   } catch (error) {
-    console.log('error : ', error);
+    crashlytics().recordError(error);
   }
+  trace.stop();
 }
 
 

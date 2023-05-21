@@ -4,7 +4,7 @@ import React, {  useEffect, useState  } from "react";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import {Update_Button} from "../../../components/Update_User";
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from "../../../functions/storage"; 
 
 import {Slider} from '@miblanchard/react-native-slider';
@@ -37,6 +37,8 @@ const Recherche = ({ route, navigation }) => {
           fetchedUser.preferences.age.max = fetchedUser.preferences.age.min + 10;
         }
           setUser(fetchedUser);
+      }).catch((error) => {
+        crashlytics().recordError(error)
       });
   }, []); 
 

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import {Update_Button} from "../../../components/Update_User";
-
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from "../../../functions/storage"; 
 
-import { BioInput, ViewCustom, Title, MainText, ConditionText } from "../styles";
+import { BioInput, ViewCustom, Title, ConditionText } from "../styles";
 
 
 
@@ -23,6 +22,8 @@ const Biographie = ({ route, navigation }) => {
                 fetchedUser.biographie = "";     
             }
             setUser(fetchedUser);
+        }).catch((error) => {
+            crashlytics().recordError(error)
         });
     }, []);
 
