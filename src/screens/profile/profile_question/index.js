@@ -9,7 +9,7 @@ import {Update_Button} from "../../../components/Update_User";
 import { getStorage } from "../../../functions/storage"; 
 import { getQuestionList } from "../../../functions/api_request";
 
-import {  ViewCustom, Title, ModalSelectorCustom, FieldInput, InputView, ConditionText } from "../styles";
+import {  ViewCustom, Title, ModalSelectorCustom, FieldInput, InputView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 import crashlytics from '@react-native-firebase/crashlytics';
 import Loading from "../../../components/loading";
 

@@ -4,7 +4,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 import {Update_Button} from "../../../components/Update_User";
 import { getStorage } from "../../../functions/storage"; 
 
-import { ViewCustom, Title, MainText, SwitchSelectorCustom, DatePickerCustom, InputView, ConditionText } from "../styles";
+import { ViewCustom, Title, MainText, SwitchSelectorCustom, DatePickerCustom, InputView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 
 
 

@@ -5,7 +5,7 @@ import {  GIPHY_API_KEY, GIPHY_PATH } from '@env';
 import { getStorage } from "../../../functions/storage"; 
 import crashlytics from '@react-native-firebase/crashlytics';
 import {FlatList, TouchableOpacity, Image } from "react-native"
-import { ViewCustom, Title, FieldInput } from "../styles";
+import { ViewCustom, Title, FieldInput } from "../../../components/StyledComponents/Profile/General/CustomView";
 
  
 const Gif = ({ route, navigation }) => {

@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from "react-i18next";
 
-import { FieldInput, ViewCustom, Title, MainText, InputView, ConditionText } from "../styles";
-
+import { ViewCustom } from "../../../components/StyledComponents/Profile/General/CustomView";
+import { PageTitle } from "../../../components/StyledComponents/Profile/General/PageTitle";
+import { InputView } from "../../../components/StyledComponents/Profile/General/InputView";
+import { MainText } from "../../../components/StyledComponents/Profile/General/MainText";
+import { CustomView } from "../../../components/StyledComponents/Profile/General/CustomView";
+import { ConditionText } from "../../../components/StyledComponents/Profile/General/ConditionText";
+import { FieldInput } from "../../../components/StyledComponents/Profile/General/FieldInput";
 
 import {Update_Button} from "../../../components/Update_User";
 
@@ -47,30 +52,28 @@ const Profile1 = ({ route, navigation }) => {
     return (
         <ViewCustom>
 
-            <Title>{t("profile.title")}</Title>
+            <PageTitle>{t("profile.title")}</PageTitle>
 
             <InputView>
-                <MainText>{t("profile.firstname")}</MainText>
                 <FieldInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                     value={user.firstName}
                     onChangeText={(text) => {
                         let newUser = {...user}
                         newUser.firstName = text; 
                         setUser(newUser) 
                     }}
+                    placeholder={t("profile.firstname")}
                 />
             </InputView>
-            <InputView> 
-                <MainText>{t("profile.lastname")}</MainText> 
+            <InputView>
                 <FieldInput 
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }} 
                     value={user.lastName}
                     onChangeText={(text) => { 
                         let newUser = {...user}
                         newUser.lastName = text; 
                         setUser(newUser)
-                    }} 
+                    }}
+                    placeholder={t("profile.lastname")}
                 />
             </InputView>
             {navButton} 

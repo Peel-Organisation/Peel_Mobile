@@ -1,11 +1,3 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Update_Button} from '../../../components/Update_User';
-import Loading from '../../../components/loading';
-
-import {getStorage} from '../../../functions/storage';
-import {getInterestList} from '../../../functions/api_request';
-
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {Update_Button} from "../../../components/Update_User";
@@ -13,7 +5,7 @@ import Loading from "../../../components/loading";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from "../../../functions/storage"; 
 import { getInterestList } from "../../../functions/api_request";
-import { InterestButton, InterestButtonText, ViewCustom, Title, InterestButtonSelected, InterestButtonDisabled, InterestView, ConditionText } from "../styles";
+import { InterestButton, InterestButtonText, ViewCustom, Title, InterestButtonSelected, InterestButtonDisabled, InterestView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 
 
 const ProfileInterest = ({ route, navigation }) => {

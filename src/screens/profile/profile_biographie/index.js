@@ -5,7 +5,7 @@ import {Update_Button} from "../../../components/Update_User";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from "../../../functions/storage"; 
 
-import { BioInput, ViewCustom, Title, ConditionText } from "../styles";
+import { BioInput, ViewCustom, Title, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 
 
 

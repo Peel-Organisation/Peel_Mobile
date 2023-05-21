@@ -10,7 +10,7 @@ import { getStorage } from "../../../functions/storage";
 import {Slider} from '@miblanchard/react-native-slider';
 
 
-import { ViewCustom, Title, MainText, SwitchSelectorCustom, SliderCustom, InputView, ConditionText } from "../styles";
+import { ViewCustom, Title, MainText, SwitchSelectorCustom, SliderCustom, InputView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 
 
  

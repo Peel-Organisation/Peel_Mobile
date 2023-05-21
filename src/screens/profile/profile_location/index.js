@@ -13,7 +13,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 import { getStorage } from "../../../functions/storage"; 
 
-import { ViewCustom, Title, MainText, SliderCustom, InputView, ConditionText } from "../styles";
+import { ViewCustom, Title, MainText, SliderCustom, InputView, ConditionText } from "../../../components/StyledComponents/Profile/General/CustomView";
 
 
 

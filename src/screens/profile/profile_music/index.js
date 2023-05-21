@@ -4,7 +4,7 @@ import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import {ViewCustom, Title, MainText, FieldInput} from '../../../components/StyledComponents/Profile/General/CustomView';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { set } from 'lodash';
 
