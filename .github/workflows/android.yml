@@ -25,6 +25,6 @@ jobs:
               with:
                   name: peelApp.apk
                   path: app/build/outputs/apk/release/peelApp.apk
-            env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                APP_FOLDER: app
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            APP_FOLDER: app
