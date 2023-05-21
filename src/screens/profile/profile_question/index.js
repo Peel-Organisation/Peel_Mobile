@@ -72,26 +72,16 @@ const QuestionProfil = ({route, navigation}) => {
     ) {
       setNavButton(
         <>
-          <Update_Button
-            user={user}
-            prevPage="Profile8"
-            nextPage="Auth"
-            navigation={navigation}
-          />
-        </>,
-      );
+          <Update_Button user={user} prevPage="Profile8" nextPage="Auth"  navigation={navigation} />
+        </>
+      ) 
     } else {
       setNavButton(
-        <>
-          <ConditionText>{t('profile.fill')}</ConditionText>
-          <Update_Button
-            user={user}
-            prevPage="Profile8"
-            nextPage=""
-            navigation={navigation}
-          />
-        </>,
-      );
+        <> 
+          <ConditionText>{t("profile.fill")}</ConditionText>
+          <Update_Button user={user} prevPage="Profile8" nextPage=""  navigation={navigation} />
+        </>
+      )
     }
   }, [user]);
 
