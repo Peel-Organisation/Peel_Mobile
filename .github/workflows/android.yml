@@ -24,7 +24,8 @@ jobs:
                   node-version: 16
                   
             - name: Install dependencies
-              run: npm ci
+              run: npm install --legacy-peer-deps
+
 
             - name: Build with Gradle
               run: npx react-native run-android --variant=release
