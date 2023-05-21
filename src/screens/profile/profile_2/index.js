@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
 import { useTranslation } from "react-i18next";
-
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import {Update_Button} from "../../../components/Update_User";
 import { getStorage } from "../../../functions/storage"; 
 
@@ -24,18 +22,20 @@ const Profile2 = ({ route, navigation }) => {
         } else {
           fetchedUser.birthday = new Date(fetchedUser.birthday);
           let age = new Date().getFullYear() - fetchedUser.birthday.getFullYear();
-          console.log(age);
+          crashlytics().log(age);
           if (age < 18){
             fetchedUser.birthday.setFullYear(fetchedUser.birthday.getFullYear() - 18);
           }
         }
         setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
   }, []);
 
   useEffect(() => {
     let age = new Date().getFullYear() - user.birthday.getFullYear();
-    console.log(age);
+    crashlytics().log(age);
     if (user.birthday != undefined && user.birthday != "" && user.gender != undefined && user.gender != "" && age >= 18 && age < 99){ 
       setNavButton(
         <>

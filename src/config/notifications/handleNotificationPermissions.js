@@ -1,6 +1,7 @@
 import notifee, {AuthorizationStatus} from '@notifee/react-native';
 import {showMessage} from 'react-native-flash-message'; // Installer et configurer ce paquet pour pouvoir afficher un message d'erreur propre
 import {Linking} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const handleNotificationPermissions = async () => {
   const settings = await notifee.requestPermission(); // Permet de requeter la permission sur IOS
@@ -15,9 +16,9 @@ const handleNotificationPermissions = async () => {
       onPress: () => Linking.openSettings(), // Permet d'envoyer l'utilisateur vers les parametres de l'application dans le telephone
     });
   } else if (settings.authorizationStatus === AuthorizationStatus.AUTHORIZED) {
-    console.log('User granted permissions request');
+    crashlytics().log('User granted permissions request');
   } else if (settings.authorizationStatus === AuthorizationStatus.PROVISIONAL) {
-    console.log('User provisionally granted permissions request');
+    crashlytics().log('User provisionally granted permissions request');
   }
 };
 

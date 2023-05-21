@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { GetContactList } from "../../functions/api_request";
-
-// const dateformat = require('dateformat');
 import { View } from "react-native";
-
 import { ContactView, Button_Contact, Button_Contact_Text, ContactTitle, Container, NewMatchTitle, NewMatchView, Button_Contact_Sub_Text, Button_New_Contact, Button_New_Contact_Text, OrangeView } from './styles';
 import Loading from "../../components/loading";
 import  { getStorage } from '../../functions/storage';
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from "react-i18next";
 
  
@@ -20,14 +17,19 @@ const Contact = ({navigation}) => {
     const [userId, setUserId] = useState()
 
     useEffect(() => {
+        crashlytics().log("Contact screen mounted");
         getStorage('userId').then(userId => {
             setUserId(userId)
+        }).catch((error) => {
+            crashlytics().recordError(error)
         })
         GetContactList().then(list => {
             if (list != undefined) {
                 setContactList(list);
                 setLoading(false);
             } 
+        }).catch((error) => {
+            crashlytics().recordError(error)
         })
     }, []);
 
@@ -49,7 +51,7 @@ const Contact = ({navigation}) => {
                         } else {
                             name = contact?.members[0]?.firstName 
                         }
-                        console.log("contact : ", contact)
+                        crashlytics().log("contact : ", contact)
                         if (contact.last_message_content == undefined) {
                             
                             return(

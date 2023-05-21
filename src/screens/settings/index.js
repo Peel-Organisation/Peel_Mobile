@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from "react-i18next";
 
@@ -15,15 +14,16 @@ const Settings = ({ navigation }) => {
     const { t, i18n } = useTranslation();
 
     const Logout = () => {
+        crashlytics().log("Logout pressed");
         AsyncStorage.getAllKeys().then((keys) => {
             AsyncStorage.multiRemove(keys).then(() => {
-                console.log("Logout success");
+                crashlytics().log("Logout success");
                 navigation.navigate("Public");
             }).catch((error) => {
-                console.log("storage error : ", error);
+                crashlytics().recordError(error);
             });
         }).catch((error) => {
-            console.log("storage error : ", error);
+            crashlytics().recordError(error);
         });
     }
 
