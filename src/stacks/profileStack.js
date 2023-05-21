@@ -9,6 +9,8 @@ import ProfileInterest from "../screens/profile/profile_interest"
 import Question from "../screens/profile/profile_question"
 import Film from "../screens/profile/profile_film"
 import Gif from "../screens/profile/profile_gif"
+import Music from "../screens/profile/profile_music";
+
 import {GetUser} from "../functions/api_request"
 import Loading from "../components/loading";
 const Stack = createNativeStackNavigator();
@@ -45,9 +47,10 @@ const PublicStack = () => {
         <Stack.Screen name="Profile4" component={Biographie} />
         <Stack.Screen name="Profile5" component={Gif} />
         <Stack.Screen name="Profile6" component={Film} />
-        <Stack.Screen name="Profile7" component={ProfileInterest} />
+        <Stack.Screen name="Profile7" component={Music} />
+        <Stack.Screen name="Profile8" component={ProfileInterest} />
         {/* <Stack.Screen name="Profile8" component={Location} />  */}
-        <Stack.Screen name="Profile8" component={Question} />
+        <Stack.Screen name="Profile9" component={Question} />
       </Stack.Navigator>
     </UserContext.Provider>
   );

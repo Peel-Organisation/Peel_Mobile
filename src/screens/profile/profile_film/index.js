@@ -16,24 +16,24 @@ const Film = ({route, navigation}) => {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-    getStorage('user')
-      .then(fetchedUser => {
-        if (fetchedUser.biographie === undefined) {
-          fetchedUser.biographie = '';
-        }
-        setUser(fetchedUser);
-      })
-      .catch(error => {
-        crashlytics().recordError(error);
-      });
+    getStorage('user').then(fetchedUser => {
+      setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
+    });
   }, []);
 
   useEffect(() => {
-    getPopularMovies();
+    if (searchText.length > 0) {
+      searchMovies();
+    } else {
+      getPopularMovies();
+    }
   }, [page]);
 
   useEffect(() => {
     setPage(1);
+    setMovies([]);
     if (searchText.length > 0) {
       searchMovies();
     } else {

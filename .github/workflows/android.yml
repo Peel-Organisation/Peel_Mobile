@@ -25,15 +25,37 @@ jobs:
 
             - name: Install dependencies
               run: npm install --legacy-peer-deps
-            
-            - name: Change directory to Android project
-              run: cd android
-            
-            - name: Grant execute permission for gradlew
-              run: chmod +x gradlew
 
-            - name: Build with Gradle
-              run: ./gradlew build
+            - name: Cache Gradle Wrapper
+              uses: actions/cache@v2
+              with:
+                path: ~/.gradle/wrapper
+                key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+            - name: Cache Gradle Dependencies
+              uses: actions/cache@v2
+              with:
+                path: ~/.gradle/caches
+                key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+                restore-keys: |
+                    ${{ runner.os }}-gradle-caches-
+        
+            - name: Make Gradlew Executable
+              run: cd android && chmod +x ./gradlew
+
+            - name: Build Android App Bundle
+              run: |
+                cd android && ./gradlew bundleRelease --no-daemon
+
+            - name: Signed APK
+              id: sign_app
+              uses: r0adkll/sign-android-release@v1
+              with: 
+                releaseDirectory: 'app/build/outputs/bundle/release'
+                signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+                signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+                signingKeyAlias: ${{ secrets.KEY_ALIAS }}
+                signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v2
@@ -42,4 +64,8 @@ jobs:
                   path: app/build/outputs/apk/release/peelApp.apk
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+            KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+            KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+            KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
             APP_FOLDER: app
