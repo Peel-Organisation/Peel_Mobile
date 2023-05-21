@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
-import { uniqBy } from 'lodash';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 import {ViewCustom, Title, MainText, FieldInput} from '../styles';
 import crashlytics from '@react-native-firebase/crashlytics';
+import { set } from 'lodash';
 
 const Music = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -39,6 +39,8 @@ const Music = ({route, navigation}) => {
 
   const searchMusics = async () => {
     const url = `https://${GENIUS_API_PATH}search?q=${searchText}&page=${page}`;
+    console.log("url : ", url)
+    console.log("authorization : ", `Bearer ${GENIUS_API_TOKEN}`)
     setLoading(true);
     try {
       const response = await fetch(url, {
@@ -47,18 +49,27 @@ const Music = ({route, navigation}) => {
           Authorization: `Bearer ${GENIUS_API_TOKEN}`,
         },
       });
-
       if (response.status === 200) {
         const data = await response.json();
-        if (
-          data.response !== null &&
-          data.response.hits.length > 0
-        ) {
-          setMusics((oldMusics) => uniqBy([...oldMusics, ...data.response.hits], 'result.id'));
-          setLoading(false); 
+        crashlytics().log("data : ", data)
+        let hits = []
+        data.response.hits.forEach(hit => {
+          if (musics.findIndex(music => music.result.id === hit.result.id) === -1) {
+            hits.push(hit)
+          }
+        })
+        let newMusic = []
+
+        if (page > 0) {
+            newMusic = [...musics, ...hits]
+        } else {
+            newMusic = data
         }
+        setMusics(newMusic)
+        setLoading(false);       
       }
     } catch (error) {
+      console.log("error : ", error)
       crashlytics().recordError(error);
     }
   };
@@ -122,7 +133,12 @@ const Music = ({route, navigation}) => {
       <FieldInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         value={searchText}
-        onChangeText={setSearchText}
+        onChangeText={(text) => { 
+          setSearchText(text)
+          setPage(1)
+          setMusics([])  
+        }
+  }
       />
       <FlatList
         data={musics}
