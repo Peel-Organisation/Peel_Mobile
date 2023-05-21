@@ -1,4 +1,4 @@
-name: Build & Publish Release APK (Android) - main
+name: Build & Publish Release APK (Android) - Main
 
 on:
   push:
