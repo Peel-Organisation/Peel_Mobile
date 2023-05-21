@@ -44,14 +44,14 @@ const ProfileInterest = ({ route, navigation }) => {
     if (user.interests?.length == 5 ){ 
       setNavButton(
         <>
-          <Update_Button user={user} prevPage="Profile6" nextPage="Profile8"  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile7" nextPage="Profile9"  navigation={navigation} />
         </>
       ) 
     } else {
       setNavButton(
         <> 
           <ConditionText>{t("profile.fill")}</ConditionText>
-          <Update_Button user={user} prevPage="Profile6" nextPage=""  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile7" nextPage=""  navigation={navigation} />
         </>
       )
     }
