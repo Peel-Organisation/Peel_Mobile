@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import {View, Text, SafeAreaView, ActivityIndicator} from 'react-native';
+import {View} from 'react-native';
 import { useTranslation } from "react-i18next";
 import {Update_Button} from "../../../components/Update_User";
 
@@ -10,7 +10,7 @@ import { getStorage } from "../../../functions/storage";
 import { getQuestionList } from "../../../functions/api_request";
 
 import {  ViewCustom, Title, ModalSelectorCustom, FieldInput, InputView, ConditionText } from "../styles";
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import Loading from "../../../components/loading";
 
 
@@ -29,11 +29,15 @@ const QuestionProfil = ({ route, navigation }) => {
         fetchedUser.questions = [{}, {}, {}];
       } 
       setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
 
     getQuestionList().then(data => {
       setquestionList(data);
       setLoading(false);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
         
   }, []);
@@ -50,7 +54,7 @@ const QuestionProfil = ({ route, navigation }) => {
       setNavButton(
         <> 
           <ConditionText>{t("profile.fill")}</ConditionText>
-          <Update_Button user={user} prevPage="Profile6" nextPage=""  navigation={navigation} />
+          <Update_Button user={user} prevPage="Profile7" nextPage=""  navigation={navigation} />
         </>
       )
     }

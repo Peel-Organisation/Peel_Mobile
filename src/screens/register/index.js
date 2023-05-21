@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from "react-i18next";
 import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { registerRequest } from "../../functions/api_request";
 
 
@@ -13,26 +13,18 @@ const Register = ({ navigation }) => {
     const [repeatPassword, setRepeatPassword] = useState(""); 
 
     useEffect(() => {
+        crashlytics().log("Register screen mounted");
         AsyncStorage.getItem('token').then(token => {
             if (token) {
                 navigation.navigate('Auth')
             }
-        })
+        }).catch((error) => {
+            crashlytics().recordError(error)
+        });
     }, []);
 
 
     const SignIn = () => {
-        console.log("Register");
-        console.log(email);
-        console.log(password);
-        let header = {
-            method: 'POST',
-            data: JSON.stringify({
-                email : email,
-                password: password
-            })
-        }
-        console.log(header);
         const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if (email.length < 5 || password.length < 8 || password != repeatPassword || !email.toLowerCase().match(email_regex)) {
             alert("erreur de saisie");

@@ -1,15 +1,13 @@
 
 
 import React, {  useEffect, useState  } from "react";
-import { View, Dimensions,  Platform, PermissionsAndroid  } from "react-native";
-
-// import google from "google-maps"
+import { Dimensions,  Platform, PermissionsAndroid  } from "react-native";
 import Geolocation from 'react-native-geolocation-service';
 import  MapView, {Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import {Update_Button} from "../../../components/Update_User"; 
 import { useTranslation } from "react-i18next";
 import {Slider} from '@miblanchard/react-native-slider';
-// import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
@@ -37,6 +35,8 @@ const Location = ({ route, navigation }) => {
         fetchedUser.preferences.searchRange = 100;
       }
       setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
     getOneTimeLocation();
   }, []); 
@@ -60,28 +60,30 @@ const Location = ({ route, navigation }) => {
   }, [user]);
 
   const getOneTimeLocation = async () => {
-    console.log("getOneTimeLocation", Platform.OS);
+    crashlytics().log("getOneTimeLocation", Platform.OS);
     if(Platform.OS === 'ios'){
       check(PERMISSIONS.IOS.LocationWhenInUse)
       .then((result) => {
         switch (result) {
           case RESULTS.UNAVAILABLE:
-            console.log('This feature is not available (on this device / in this context)');
+            crashlytics().log('This feature is not available (on this device / in this context)');
             break;
           case RESULTS.DENIED:
-            console.log('The permission has not been requested / is denied but requestable');
+            crashlytics().log('The permission has not been requested / is denied but requestable');
             break;
           case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
+            crashlytics().log('The permission is limited: some actions are possible');
             break;
           case RESULTS.GRANTED:
-            console.log('The permission is granted');
+            crashlytics().log('The permission is granted');
             break;
           case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
+            crashlytics().log('The permission is denied and not requestable anymore');
             break;
         }
-      })
+      }).catch((error) => {
+        crashlytics().recordError(error)
+      });
     } else if (Platform.OS === 'android') {
       await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -89,7 +91,7 @@ const Location = ({ route, navigation }) => {
     }
     Geolocation.getCurrentPosition(
         (position) => {
-          console.log("position : ", position);
+          crashlytics().log("position : ", position);
           let newUser = user;
           newUser.position.longitude = position.coords.longitude;
           newUser.position.latitude = position.coords.latitude; 
@@ -97,7 +99,7 @@ const Location = ({ route, navigation }) => {
         },
         (error) => {
           // See error code charts below.
-          console.log("error : ", error.code, error.message);
+          crashlytics().recordError(error);
         },
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );

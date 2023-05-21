@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from "react-i18next";
 import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { loginRequest } from "../../functions/api_request";
 
 
@@ -13,10 +13,13 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState(""); 
 
     useEffect(() => {
+        crashlytics().log("Login screen mounted");
         AsyncStorage.getItem('token').then(token => {
             if (token) {
                 navigation.navigate('Auth')
             }
+        }).catch((error) => {
+            crashlytics().recordError(error)
         })
     }, []);
 

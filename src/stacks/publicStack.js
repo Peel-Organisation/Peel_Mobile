@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { useTranslation } from "react-i18next";
+import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
@@ -20,20 +21,20 @@ const PublicStack = ({navigation}) => {
   useEffect(() => {
     (async () => {
       let auth_bool = await TestAuth()
-      console.log("auth_bool : ", auth_bool)
-      if (auth_bool == true) {
+      crashlytics().log("auth_bool : ", auth_bool)
+      if (auth_bool) {
         setLoading(false);
-        console.log("navigate to auth")
+        crashlytics().log("navigate to auth")
         navigation.navigate('Auth');
       } else {
         setLoading(false);
-        console.log("navigate to public	")
+        crashlytics().log("navigate to public	")
         navigation.navigate('Public');
       }
     })();
 
     return () => {
-      // this now gets called when the component unmounts
+      crashlytics().log("unmounting public stack")
     };
   }, []);
 

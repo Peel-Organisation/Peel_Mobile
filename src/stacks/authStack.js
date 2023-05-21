@@ -13,7 +13,6 @@ import HomeSelectedImage from "../img/tabIcons/homeSelected.png";
 import ChatSelectedImage from "../img/tabIcons/chatSelected.png";
 import SettingsSelectedImage from "../img/tabIcons/settingsSelected.png";
 
-// Peel_Mobile\src\stacks\tabIcons\Chat.png
 
 
 import HomeScreen from '../screens/home';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from "react-i18next";
 
 import { FieldInput, ViewCustom, Title, MainText, InputView, ConditionText } from "../styles";
@@ -20,6 +20,8 @@ const Profile1 = ({ route, navigation }) => {
     useEffect(() => {
         getStorage('user').then(fetchedUser => {
             setUser(fetchedUser);
+        }).catch((error) => {
+            crashlytics().recordError(error)
         });
     }, []);
 
