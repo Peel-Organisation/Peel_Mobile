@@ -1,0 +1,83 @@
+name: Build & Publish Release APK
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+          run: npm install --legacy-peer-deps
+        - name: Run Jests tests
+          run: npm run test  
+
+    Gradle:
+        needs: test
+        runs-on: ubuntu-latest
+   
+        steps:
+            - name: Checkout source code
+              uses: actions/checkout@v2
+
+            - name: Set up JDK 11
+              uses: actions/setup-java@v1
+              with:
+                  java-version: 11
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+
+            - name: Install dependencies
+              run: npm install --legacy-peer-deps
+
+            - name: Cache Gradle Wrapper
+              uses: actions/cache@v2
+              with:
+                path: ~/.gradle/wrapper
+                key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+            - name: Cache Gradle Dependencies
+              uses: actions/cache@v2
+              with:
+                path: ~/.gradle/caches
+                key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+                restore-keys: |
+                    ${{ runner.os }}-gradle-caches-
+        
+            - name: Make Gradlew Executable
+              run: cd android && chmod +x ./gradlew
+
+            - name: Build Android App Bundle
+              run: |
+                cd android && ./gradlew bundleRelease --no-daemon
+
+            # - name: Signed APK
+            #   id: sign_app
+            #   uses: r0adkll/sign-android-release@v1
+            #   with: 
+            #     releaseDirectory: 'app/build/outputs/bundle/release'
+            #     signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+            #     signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+            #     signingKeyAlias: ${{ secrets.KEY_ALIAS }}
+            #     signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
+
+            - name: Publish Release APK
+              uses: actions/upload-artifact@v3
+              with:
+                name: peelApp.apk
+                path: android/app/build/outputs/apk/release/
+          
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+            KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+            KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+            KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+            APP_FOLDER: app

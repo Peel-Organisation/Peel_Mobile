@@ -2,22 +2,22 @@ name: Build & Publish Release APK
 
 on:
   push:
-    branches: [main, development]
+    branches: development
   pull_request:
-    branches: [main, development]
+    branches: development
 
 jobs:
-    # test:
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - uses: actions/checkout@v2
-    #     - name: Install dependencies
-    #       run: npm install --legacy-peer-deps
-    #     - name: Run Jests tests
-    #       run: npm run test  
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+          run: npm install --legacy-peer-deps
+        - name: Run Jests tests
+          run: npm run test  
 
     Gradle:
-        # needs: test
+        needs: test
         runs-on: ubuntu-latest
    
         steps:
@@ -71,8 +71,8 @@ jobs:
             - name: Publish Release APK
               uses: actions/upload-artifact@v3
               with:
-                name: release-apk
-                path: app/build/outputs/apk/release/app-release.apk
+                name: peelApp.apk
+                path: android/app/build/outputs/apk/release/
           
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
