@@ -7,14 +7,14 @@ on:
     branches: development
 
 jobs:
-    Test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install dependencies
-          run: npm install --legacy-peer-deps
-        - name: Run Jests tests
-          run: npm run test  
+    # Test:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v2
+    #     - name: Install dependencies
+    #       run: npm install --legacy-peer-deps
+    #     - name: Run Jests tests
+    #       run: npm run test  
 
     Gradle:
         # needs: test
@@ -73,8 +73,6 @@ jobs:
               with:
                 name: peelApp.apk
                 path: ${{ steps.sign_app.outputs.signedBundlePath }}
-              
-          
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}

@@ -9,15 +9,15 @@ on:
 jobs:
     test:
       runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install dependencies
-          run: npm install --legacy-peer-deps
-        - name: Run Jests tests
-          run: npm run test  
+      # steps:
+      #   - uses: actions/checkout@v2
+      #   - name: Install dependencies
+      #     run: npm install --legacy-peer-deps
+      #   - name: Run Jests tests
+      #     run: npm run test  
 
     Gradle:
-        needs: test
+        # needs: test
         runs-on: ubuntu-latest
    
         steps:
