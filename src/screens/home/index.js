@@ -18,8 +18,29 @@ const Match = () => {
     const [userList, setUserList] = useState([{}]);
     const [filter, setFilter] = useState(false);
     
+    
+    const [activeFilter, setActiveFilter] = useState([]);
+    
+    const handleFilterArray = ( filterName ) => {
+        const updatedFilterArray = {...activeFilter};
+        updatedFilterArray[filterName] = !updatedFilterArray[filterName];
+        setActiveFilter(updatedFilterArray);
+    };
+    
     useEffect(() => {
-        GetMatchList().then(matchList => {
+        setActiveFilter(filtersArray);
+    },[])
+
+    const filtersArray = {
+        interest: false,
+        music: false,
+        sport: false,
+        movie: false,
+        games: false,
+    };
+    
+    useEffect(() => {
+        GetMatchList(activeFilter.interest, activeFilter.music, activeFilter.sport, activeFilter.movie, activeFilter.games).then(matchList => {
             if (matchList != undefined) {
                 setUserList(matchList);
                 setLoading(false);
@@ -27,17 +48,13 @@ const Match = () => {
                 navigation.navigate('Public');
             }
         })
-    }, []);
-
-
+    }, [activeFilter]);
 
     if (loading) {
         return (
             <Loading />
         );
     }
-
-
     
     return (
         <>
@@ -54,7 +71,7 @@ const Match = () => {
                 
                 {
                     filter &&(
-                        <Filter filter={filter} setFilter={setFilter}/>
+                        <Filter filter={filter} setFilter={setFilter} handleFilterArray={handleFilterArray}/>
                     )
                 }
             </Container>

@@ -6,38 +6,10 @@ import { useTranslation } from "react-i18next";
 import FilterDetails from "../UI/FilterDetails";
 
 
-const Filter = ({ filter, setFilter }) => {
+const Filter = ({ filter, setFilter, handleFilterArray }) => {
     const { t } = useTranslation();
 
     const [FilterPage, setFilterPage] = useState(true);
-    const [activeFilter, setActiveFilter] = useState([]);
-
-    useEffect(() => {
-        setActiveFilter(filtersArray);
-    },[]) 
-
-    const filtersArray = [
-        {
-            name: "interest",
-            checked: false,
-        },
-        {
-            name: "musics",
-            checked: false,
-        },
-        {
-            name: "sports",
-            checked: false,
-        },
-        {
-            name: "movies",
-            checked: false,
-        },
-        {
-            name: "games",
-            checked: false,
-        },
-    ];
 
     return (
         <Container>
@@ -55,11 +27,11 @@ const Filter = ({ filter, setFilter }) => {
                 {
                     FilterPage ?(
                         <>
-                            <FilterSelector title={"Mes centres d'intérêts"} activeFilter={activeFilter} setActiveFilter={setActiveFilter}/>
-                            <FilterSelector title={"Musiques"} setFilterPage={setFilterPage}/>
-                            <FilterSelector title={"Sports"} setFilterPage={setFilterPage}/>
-                            <FilterSelector title={"Films"} setFilterPage={setFilterPage}/>
-                            <FilterSelector title={"Jeux"} setFilterPage={setFilterPage}/>
+                            <FilterSelector title={"Mes centres d'intérêts"} filterName="interest" handleFilterArray={handleFilterArray}/>
+                            <FilterSelector title={"Musiques"} filterName="music" handleFilterArray={handleFilterArray}/>
+                            <FilterSelector title={"Sports"} filterName="sport" handleFilterArray={handleFilterArray}/>
+                            <FilterSelector title={"Films"} filterName="movie" handleFilterArray={handleFilterArray}/>
+                            <FilterSelector title={"Jeux"} filterName="games" handleFilterArray={handleFilterArray}/>
                         </>
                     ) : (
                         <>

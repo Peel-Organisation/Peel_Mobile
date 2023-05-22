@@ -59,10 +59,13 @@ export  const  TestAuth = async () => {
     });
 }
 
-export const GetMatchList = async () => {
+export const GetMatchList = async (interest, music, sport, movie, games) => {
     console.log("\n\n GetMatchList")
+    console.log(interest, music, sport, movie, games);
     const token = await  getStorage('token')
-    return FetchPeelApi({url : "/api/match/swipeProfil", method:"GET", token:token}).then(res => {
+    const body = { interest: interest, music: music, sport: sport, movie: movie, games: games }
+    // return FetchPeelApi({url : "/api/match/swipeProfil", method:"GET", token:token}).then(res => {
+    return FetchPeelApi({url : "/api/match/getSwipeProfilUser", method:"POST", body:body, token:token}).then(res => {
         return (res);
     }).catch(error => {
         console.log("error : ", error)

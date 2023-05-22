@@ -1,10 +1,10 @@
 import { Text } from "react-native";
 import { Container, FilterText } from "./styles";
 
-const FilterSelector = ({ title, activeFilter, setActiveFilter }) => {
+const FilterSelector = ({ title, handleFilterArray, filterName }) => {
 
     return (
-        <Container onPress={()=>console.log(activeFilter)} >
+        <Container onPress={ () => handleFilterArray(filterName)} >
             <FilterText>{title}</FilterText>
         </Container>
     );

@@ -1,9 +1,9 @@
 import { Container, FilterText } from "./styles";
 
-const FilterButton = ({ title, primary }) => {
+const FilterButton = ({ title, primary, activeFilter }) => {
 
     return (
-        <Container primary={primary}>
+        <Container primary={primary} onPress={()=> console.log(activeFilter[0].interest)}>
             <FilterText>{title}</FilterText>
         </Container>
     );
