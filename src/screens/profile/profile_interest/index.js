@@ -5,16 +5,22 @@ import Loading from '../../../components/loading';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {getStorage} from '../../../functions/storage';
 import {getInterestList} from '../../../functions/api_request';
+
 import {
   InterestButton,
   InterestButtonText,
-  ViewCustom,
-  Title,
   InterestButtonSelected,
   InterestButtonDisabled,
   InterestView,
-  ConditionText,
-} from '../styles';
+} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {ScrollContainer} from '../../../components/StyledComponents/Profile/General/ScrollContainer';
 
 const ProfileInterest = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -68,16 +74,26 @@ const ProfileInterest = ({route, navigation}) => {
     if (user.interests?.length == 5) {
       setNavButton(
         <>
-          <Update_Button user={user} prevPage="Profile7" nextPage="Profile9"  navigation={navigation} />
-        </>
-      ) 
+          <Update_Button
+            user={user}
+            prevPage="Profile7"
+            nextPage="Profile9"
+            navigation={navigation}
+          />
+        </>,
+      );
     } else {
       setNavButton(
-        <> 
-          <ConditionText>{t("profile.fill")}</ConditionText>
-          <Update_Button user={user} prevPage="Profile7" nextPage=""  navigation={navigation} />
-        </>
-      )
+        <>
+          <ConditionText>{t('profile.fill')}</ConditionText>
+          <Update_Button
+            user={user}
+            prevPage="Profile7"
+            nextPage=""
+            navigation={navigation}
+          />
+        </>,
+      );
     }
   }, [user]);
 
@@ -107,42 +123,46 @@ const ProfileInterest = ({route, navigation}) => {
   }
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.interest')}</Title>
-      <InterestView>
-        {InterestList.map(interest => {
-          if (containsObject(interest, user.interests)) {
-            return (
-              <InterestButtonSelected
-                key={interest._id}
-                onPress={() => removeInterest(interest)}>
-                <InterestButtonText>{interest.name}</InterestButtonText>
-              </InterestButtonSelected>
-            );
-          } else if (user.interests?.length < 5) {
-            return (
-              <InterestButton
-                key={interest._id}
-                onPress={() => addInterest(interest)}>
-                <InterestButtonText>{interest.name}</InterestButtonText>
-              </InterestButton>
-            );
-          } else {
-            return (
-              <InterestButtonDisabled
-                key={interest._id}
-                onPress={() => addInterest(interest)}
-                color="#ff5c5c"
-                disabled>
-                <InterestButtonText>{interest.name}</InterestButtonText>
-              </InterestButtonDisabled>
-            );
-          }
-        })}
-      </InterestView>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.interest')}</HeaderText>
+      </HeaderView>
+      <ScrollContainer>
+        <InterestView>
+          {InterestList.map(interest => {
+            if (containsObject(interest, user.interests)) {
+              return (
+                <InterestButtonSelected
+                  key={interest._id}
+                  onPress={() => removeInterest(interest)}>
+                  <InterestButtonText>{interest.name}</InterestButtonText>
+                </InterestButtonSelected>
+              );
+            } else if (user.interests?.length < 5) {
+              return (
+                <InterestButton
+                  key={interest._id}
+                  onPress={() => addInterest(interest)}>
+                  <InterestButtonText>{interest.name}</InterestButtonText>
+                </InterestButton>
+              );
+            } else {
+              return (
+                <InterestButtonDisabled
+                  key={interest._id}
+                  onPress={() => addInterest(interest)}
+                  color="#ff5c5c"
+                  disabled>
+                  <InterestButtonText>{interest.name}</InterestButtonText>
+                </InterestButtonDisabled>
+              );
+            }
+          })}
+        </InterestView>
+      </ScrollContainer>
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
-}
+};
 
 export default ProfileInterest;
