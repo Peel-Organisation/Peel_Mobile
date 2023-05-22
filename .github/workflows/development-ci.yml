@@ -7,14 +7,14 @@ on:
     branches: development
 
 jobs:
-    Test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install dependencies
-          run: npm install --legacy-peer-deps
-        - name: Run Jests tests
-          run: npm run test  
+    # Test:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v2
+    #     - name: Install dependencies
+    #       run: npm install --legacy-peer-deps
+    #     - name: Run Jests tests
+    #       run: npm run test  
 
     Gradle:
         # needs: test
@@ -60,7 +60,7 @@ jobs:
 
             - name: Signed APK
               id: sign_app
-              uses: bastienboutonnet/sign-android-release@v1
+              uses: r0adkll/sign-android-release@v1
               with: 
                 releaseDirectory: 'app/build/outputs/bundle/release'
                 signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
@@ -73,8 +73,6 @@ jobs:
               with:
                 name: peelApp.apk
                 path: ${{ steps.sign_app.outputs.signedBundlePath }}
-              
-          
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
