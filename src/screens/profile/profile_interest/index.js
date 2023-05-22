@@ -145,6 +145,4 @@ const ProfileInterest = ({route, navigation}) => {
   );
 }
 
-};
-
 export default ProfileInterest;
