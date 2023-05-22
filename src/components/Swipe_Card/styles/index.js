@@ -91,20 +91,20 @@ export const ResponseText = styled.Text`
 export const GifImage = styled.Image`
     width: 100%;
     min-width: 100%;
-    height: 200px;
+    height: 100px;
     border-radius: 10px;
 `
 
 export const MovieImage = styled.Image`
     width: 100%;
     min-width: 100%;
-    height: 200px;
+    height: 100px;
     border-radius: 10px;
 `
 
 export const MusicImage = styled.Image`
     width: 100%;
     min-width: 100%;
-    height: 200px;
+    height: 100px;
     border-radius: 10px;
 `

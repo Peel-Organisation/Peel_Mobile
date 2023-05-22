@@ -5,7 +5,15 @@ import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
 import {getStorage} from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {ViewCustom, Title, FieldInput} from '../styles';
+
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
+import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {FieldView} from '../../../components/StyledComponents/Profile/General/FieldView';
 
 const Gif = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -121,29 +129,35 @@ const Gif = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <FieldView>
+        <PageTitle>{t('profile.gifs_condition')}</PageTitle>
+        <FieldInput
+          value={searchText}
+          onChangeText={text => setSearchText(text)}
+          placeholder={t('profile.gifs_condition')}
+        />
+        <FlatList
+          data={gifs}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          onEndReached={() => {
+            setPage(page + 1);
+          }}
+          onEndReachedThreshold={0.4}
+          numColumns={2}
+        />
+      </FieldView>
       <Update_Button
-        user={user}
-        prevPage="Profile4"
-        nextPage="Profile6"
-        navigation={navigation}
-      />
-      <Title>Choix du gif</Title>
-      <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value={searchText}
-        onChangeText={text => setSearchText(text)}
-      />
-      <FlatList
-        data={gifs}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
-      />
-    </ViewCustom>
+          user={user}
+          prevPage="Profile4"
+          nextPage="Profile6"
+          navigation={navigation}
+        />
+    </CustomView>
   );
 };
 

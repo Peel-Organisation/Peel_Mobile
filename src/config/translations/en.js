@@ -64,7 +64,12 @@ export default {
       question_select: 'Select a question !',
       question_placeholder: 'Answer the question !',
       question_save: 'Save',
+      gifs_condition: 'Choose a gif',
       gifs_placeholder: 'Search a gif',
+      movie_condition: 'Choose a movie',
+      movie_placeholder: 'Search a movie',
+      music_condition: 'Choose a music',
+      music_placeholder: 'Search a music',
       custom: {
         title: 'Customize your profile !',
         text: 'Select the elements you want other users to see when they want to check on your profile',

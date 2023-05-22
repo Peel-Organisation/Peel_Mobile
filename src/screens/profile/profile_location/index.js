@@ -9,14 +9,16 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 import {getStorage} from '../../../functions/storage';
 
+import {SliderCustom} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {InputView} from '../../../components/StyledComponents/Profile/General/InputView';
+import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
 import {
-  ViewCustom,
-  Title,
-  MainText,
-  SliderCustom,
-  InputView,
-  ConditionText,
-} from '../styles';
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
 
 const Location = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -25,7 +27,6 @@ const Location = ({route, navigation}) => {
     preferences: {searchRange: 100},
   });
   const [navButton, setNavButton] = useState(null);
-
 
   useEffect(() => {
     getStorage('user')
@@ -149,8 +150,10 @@ const Location = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.search_zone')}</Title>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.search_zone')}</HeaderText>
+      </HeaderView>
       <InputView>
         <MainText> {user.preferences?.searchRange} km</MainText>
         <SliderCustom>
@@ -199,7 +202,7 @@ const Location = ({route, navigation}) => {
       </MapView>
 
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

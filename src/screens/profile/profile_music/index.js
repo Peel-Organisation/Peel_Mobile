@@ -4,8 +4,17 @@ import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../../../components/StyledComponents/Profile/General/CustomView';
 import crashlytics from '@react-native-firebase/crashlytics';
+
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
+import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
+import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {FieldView} from '../../../components/StyledComponents/Profile/General/FieldView';
 
 const Music = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -131,34 +140,40 @@ const Music = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <FieldView>
+        <PageTitle>{t('profile.music_condition')}</PageTitle>
+        <FieldInput
+          value={searchText}
+          onChangeText={text => {
+            setSearchText(text);
+            setPage(1);
+            setMusics([]);
+          }}
+          placeholder={t('profile.music_placeholder')}
+        />
+        <FlatList
+          data={musics}
+          renderItem={renderItem}
+          keyExtractor={item => item.result.id.toString()}
+          onEndReached={() => {
+            setPage(page + 1);
+          }}
+          onEndReachedThreshold={0.4}
+          numColumns={2}
+        />
+      </FieldView>
+      {loading && <MainText>Chargement...</MainText>}
       <Update_Button
         user={user}
         prevPage="Profile6"
-        nextPage=""
+        nextPage="Profile8"
         navigation={navigation}
       />
-      <Title>Rechercher une musique</Title>
-      <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value={searchText}
-        onChangeText={text => {
-          setSearchText(text);
-          setPage(1);
-          setMusics([]);
-        }}
-      />
-      <FlatList
-        data={musics}
-        renderItem={renderItem}
-        keyExtractor={item => item.result.id.toString()}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
-      />
-      {loading && <MainText>Chargement...</MainText>}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

@@ -5,7 +5,15 @@ import {Update_Button} from '../../../components/Update_User';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {getStorage} from '../../../functions/storage';
 
-import {BioInput, ViewCustom, Title, ConditionText} from '../styles';
+import {BioInput} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {ContentView} from '../../../components/StyledComponents/Profile/General/ContentView';
 
 const Biographie = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -88,24 +96,28 @@ const Biographie = ({route, navigation}) => {
   }, [user]);
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.title')}</Title>
-      <View>
-        <BioInput
-          multiline
-          numberOfLines={10}
-          // style={styles.input}
-          onChangeText={text => {
-            let newUser = {...user};
-            newUser.biographie = text;
-            setUser(newUser);
-          }}
-          value={user.biographie}
-          placeholder={t('profile.biography')}
-        />
-      </View>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <ContentView>
+        <PageTitle>{t('profile.biography')}</PageTitle>
+        <View>
+          <BioInput
+            multiline
+            numberOfLines={4}
+            onChangeText={text => {
+              let newUser = {...user};
+              newUser.biographie = text;
+              setUser(newUser);
+            }}
+            value={user.biographie}
+            placeholder={t('profile.biography')}
+          />
+        </View>
+      </ContentView>
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

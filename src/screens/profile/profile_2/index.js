@@ -5,14 +5,18 @@ import {Update_Button} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 
 import {
-  ViewCustom,
-  Title,
-  MainText,
   SwitchSelectorCustom,
   DatePickerCustom,
-  InputView,
-  ConditionText,
-} from '../styles';
+} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
+import {InputView} from '../../../components/StyledComponents/Profile/General/InputView';
+import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {ContentView} from '../../../components/StyledComponents/Profile/General/ContentView';
 
 const Profile2 = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -82,42 +86,45 @@ const Profile2 = ({route, navigation}) => {
   }, [user]);
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.title')}</Title>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <ContentView>
+        <InputView>
+          <MainText>{t('profile.birth_date')}</MainText>
+          <DatePickerCustom
+            date={user['birthday']}
+            onDateChange={date => {
+              let newUser = {...user};
+              newUser['birthday'] = date;
+              setUser(newUser);
+            }}
+            mode="date"
+          />
+        </InputView>
+        <InputView>
+          <MainText>{t('profile.gender')}</MainText>
 
-      <InputView>
-        <MainText>{t('profile.birth_date')}</MainText>
-        <DatePickerCustom
-          date={user['birthday']}
-          onDateChange={date => {
-            let newUser = {...user};
-            newUser['birthday'] = date;
-            setUser(newUser);
-          }}
-          mode="date"
-        />
-      </InputView>
-      <InputView>
-        <MainText>{t('profile.gender')}</MainText>
-
-        <SwitchSelectorCustom
-          initial={0}
-          onPress={value => {
-            let newUser = {...user};
-            newUser.gender = value;
-            setUser(newUser);
-          }}
-          buttonColor="#FC912F"
-          hasPadding
-          options={[
-            {label: t('profile.male_gender'), value: 'Male'},
-            {label: t('profile.female_gender'), value: 'Female'},
-            {label: t('profile.other_gender'), value: 'Other'},
-          ]}
-        />
-      </InputView>
+          <SwitchSelectorCustom
+            initial={0}
+            onPress={value => {
+              let newUser = {...user};
+              newUser.gender = value;
+              setUser(newUser);
+            }}
+            buttonColor="#FC912F"
+            hasPadding
+            options={[
+              {label: t('profile.male_gender'), value: 'Male'},
+              {label: t('profile.female_gender'), value: 'Female'},
+              {label: t('profile.other_gender'), value: 'Other'},
+            ]}
+          />
+        </InputView>
+      </ContentView>
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

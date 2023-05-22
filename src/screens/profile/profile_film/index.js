@@ -4,8 +4,17 @@ import {FlatList, TouchableOpacity, Image} from 'react-native';
 import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../../../components/StyledComponents/Profile/General/CustomView';
 import crashlytics from '@react-native-firebase/crashlytics';
+
+import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
+import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
+import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
+import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import {FieldView} from '../../../components/StyledComponents/Profile/General/FieldView';
 
 const Film = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -17,11 +26,13 @@ const Film = ({route, navigation}) => {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-    getStorage('user').then(fetchedUser => {
-      setUser(fetchedUser);
-    }).catch((error) => {
-      crashlytics().recordError(error)
-    });
+    getStorage('user')
+      .then(fetchedUser => {
+        setUser(fetchedUser);
+      })
+      .catch(error => {
+        crashlytics().recordError(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -126,29 +137,35 @@ const Film = ({route, navigation}) => {
   if (loading) return <MainText>Chargement...</MainText>;
 
   return (
-    <ViewCustom>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <FieldView>
+        <PageTitle>{t('profile.movie_condition')}</PageTitle>
+        <FieldInput
+          value={searchText}
+          onChangeText={setSearchText}
+          placeholder={t('profile.movie_placeholder')}
+        />
+        <FlatList
+          data={movies}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={() => {
+            setPage(page + 1);
+          }}
+          onEndReachedThreshold={0.4}
+          numColumns={2}
+        />
+      </FieldView>
       <Update_Button
         user={user}
         prevPage="Profile5"
-        nextPage=""
+        nextPage="Profile7"
         navigation={navigation}
       />
-      <Title>Choix du film</Title>
-      <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value={searchText}
-        onChangeText={setSearchText}
-      />
-      <FlatList
-        data={movies}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
-      />
-    </ViewCustom>
+    </CustomView>
   );
 };
 
