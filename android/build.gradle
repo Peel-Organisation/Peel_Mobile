@@ -1,12 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-
     ext {
         buildToolsVersion = "33.0.0"
         minSdkVersion = 33
         compileSdkVersion = 33
         targetSdkVersion = 33
+        plugin: 'com.android.application'
 
         if (System.properties['os.arch'] == "aarch64") {
             // For M1 Users we need to use the NDK 24 which added support for aarch64
