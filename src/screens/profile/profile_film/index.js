@@ -5,6 +5,7 @@ import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
 import {Update_Button, nextAction} from '../../../components/Update_User';
 import {getStorage} from '../../../functions/storage';
 import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const Film = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -14,21 +15,26 @@ const Film = ({route, navigation}) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+
   useEffect(() => {
     getStorage('user').then(fetchedUser => {
-      if (fetchedUser.biographie === undefined) {
-        fetchedUser.biographie = '';
-      }
       setUser(fetchedUser);
+    }).catch((error) => {
+      crashlytics().recordError(error)
     });
   }, []);
 
   useEffect(() => {
-    getPopularMovies();
+    if (searchText.length > 0) {
+      searchMovies();
+    } else {
+      getPopularMovies();
+    }
   }, [page]);
 
   useEffect(() => {
     setPage(1);
+    setMovies([]);
     if (searchText.length > 0) {
       searchMovies();
     } else {
@@ -52,7 +58,7 @@ const Film = ({route, navigation}) => {
         }
       }
     } catch (error) {
-      console.log({error});
+      crashlytics().recordError(error);
     }
   };
 
@@ -79,7 +85,7 @@ const Film = ({route, navigation}) => {
         const genre = genres.find(genre => genre.id === genre_id);
         return {
           id: genre_id,
-          name: genre?.name|| '',
+          name: genre?.name || '',
         };
       });
       const updatedUser = {
@@ -95,15 +101,15 @@ const Film = ({route, navigation}) => {
         },
       };
       setUser(updatedUser);
-      nextAction('Profile6', navigation, user);
+      nextAction('Profile7', navigation, user);
     } catch (error) {
-      console.log({error});
+      crashlytics().recordError(error);
     }
   };
+
   const renderItem = ({item}) => {
-    const handlePress = item => updateMovie(item);
     return (
-      <TouchableOpacity onPress={handlePress(item)}>
+      <TouchableOpacity onPress={() => updateMovie(item)}>
         <Image
           style={{
             width: 200,
@@ -123,7 +129,7 @@ const Film = ({route, navigation}) => {
     <ViewCustom>
       <Update_Button
         user={user}
-        prevPage="Profile4"
+        prevPage="Profile5"
         nextPage=""
         navigation={navigation}
       />

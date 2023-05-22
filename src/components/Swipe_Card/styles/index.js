@@ -9,11 +9,9 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const HomeCard =  styled.View`
     background-color: white;
     width: 100%;
-    max-height: ${DIMENSION_HEIGHT/1.4};
+    height: 100%;
     overflow: hidden;
     padding: 7%;
-    border: 1px solid #DFD6CE;
-    border-radius: 13px;
 `
 export const UserCont = styled.View `
     margin: 0px 0px 15px 0px;
@@ -60,7 +58,7 @@ export const InteretView = styled.View`
 
 export const InteretBox = styled.Text`
     background-color: ${props => props.theme.primary};
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 2%;
     margin: 10px 0px;
 `
@@ -94,5 +92,19 @@ export const GifImage = styled.Image`
     width: 100%;
     min-width: 100%;
     height: 200px;
-    border-radius: 13px;
+    border-radius: 10px;
+`
+
+export const MovieImage = styled.Image`
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+    border-radius: 10px;
+`
+
+export const MusicImage = styled.Image`
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+    border-radius: 10px;
 `

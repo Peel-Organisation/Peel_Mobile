@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SafeAreaView, ActivityIndicator} from 'react-native';
-
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import Profile1 from "../screens/profile/profile_1"
 import Profile2 from "../screens/profile/profile_2"
 import Profile3 from "../screens/profile/profile_3"
 import Biographie from "../screens/profile/profile_biographie"
 import ProfileInterest from "../screens/profile/profile_interest"
 import Question from "../screens/profile/profile_question"
-import Location from "../screens/profile/profile_location"
 import Film from "../screens/profile/profile_film"
 import Gif from "../screens/profile/profile_gif"
+import Music from "../screens/profile/profile_music";
 
 import {GetUser} from "../functions/api_request"
-
 import Loading from "../components/loading";
-
 const Stack = createNativeStackNavigator();
 const UserContext = React.createContext("token");
 
@@ -27,11 +23,13 @@ const PublicStack = () => {
 
   useEffect(() => {
       GetUser(user).then(user_data => {
-        if (user_data != false) {
+        if (user_data) {
           setUser(user_data);
           setLoading(false);
         } 
-      })
+      }).catch((error) => {
+        crashlytics().recordError(error)
+      });
   }, []);
 
   if (loading) {
@@ -49,8 +47,9 @@ const PublicStack = () => {
         <Stack.Screen name="Profile4" component={Biographie} />
         <Stack.Screen name="Profile5" component={Gif} />
         <Stack.Screen name="Profile6" component={Film} />
-        <Stack.Screen name="Profile7" component={ProfileInterest} />
-        <Stack.Screen name="Profile8" component={Location} /> 
+        <Stack.Screen name="Profile7" component={Music} />
+        <Stack.Screen name="Profile8" component={ProfileInterest} />
+        {/* <Stack.Screen name="Profile8" component={Location} />  */}
         <Stack.Screen name="Profile9" component={Question} />
       </Stack.Navigator>
     </UserContext.Provider>

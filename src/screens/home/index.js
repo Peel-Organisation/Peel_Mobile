@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe  from "../../components/Swipe";
-
+import crashlytics from '@react-native-firebase/crashlytics';
 import { GetMatchList} from "../../functions/api_request"
 import Loading from "../../components/loading";
-import { Icon } from "../../components/Swipe/styles";
-import Filter from "../../components/Filter";
 
 
 
@@ -40,13 +38,16 @@ const Match = () => {
     };
     
     useEffect(() => {
-        GetMatchList(activeFilter.interest, activeFilter.music, activeFilter.sport, activeFilter.movie, activeFilter.games).then(matchList => {
+        crashlytics().log("Match screen mounted");
+        GetMatchList().then(matchList => {
             if (matchList != undefined) {
                 setUserList(matchList);
                 setLoading(false);
             } else {
                 navigation.navigate('Public');
             }
+        }).catch((error) => {
+            crashlytics().recordError(error)
         })
     }, [activeFilter]);
 
@@ -63,7 +64,7 @@ const Match = () => {
                 <StatusBar backgroundColor="#FC912F"/>
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
-                    <FilterIcon onPress={()=>{setFilter(!filter)}}>
+                    <FilterIcon>
                         <FilterIconImg source={require('./styles/sort.png')}/>
                     </FilterIcon>
                 </Header>

@@ -3,6 +3,7 @@ import { FieldInput, MessageButton, ViewCustom, SendIcon } from './styles';
 const sendpng = require('./styles/send.png');
 import { sendMessage } from "../../functions/api_request";
 import { addStorageMessage, getStorage } from "../../functions/storage";
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const MessageInput = ({conversation_id, messages, setMessages}) => {
   const [value, setValue] = useState('');
@@ -18,7 +19,9 @@ const MessageInput = ({conversation_id, messages, setMessages}) => {
   useEffect(() => {
     getStorage('userId').then(data => {
       setUserId(data);
-    });
+    }).catch((error) => {
+      crashlytics().recordError(error)
+    })
   }, []);
 
   return (
