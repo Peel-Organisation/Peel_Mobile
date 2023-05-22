@@ -65,7 +65,7 @@ const Match = () => {
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
                     <FilterIcon>
-                        <FilterIconImg source={require('./styles/sort.png')}/>
+                        <FilterIconImg source={require('@/../assets/images/icons/sort.png')}/>
                     </FilterIcon>
                 </Header>
                 <Swipe userList={userList} />
