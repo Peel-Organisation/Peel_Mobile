@@ -16,10 +16,8 @@ const Login = ({ navigation }) => {
         async function checkProfile() {
             let profile_bool = await IsProfileCompleted()
             if (profile_bool) {
-                console.log("navigate to auth from login");
                 navigation.navigate('Auth');
             } else {
-                console.log("navigate to profile from login");
                 navigation.navigate('Profile');
             }
         }
@@ -27,7 +25,6 @@ const Login = ({ navigation }) => {
         AsyncStorage.getItem('token').then(token => {
             if (token) {
                 checkProfile();
-                console.log("token : ", token);
             }
         }).catch((error) => {
             crashlytics().recordError(error)
@@ -41,7 +38,6 @@ const Login = ({ navigation }) => {
             alert("erreur de saisie");
         } else {
             loginRequest(email, password, navigation);
-            console.log(email, password);
         }
     }
     

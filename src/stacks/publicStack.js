@@ -27,18 +27,15 @@ const PublicStack = ({navigation}) => {
         if (profile_bool) {
           setLoading(false);
           crashlytics().log("navigate to auth");
-          console.log("navigate to auth");
           navigation.navigate('Auth');
         } else {
         setLoading(false);
         crashlytics().log("navigate to profile");
-        console.log("navigate to profile");
         navigation.navigate('Profile');
         }
       } else {
         setLoading(false);
         crashlytics().log("navigate to public")
-        console.log("navigate to public");
         navigation.navigate('Public');
       }
     })();

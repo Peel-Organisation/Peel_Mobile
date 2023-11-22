@@ -32,7 +32,6 @@ export const updateUser = async (user) => {
     addStorage('user', user);
     const token = await  getStorage('token')
     return FetchPeelApi({url : "/api/user/", method:"PUT", body: user, token:token}).then(res => {
-        console.log(res);
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
