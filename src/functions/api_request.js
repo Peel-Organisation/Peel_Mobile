@@ -65,6 +65,17 @@ export  const  TestAuth = async () => {
     });
 }
 
+export const IsProfileCompleted = async () => {
+    crashlytics().log("\n\n IsProfileCompleted")
+    const token = await  getStorage('token')
+    return FetchPeelApi({url : "/api/user/verifyProfileCompleted", method:"GET", token:token}).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}
+
+
 export const GetMatchList = async () => {
     crashlytics().log("\n\n GetMatchList")
     const token = await  getStorage('token')

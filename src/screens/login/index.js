@@ -3,20 +3,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from "react-i18next";
 import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
-import { loginRequest } from "../../functions/api_request";
+import { loginRequest, IsProfileCompleted } from "../../functions/api_request";
 
 
 
 const Login = ({ navigation }) => { 
     const { t } = useTranslation();
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState(""); 
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
+        async function checkProfile() {
+            let profile_bool = await IsProfileCompleted()
+            if (profile_bool) {
+                console.log("navigate to auth from login");
+                navigation.navigate('Auth');
+            } else {
+                console.log("navigate to profile from login");
+                navigation.navigate('Profile');
+            }
+        }
         crashlytics().log("Login screen mounted");
         AsyncStorage.getItem('token').then(token => {
             if (token) {
-                navigation.navigate('Auth')
+                checkProfile();
+                console.log("token : ", token);
             }
         }).catch((error) => {
             crashlytics().recordError(error)
@@ -30,6 +41,7 @@ const Login = ({ navigation }) => {
             alert("erreur de saisie");
         } else {
             loginRequest(email, password, navigation);
+            console.log(email, password);
         }
     }
     

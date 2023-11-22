@@ -11,7 +11,7 @@ import Auth from '../screens/auth';
 const Stack = createNativeStackNavigator();
 import Loading from '../components/loading';
 
-import { TestAuth } from '../functions/api_request';
+import { TestAuth, IsProfileCompleted } from '../functions/api_request';
 
 const PublicStack = ({navigation}) => {
   const { t } = useTranslation();
@@ -21,14 +21,24 @@ const PublicStack = ({navigation}) => {
   useEffect(() => {
     (async () => {
       let auth_bool = await TestAuth()
+      let profile_bool = await IsProfileCompleted()
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
+        if (profile_bool) {
+          setLoading(false);
+          crashlytics().log("navigate to auth");
+          console.log("navigate to auth");
+          navigation.navigate('Auth');
+        } else {
         setLoading(false);
-        crashlytics().log("navigate to auth")
-        navigation.navigate('Auth');
+        crashlytics().log("navigate to profile");
+        console.log("navigate to profile");
+        navigation.navigate('Profile');
+        }
       } else {
         setLoading(false);
-        crashlytics().log("navigate to public	")
+        crashlytics().log("navigate to public")
+        console.log("navigate to public");
         navigation.navigate('Public');
       }
     })();
