@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1046307844310:android:d90145859a78585c339977",
+        "mobilesdk_app_id": "1:1046307844310:android:8be7599f4c1359cd339977",
         "android_client_info": {
-          "package_name": "com.peel"
+          "package_name": "com.peelapp.peel"
         }
       },
       "oauth_client": [
