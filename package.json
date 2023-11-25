@@ -1,5 +1,5 @@
 {
-  "name": "Peel",
+  "name": "peel",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,16 +14,16 @@
     "ios-release": "npm run ios --configuration Release",
     "clean-android": "cd android && ./gradlew clean && cd ../",
     "clean-ios": "cd ios && xcodebuild clean && cd ../",
-    "deleteBuild-android": "shx rm -r android/app/build && shx rm -r android/build && shx rm -r android/.gradle && shx rm -r package-lock.json && shx rm -r node_modules && npm install --legacy-peer-deps",
+    "deleteBuild-android": "shx rm -r android/peel/build && shx rm -r android/build && shx rm -r android/.gradle && shx rm -r package-lock.json && shx rm -r node_modules && npm install --legacy-peer-deps",
     "deleteBuild-ios": "shx rm -r ios/build && shx rm -r ios/Pods && shx rm -r ios/Podfile.lock && shx rm -r ios/Podfile && shx rm -r package-lock.json && shx rm -r node_modules && npm install --legacy-peer-deps",
     "build-android": "cd android && ./gradlew assembleRelease && cd ..",
-    "build-ios": "cd ios && xcodebuild -workspace app.xcworkspace -scheme app -configuration Release -sdk iphoneos -derivedDataPath build"
+    "build-ios": "cd ios && xcodebuild -workspace peel.xcworkspace -scheme peel -configuration Release -sdk iphoneos -derivedDataPath build"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.1.0",
     "@notifee/react-native": "^7.6.1",
     "@react-native-async-storage/async-storage": "^1.17.11",
-    "@react-native-firebase/app": "^17.4.2",
+    "@react-native-firebase/peel": "^17.4.2",
     "@react-native-firebase/crashlytics": "^17.4.3",
     "@react-native-firebase/messaging": "^17.4.2",
     "@react-native-firebase/perf": "^17.5.0",
