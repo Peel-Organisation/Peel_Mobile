@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.peel",
+    package = "com.peelapp.peel",
 )
 
 android_resource(
     name = "res",
-    package = "com.peel",
+    package = "com.peelapp.peel",
     res = "src/main/res",
 )
 

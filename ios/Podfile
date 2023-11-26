@@ -23,7 +23,7 @@ pre_install do |installer|
   end
 end
 
-target 'Peel' do
+target 'peel' do
   config = use_native_modules!
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'
@@ -52,7 +52,7 @@ target 'Peel' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'PeelTests' do
+  target 'peelTests' do
     inherit! :complete
     # Pods for testing
   end
