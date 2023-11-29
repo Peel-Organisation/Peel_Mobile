@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from "react-i18next";
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -13,15 +13,16 @@ import Loading from '../components/loading';
 
 import { TestAuth, IsProfileCompleted } from '../functions/api_request';
 
-const PublicStack = ({navigation}) => {
+const PublicStack = ({ navigation }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = React.useState(true);
-  
+
 
   useEffect(() => {
     (async () => {
       let auth_bool = await TestAuth()
       let profile_bool = await IsProfileCompleted()
+      console.log("profile_bool : ", profile_bool)
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
         if (profile_bool) {
@@ -29,9 +30,9 @@ const PublicStack = ({navigation}) => {
           crashlytics().log("navigate to auth");
           navigation.navigate('Auth');
         } else {
-        setLoading(false);
-        crashlytics().log("navigate to profile");
-        navigation.navigate('Profile');
+          setLoading(false);
+          crashlytics().log("navigate to profile");
+          navigation.navigate('Profile');
         }
       } else {
         setLoading(false);
@@ -52,13 +53,13 @@ const PublicStack = ({navigation}) => {
   }
 
 
-  
+
 
   return (
-    <Stack.Navigator initialRouteName="AuthHome" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="AuthHome" component={Auth} options={{title: 'Details'}} />
-        <Stack.Screen name="Login" component={Login} options={{title: 'Login'}} />
-        <Stack.Screen name="Register" component={Register} options={{title: 'Register'}} />
+    <Stack.Navigator initialRouteName="AuthHome" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AuthHome" component={Auth} options={{ title: 'Details' }} />
+      <Stack.Screen name="Login" component={Login} options={{ title: 'Login' }} />
+      <Stack.Screen name="Register" component={Register} options={{ title: 'Register' }} />
     </Stack.Navigator>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {CustomFlatList } from './styles';
+import { CustomFlatList } from './styles';
 
 import messaging from '@react-native-firebase/messaging';
 import { getStorageMessage, getStorage } from "../../functions/storage";
@@ -9,16 +9,16 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
-const MessageList = ({conversation_id, messages, setMessages}) => {
+const MessageList = ({ conversation_id, messages, setMessages }) => {
   const [userId, setUserId] = useState(null);
-  
+
   useEffect(() => {
     getStorageMessage(conversation_id).then(data => {
       setMessages(data);
     }).catch((error) => {
       crashlytics().recordError(error)
     })
-    
+
     getStorage('userId').then(data => {
       setUserId(data);
     }).catch((error) => {
@@ -31,24 +31,32 @@ const MessageList = ({conversation_id, messages, setMessages}) => {
     try {
       const newMessage = JSON.parse(remoteMessage?.data?.message);
       let index = messages.findIndex((message) => message._id == newMessage._id);
-      if (index !== null && index == -1 && userId !== null && newMessage.conversation_id == conversation_id && newMessage.sender != userId){
-        setMessages([...messages, newMessage]);
+      if (newMessage.sender != userId) {
+        if (index !== null && index == -1 && userId !== null) {
+          // if (newMessage.conversationId == conversation_id) {
+          console.log("newMessage", newMessage);
+          const message = { "content": newMessage.content, "time": newMessage.sentTime, "sender": newMessage.sender, "createdAt": newMessage.createdAt, "_id": newMessage._id };
+          setMessages([...messages, message]);
+        }
       }
     } catch (error) {
+      console.error("error", error);
       crashlytics().recordError(error);
     }
   });
 
 
+
+
   return (
     <CustomFlatList>
-        <FlatList 
-          data={[...Object.values(messages)].sort((a, b) => a.time - b.time).reverse()}
-          renderItem={({ item }) => <MessageUser message={item} userId={userId} key={userId} />}
-          keyExtractor={(item, index) => index}
-          extraData={messages}
-          inverted 
-        />
+      <FlatList
+        data={[...Object.values(messages)].sort((a, b) => a.time - b.time).reverse()}
+        renderItem={({ item }) => <MessageUser message={item} userId={userId} key={userId} />}
+        keyExtractor={(item, index) => index}
+        extraData={messages}
+        inverted
+      />
     </CustomFlatList>
   );
 }
