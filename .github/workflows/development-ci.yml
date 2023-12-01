@@ -2,9 +2,9 @@ name: Build & Publish Release APK - Development
 
 on:
   push:
-    branches: development
-  pull_request:
-    branches: development
+    branches: feature/update_ci
+  # pull_request:
+  #   branches: development
 
 jobs:
     # Test:
@@ -57,6 +57,12 @@ jobs:
             - name: Build Android App Bundle
               run: |
                 cd android && ./gradlew bundleRelease --no-daemon
+
+            - name: Debug Keystore
+              run: |
+                ls -R android/app/build/outputs/bundle/release
+                echo "Contents of keystore directory:"
+                ls -l ${{ secrets.KEYSTORE_PATH }}
 
             - name: Signed APK
               id: sign_app
