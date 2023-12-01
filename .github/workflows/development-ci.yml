@@ -62,7 +62,7 @@ jobs:
               run: |
                 ls -R android/app/build/outputs/bundle/release
                 echo "Contents of keystore directory:"
-                ls -l ${{ secrets.KEYSTORE_PATH }}
+                # ls -l ${{ secrets.KEYSTORE_PATH }}
 
             - name: Sign Android release   
               id: sign_app
