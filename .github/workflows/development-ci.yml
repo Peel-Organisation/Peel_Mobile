@@ -37,16 +37,6 @@ jobs:
             - name: Install dependencies
               run: npm install --legacy-peer-deps
 
-            - name: Build Android App Bundle
-              run: |
-                cd android && ./gradlew assembleRelease --no-daemon && cd ..
-              env:
-                GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
-                GIPHY_PATH: ${{ secrets.GIPHY_PATH }}
-                TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-                TMDB_PATH: ${{ secrets.TMDB_PATH }}
-                API_LINK: ${{ secrets.API_LINK_DEV }}
-
             - name: Cache Gradle
               uses: actions/cache@v2
               with:
@@ -71,11 +61,17 @@ jobs:
         
             - name: Make Gradlew Executable
               run: cd android && chmod +x ./gradlew
+
+            - name: Build Android App Release
+              run: |
+                cd android && ./gradlew assembleRelease --no-daemon && cd ..
+              env:
+                GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+                GIPHY_PATH: ${{ secrets.GIPHY_PATH }}
+                TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+                TMDB_PATH: ${{ secrets.TMDB_PATH }}
+                API_LINK: ${{ secrets.API_LINK_DEV }}
             
-            
-
-
-
             # - name: Debug Keystore
             #   run: |
             #     ls -R android/app/build/outputs/bundle/release
@@ -86,11 +82,11 @@ jobs:
               id: sign_app
               uses: r0adkll/sign-android-release@v1
               with: 
-                releaseDirectory: app/build/outputs/bundle/release
+                releaseDirectory: './android/app/build/outputs/bundle/release'
                 signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
-                signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
-                signingKeyAlias: ${{ secrets.KEY_ALIAS }}
-                signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
+                keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+                alias: ${{ secrets.KEY_ALIAS }}
+                keyPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v3.1.3
