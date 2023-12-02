@@ -77,7 +77,7 @@ jobs:
                 echo "Contents of keystore directory:"
                 ls -R android/app/build/outputs/bundle/release
                 ls -R android/app/build/outputs/bundle/release/*.aab
-                keytool -list -keystore android/app/build/outputs/bundle/release/signingKey.jks -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+                keytool -list -keystore android/app/build/outputs/bundle/release/peel-keystore.jks -storepass ${{ secrets.KEYSTORE_PASSWORD }}
 
             - name: Sign Android release   
               id: sign_app
