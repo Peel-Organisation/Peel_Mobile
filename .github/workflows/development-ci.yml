@@ -64,15 +64,15 @@ jobs:
                 echo "Contents of keystore directory:"
                 # ls -l ${{ secrets.KEYSTORE_PATH }}
 
-            - name: Sign Android release   
-              id: sign_app
-              uses: r0adkll/sign-android-release@v1
-              with: 
-                releaseDirectory: app/build/outputs/bundle/release
-                signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
-                signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
-                signingKeyAlias: ${{ secrets.KEY_ALIAS }}
-                signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
+            # - name: Sign Android release   
+            #   id: sign_app
+            #   uses: r0adkll/sign-android-release@v1
+            #   with: 
+            #     releaseDirectory: app/build/outputs/bundle/release
+            #     signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+            #     signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+            #     signingKeyAlias: ${{ secrets.KEY_ALIAS }}
+            #     signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v3
