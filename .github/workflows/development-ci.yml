@@ -24,7 +24,7 @@ jobs:
       steps:
         - name: Get the SHA of the latest commit
           id: sha
-          run: echo "SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          run: echo ::set-output name=sha::$(git rev-parse HEAD)
     
         - name: Set current date
           id: date
@@ -35,11 +35,10 @@ jobs:
           uses: actions/create-release@v1
           env:
             GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-            SHA: ${{ env.SHA }}
             DATE: ${{ env.DATE }}
           with:
             tag_name: "v1-${{ env.SHA }}"
-            release_name: Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ env.SHA }}
+            release_name: Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ github.sha }}
             body: |
               This code release is an automated release created by GitHub Actions.
     
@@ -103,15 +102,15 @@ jobs:
                 TMDB_PATH: ${{ secrets.TMDB_PATH }}
                 API_LINK: ${{ secrets.API_LINK_DEV }}
             
-            # - name: Sign Android release   
-            #   id: sign_app
-            #   uses: r0adkll/sign-android-release@v1
-            #   with: 
-            #     releaseDirectory: './android/app/build/outputs/bundle/release'
-            #     signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
-            #     keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-            #     alias: ${{ secrets.KEY_ALIAS }}
-            #     keyPassword: ${{ secrets.KEY_PASSWORD }}
+            - name: Sign Android release   
+              id: sign_app
+              uses: r0adkll/sign-android-release@v1
+              with: 
+                releaseDirectory: './android/app/build/outputs/bundle/release'
+                signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+                keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+                alias: ${{ secrets.KEY_ALIAS }}
+                keyPassword: ${{ secrets.KEY_PASSWORD }}
 
             - name: Publish Release APK
               uses: actions/upload-artifact@v3.1.3
