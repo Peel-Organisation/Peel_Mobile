@@ -115,12 +115,12 @@ jobs:
             - name: Publish Release Bundle
               uses: actions/upload-artifact@v3.1.3
               with:
-                name: peelApp.apk
+                name: peelApp.aab
                 path: ./android/app/build/outputs/bundle/release/app-release.aab
 
-            - name: Download APK
+            - name: Download AAB
               run: |
-                curl -O -L ${{ github.repository_url }}/releases/download/${{ github.event.release.tag_name }}/peelApp.apk
+                curl -O -L ${{ github.repository_url }}/releases/download/${{ github.event.release.tag_name }}/peelApp.aab
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
