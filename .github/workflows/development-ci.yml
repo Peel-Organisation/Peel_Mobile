@@ -118,17 +118,11 @@ jobs:
                 name: peelApp.aab
                 path: ./android/app/build/outputs/bundle/release/app-release.aab
 
-            - name: Download AAB
-              run: |
-                curl -O -L ${{ github.repository_url }}/releases/download/${{ github.event.release.tag_name }}/peelApp.aab
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-            - name: Publish Package
-              uses: softprops/action-gh-release@v1
+            - name: Download Release Bundle
+              uses: actions/download-artifact@v3
               with:
-                files: ./peelApp.apk
-
+                name: peelApp.aab
+          
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
