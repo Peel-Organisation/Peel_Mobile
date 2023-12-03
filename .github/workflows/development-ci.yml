@@ -38,7 +38,7 @@ jobs:
             DATE: ${{ env.DATE }}
           with:
             tag_name: "v1-${{ github.run_number }}"
-            release_name: Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ github.sha }}
+            release_name: DEV - Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ github.sha }}
             body: |
               This code release is an automated release created by GitHub Actions.
     
@@ -117,20 +117,7 @@ jobs:
               with:
                 name: peelApp.aab
                 path: ./android/app/build/outputs/bundle/release/app-release.aab
-
-            - name: Download Release Bundle
-              uses: actions/download-artifact@v3
-              with:
-                name: peelApp.aab
-
-            - name: Upload AAB artifact to Package
-              uses: softprops/action-gh-release@v1
-              with:
-                files: /home/runner/work/Peel_Mobile/Peel_Mobile 
-                tag_name: "v1-${{ github.run_number }}"
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+                
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
