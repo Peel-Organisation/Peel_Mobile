@@ -37,7 +37,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
             DATE: ${{ env.DATE }}
           with:
-            tag_name: "v1-${{ env.SHA }}"
+            tag_name: "v1-${{ github.run_number }}"
             release_name: Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ github.sha }}
             body: |
               This code release is an automated release created by GitHub Actions.
