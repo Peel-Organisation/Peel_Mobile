@@ -6,14 +6,14 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const HomeCard =  styled.View`
+export const HomeCard = styled.SafeAreaView`
     background-color: white;
     width: 100%;
     height: 100%;
     overflow: hidden;
     padding: 7%;
 `
-export const UserCont = styled.View `
+export const UserCont = styled.SafeAreaView`
     margin: 0px 0px 15px 0px;
 `
 
@@ -28,7 +28,7 @@ export const Locate = styled.Text`
     align-self: center;
 `
 
-export const Biography = styled.View`
+export const Biography = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border-radius: 10px;
     border: 2px solid ${props => props.theme.background_button_border};
@@ -45,7 +45,7 @@ export const InteretTitle = styled.Text`
     color: ${props => props.theme.text};
     `
 
-export const InteretView = styled.View`
+export const InteretView = styled.SafeAreaView`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -68,7 +68,7 @@ export const InteretText = styled.Text`
     color: ${props => props.theme.background};
 `
 
-export const QuestionView = styled.View`
+export const QuestionView = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border-radius: 10px;
     border: 2px solid ${props => props.theme.background_button_border};

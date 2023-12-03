@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 
 export const ViewCustom = styled.ScrollView`
@@ -26,7 +26,7 @@ export const MainText = styled.Text`
   color: ${props => props.theme.text};
 `;
 
-export const ModuleView = styled.View`
+export const ModuleView = styled.SafeAreaView`
   background-color: ${props => props.theme.white};
   padding: 5px;
   margin: 10%;

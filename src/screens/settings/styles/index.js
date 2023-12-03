@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const SettingsView =  styled.View`
+export const SettingsView = styled.SafeAreaView`
     flex: 1;
     align-items: center;
     /* justify-content: center; */

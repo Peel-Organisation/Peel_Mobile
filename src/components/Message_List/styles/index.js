@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 
-export const CustomFlatList = styled.View`
+export const CustomFlatList = styled.SafeAreaView`
     /* background-color: ${props => props.theme.background}; */
     bottom: 50px;
     /* border-radius: 5px; */
