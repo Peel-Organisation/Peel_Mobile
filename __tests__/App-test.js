@@ -10,5 +10,7 @@ import App from '../App';
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
+  console.log('Test: Rendering App component');
   renderer.create(<App />);
 });
+
