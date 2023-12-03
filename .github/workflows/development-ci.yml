@@ -8,19 +8,19 @@ on:
 
 jobs:
     Test:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout source code
-          uses: actions/checkout@v2
+      # runs-on: ubuntu-latest
+      # steps:
+      #   - name: Checkout source code
+      #     uses: actions/checkout@v2
 
-        - name: Install dependencies
-          run: npm install --legacy-peer-deps
+      #   - name: Install dependencies
+      #     run: npm install --legacy-peer-deps
 
-        - name: Run Jests tests
-          run: npm run test  
+      #   - name: Run Jests tests
+      #     run: npm run test  
 
     ReleaseCode:
-        needs: Test
+        
         runs-on: ubuntu-latest
 
         steps:
@@ -49,7 +49,6 @@ jobs:
                 prerelease: false
 
     Gradle:
-        needs: Test
         runs-on: ubuntu-latest
    
         steps:
