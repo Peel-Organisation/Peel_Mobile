@@ -24,10 +24,10 @@ public class MainActivity extends ReactActivity {
   }
 
   //react-native-screens override
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(null);
-  }
+  // @Override
+  // protected void onCreate(Bundle savedInstanceState) {
+  //     super.onCreate(savedInstanceState);
+  // }
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. Here we use a util class {@link
