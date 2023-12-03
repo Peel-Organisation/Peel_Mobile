@@ -221,7 +221,6 @@ android {
             keyPassword 'android'
         }
         release {
-    
             storeFile file('peel_keystore.jks')
             storePassword 'Peelapp2023'
             keyAlias 'peel_app_2023'

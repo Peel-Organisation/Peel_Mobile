@@ -1,4 +1,4 @@
-name: Android - Build & Publish Release APK - Development
+name: Android - Build & Publish Release APK - Development 
 
 on:
   push:
@@ -128,7 +128,7 @@ jobs:
           APP_NAME: peelApp
     
 
-    DeployAndroidAPKinStore:
+    DeployInStore:
       needs: Gradle
       runs-on: ubuntu-latest
   
@@ -144,10 +144,16 @@ jobs:
             BUNDLE_PATH: vendor/bundle
 
         - name: Deploy to Google Play Store
-          run: bundle exec fastlane supply --json_key_data "$GOOGLE_PLAY_JSON_KEY" --package_name "$PACKAGE_NAME" --track "$DEPLOY_TRACK" --apk "path/to/your/app-release.aab"
+          uses: r0adkll/upload-google-play@v1
+          with:
+            serviceAccountJsonPlainText: ${{ env.GOOGLE_PLAY_JSON_KEY }}
+            packageName: com.peelapp.peel
+            releaseFiles: ./android/app/build/outputs/bundle/release/app-release.aab
+            track: internal
+            status: draft
+
           env:
             GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
-            PACKAGE_NAME: "com.example.yourapp" # Remplacez par le nom de votre package
             DEPLOY_TRACK: "internal" # Remplacez par la piste (track) que vous souhaitez utiliser (par exemple, "internal" pour un test interne)
   
         - name: Download APK
