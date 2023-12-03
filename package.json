@@ -31,7 +31,6 @@
     "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.9.6",
-    "dateformat": "^5.0.3",
     "i18next": "^23.7.7",
     "react": "18.2.0",
     "react-i18next": "^13.5.0",

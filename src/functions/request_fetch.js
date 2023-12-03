@@ -6,8 +6,8 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
     const trace = await perf().startTrace('FetchPeelApi');
     try {
         crashlytics().log("\n\n FetchPeelApi")
-        console.log(`${process.env.API_LINK}${url}`)
         const response = await fetch(`${process.env.API_LINK}${url}`, {
+
             headers: {
                 "Content-Type": "Application/json",
                 ...token && {
