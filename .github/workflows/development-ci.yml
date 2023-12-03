@@ -136,12 +136,12 @@ jobs:
         - name: Checkout source code
           uses: actions/checkout@v2
   
-        - name: Set up Fastlane
-          run: |
-            sudo gem install bundler
-            bundle install
-          env:
-            BUNDLE_PATH: vendor/bundle
+        # - name: Set up Fastlane
+        #   run: |
+        #     sudo gem install bundler
+        #     bundle install
+        #   env:
+        #     BUNDLE_PATH: vendor/bundle
 
         - name: Deploy to Google Play Store
           uses: r0adkll/upload-google-play@v1
