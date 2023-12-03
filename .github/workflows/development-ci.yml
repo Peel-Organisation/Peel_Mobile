@@ -138,7 +138,7 @@ jobs:
   
         - name: Set up Fastlane
           run: |
-            gem install bundler
+            sudo gem install bundler
             bundle install
           env:
             BUNDLE_PATH: vendor/bundle
