@@ -15,9 +15,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+<<<<<<<< HEAD:ios/Peel.xcodeproj/xcshareddata/xcschemes/Peel.xcscheme
                BuildableName = "Peel.app"
                BlueprintName = "Peel"
                ReferencedContainer = "container:Peel.xcodeproj">
+========
+               BuildableName = "peel.peel"
+               BlueprintName = "peel"
+               ReferencedContainer = "container:peel.xcodeproj">
+>>>>>>>> development:ios/peel.xcodeproj/xcshareddata/xcschemes/peel.xcscheme
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +39,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
+<<<<<<<< HEAD:ios/Peel.xcodeproj/xcshareddata/xcschemes/Peel.xcscheme
                BuildableName = "PeelTests.xctest"
                BlueprintName = "PeelTests"
                ReferencedContainer = "container:Peel.xcodeproj">
+========
+               BuildableName = "peelTests.xctest"
+               BlueprintName = "peelTests"
+               ReferencedContainer = "container:peel.xcodeproj">
+>>>>>>>> development:ios/peel.xcodeproj/xcshareddata/xcschemes/peel.xcscheme
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +67,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+<<<<<<<< HEAD:ios/Peel.xcodeproj/xcshareddata/xcschemes/Peel.xcscheme
             BuildableName = "Peel.app"
             BlueprintName = "Peel"
             ReferencedContainer = "container:Peel.xcodeproj">
+========
+            BuildableName = "peel.peel"
+            BlueprintName = "peel"
+            ReferencedContainer = "container:peel.xcodeproj">
+>>>>>>>> development:ios/peel.xcodeproj/xcshareddata/xcschemes/peel.xcscheme
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +90,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
+<<<<<<<< HEAD:ios/Peel.xcodeproj/xcshareddata/xcschemes/Peel.xcscheme
             BuildableName = "Peel.app"
             BlueprintName = "Peel"
             ReferencedContainer = "container:Peel.xcodeproj">
+========
+            BuildableName = "peel.peel"
+            BlueprintName = "peel"
+            ReferencedContainer = "container:peel.xcodeproj">
+>>>>>>>> development:ios/peel.xcodeproj/xcshareddata/xcschemes/peel.xcscheme
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

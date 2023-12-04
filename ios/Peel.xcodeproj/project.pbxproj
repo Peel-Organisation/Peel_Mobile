@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		00E356F31AD99517003FC87E /* PeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PeelTests.m */; };
+========
+		00E356F31AD99517003FC87E /* peelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* peelTests.m */; };
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -23,11 +27,16 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			remoteInfo = Peel;
+========
+			remoteInfo = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		00E356EE1AD99517003FC87E /* PeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PeelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeelTests.m; sourceTree = "<group>"; };
@@ -46,6 +55,24 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Peel-PeelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Peel-PeelTests.release.xcconfig"; path = "Target Support Files/Pods-Peel-PeelTests/Pods-Peel-PeelTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA280A082B1952D4004A3FF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Peel/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA280A0A2B195AE7004A3FF2 /* Peel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Peel.entitlements; path = Peel/Peel.entitlements; sourceTree = "<group>"; };
+========
+		00E356EE1AD99517003FC87E /* peelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "peelTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* peelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "peelTests.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* peel.peel */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peel.peel"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "peel/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "peel/AppDelegate.mm"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "peel/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "peel/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "peel/main.m"; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-peel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peel.debug.xcconfig"; path = "Target Support Files/Pods-peel/Pods-peel.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-peel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peel.release.xcconfig"; path = "Target Support Files/Pods-peel/Pods-peel.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-peel-peelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peel-peelTests.debug.xcconfig"; path = "Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests.debug.xcconfig"; sourceTree = "<group>"; };
+		60DCC53D3D9AA303158BF9D4 /* Pods_Peel_PeelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Peel_PeelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "peel/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-peel-peelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-peel-peelTests.release.xcconfig"; path = "Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests.release.xcconfig"; sourceTree = "<group>"; };
+		A9510A6925CF16398E796620 /* Pods_Peel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Peel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -69,6 +96,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		00E356EF1AD99517003FC87E /* PeelTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +104,15 @@
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
 			path = PeelTests;
+========
+		00E356EF1AD99517003FC87E /* peelTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* peelTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = "peelTests";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -86,7 +123,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		13B07FAE1A68108700A75B9A /* Peel */ = {
+========
+		13B07FAE1A68108700A75B9A /* peel */ = {
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			isa = PBXGroup;
 			children = (
 				BA280A0A2B195AE7004A3FF2 /* Peel.entitlements */,
@@ -97,7 +138,11 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			name = Peel;
+========
+			name = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -120,10 +165,16 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				BA280A082B1952D4004A3FF2 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Peel */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* PeelTests */,
+========
+				13B07FAE1A68108700A75B9A /* peel */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* peelTests */,
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -136,8 +187,13 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				13B07F961A680F5B00A75B9A /* Peel.app */,
 				00E356EE1AD99517003FC87E /* PeelTests.xctest */,
+========
+				13B07F961A680F5B00A75B9A /* peel.peel */,
+				00E356EE1AD99517003FC87E /* peelTests.xctest */,
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,10 +201,17 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				3B4392A12AC88292D35C810B /* Pods-Peel.debug.xcconfig */,
 				5709B34CF0A7D63546082F79 /* Pods-Peel.release.xcconfig */,
 				5B7EB9410499542E8C5724F5 /* Pods-Peel-PeelTests.debug.xcconfig */,
 				89C6BE57DB24E9ADA2F236DE /* Pods-Peel-PeelTests.release.xcconfig */,
+========
+				3B4392A12AC88292D35C810B /* Pods-peel.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-peel.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-peel-peelTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-peel-peelTests.release.xcconfig */,
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -156,9 +219,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		00E356ED1AD99517003FC87E /* PeelTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PeelTests" */;
+========
+		00E356ED1AD99517003FC87E /* peelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "peelTests" */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -172,6 +241,7 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			name = PeelTests;
 			productName = PeelTests;
 			productReference = 00E356EE1AD99517003FC87E /* PeelTests.xctest */;
@@ -180,6 +250,16 @@
 		13B07F861A680F5B00A75B9A /* Peel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Peel" */;
+========
+			name = "peelTests";
+			productname = "peelTests";
+			productReference = 00E356EE1AD99517003FC87E /* peelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* peel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "peel" */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -196,9 +276,15 @@
 			);
 			dependencies = (
 			);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			name = Peel;
 			productName = Peel;
 			productReference = 13B07F961A680F5B00A75B9A /* Peel.app */;
+========
+			name = "peel";
+			productName = "peel";
+			productReference = 13B07F961A680F5B00A75B9A /* peel.peel */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -218,7 +304,11 @@
 					};
 				};
 			};
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Peel" */;
+========
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "peel" */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -231,8 +321,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				13B07F861A680F5B00A75B9A /* Peel */,
 				00E356ED1AD99517003FC87E /* PeelTests */,
+========
+				13B07F861A680F5B00A75B9A /* peel */,
+				00E356ED1AD99517003FC87E /* peelTests */,
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 		};
 /* End PBXProject section */
@@ -280,6 +375,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"${PODS_ROOT}/Target Support Files/Pods-Peel/Pods-Peel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -289,6 +385,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Peel/Pods-Peel-frameworks.sh\"\n";
+========
+				"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-frameworks.sh\"\n";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			showEnvVarsInLog = 0;
 		};
 		3E625259340A95EA740377F8 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
@@ -320,7 +427,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"$(DERIVED_FILE_DIR)/Pods-Peel-PeelTests-checkManifestLockResult.txt",
+========
+				"$(DERIVED_FILE_DIR)/Pods-peel-peelTests-checkManifestLockResult.txt",
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -355,7 +466,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"$(DERIVED_FILE_DIR)/Pods-Peel-checkManifestLockResult.txt",
+========
+				"$(DERIVED_FILE_DIR)/Pods-peel-checkManifestLockResult.txt",
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -368,6 +483,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"${PODS_ROOT}/Target Support Files/Pods-Peel-PeelTests/Pods-Peel-PeelTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -377,6 +493,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Peel-PeelTests/Pods-Peel-PeelTests-frameworks.sh\"\n";
+========
+				"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-frameworks.sh\"\n";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			showEnvVarsInLog = 0;
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
@@ -385,6 +512,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"${PODS_ROOT}/Target Support Files/Pods-Peel/Pods-Peel-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -394,6 +522,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Peel/Pods-Peel-resources.sh\"\n";
+========
+				"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-peel/Pods-peel-resources.sh\"\n";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			showEnvVarsInLog = 0;
 		};
 		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
@@ -402,6 +541,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				"${PODS_ROOT}/Target Support Files/Pods-Peel-PeelTests/Pods-Peel-PeelTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -411,6 +551,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Peel-PeelTests/Pods-Peel-PeelTests-resources.sh\"\n";
+========
+				"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-peel-peelTests/Pods-peel-peelTests-resources.sh\"\n";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -439,7 +590,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				00E356F31AD99517003FC87E /* PeelTests.m in Sources */,
+========
+				00E356F31AD99517003FC87E /* peelTests.m in Sources */,
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +612,11 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			target = 13B07F861A680F5B00A75B9A /* Peel */;
+========
+			target = 13B07F861A680F5B00A75B9A /* peel */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -465,14 +624,22 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Peel-PeelTests.debug.xcconfig */;
+========
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-peel-peelTests.debug.xcconfig */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				INFOPLIST_FILE = PeelTests/Info.plist;
+========
+				INFOPLIST_FILE = "peelTests/Info.plist";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -486,17 +653,29 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peelapp.peel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peel.app/Peel";
+========
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/peel.peel/peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Peel-PeelTests.release.xcconfig */;
+========
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-peel-peelTests.release.xcconfig */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				INFOPLIST_FILE = PeelTests/Info.plist;
+========
+				INFOPLIST_FILE = "peelTests/Info.plist";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -510,13 +689,21 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peelapp.peel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peel.app/Peel";
+========
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/peel.peel/peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Peel.debug.xcconfig */;
+========
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-peel.debug.xcconfig */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -524,7 +711,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQALFKA2QR;
 				ENABLE_BITCODE = NO;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				INFOPLIST_FILE = Peel/Info.plist;
+========
+				INFOPLIST_FILE = "peel/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,8 +727,13 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				PRODUCT_BUNDLE_IDENTIFIER = com.peelapp.peel;
 				PRODUCT_NAME = Peel;
+========
+				PRODUCT_BUNDLE_IDENTIFIER = "com.peelapp.peel";
+				PRODUCT_NAME = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -545,14 +742,24 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Peel.release.xcconfig */;
+========
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-peel.release.xcconfig */;
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Peel/Peel.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				DEVELOPMENT_TEAM = TQALFKA2QR;
 				INFOPLIST_FILE = Peel/Info.plist;
+========
+				DEVELOPMENT_TEAM = NGASFQ4A26;
+				INFOPLIST_FILE = "peel/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,8 +770,13 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 				PRODUCT_BUNDLE_IDENTIFIER = com.peelapp.peel;
 				PRODUCT_NAME = Peel;
+========
+				PRODUCT_BUNDLE_IDENTIFIER = "com.peelapp.peel";
+				PRODUCT_NAME = "peel";
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -743,7 +955,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PeelTests" */ = {
+========
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "peelTests" */ = {
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -752,7 +968,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Peel" */ = {
+========
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "peel" */ = {
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -761,7 +981,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+<<<<<<<< HEAD:ios/Peel.xcodeproj/project.pbxproj
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Peel" */ = {
+========
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "peel" */ = {
+>>>>>>>> development:ios/peel.xcodeproj/project.pbxproj
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
