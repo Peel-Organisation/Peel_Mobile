@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const FieldView = styled.View`
+export const FieldView = styled.SafeAreaView`
   width: 100%;
   height: 80%;
   align-items: center;

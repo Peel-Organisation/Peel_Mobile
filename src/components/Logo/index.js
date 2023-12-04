@@ -1,5 +1,5 @@
 import React from "react";
-import { View} from "react-native";
+import { SafeAreaView } from "react-native";
 import styled from 'styled-components/native';
 import marvelLogo from "../../img/peel_logo.png";
 
@@ -7,7 +7,7 @@ import marvelLogo from "../../img/peel_logo.png";
 
 
 
-const Logo = () => { 
+const Logo = () => {
 
     const ImageLogo = styled.Image`
         width: 200px;
@@ -17,12 +17,12 @@ const Logo = () => {
 
 
     return (
-        <View>
+        <SafeAreaView>
             {/* <ImageLogo source={marvelLogo}/> */}
             <ImageLogo source={marvelLogo} />
-        </View >
+        </SafeAreaView >
     );
-    }
- 
+}
+
 
 export default Logo; 

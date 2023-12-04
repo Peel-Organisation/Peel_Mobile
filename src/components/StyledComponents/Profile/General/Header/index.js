@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const HeaderView = styled.View`
+export const HeaderView = styled.SafeAreaView`
   background-color: ${props => props.theme.primary};
   color: ${props => props.theme.white};
   height: 15%;

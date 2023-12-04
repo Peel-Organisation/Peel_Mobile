@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const ViewCustom =  styled.View`
+export const ViewCustom = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     width: 100%;
 `

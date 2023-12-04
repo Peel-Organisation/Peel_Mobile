@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import SwitchSelector from 'react-native-switch-selector';
 import DatePicker from 'react-native-date-picker';
@@ -32,7 +32,7 @@ export const InterestButton = styled.TouchableOpacity`
   color: ${props => props.theme.background};
 `;
 
-export const InterestView = styled.View`
+export const InterestView = styled.SafeAreaView`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
@@ -65,11 +65,11 @@ export const InterestButtonText = styled.Text`
   margin: 10px;
 `;
 
-export const Spacer = styled.View`
+export const Spacer = styled.SafeAreaView`
   height: 100px;
 `;
 
-export const Header = styled.View`
+export const Header = styled.SafeAreaView`
   width: ${DIMENSION_WIDTH}px;
   height: 100px;
   background-color: ${props => props.theme.primary};
@@ -104,7 +104,7 @@ export const DatePickerCustom = styled(DatePicker)`
   fadetocolor: ${props => props.theme.background};
 `;
 
-export const SliderCustom = styled.View`
+export const SliderCustom = styled.SafeAreaView`
   width: 80%;
   height: 50px;
   background-color: ${props => props.theme.background};

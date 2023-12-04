@@ -1,5 +1,5 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import AuthStack from '../stacks/authStack';
 import PublicStack from '../stacks/publicStack';
@@ -10,7 +10,7 @@ const Routes = () => {
   return (
     <Stack.Navigator
       initialRouteName="Public"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Public" component={PublicStack} />
       <Stack.Screen name="Auth" component={AuthStack} />
       <Stack.Screen name="Profile" component={ProfileStack} />
