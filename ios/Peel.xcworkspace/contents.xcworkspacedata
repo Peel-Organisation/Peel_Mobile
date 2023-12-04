@@ -2,14 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-<<<<<<<< HEAD:ios/Peel.xcworkspace/contents.xcworkspacedata
       location = "group:Peel.xcodeproj">
-========
-      location = "group:Pods/../..">
-   </FileRef>
-   <FileRef
-      location = "group:peel.xcodeproj">
->>>>>>>> development:ios/peel.xcworkspace/contents.xcworkspacedata
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

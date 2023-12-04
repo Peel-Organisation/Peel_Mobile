@@ -7,19 +7,12 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-<<<<<<<< HEAD:ios/PeelTests/PeelTests.m
 @interface PeelTests : XCTestCase
 
 @end
 
 @implementation PeelTests
-========
-@interface peelTests : XCTestCase
 
-@end
-
-@implementation peelTests
->>>>>>>> development:ios/peelTests/peelTests.m
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
