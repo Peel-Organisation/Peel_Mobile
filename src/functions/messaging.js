@@ -7,9 +7,6 @@ import crashlytics from '@react-native-firebase/crashlytics';
 const onMessageReceived = async (remoteMessage) => {
   const trace = await perf().startTrace('onMessageReceived');
   crashlytics().log('A new FCM message arrived in background!', JSON.stringify(remoteMessage));
-  if (process.env.NODE_ENV === "development") {
-    console.log('A new FCM message arrived in background!', JSON.stringify(remoteMessage));
-  }
   try {
     const newMessage = JSON.parse(remoteMessage.data.message);
     if (newMessage !== undefined && newMessage !== null) {
@@ -32,8 +29,20 @@ const onMessageReceived = async (remoteMessage) => {
   trace.stop();
 }
 
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    crashlytics().log('User registered for notification');
+  }
+}
+
 
 export const messageLisner = () => {
+  requestUserPermission()
   messaging().setBackgroundMessageHandler(onMessageReceived);
   messaging().onMessage(onMessageReceived);
 }

@@ -41,25 +41,38 @@ export const updateUser = async (user) => {
 
 export const TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
-    const firebaseToken = await messaging().getToken()
-    const token = await getStorage('token')
-    if (token == null || token == undefined) {
-        crashlytics().log("User not authenticated");
-        await Logout();
-        return false;
-    }
-    return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(res => {
-        if (res == null || res == undefined || res == "") {
-            Logout();
+    messaging().getToken().then((firebaseToken) => {
+        console.log("test")
+        console.log(firebaseToken)
+        getStorage('token').then((token) => {
+            if (token == null || token == undefined) {
+                crashlytics().log("User not authenticated");
+                Logout();
+                return false;
+            }
+            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(res => {
+                if (res == null || res == undefined || res == "") {
+                    Logout();
+                    return false;
+                } else {
+                    crashlytics().log("User authenticated");
+                    crashlytics().setUserId(res.userId.toString());
+                    update_messaging();
+                    return true;
+                }
+            }).catch(error => {
+                crashlytics().recordError(error)
+                return false;
+            });
+        }).catch(error => {
+            crashlytics().recordError(error)
+            console.error(error)
+
             return false;
-        } else {
-            crashlytics().log("User authenticated");
-            crashlytics().setUserId(res.userId.toString());
-            update_messaging();
-            return true;
-        }
+        });
     }).catch(error => {
         crashlytics().recordError(error)
+        console.error(error)
         return false;
     });
 }
@@ -108,7 +121,7 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 export const loginRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nlogin request")
     const firebaseToken = await messaging().getToken()
-    const body = { email: email, password: password }
+    const body = { email: email.toLowerCase(), password: password }
     return FetchPeelApi({ url: `/api/auth/login`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
         addStorage("token", res['token'].toString())
         addStorage("userId", res['userId'].toString())
@@ -124,7 +137,7 @@ export const loginRequest = async (email, password, navigation) => {
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
     const firebaseToken = await messaging().getToken()
-    const body = { email: email, password: password }
+    const body = { email: email.toLowerCase, password: password }
     return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
         addStorage("token", res['token'])
         addStorage("userId", res['userId'].toString())
