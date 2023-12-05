@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const NavigatorView =  styled.View`
+export const NavigatorView = styled.SafeAreaView`
     flex-direction: row;
     /* flex-wrap: wrap; */
     width: 100%;

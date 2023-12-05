@@ -11,7 +11,7 @@ const onMessageReceived = async (remoteMessage) => {
     const newMessage = JSON.parse(remoteMessage.data.message);
     if (newMessage !== undefined && newMessage !== null) {
       const conversation_id = newMessage.conversation_id;
-      if (conversation_id !== undefined && conversation_id !== null && conversation_id !== ""){
+      if (conversation_id !== undefined && conversation_id !== null && conversation_id !== "") {
         addStorageMessage(conversation_id, newMessage);
       }
     }
@@ -29,8 +29,20 @@ const onMessageReceived = async (remoteMessage) => {
   trace.stop();
 }
 
+async function requestUserPermission() {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    crashlytics().log('User registered for notification');
+  }
+}
+
 
 export const messageLisner = () => {
+  requestUserPermission()
   messaging().setBackgroundMessageHandler(onMessageReceived);
   messaging().onMessage(onMessageReceived);
 }

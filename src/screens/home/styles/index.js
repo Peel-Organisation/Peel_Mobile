@@ -6,13 +6,13 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const Background = styled.View`
+export const Background = styled.SafeAreaView`
     position: absolute;
     background-color: ${props => props.theme.background};
     width: 100%;
     height: 100%;
 `
-export const BackgroundTop = styled.View`
+export const BackgroundTop = styled.SafeAreaView`
     position: absolute;
     background-color: ${props => props.theme.primary};
     width: 100%;
@@ -21,14 +21,14 @@ export const BackgroundTop = styled.View`
     border-bottom-right-radius: 39px;
 `
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     width: 100%;
     height: 100%;
     /* border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px; */
 `
 
-export const Header =  styled.View`
+export const Header = styled.SafeAreaView`
     width: 100%;
     height: 45px;
     display: flex;
@@ -41,7 +41,7 @@ export const TitleText = styled.Text`
     color: ${props => props.theme.background};
 `
 
-export const FilterIcon = styled.TouchableOpacity `
+export const FilterIcon = styled.TouchableOpacity`
     position: absolute;
     left: 7%;
     width: 45px;
@@ -51,12 +51,12 @@ export const FilterIcon = styled.TouchableOpacity `
     justify-content: center;
     align-items: center;
 `
-export const FilterIconImg = styled.Image `
+export const FilterIconImg = styled.Image`
     width: 30px;
     height: 30px;
 `
 
-export const Filter = styled.View `
+export const Filter = styled.SafeAreaView`
     position: absolute;
     width: 100%;
     height: 50%;

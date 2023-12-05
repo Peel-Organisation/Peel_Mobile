@@ -1,12 +1,12 @@
 import React from "react";
 
-import { View, Text } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 
 const Title = (props) => {
     return (
-    <View>
-        <Text>{props.title}</Text>
-    </View>);
+        <SafeAreaView>
+            <Text>{props.title}</Text>
+        </SafeAreaView>);
 }
 
 

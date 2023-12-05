@@ -7,12 +7,12 @@ export const ModalSelectorCustom = styled(ModalSelector)`
     color: ${props => props.theme.text};
 `
 
-export const InputView = styled.View`
+export const InputView = styled.SafeAreaView`
     width: 80%;
     align-self: center;
 `
 
-export const QuestionView = styled.View`
+export const QuestionView = styled.SafeAreaView`
     width: 100%;
 `
 export const FieldInput = styled.TextInput`
