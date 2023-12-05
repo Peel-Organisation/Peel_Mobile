@@ -94,7 +94,7 @@ jobs:
 
           - name: Build Android App Release
             run: |
-              cd android && ./gradlew bundleRelease
+              cd android && ./gradlew --warning-mode all bundleRelease
             env:
               GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
               GIPHY_PATH: ${{ secrets.GIPHY_PATH }}
