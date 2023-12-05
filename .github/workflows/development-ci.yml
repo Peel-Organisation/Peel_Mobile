@@ -7,17 +7,21 @@ on:
   #   branches: development
 
 jobs:
-    # Test:
-      # runs-on: ubuntu-latest
-      # steps:
-      #   - name: Checkout source code
-      #     uses: actions/checkout@v2
+    Test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout source code
+          uses: actions/checkout@v2
 
-      #   - name: Install dependencies
-      #     run: npm install --legacy-peer-deps
+        - name: Take package.json version
+          id: package_version
+          run: echo ::set-output name=package_version::$(node -p "require('./package.json').version")
 
-      #   - name: Run Jests tests
-      #     run: npm run test  
+        - name: Install dependencies
+          run: npm config set legacy-peer-deps=true && npm install --legacy-peer-deps
+
+        # - name: Run Jests tests
+        #   run: npm run test  
 
     Release_Code:
       runs-on: ubuntu-latest
@@ -65,7 +69,7 @@ jobs:
                 node-version: 16
 
           - name: Install dependencies
-            run: npm install --legacy-peer-deps
+            run: npm config set legacy-peer-deps=true && npm install --legacy-peer-deps
 
           - name: Cache Gradle
             uses: actions/cache@v2
