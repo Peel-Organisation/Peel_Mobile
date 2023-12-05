@@ -32,6 +32,34 @@ npm run install-ios
 npm run start 
 npm run ios
 
+## Nettoyer le cache de l'application : 
+
+### Sur Android : 
+yarn clean-android
+
+
+### Sur IOS : 
+yarn clean-ios
+
+## Supprimer le Build de l'application : 
+npm install shx -g
+
+### Sur Android : 
+npm run deleteBuild-android
+
+
+### Sur IOS : 
+npm run deleteBuild-ios
+
+## Créer le Build de l'application : 
+
+### Sur Android : 
+yarn build-android
+
+
+### Sur IOS : 
+yarn build-ios
+
 
 
 ## Compte a utiliser pour les messages
