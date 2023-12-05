@@ -13,6 +13,10 @@ jobs:
         - name: Checkout source code
           uses: actions/checkout@v2
 
+        - name: Take package.json version
+          id: package_version
+          run: echo ::set-output name=package_version::$(node -p "require('./package.json').version")
+
         - name: Install dependencies
           run: npm config set legacy-peer-deps=true && npm ci --legacy-peer-deps
 
