@@ -2,29 +2,23 @@ name: Android - Build & Publish Release APK - PROD
 
 on:
   push:
-    branches: main
-    branches-ignore:
-      - development
-      - feature
-      - 'feature/*'
-      - fix
-      - 'fix/*'
-      - hotfix
-      - 'hotfix/*'
-      - feat
-      - 'feat/*'
+    branches: 
+      - 'main'
+      - '!main'
+      - '!master'
+      - '!feature*'
+      - '!fix*'
+      - '!hotfix*'
+      - '!feat*'
   pull_request:
-    branches: main
-    branches-ignore:
-      - development
-      - feature
-      - 'feature/*'
-      - fix
-      - 'fix/*'
-      - hotfix
-      - 'hotfix/*'
-      - feat
-      - 'feat/*'
+    branches: 
+      - 'main'
+      - '!main'
+      - '!master'
+      - '!feature*'
+      - '!fix*'
+      - '!hotfix*'
+      - '!feat*'
 
 jobs:
   Test:
