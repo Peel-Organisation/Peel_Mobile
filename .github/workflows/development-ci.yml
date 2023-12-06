@@ -1,10 +1,32 @@
-name: Android - Build & Publish Release APK - Development 
+name: Android - Build & Publish Release APK - DEV 
 
 on:
   push:
-    branches: feature/update_ci
-  # pull_request:
-  #   branches: development
+    branches: development
+    branches-ignore:
+      - main
+      - master
+      - feature
+      - feature/*
+      - fix
+      - fix/*
+      - hotfix
+      - hotfix/*
+      - feat
+      - feat/*
+  pull_request:
+    branches: development
+    branches-ignore:
+      - main
+      - master
+      - feature
+      - feature/*
+      - fix
+      - fix/*
+      - hotfix
+      - hotfix/*
+      - feat
+      - feat/*
 
 jobs:
     Test:
@@ -52,7 +74,7 @@ jobs:
             draft: false
             prerelease: false
 
-    Publish_Android_App_Bundle:
+    Publish_Bundle:
       runs-on: ubuntu-latest
   
       steps:
@@ -122,15 +144,6 @@ jobs:
             with:
               name: peelApp.aab
               path: ./android/app/build/outputs/bundle/release/app-release.aab
-
-          - name: Publish on Google Play Store (Draft Mode)
-            uses: r0adkll/upload-google-play@v1
-            with:
-              serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
-              packageName: com.peelapp.peel
-              releaseFiles: ./android/app/build/outputs/bundle/release/app-release.aab
-              track: internal
-              status: draft
               
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -141,9 +154,4 @@ jobs:
         APP_FOLDER: app
         APP_NAME: peelApp
     
-          #TODO : 
-            # Ajouter la partie pour upload sur Google play store - voir script damien
-            # Adapter le script pour la branche main du projet :
-              # - Voir si on integre le deploiement sur google store en mode draft sur la branche de dev
-              # - Voir si on integre le deploiement sur google store en mode prod sur la branche de main
 

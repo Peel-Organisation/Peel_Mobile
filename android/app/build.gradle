@@ -81,6 +81,8 @@ android {
         applicationId "com.peelapp.peel"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+
+        #TODO change version code and version name before release
         versionCode 2
         versionName "1.1"
     }
