@@ -1,82 +1,149 @@
-name: Build & Publish Release APK - Development
+name: Android - Build & Publish Release APK - DEV 
 
 on:
   push:
-    branches: development
+    branches: 
+      - 'development'
+      - '!main'
+      - '!master'
+      - '!feature*'
+      - '!fix*'
+      - '!hotfix*'
+      - '!feat*'
   pull_request:
-    branches: development
+    branches: 
+      - 'development'
+      - '!main'
+      - '!master'
+      - '!feature*'
+      - '!fix*'
+      - '!hotfix*'
+      - '!feat*'
 
 jobs:
-    # Test:
-    #   runs-on: ubuntu-latest
-    #   steps:
-    #     - uses: actions/checkout@v2
-    #     - name: Install dependencies
-    #       run: npm install --legacy-peer-deps
-    #     - name: Run Jests tests
-    #       run: npm run test  
+    Test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout source code
+          uses: actions/checkout@v2
 
-    Gradle:
-        # needs: test
-        runs-on: ubuntu-latest
-   
-        steps:
-            - name: Checkout source code
-              uses: actions/checkout@v2
+        - name: Take package.json version
+          id: package_version
+          run: echo ::set-output name=package_version::$(node -p "require('./package.json').version")
 
-            - name: Set up JDK 11
-              uses: actions/setup-java@v1
-              with:
-                  java-version: 11
+        - name: Install dependencies
+          run: npm config set legacy-peer-deps=true && npm install --legacy-peer-deps
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                  node-version: 16
+        # - name: Run Jests tests
+        #   run: npm run test  
 
-            - name: Install dependencies
-              run: npm install --legacy-peer-deps
+    Release_Code:
+      needs: Test
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get the SHA of the latest commit
+          id: sha
+          run: echo ::set-output name=sha::$(git rev-parse HEAD)
+    
+        - name: Set current date
+          id: date
+          run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+    
+        - name: Create GitHub Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+            DATE: ${{ env.DATE }}
+          with:
+            tag_name: "v1-${{ github.run_number }}"
+            release_name: DEV - Code Release ${{ github.run_number }} - ${{ env.DATE }} - ${{ github.sha }}
+            body: |
+              This code release is an automated release created by GitHub Actions.
+    
+              Commit messages:
+                ${{ join(github.event.commits.*.message, '\n') }}
+            draft: false
+            prerelease: false
 
-            - name: Cache Gradle Wrapper
-              uses: actions/cache@v2
-              with:
-                path: ~/.gradle/wrapper
-                key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+    Publish_Bundle:
+      runs-on: ubuntu-latest
+  
+      steps:
+          - name: Checkout source code
+            uses: actions/checkout@v2
 
-            - name: Cache Gradle Dependencies
-              uses: actions/cache@v2
-              with:
-                path: ~/.gradle/caches
-                key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-                restore-keys: |
-                    ${{ runner.os }}-gradle-caches-
-        
-            - name: Make Gradlew Executable
-              run: cd android && chmod +x ./gradlew
+          - name: Set up JDK 17
+            uses: actions/setup-java@v1
+            with:
+                java-version: 17
 
-            - name: Build Android App Bundle
-              run: |
-                cd android && ./gradlew bundleRelease --no-daemon
+          - name: Set up Node.js
+            uses: actions/setup-node@v2
+            with:
+                node-version: 16
 
-            - name: Signed APK
-              id: sign_app
-              uses: r0adkll/sign-android-release@v1
-              with: 
-                releaseDirectory: 'app/build/outputs/bundle/release'
-                signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
-                signingKeyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
-                signingKeyAlias: ${{ secrets.KEY_ALIAS }}
-                signingKeyAliasPassword: ${{ secrets.KEY_PASSWORD }}
+          - name: Install dependencies
+            run: npm config set legacy-peer-deps=true && npm install --legacy-peer-deps
 
-            - name: Publish Release APK
-              uses: actions/upload-artifact@v3
-              with:
-                name: peelApp.apk
-                path: ${{ steps.sign_app.outputs.signedBundlePath }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
-            KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-            KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-            KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-            APP_FOLDER: app
+          - name: Cache Gradle
+            uses: actions/cache@v2
+            with:
+              path: ~/.gradle/caches/modules-2
+              key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+              restore-keys: |
+                ${{ runner.os }}-gradle-
+
+          - name: Cache Gradle Wrapper
+            uses: actions/cache@v2
+            with:
+              path: ~/.gradle/wrapper
+              key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+          - name: Cache Gradle Dependencies
+            uses: actions/cache@v2
+            with:
+              path: ~/.gradle/caches
+              key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+              restore-keys: |
+                  ${{ runner.os }}-gradle-caches-
+      
+          - name: Make Gradlew Executable
+            run: cd android && chmod +x ./gradlew
+
+          - name: Build Android App Release
+            run: |
+              cd android && ./gradlew --warning-mode all bundleRelease
+            env:
+              GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
+              GIPHY_PATH: ${{ secrets.GIPHY_PATH }}
+              TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+              TMDB_PATH: ${{ secrets.TMDB_PATH }}
+              API_LINK: ${{ secrets.API_LINK_DEV }}
+          
+          - name: Sign Android release   
+            id: sign_app
+            uses: r0adkll/sign-android-release@v1
+            with: 
+              releaseDirectory: './android/app/build/outputs/bundle/release'
+              signingKeyBase64: ${{ secrets.KEYSTORE_PATH }}
+              keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+              alias: ${{ secrets.KEY_ALIAS }}
+              keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+          - name: Publish Release Bundle
+            uses: actions/upload-artifact@v3.1.3
+            with:
+              name: peelApp.aab
+              path: ./android/app/build/outputs/bundle/release/app-release.aab
+              
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        APP_FOLDER: app
+        APP_NAME: peelApp
+    
+
