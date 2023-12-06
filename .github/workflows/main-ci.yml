@@ -7,12 +7,16 @@ on:
       - development
       - feature
       - feature/*
+      - fix
+      - fix/*
   pull_request:
     branches: main
     branches-ignore:
       - development
       - feature
       - feature/*
+      - fix
+      - fix/*
 
 jobs:
     # Test:

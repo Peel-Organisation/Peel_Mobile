@@ -24,6 +24,7 @@ jobs:
         #   run: npm run test  
 
     Release_Code:
+      needs: Test
       runs-on: ubuntu-latest
       steps:
         - name: Get the SHA of the latest commit
