@@ -6,25 +6,25 @@ on:
     branches-ignore:
       - development
       - feature
-      - feature/*
+      - 'feature/*'
       - fix
-      - fix/*
+      - 'fix/*'
       - hotfix
-      - hotfix/*
+      - 'hotfix/*'
       - feat
-      - feat/*
+      - 'feat/*'
   pull_request:
     branches: main
     branches-ignore:
       - development
       - feature
-      - feature/*
+      - 'feature/*'
       - fix
-      - fix/*
+      - 'fix/*'
       - hotfix
-      - hotfix/*
+      - 'hotfix/*'
       - feat
-      - feat/*
+      - 'feat/*'
 
 jobs:
   Test:
