@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
-import {updateUser} from '../../../functions/api_request';
-import {getStorage} from '../../../functions/storage';
-import {MainText, FieldInput} from './styles';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
+import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
+import { updateUser } from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
+import { MainText, FieldInput } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-const Music = ({route, navigation}) => {
-  const {t} = useTranslation();
+const MusicEdit = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(1);
@@ -113,7 +113,7 @@ const Music = ({route, navigation}) => {
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateMusic(item)}>
         <Image
@@ -156,4 +156,4 @@ const Music = ({route, navigation}) => {
   );
 };
 
-export default Music;
+export default MusicEdit;

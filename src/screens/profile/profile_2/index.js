@@ -1,26 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {Update_Button} from '../../../components/Update_User';
-import {getStorage} from '../../../functions/storage';
+import { UpdateButton } from '../../../components/Update_User';
+import { getStorage } from '../../../functions/storage';
 
 import {
   SwitchSelectorCustom,
   DatePickerCustom,
 } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
-import {InputView} from '../../../components/StyledComponents/Profile/General/InputView';
-import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
-import {ContentView} from '../../../components/StyledComponents/Profile/General/ContentView';
+import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
 
-const Profile2 = ({route, navigation}) => {
-  const {t} = useTranslation();
-  const [user, setUser] = useState({birthday: new Date()});
+const Profile2 = ({ route, navigation }) => {
+  const { t } = useTranslation();
+  const [user, setUser] = useState({ birthday: new Date() });
   const [navButton, setNavButton] = useState(null);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Profile2 = ({route, navigation}) => {
     ) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile1"
             nextPage="Profile3"
@@ -74,7 +74,7 @@ const Profile2 = ({route, navigation}) => {
       setNavButton(
         <>
           <ConditionText>Remplissez tous les champs</ConditionText>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile1"
             nextPage=""
@@ -96,7 +96,7 @@ const Profile2 = ({route, navigation}) => {
           <DatePickerCustom
             date={user['birthday']}
             onDateChange={date => {
-              let newUser = {...user};
+              let newUser = { ...user };
               newUser['birthday'] = date;
               setUser(newUser);
             }}
@@ -109,16 +109,16 @@ const Profile2 = ({route, navigation}) => {
           <SwitchSelectorCustom
             initial={0}
             onPress={value => {
-              let newUser = {...user};
+              let newUser = { ...user };
               newUser.gender = value;
               setUser(newUser);
             }}
             buttonColor="#FC912F"
             hasPadding
             options={[
-              {label: t('profile.male_gender'), value: 'Male'},
-              {label: t('profile.female_gender'), value: 'Female'},
-              {label: t('profile.other_gender'), value: 'Other'},
+              { label: t('profile.male_gender'), value: 'Male' },
+              { label: t('profile.female_gender'), value: 'Female' },
+              { label: t('profile.other_gender'), value: 'Other' },
             ]}
           />
         </InputView>
