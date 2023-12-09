@@ -1,30 +1,30 @@
-import React, {useEffect, useState} from 'react';
-import {Dimensions, Platform, PermissionsAndroid} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Platform, PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import MapView, {Circle, PROVIDER_GOOGLE} from 'react-native-maps';
-import {Update_Button} from '../../../components/Update_User';
-import {useTranslation} from 'react-i18next';
-import {Slider} from '@miblanchard/react-native-slider';
+import MapView, { Circle, PROVIDER_GOOGLE } from 'react-native-maps';
+import { UpdateButton } from '../../../components/Update_User';
+import { useTranslation } from 'react-i18next';
+import { Slider } from '@miblanchard/react-native-slider';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-import {getStorage} from '../../../functions/storage';
+import { getStorage } from '../../../functions/storage';
 
-import {SliderCustom} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import { SliderCustom } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
 
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {InputView} from '../../../components/StyledComponents/Profile/General/InputView';
-import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
-import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 
-const Location = ({route, navigation}) => {
-  const {t} = useTranslation();
+const Location = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({
-    position: {longitude: 0, latitude: 0},
-    preferences: {searchRange: 100},
+    position: { longitude: 0, latitude: 0 },
+    preferences: { searchRange: 100 },
   });
   const [navButton, setNavButton] = useState(null);
 
@@ -71,7 +71,7 @@ const Location = ({route, navigation}) => {
     ) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile6"
             nextPage="Profile8"
@@ -83,7 +83,7 @@ const Location = ({route, navigation}) => {
       setNavButton(
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile5"
             nextPage=""
@@ -145,7 +145,7 @@ const Location = ({route, navigation}) => {
         // See error code charts below.
         crashlytics().recordError(error);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   };
 
@@ -163,7 +163,7 @@ const Location = ({route, navigation}) => {
             maximumValue={1000}
             step={5}
             onValueChange={value => {
-              let newUser = {...user};
+              let newUser = { ...user };
               newUser.preferences.searchRange = value;
               setUser(newUser);
             }}

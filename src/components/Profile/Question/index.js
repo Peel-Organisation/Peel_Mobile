@@ -16,7 +16,7 @@ import {
   ValidButtonText,
 } from './styles';
 
-const Question = ({ route, navigation }) => {
+const QuestionEdit = ({ route, navigation }) => {
   const { t } = useTranslation();
   const [user, setUser] = useState({ questions: [{}, {}, {}] });
   const [status, setStatus] = useState({
@@ -155,4 +155,4 @@ const Question = ({ route, navigation }) => {
   );
 };
 
-export default Question;
+export default QuestionEdit;

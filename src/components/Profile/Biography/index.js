@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import {updateUser} from '../../../functions/api_request';
-import {getStorage} from '../../../functions/storage';
+import { updateUser } from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
 
-import {BioInput} from './styles';
-import {Text} from 'react-native';
+import { BioInput } from './styles';
+import { Text } from 'react-native';
 
-const Biography = () => {
-  const {t} = useTranslation();
+const BiographyEdit = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [status, setStatus] = useState({
     isCorrect: false,
@@ -31,7 +31,7 @@ const Biography = () => {
       user.biographie.length < 200 &&
       user.biographie.length > 20
     ) {
-      setStatus({isCorrect: true, statusPrompt: ''});
+      setStatus({ isCorrect: true, statusPrompt: '' });
     } else {
       if (user.biographie != undefined) {
         if (user.biographie.length < 20) {
@@ -46,7 +46,7 @@ const Biography = () => {
           });
         }
       } else {
-        setStatus({isCorrect: false, statusPrompt: t('profile.fill')});
+        setStatus({ isCorrect: false, statusPrompt: t('profile.fill') });
       }
     }
   }, [user]);
@@ -58,7 +58,7 @@ const Biography = () => {
         multiline
         numberOfLines={4}
         onChangeText={text => {
-          let newUser = {...user};
+          let newUser = { ...user };
           newUser.biographie = text;
           setUser(newUser);
         }}
@@ -72,4 +72,4 @@ const Biography = () => {
   );
 };
 
-export default Biography;
+export default BiographyEdit;

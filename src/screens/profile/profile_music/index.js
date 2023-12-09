@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
-import { Update_Button, nextAction } from '../../../components/Update_User';
+import { UpdateButton, nextAction } from '../../../components/Update_User';
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -166,7 +166,7 @@ const Music = ({ route, navigation }) => {
         />
       </FieldView>
       {loading && <MainText>Chargement...</MainText>}
-      <Update_Button
+      <UpdateButton
         user={user}
         prevPage="Profile6"
         nextPage="Profile8"

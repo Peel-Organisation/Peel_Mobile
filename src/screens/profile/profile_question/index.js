@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Update_Button } from '../../../components/Update_User';
+import { UpdateButton } from '../../../components/Update_User';
 
 import { getStorage } from '../../../functions/storage';
 import { getQuestionList } from '../../../functions/api_request';
@@ -26,8 +26,8 @@ const QuestionProfil = ({ route, navigation }) => {
   let index = 0;
   const [navButton, setNavButton] = useState(null);
   const [questionList, setquestionList] = useState([
-    { key: index++, label: 'question 1 ?' },
-    { key: index++, label: 'question 2 ?' },
+    { key: 1, label: 'question 1 ?' },
+    { key: 2, label: 'question 2 ?' },
     { key: index++, label: 'question 3 ?' },
     {},
     {},
@@ -75,7 +75,7 @@ const QuestionProfil = ({ route, navigation }) => {
     ) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile8"
             nextPage="Auth"
@@ -87,7 +87,7 @@ const QuestionProfil = ({ route, navigation }) => {
       setNavButton(
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile8"
             nextPage=""

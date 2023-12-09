@@ -7,7 +7,7 @@ import { getStorage } from '../../../functions/storage';
 import { FieldInput } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-const Movie = () => {
+const MovieEdit = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
@@ -142,4 +142,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default MovieEdit;
