@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import Biography from '../../../components/Profile/Biography';
-import Gif from '../../../components/Profile/Gifs';
-import Interest from '../../../components/Profile/Interest';
-import Question from '../../../components/Profile/Question';
-import Movie from '../../../components/Profile/Movie';
-import Music from '../../../components/Profile/Music';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import BiographyEdit from '../../../components/Profile/Biography';
+import GifEdit from '../../../components/Profile/Gifs';
+import InterestEdit from '../../../components/Profile/Interest';
+import QuestionEdit from '../../../components/Profile/Question';
+import MovieEdit from '../../../components/Profile/Movie';
+import MusicEdit from '../../../components/Profile/Music';
+import BiographyCard from '../../../components/Swipe_Card/Biography';
+import GifCard from '../../../components/Swipe_Card/Gif';
+import InterestsCard from '../../../components/Swipe_Card/Interests';
+import QuestionsCard from '../../../components/Swipe_Card/Questions';
+import MovieCard from '../../../components/Swipe_Card/Movie';
+import MusicCard from '../../../components/Swipe_Card/Music';
 import {
   ViewCustom,
   Title,
@@ -14,10 +20,10 @@ import {
   ModuleTitle,
   ModulePicker,
 } from './styles';
-import {GetUser, updateUser} from '../../../functions/api_request';
+import { GetUser, updateUser } from '../../../functions/api_request';
 
 const EditProfile = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [selectedModules, setSelectedModules] = useState([]);
   const [modules, setModules] = useState([]);
@@ -55,12 +61,12 @@ const EditProfile = () => {
 
   // Tableau des modules disponibles dans l'API
   const availableModules = [
-    {value: 'gif', label: t('profile.custom.gifs')},
-    {value: 'biographie', label: t('profile.custom.biography')},
-    {value: 'interests', label: t('profile.custom.interests')},
-    {value: 'questions', label: t('profile.custom.questions')},
-    {value: 'movie', label: t('profile.custom.movie')},
-    {value: 'music', label: t('profile.custom.music')},
+    { value: 'gif', label: t('profile.custom.gifs') },
+    { value: 'biographie', label: t('profile.custom.biography') },
+    { value: 'interests', label: t('profile.custom.interests') },
+    { value: 'questions', label: t('profile.custom.questions') },
+    { value: 'movie', label: t('profile.custom.movie') },
+    { value: 'music', label: t('profile.custom.music') },
   ];
 
   // Vérifier si un module est sélectionné
@@ -82,7 +88,7 @@ const EditProfile = () => {
     }
 
     //  update user
-    const updatedUser = {...user};
+    const updatedUser = { ...user };
     updatedUser.profileModules = {
       mainElement: updatedModules[0],
       secondaryElement: updatedModules[1],
@@ -96,65 +102,70 @@ const EditProfile = () => {
     <ViewCustom>
       <Title>{t('profile.custom.title')}</Title>
       <MainText>{t('profile.custom.text')}</MainText>
-      {selectedModules &&
-        selectedModules.map((module, index) => (
-          <ModuleView key={index}>
-            <ModulePicker
-              selectedValue={module}
-              onValueChange={itemValue =>
-                handleModuleSelection(itemValue, index)
-              }>
+      {selectedModules && selectedModules.map((module) => (
+        <ModuleView key={module}>
+          <ModulePicker
+            selectedValue={module}
+            onValueChange={itemValue =>
+              handleModuleSelection(itemValue, index)
+            }>
+            <ModulePicker.Item
+              label={module}
+              value=""
+            />
+            {modules.map((availableModule, index) => (
               <ModulePicker.Item
-                label={module}
-                value=""
+                key={availableModule.value}
+                label={availableModule.label}
+                value={availableModule.value}
               />
-              {modules.map((availableModule, index) => (
-                <ModulePicker.Item
-                  key={availableModule.value}
-                  label={availableModule.label}
-                  value={availableModule.value}
-                />
-              ))}
-            </ModulePicker>
-            {/* Afficher les composants correspondant aux modules sélectionnés */}
-            {module === 'biographie' && (
-              <>
-                <ModuleTitle>{t('profile.custom.biography')}</ModuleTitle>
-                <Biography user={user} setUser={setUser} />
-              </>
-            )}
-            {module === 'interests' && (
-              <>
-                <ModuleTitle>{t('profile.custom.interests')}</ModuleTitle>
-                <Interest user={user} setUser={setUser} />
-              </>
-            )}
-            {module === 'questions' && (
-              <>
-                <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
-              <Question user={user} setUser={setUser} />
-              </>
-            )}
-            {module === 'gif' && (
-              <>
-                <ModuleTitle>{t('profile.custom.gifs')}</ModuleTitle>
-                <Gif user={user} setUser={setUser} />
-              </>
-            )}
-            {module === 'movie' && (
-              <>
-                <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
-                <Movie user={user} setUser={setUser} />
-              </>
-            )}
-            {module === 'music' && (
-              <>
-                <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
-                <Music user={user} setUser={setUser} />
-              </>
-            )}
-          </ModuleView>
-        ))}
+            ))}
+          </ModulePicker>
+          {/* Afficher les composants correspondant aux modules sélectionnés */}
+          {module === 'biographie' && (
+            <>
+              <ModuleTitle>{t('profile.custom.biography')}</ModuleTitle>
+              <BiographyCard User={user} />
+              {/* <Biography user={user} setUser={setUser} /> */}
+            </>
+          )}
+          {module === 'interests' && (
+            <>
+              <ModuleTitle>{t('profile.custom.interests')}</ModuleTitle>
+              <InterestsCard User={user} />
+              {/* <Interest user={user} setUser={setUser} /> */}
+            </>
+          )}
+          {module === 'questions' && (
+            <>
+              <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
+              <QuestionsCard User={user} />
+              {/* <Question user={user} setUser={setUser} /> */}
+            </>
+          )}
+          {module === 'gif' && (
+            <>
+              <ModuleTitle>{t('profile.custom.gifs')}</ModuleTitle>
+              <GifCard User={user} />
+              {/* <Gif user={user} setUser={setUser} /> */}
+            </>
+          )}
+          {module === 'movie' && (
+            <>
+              <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
+              <MovieCard User={user} />
+              {/* <Movie user={user} setUser={setUser} /> */}
+            </>
+          )}
+          {module === 'music' && (
+            <>
+              <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
+              <MusicCard User={user} />
+              {/* <Music user={user} setUser={setUser} /> */}
+            </>
+          )}
+        </ModuleView>
+      ))}
     </ViewCustom>
   );
 };

@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { GIPHY_API_KEY, GIPHY_PATH } from '@env';
 
-import {updateUser} from '../../../functions/api_request';
-import {getStorage} from '../../../functions/storage';
+import { updateUser } from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
 
-import {FlatList, TouchableOpacity, Image} from 'react-native';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
 
-import {FieldInput} from './styles';
+import { FieldInput } from './styles';
 
-const Gif = () => {
-  const {t} = useTranslation();
+const GifEdit = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(0);
@@ -44,13 +44,11 @@ const Gif = () => {
     const limit = 10;
     let link = '';
     if (searchText.length > 0) {
-      link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${
-        page * limit
-      }`;
+      link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${page * limit
+        }`;
     } else {
-      link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${
-        page * limit
-      }`;
+      link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${page * limit
+        }`;
     }
     console.log('link : ', link);
     const response = await fetch(link);
@@ -103,7 +101,7 @@ const Gif = () => {
     updateUser(newUser);
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateGif(item)}>
         <Image
@@ -138,4 +136,4 @@ const Gif = () => {
   );
 };
 
-export default Gif;
+export default GifEdit;

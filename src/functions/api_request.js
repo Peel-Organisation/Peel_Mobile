@@ -41,7 +41,6 @@ export const updateUser = async (user) => {
 
 export const TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
-    console.log("test auth")
     messaging().getToken().then((firebaseToken) => {
         console.log("test")
         console.log(firebaseToken)

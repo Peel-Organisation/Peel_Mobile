@@ -32,7 +32,6 @@ const MessageList = ({ conversation_id, messages, setMessages }) => {
       const newMessage = JSON.parse(remoteMessage?.data?.message);
       let index = messages.findIndex((message) => message._id == newMessage._id);
       if ((newMessage.sender != userId) && (index !== null && index == -1 && userId !== null)) {
-        console.log("newMessage", newMessage);
         const message = { "content": newMessage.content, "time": newMessage.sentTime, "sender": newMessage.sender, "createdAt": newMessage.createdAt, "_id": newMessage._id };
         setMessages([...messages, message]);
       }

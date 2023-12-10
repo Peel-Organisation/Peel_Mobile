@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {GENIUS_API_TOKEN, GENIUS_API_PATH} from '@env';
-import {Update_Button, nextAction} from '../../../components/Update_User';
-import {getStorage} from '../../../functions/storage';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
+import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
+import { UpdateButton, nextAction } from '../../../components/Update_User';
+import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
-import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
-import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
-import {FieldView} from '../../../components/StyledComponents/Profile/General/FieldView';
+import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
 
-const Music = ({route, navigation}) => {
-  const {t} = useTranslation();
+const Music = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(1);
@@ -97,32 +97,31 @@ const Music = ({route, navigation}) => {
       });
       const data = await response.json();
       let music = data.response.song;
-      const updatedUser = {
-        ...user,
-        music: {
-          id: music.id,
-          title: music.title,
-          artist: {
-            id: music.primary_artist.id,
-            name: music.primary_artist.name,
-            image: music.primary_artist.image_url,
-          },
-          image: music.song_art_image_thumbnail_url,
-          album: {
-            id: music.album.id,
-            title: music.album.name,
-            image: music.album.cover_art_url,
-          },
+      let newUser = user;
+
+      newUser.music = {
+        id: music.id,
+        title: music.title,
+        artist: {
+          id: music.primary_artist.id,
+          name: music.primary_artist.name,
+          image: music.primary_artist.image_url,
+        },
+        image: music.song_art_image_thumbnail_url,
+        album: {
+          id: music.album.id,
+          title: music.album.name,
+          image: music.album.cover_art_url,
         },
       };
-      setUser(updatedUser);
+      setUser(newUser);
       nextAction('Profile8', navigation, user);
     } catch (error) {
       crashlytics().recordError(error);
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateMusic(item)}>
         <Image
@@ -167,7 +166,7 @@ const Music = ({route, navigation}) => {
         />
       </FieldView>
       {loading && <MainText>Chargement...</MainText>}
-      <Update_Button
+      <UpdateButton
         user={user}
         prevPage="Profile6"
         nextPage="Profile8"

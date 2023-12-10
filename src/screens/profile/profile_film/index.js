@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
-import {Update_Button, nextAction} from '../../../components/Update_User';
-import {getStorage} from '../../../functions/storage';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
+import { TMDB_API_KEY, TMDB_API_PATH } from '@env';
+import { UpdateButton, nextAction } from '../../../components/Update_User';
+import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
-import {MainText} from '../../../components/StyledComponents/Profile/General/MainText';
-import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
-import {FieldView} from '../../../components/StyledComponents/Profile/General/FieldView';
+import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
 
-const Film = ({route, navigation}) => {
-  const {t} = useTranslation();
+const Film = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(1);
@@ -88,6 +88,7 @@ const Film = ({route, navigation}) => {
 
   const updateMovie = async movieToUpdate => {
     try {
+      console.log('movieToUpdate : ', movieToUpdate);
       const url = `${TMDB_API_PATH}/genre/movie/list?api_key=${TMDB_API_KEY}`;
       const reponse = await fetch(url);
       const data = await reponse.json();
@@ -99,26 +100,25 @@ const Film = ({route, navigation}) => {
           name: genre?.name || '',
         };
       });
-      const updatedUser = {
-        ...user,
-        movie: {
-          id: movieToUpdate.id,
-          title: movieToUpdate.title,
-          images: {
-            backdrop_path: `${imageBaseUrl}${movieToUpdate.backdrop_path}`,
-            poster_path: `${imageBaseUrl}${movieToUpdate.poster_path}`,
-          },
-          genres_ids,
+      let newUser = user;
+      newUser.movie = {
+        id: movieToUpdate.id,
+        title: movieToUpdate.title,
+        images: {
+          backdrop_path: `${imageBaseUrl}${movieToUpdate.backdrop_path}`,
+          poster_path: `${imageBaseUrl}${movieToUpdate.poster_path}`,
         },
-      };
-      setUser(updatedUser);
+        genres_ids,
+      }
+      console.log('updatedUser : ', newUser);
+      setUser(newUser);
       nextAction('Profile7', navigation, user);
     } catch (error) {
       crashlytics().recordError(error);
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateMovie(item)}>
         <Image
@@ -159,7 +159,7 @@ const Film = ({route, navigation}) => {
           numColumns={2}
         />
       </FieldView>
-      <Update_Button
+      <UpdateButton
         user={user}
         prevPage="Profile5"
         nextPage="Profile7"

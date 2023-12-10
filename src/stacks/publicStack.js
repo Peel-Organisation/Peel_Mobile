@@ -22,6 +22,7 @@ const PublicStack = ({ navigation }) => {
     (async () => {
       let auth_bool = await TestAuth()
       let profile_bool = await IsProfileCompleted()
+      console.log("profile_bool : ", profile_bool)
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
         if (profile_bool) {
