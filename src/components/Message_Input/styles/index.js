@@ -9,19 +9,11 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const ViewCustom = styled.SafeAreaView`
     flex-direction: row;
     background-color: ${props => props.theme.background};
-    /* height: 200px; */
-    /* background-color: ${props => props.theme.white}; */
-    /* position : absolute; */
-    bottom : 60px;
-    /* width: ${DIMENSION_WIDTH}px; */
-    /* height: 10%; */
-    /* flex: 1; */
 `
 
 export const FieldInput = styled.TextInput`
     width: 80%;
     height: 40px;
-    /* margin: 10px; */
     margin: 20px;
     border-radius: 10px;
     border: 1px solid ${props => props.theme.primary};
@@ -48,7 +40,6 @@ export const MessageButtonText = styled.Text`
 export const SendIcon = styled.Image`
     width: 20px;
     height: 20px;
-    /* margin : 5px; */
     align-self: center;
     margin-top: 10px;
     margin-left: 5px;
