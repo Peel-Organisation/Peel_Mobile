@@ -13,13 +13,13 @@ export const ContactView = styled.View`
     background-color: ${props => props.theme.background};
 `
 
-export const Button_Contact = styled.TouchableOpacity`
+export const ButtonContact = styled.TouchableOpacity`
     height: 80px;
     border-style: solid;
     border-color: ${props => props.theme.sub_text};
     background-color: ${props => props.theme.background};
 `
-export const Button_Contact_Text = styled.Text`
+export const ButtonContactText = styled.Text`
     font-size: 20px;
     color: ${props => props.theme.text};
     /* align-self: center; */
@@ -27,7 +27,7 @@ export const Button_Contact_Text = styled.Text`
     margin-left: 50px;
 `
 
-export const Button_Contact_Sub_Text = styled.Text`
+export const ButtonContactSubText = styled.Text`
     font-size: 16px;
     color: ${props => props.theme.sub_text};
     margin-left: 50px;
@@ -63,14 +63,14 @@ export const NewMatchView = styled.SafeAreaView`
     background-color: ${props => props.theme.primary};
 `
 
-export const Button_New_Contact = styled.TouchableOpacity`
+export const ButtonNewContact = styled.TouchableOpacity`
     height: 100px;
     width: 100px;
     margin: 10px;
     background-color: ${props => props.theme.background};
 `
 
-export const Button_New_Contact_Text = styled.Text`
+export const ButtonNewContactText = styled.Text`
     font-size: 15px;
     color: ${props => props.theme.text};
     align-self: center;

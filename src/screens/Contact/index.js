@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { GetContactList } from "../../functions/api_request";
-import { View } from "react-native";
-import { ContactView, Button_Contact, Button_Contact_Text, ContactTitle, Container, NewMatchTitle, NewMatchView, Button_Contact_Sub_Text, Button_New_Contact, Button_New_Contact_Text, OrangeView } from './styles';
+import { ContactView, ContactTitle, NewMatchTitle, NewMatchView, OrangeView } from './styles';
 import Loading from "../../components/loading";
-import  { getStorage } from '../../functions/storage';
+import { getStorage } from '../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from "react-i18next";
+import { ButtonContact, ButtonContactText, Container, ButtonContactSubText } from './styles';
+import { ScrollView } from "react-native";
+import { RefreshControl } from "react-native";
 
- 
-const Contact = ({navigation}) => {
+const Contact = ({ navigation }) => {
 
     const { t } = useTranslation();
 
@@ -18,6 +19,10 @@ const Contact = ({navigation}) => {
 
     useEffect(() => {
         crashlytics().log("Contact screen mounted");
+        getContactList()
+    }, []);
+
+    const getContactList = () => {
         getStorage('userId').then(userId => {
             setUserId(userId)
         }).catch((error) => {
@@ -27,11 +32,16 @@ const Contact = ({navigation}) => {
             if (list != undefined) {
                 setContactList(list);
                 setLoading(false);
-            } 
+            }
         }).catch((error) => {
             crashlytics().recordError(error)
         })
-    }, []);
+    }
+
+    const refresh = () => {
+        setLoading(true);
+        getContactList();
+    }
 
     if (loading) {
         return (
@@ -39,57 +49,49 @@ const Contact = ({navigation}) => {
         );
     }
 
+
+
     return (
-        <ContactView className="message-app">
-            <OrangeView>
-                <NewMatchTitle>{t("Contact.newMatchs")}</NewMatchTitle>
-                <NewMatchView>
-                    {contactList.map((contact, index) => {
-                        let name = ""
-                        if (contact.members[0]._id == userId){
-                            name = contact?.members[1]?.firstName
-                        } else {
-                            name = contact?.members[0]?.firstName 
-                        }
-                        crashlytics().log("contact : ", contact)
-                        if (contact.last_message_content == undefined) {
-                            
-                            return(
-                                <Button_New_Contact key={index} onPress={() => {
-                                    navigation.navigate('Chat', {conversation : contact, name : name})
-                                }}>
-                                    <Button_New_Contact_Text>{name}</Button_New_Contact_Text>
-                                </Button_New_Contact>
-                            )
-                        }
-                    })}
-                </NewMatchView>
-            </OrangeView>
-            <ContactTitle>{t("Contact.title")}</ContactTitle>
-            {contactList.map((contact, index) => {
-                let name = ""
-                    if (contact.members[0]._id == userId){
-                        name = contact?.members[1]?.firstName
-                    } else {
-                        name = contact?.members[0]?.firstName 
-                    }
-                if (contact.last_message_content != undefined) {
-                    return(
-                        <Container key={index}>
-                            <Button_Contact onPress={() => {
-                                navigation.navigate('Chat', {conversation : contact, name : name})
-                            }}>
-                                <Button_Contact_Text>{name }</Button_Contact_Text>
-                                    <View>
-                                        <Button_Contact_Sub_Text>{contact.last_message_content}</Button_Contact_Sub_Text>
-                                    </View>
-                                </Button_Contact>
-                        </Container>
-                    )
-                }
-            })}
-        </ContactView>
+        <ScrollView refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={refresh} />
+        }>
+            <ContactView className="message-app">
+                <OrangeView>
+                    <NewMatchTitle>{t("Contact.newMatchs")}</NewMatchTitle>
+                    <NewMatchView>
+                        {contactList.map((contact) => (<ContactCard contact={contact} key={contact?._id} userId={userId} navigation={navigation} newContact={true} />))}
+                    </NewMatchView>
+                </OrangeView>
+                <ContactTitle>{t("Contact.title")}</ContactTitle>
+                {contactList.map((contact) => (<ContactCard contact={contact} key={contact?._id} userId={userId} navigation={navigation} newContact={false} />))}
+            </ContactView>
+        </ScrollView>
     );
 }
+
+const ContactCard = ({ contact, userId, navigation, newContact }) => {
+    let name = ""
+    if (contact.members[0]._id == userId) {
+        name = contact?.members[1]?.firstName
+    } else {
+        name = contact?.members[0]?.firstName
+    }
+    if ((newContact && contact.last_message_content != undefined) || (!newContact && contact.last_message_content == undefined)) {
+        return null
+    }
+    return (
+        <Container>
+            <ButtonContact onPress={() => {
+                navigation.navigate('Chat', { conversation: contact, name: name })
+            }}>
+                <ButtonContactText>{name}</ButtonContactText>
+                <ButtonContactSubText>{contact.last_message_content}</ButtonContactSubText>
+            </ButtonContact>
+        </Container>
+    )
+}
+
+
+
 
 export default Contact;
