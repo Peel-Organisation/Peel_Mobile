@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Update_Button} from '../../../components/Update_User';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { UpdateButton } from '../../../components/Update_User';
 import Loading from '../../../components/loading';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {getStorage} from '../../../functions/storage';
-import {getInterestList} from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
+import { getInterestList } from '../../../functions/api_request';
 
 import {
   InterestButton,
@@ -14,18 +14,18 @@ import {
   InterestView,
 } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
 
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
-import {ScrollContainer} from '../../../components/StyledComponents/Profile/General/ScrollContainer';
+import { ScrollContainer } from '../../../components/StyledComponents/Profile/General/ScrollContainer';
 
-const ProfileInterest = ({route, navigation}) => {
-  const {t} = useTranslation();
+const ProfileInterest = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [InterestList, setInterestList] = useState([{}]);
-  const [user, setUser] = useState({interests: []});
+  const [user, setUser] = useState({ interests: [] });
   const [loading, setLoading] = React.useState(true);
   const [navButton, setNavButton] = useState(null);
 
@@ -74,7 +74,7 @@ const ProfileInterest = ({route, navigation}) => {
     if (user.interests?.length == 5) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile7"
             nextPage="Profile9"
@@ -86,7 +86,7 @@ const ProfileInterest = ({route, navigation}) => {
       setNavButton(
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile7"
             nextPage=""
@@ -100,14 +100,14 @@ const ProfileInterest = ({route, navigation}) => {
   const addInterest = interest => {
     if (user.interests?.length < 5) {
       crashlytics().log('interest = ', interest);
-      let newUser = {...user};
+      let newUser = { ...user };
       newUser.interests.push(interest);
       setUser(newUser);
     }
   };
 
   const removeInterest = interest => {
-    let newUser = {...user};
+    let newUser = { ...user };
     if (typeof interest == 'string') {
       interest = JSON.parse(interest);
     }

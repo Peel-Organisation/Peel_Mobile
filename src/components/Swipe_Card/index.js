@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import {
   HomeCard,
   Name,
@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 const Swipe_Card = props => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const [User, setUser] = useState(props.User);
 
@@ -128,7 +128,13 @@ const Swipe_Card = props => {
         <Name>
           {User.firstName} {getAge(User.birthday)}
         </Name>
-        <Locate>? km de vous</Locate>
+        <Locate>{User?.preferences?.searchFriend && (
+          <>Recherche l'amitié</>
+        )}
+          {User?.preferences?.searchLove && (
+            <>Recherche l'amour</>
+          )}
+        </Locate>
         {/* In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement */}
         {/* The value of each key is the name of the module */}
         {/* So we can use the value of each key to display the corresponding component */}

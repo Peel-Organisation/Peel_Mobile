@@ -5,6 +5,12 @@ import perf from '@react-native-firebase/perf';
 export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) => {
     const trace = await perf().startTrace('FetchPeelApi');
     try {
+        if (process.env.NODE_ENV === "development") {
+            console.log("url : ", `${process.env.API_LINK}${url}`);
+            console.log("method : ", method);
+            // console.log("body : ", body);
+            console.log("token : ", token);
+        }
         crashlytics().log("\n\n FetchPeelApi")
         const response = await fetch(`${process.env.API_LINK}${url}`, {
 
@@ -23,6 +29,9 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
             }
         });
         const dataJson = await response.json();
+        if (process.env.NODE_ENV === "development") {
+            console.log("dataJson : ", dataJson);
+        }
         let status_code = response.status;
         if (status_code !== 200) {
             throw new Error(dataJson.message);

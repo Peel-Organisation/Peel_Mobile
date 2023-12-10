@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Loading from '../../../components/loading';
 
-import {updateUser, getInterestList} from '../../../functions/api_request';
-import {getStorage} from '../../../functions/storage';
+import { updateUser, getInterestList } from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
 
 import {
   InterestView,
@@ -12,9 +12,9 @@ import {
   InterestButtonDisabled,
 } from './styles';
 
-const Interest = () => {
+const InterestEdit = () => {
   const [InterestList, setInterestList] = useState([{}]);
-  const [user, setUser] = useState({interests: []});
+  const [user, setUser] = useState({ interests: [] });
   const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
@@ -44,14 +44,14 @@ const Interest = () => {
   const addInterest = interest => {
     if (user.interests?.length < 5) {
       console.log('interest = ', interest);
-      let newUser = {...user};
+      let newUser = { ...user };
       newUser.interests.push(interest);
       setUser(newUser);
     }
   };
 
   const removeInterest = interest => {
-    let newUser = {...user};
+    let newUser = { ...user };
     if (typeof interest == 'string') {
       interest = JSON.parse(interest);
     }
@@ -123,4 +123,4 @@ const containsObject = (obj, list) => {
   return false;
 };
 
-export default Interest;
+export default InterestEdit;

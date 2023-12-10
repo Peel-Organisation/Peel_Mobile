@@ -1,35 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {useTranslation} from 'react-i18next';
-import {Update_Button} from '../../../components/Update_User';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { UpdateButton } from '../../../components/Update_User';
 
-import {getStorage} from '../../../functions/storage';
-import {getQuestionList} from '../../../functions/api_request';
-
-import {ModalSelectorCustom} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-import {CustomView} from '../../../components/StyledComponents/Profile/General/CustomView';
-import {PageTitle} from '../../../components/StyledComponents/Profile/General/PageTitle';
-import {FieldInput} from '../../../components/StyledComponents/Profile/General/FieldInput';
-import {InputView} from '../../../components/StyledComponents/Profile/General/InputView';
-import {ConditionText} from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { getStorage } from '../../../functions/storage';
+import { getQuestionList } from '../../../functions/api_request';
+import { ModalSelectorCustom } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
+import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
-import {ContentView} from '../../../components/StyledComponents/Profile/General/ContentView';
+import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
 
 import crashlytics from '@react-native-firebase/crashlytics';
 import Loading from '../../../components/loading';
 
-const QuestionProfil = ({route, navigation}) => {
-  const {t} = useTranslation();
-  const [user, setUser] = useState({questions: [{}, {}, {}]});
+const QuestionProfil = ({ route, navigation }) => {
+  const { t } = useTranslation();
+  const [user, setUser] = useState({ questions: [{}, {}, {}] });
   let index = 0;
   const [navButton, setNavButton] = useState(null);
   const [questionList, setquestionList] = useState([
-    {key: index++, label: 'question 1 ?'},
-    {key: index++, label: 'question 2 ?'},
-    {key: index++, label: 'question 3 ?'},
+    { key: 1, label: 'question 1 ?' },
+    { key: 2, label: 'question 2 ?' },
+    { key: index++, label: 'question 3 ?' },
     {},
     {},
     {},
@@ -76,7 +75,7 @@ const QuestionProfil = ({route, navigation}) => {
     ) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile8"
             nextPage="Auth"
@@ -88,7 +87,7 @@ const QuestionProfil = ({route, navigation}) => {
       setNavButton(
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
-          <Update_Button
+          <UpdateButton
             user={user}
             prevPage="Profile8"
             nextPage=""
@@ -126,7 +125,7 @@ const QuestionProfil = ({route, navigation}) => {
             <FieldInput
               value={user.questions[0]?.answer}
               onChangeText={text => {
-                let newUser = {...user};
+                let newUser = { ...user };
                 newUser.questions[0].answer = text;
                 setUser(newUser);
               }}
@@ -151,7 +150,7 @@ const QuestionProfil = ({route, navigation}) => {
             <FieldInput
               value={user.questions[1]?.answer}
               onChangeText={text => {
-                let newUser = {...user};
+                let newUser = { ...user };
                 newUser.questions[1].answer = text;
                 setUser(newUser);
               }}
@@ -176,7 +175,7 @@ const QuestionProfil = ({route, navigation}) => {
             <FieldInput
               value={user.questions[2]?.answer}
               onChangeText={text => {
-                let newUser = {...user};
+                let newUser = { ...user };
                 newUser.questions[2].answer = text;
                 setUser(newUser);
               }}
