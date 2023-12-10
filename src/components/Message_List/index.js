@@ -31,13 +31,9 @@ const MessageList = ({ conversation_id, messages, setMessages }) => {
     try {
       const newMessage = JSON.parse(remoteMessage?.data?.message);
       let index = messages.findIndex((message) => message._id == newMessage._id);
-      if (newMessage.sender != userId) {
-        if (index !== null && index == -1 && userId !== null) {
-          // if (newMessage.conversationId == conversation_id) {
-          console.log("newMessage", newMessage);
-          const message = { "content": newMessage.content, "time": newMessage.sentTime, "sender": newMessage.sender, "createdAt": newMessage.createdAt, "_id": newMessage._id };
-          setMessages([...messages, message]);
-        }
+      if ((newMessage.sender != userId) && (index !== null && index == -1 && userId !== null)) {
+        const message = { "content": newMessage.content, "time": newMessage.sentTime, "sender": newMessage.sender, "createdAt": newMessage.createdAt, "_id": newMessage._id };
+        setMessages([...messages, message]);
       }
     } catch (error) {
       console.error("error", error);
