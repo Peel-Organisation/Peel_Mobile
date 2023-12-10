@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import {
   ViewCustom,
   ButtonOrange,
@@ -14,10 +14,10 @@ import {
   Spacer,
 } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {registerRequest} from '../../functions/api_request';
+import { registerRequest } from '../../functions/api_request';
 
-const Register = ({navigation}) => {
-  const {t} = useTranslation();
+const Register = ({ navigation }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -46,7 +46,11 @@ const Register = ({navigation}) => {
     ) {
       alert('erreur de saisie');
     } else {
-      registerRequest(email, password, navigation);
+      registerRequest(email, password, navigation).then(({ error, message }) => {
+        if (error) {
+          alert(message);
+        }
+      });
     }
   };
 
@@ -59,7 +63,7 @@ const Register = ({navigation}) => {
         <Spacer />
         <MainText>{t('register.email')}</MainText>
         <FieldInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={email}
           onChangeText={text => setEmail(text)}
           keyboardType="email-address"
@@ -67,7 +71,7 @@ const Register = ({navigation}) => {
         />
         <MainText>{t('register.password')}</MainText>
         <PasswordInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={password}
           secureTextEntry={true}
           onChangeText={text => setPassword(text)}
@@ -75,7 +79,7 @@ const Register = ({navigation}) => {
         />
         <MainText>{t('register.password_confirm')}</MainText>
         <PasswordInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={repeatPassword}
           secureTextEntry={true}
           onChangeText={text => setRepeatPassword(text)}

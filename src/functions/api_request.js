@@ -130,23 +130,29 @@ export const loginRequest = async (email, password, navigation) => {
         crashlytics().setUserId(res['userId'].toString());
         navigation.navigate("Auth");
         update_messaging();
+        return { error: false, message: "connecté" };
     }).catch(error => {
         crashlytics().recordError(error);
+        return { error: true, message: error.message };
     });
 }
 
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
     const firebaseToken = await messaging().getToken()
-    const body = { email: email.toLowerCase, password: password }
+    const body = { email: email.toLowerCase(), password: password }
+    console.log("body : ", body)
     return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
         addStorage("token", res['token'])
         addStorage("userId", res['userId'].toString())
         crashlytics().log("connecté")
         crashlytics().setUserId(res['userId'].toString());
         navigation.navigate("Profile");
+        update_messaging();
+        return { error: false, message: "connecté" };
     }).catch((error) => {
         crashlytics().recordError(error)
+        return { error: true, message: error.message };
     })
 }
 
