@@ -10,3 +10,13 @@ export const ViewCustom = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     width: 100%;
 `
+
+export const KeyboardAvoidingViewCustom = styled.KeyboardAvoidingView`
+    flex: 1;
+    background-color: ${props => props.theme.background};
+    height: 100%;
+    bottom: 20px;
+    /* align-content : flex-end; 
+    justify-content: flex-end; */
+    /* bottom: 0px; */
+`
