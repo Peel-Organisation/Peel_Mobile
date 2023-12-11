@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from 'react-native-card-stack-swiper';
 import Swipe_Card from "../Swipe_Card";
 import {sendSwipe} from "../../functions/api_request"
@@ -12,6 +12,9 @@ const Swipe = (props) => {
 
     const [userList, setUserList] = useState(props.userList);
 
+    useEffect(() => {
+        setUserList(props.userList)
+    },[props.userList])
 
     if (userList !== undefined) { 
         return (
@@ -22,11 +25,11 @@ const Swipe = (props) => {
                     renderNoMoreCards={() => null}
                     ref={swiper => (this.swiper = swiper)}                    
                 >
-                    {userList.map((user, index) => (
+                    {userList.map((user) => (
                         <Card 
                             onSwipedLeft={() => {sendSwipe(user, "dislike")}}
                             onSwipedRight={() => {sendSwipe(user, "like")}}
-                            key={index} 
+                            key={user._id} 
                             user={user}
                         >
                             <Swipe_Card 
