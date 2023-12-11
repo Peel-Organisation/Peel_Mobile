@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
-import {updateUser} from '../../../functions/api_request';
-import {getStorage} from '../../../functions/storage';
-import {FieldInput} from './styles';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
+import { TMDB_API_KEY, TMDB_API_PATH } from '@env';
+import { updateUser } from '../../../functions/api_request';
+import { getStorage } from '../../../functions/storage';
+import { FieldInput } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-const Movie = () => {
-  const {t} = useTranslation();
+const MovieEdit = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(1);
@@ -107,14 +107,14 @@ const Movie = () => {
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() => {
           updateMovie(item);
         }}>
         <Image
-          style={{width: 150, height: 150}}
+          style={{ width: 150, height: 150 }}
           source={{
             uri: `${imageBaseUrl}${item.poster_path}`,
           }}
@@ -142,4 +142,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default MovieEdit;

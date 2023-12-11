@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
-import Swipe  from "../../components/Swipe";
+import Swipe from "../../components/Swipe";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { PostMatchList } from "../../functions/api_request"
 import Loading from "../../components/loading";
@@ -51,12 +51,14 @@ const Match = () => {
             <Loading />
         );
     }
-    
+
+
+
     return (
         <>
-            <Background><BackgroundTop/></Background>
+            <Background><BackgroundTop /></Background>
             <Container>
-                <StatusBar backgroundColor="#FC912F"/>
+                <StatusBar backgroundColor="#FC912F" />
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
                     <FilterIcon onPress={()=>{setFilter(!filter)}}>

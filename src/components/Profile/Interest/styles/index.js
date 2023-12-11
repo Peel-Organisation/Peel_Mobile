@@ -8,7 +8,7 @@ export const InterestButton = styled.TouchableOpacity`
     color: ${props => props.theme.background};
 `
 
-export const InterestView = styled.View`
+export const InterestView = styled.SafeAreaView`
     flex-direction: column;
     align-items: center;
     justify-content: center;

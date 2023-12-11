@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const ContactView =  styled.View`
+export const ContactView = styled.View`
     flex: 1;
     align-items: center;
     /* justify-content: center; */ 
@@ -35,7 +35,7 @@ export const Button_Contact_Sub_Text = styled.Text`
     overflow: hidden;
 `
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     width: 110%;
 `
 
@@ -53,7 +53,7 @@ export const NewMatchTitle = styled.Text`
     margin-top: 20px;
 `
 
-export const NewMatchView = styled.View`
+export const NewMatchView = styled.SafeAreaView`
     flex-direction: row;
     flex-wrap: wrap;
     margin: 10px;
@@ -78,7 +78,7 @@ export const Button_New_Contact_Text = styled.Text`
     /* margin-left: 50px; */
 `
 
-export const OrangeView = styled.View`
+export const OrangeView = styled.SafeAreaView`
     background-color: ${props => props.theme.primary};
     width: 100%;
 `

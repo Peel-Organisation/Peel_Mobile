@@ -18,7 +18,7 @@ export const CardStackView = styled(CardStack)`
     border: 1px solid #DFD6CE;
     `
 
-export const ButtonStack = styled.View`
+export const ButtonStack = styled.SafeAreaView`
     margin-top: 30px;
     flex-direction: row;
     flex-wrap: wrap;

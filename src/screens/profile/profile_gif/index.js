@@ -1,14 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Update_Button, nextAction} from '../../../components/Update_User';
-import {GIPHY_API_KEY, GIPHY_PATH} from '@env';
-import {getStorage} from '../../../functions/storage';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { UpdateButton, nextAction } from '../../../components/Update_User';
+import { GIPHY_API_KEY, GIPHY_PATH } from '@env';
+import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {ViewCustom, Title, FieldInput} from '../styles';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
 
-const Gif = ({route, navigation}) => {
-  const {t} = useTranslation();
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
+
+const Gif = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(0);
@@ -46,13 +54,11 @@ const Gif = ({route, navigation}) => {
     const limit = 20;
     let link = '';
     if (searchText.length > 0) {
-      link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${
-        page * limit
-      }`;
+      link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}&offset=${page * limit
+        }`;
     } else {
-      link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${
-        page * limit
-      }`;
+      link = `${GIPHY_PATH}/trending?api_key=${GIPHY_API_KEY}&limit=${limit}&offset=${page * limit
+        }`;
     }
     crashlytics().log('serach link : ', link);
     const response = await fetch(link);
@@ -104,7 +110,7 @@ const Gif = ({route, navigation}) => {
     nextAction('Profile6', navigation, user);
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateGif(item)}>
         <Image
@@ -121,29 +127,35 @@ const Gif = ({route, navigation}) => {
   };
 
   return (
-    <ViewCustom>
-      <Update_Button
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <FieldView>
+        <PageTitle>{t('profile.gifs_condition')}</PageTitle>
+        <FieldInput
+          value={searchText}
+          onChangeText={text => setSearchText(text)}
+          placeholder={t('profile.gifs_condition')}
+        />
+        <FlatList
+          data={gifs}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          onEndReached={() => {
+            setPage(page + 1);
+          }}
+          onEndReachedThreshold={0.4}
+          numColumns={2}
+        />
+      </FieldView>
+      <UpdateButton
         user={user}
         prevPage="Profile4"
         nextPage="Profile6"
         navigation={navigation}
       />
-      <Title>Choix du gif</Title>
-      <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value={searchText}
-        onChangeText={text => setSearchText(text)}
-      />
-      <FlatList
-        data={gifs}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
-      />
-    </ViewCustom>
+    </CustomView>
   );
 };
 

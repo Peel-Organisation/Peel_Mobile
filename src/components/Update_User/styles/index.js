@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const NavigatorView =  styled.View`
+export const NavigatorView = styled.SafeAreaView`
     flex-direction: row;
     /* flex-wrap: wrap; */
     width: 100%;
@@ -33,6 +33,7 @@ export const Next_Button_Text = styled.Text`
     align-self: center;
     /* padding-top: 10px; */
     margin: 10px;
+    letter-spacing: 1px;
 `
 
 export const Prev_Button = styled.TouchableOpacity`
@@ -49,4 +50,5 @@ export const Prev_Button_Text = styled.Text`
     align-self: center;
     /* padding-top: 10px; */
     margin: 10px;
+    letter-spacing: 1px;
 `

@@ -1,31 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {useTranslation} from 'react-i18next';
-import {Update_Button} from '../../../components/Update_User';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { UpdateButton } from '../../../components/Update_User';
 
-import {getStorage} from '../../../functions/storage';
-import {getQuestionList} from '../../../functions/api_request';
-
+import { getStorage } from '../../../functions/storage';
+import { getQuestionList } from '../../../functions/api_request';
+import { ModalSelectorCustom } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
+import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import {
-  ViewCustom,
-  Title,
-  ModalSelectorCustom,
-  FieldInput,
-  InputView,
-  ConditionText,
-} from '../styles';
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
+
 import crashlytics from '@react-native-firebase/crashlytics';
 import Loading from '../../../components/loading';
 
-const QuestionProfil = ({route, navigation}) => {
-  const {t} = useTranslation();
-  const [user, setUser] = useState({questions: [{}, {}, {}]});
+const QuestionProfil = ({ route, navigation }) => {
+  const { t } = useTranslation();
+  const [user, setUser] = useState({ questions: [{}, {}, {}] });
   let index = 0;
   const [navButton, setNavButton] = useState(null);
   const [questionList, setquestionList] = useState([
-    {key: index++, label: 'question 1 ?'},
-    {key: index++, label: 'question 2 ?'},
-    {key: index++, label: 'question 3 ?'},
+    { key: 1, label: 'question 1 ?' },
+    { key: 2, label: 'question 2 ?' },
+    { key: index++, label: 'question 3 ?' },
     {},
     {},
     {},
@@ -72,16 +75,26 @@ const QuestionProfil = ({route, navigation}) => {
     ) {
       setNavButton(
         <>
-          <Update_Button user={user} prevPage="Profile8" nextPage="Auth"  navigation={navigation} />
-        </>
-      ) 
+          <UpdateButton
+            user={user}
+            prevPage="Profile8"
+            nextPage="Auth"
+            navigation={navigation}
+          />
+        </>,
+      );
     } else {
       setNavButton(
-        <> 
-          <ConditionText>{t("profile.fill")}</ConditionText>
-          <Update_Button user={user} prevPage="Profile8" nextPage=""  navigation={navigation} />
-        </>
-      )
+        <>
+          <ConditionText>{t('profile.fill')}</ConditionText>
+          <UpdateButton
+            user={user}
+            prevPage="Profile8"
+            nextPage=""
+            navigation={navigation}
+          />
+        </>,
+      );
     }
   }, [user]);
 
@@ -90,85 +103,89 @@ const QuestionProfil = ({route, navigation}) => {
   }
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.question_title')}</Title>
-      <InputView>
-        <View>
-          <ModalSelectorCustom
-            data={questionList}
-            // initValue={questionList[user.questions[0]].questionId}
-            onChange={option => {
-              let newUser = user;
-              newUser.questions[0].question = option.key;
-              setUser(newUser);
-            }}
-          />
-        </View>
-        <View>
-          <FieldInput
-            value={user.questions[0]?.answer}
-            onChangeText={text => {
-              let newUser = {...user};
-              newUser.questions[0].answer = text;
-              setUser(newUser);
-            }}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          />
-        </View>
-      </InputView>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <ContentView>
+        <PageTitle>{t('profile.question_title')}</PageTitle>
+        <InputView>
+          <View>
+            <ModalSelectorCustom
+              data={questionList}
+              initValue={t('profile.question_select')}
+              onChange={option => {
+                let newUser = user;
+                newUser.questions[0].question = option.key;
+                setUser(newUser);
+              }}
+            />
+          </View>
+          <View>
+            <FieldInput
+              value={user.questions[0]?.answer}
+              onChangeText={text => {
+                let newUser = { ...user };
+                newUser.questions[0].answer = text;
+                setUser(newUser);
+              }}
+              placeholder={t('profile.question_placeholder')}
+            />
+          </View>
+        </InputView>
 
-      <InputView>
-        <View>
-          <ModalSelectorCustom
-            data={questionList}
-            // initValue={questionList[user.question_id[1]].label}
-            onChange={option => {
-              let newUser = user;
-              newUser.questions[1].question = option.key;
-              setUser(newUser);
-            }}
-          />
-        </View>
-        <View>
-          <FieldInput
-            value={user.questions[1]?.answer}
-            onChangeText={text => {
-              let newUser = {...user};
-              newUser.questions[1].answer = text;
-              setUser(newUser);
-            }}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          />
-        </View>
-      </InputView>
+        <InputView>
+          <View>
+            <ModalSelectorCustom
+              data={questionList}
+              initValue={t('profile.question_select')}
+              onChange={option => {
+                let newUser = user;
+                newUser.questions[1].question = option.key;
+                setUser(newUser);
+              }}
+            />
+          </View>
+          <View>
+            <FieldInput
+              value={user.questions[1]?.answer}
+              onChangeText={text => {
+                let newUser = { ...user };
+                newUser.questions[1].answer = text;
+                setUser(newUser);
+              }}
+              placeholder={t('profile.question_placeholder')}
+            />
+          </View>
+        </InputView>
 
-      <InputView>
-        <View>
-          <ModalSelectorCustom
-            data={questionList}
-            // initValue={questionList[user.question_id[2]].label}
-            onChange={option => {
-              let newUser = user;
-              newUser.questions[2].question = option.key;
-              setUser(newUser);
-            }}
-          />
-        </View>
-        <View>
-          <FieldInput
-            value={user.questions[2]?.answer}
-            onChangeText={text => {
-              let newUser = {...user};
-              newUser.questions[2].answer = text;
-              setUser(newUser);
-            }}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          />
-        </View>
-      </InputView>
-
+        <InputView>
+          <View>
+            <ModalSelectorCustom
+              data={questionList}
+              initValue={t('profile.question_select')}
+              onChange={option => {
+                let newUser = user;
+                newUser.questions[2].question = option.key;
+                setUser(newUser);
+              }}
+            />
+          </View>
+          <View>
+            <FieldInput
+              value={user.questions[2]?.answer}
+              onChangeText={text => {
+                let newUser = { ...user };
+                newUser.questions[2].answer = text;
+                setUser(newUser);
+              }}
+              placeholder={t('profile.question_placeholder')}
+            />
+          </View>
+        </InputView>
+      </ContentView>
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

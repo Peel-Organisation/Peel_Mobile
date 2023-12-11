@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const UserMessage = styled.View`
+export const UserMessage = styled.SafeAreaView`
     background-color: ${props => props.theme.user_message};
     border-radius: 5px;
     padding: 10px;
@@ -24,7 +24,7 @@ export const UserMessageText = styled.Text`
     text-align: left;
 `
 
-export const ContactMessage = styled.View`
+export const ContactMessage = styled.SafeAreaView`
     background-color: ${props => props.theme.contact_message};
     border-radius: 5px;
     padding: 10px;
@@ -39,7 +39,7 @@ export const ContactMessageText = styled.Text`
     text-align: left;
 `
 
-export const CustomFlatList = styled.View`
+export const CustomFlatList = styled.SafeAreaView`
     /* background-color: ${props => props.theme.background}; */
     bottom: 50px;
     /* border-radius: 5px; */

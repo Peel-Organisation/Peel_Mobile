@@ -1,5 +1,7 @@
 # Peel_Mobile# Peel : Exfolie tes rencontres
 
+[![Android - Build & Publish Release APK - Development](https://github.com/Peel-Organisation/Peel_Mobile/actions/workflows/development-ci.yml/badge.svg?branch=development)](https://github.com/Peel-Organisation/Peel_Mobile/actions/workflows/development-ci.yml)
+
 ## contexte :
 
  Dans mon cercle d’amis, beaucoup d’entre eux me disent qu’ils n’osent pas utiliser de site de rencontre. Lorsque je leur demande pourquoi, ils me répondent que les sites de rencontre sont trop superficiels et qu’ils cherchent « Le grand amour ». C’est avec ce problème en tête que j’ai trouvé une solution. L’application Peel a pour ambition de permettre à tous les utilisateurs de discuter entre eux sans se soucier du côté superficiel des sites de rencontre. Le site est inspiré de Tinder dans son fonctionnement mais sans photos d’utilisateurs. L’idée est d’avoir une alternative à Tinder plus orienté sur le caractère des personnes, chose qu’on ne trouve pas ou peu sur les applications de rencontre. 
@@ -31,6 +33,34 @@ npm run android
 npm run install-ios 
 npm run start 
 npm run ios
+
+## Nettoyer le cache de l'application : 
+
+### Sur Android : 
+yarn clean-android
+
+
+### Sur IOS : 
+yarn clean-ios
+
+## Supprimer le Build de l'application : 
+npm install shx -g
+
+### Sur Android : 
+npm run deleteBuild-android
+
+
+### Sur IOS : 
+npm run deleteBuild-ios
+
+## Créer le Build de l'application : 
+
+### Sur Android : 
+yarn build-android
+
+
+### Sur IOS : 
+yarn build-ios
 
 
 

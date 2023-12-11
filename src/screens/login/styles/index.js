@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const ViewCustom =  styled.View`
+export const ViewCustom = styled.SafeAreaView`
     flex: 1;
     align-items: center;
     /* justify-content: center; */
@@ -29,11 +29,11 @@ export const ButtonOrangeText = styled.Text`
     padding-top: 10px;
 `
 
-export const Spacer = styled.View`
+export const Spacer = styled.SafeAreaView`
     height: 100px;
 `
 
-export const Header = styled.View`
+export const Header = styled.SafeAreaView`
     width: ${DIMENSION_WIDTH}px;
     height: 100px;
     background-color: ${props => props.theme.primary};
@@ -78,4 +78,3 @@ export const MainText = styled.Text`
     font-size: 16px;
     color: ${props => props.theme.text};
 `
- 

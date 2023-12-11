@@ -1,14 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {FlatList, TouchableOpacity, Image} from 'react-native';
-import {TMDB_API_KEY, TMDB_API_PATH} from '@env';
-import {Update_Button, nextAction} from '../../../components/Update_User';
-import {getStorage} from '../../../functions/storage';
-import {ViewCustom, Title, MainText, FieldInput} from '../styles';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
+import { TMDB_API_KEY, TMDB_API_PATH } from '@env';
+import { UpdateButton, nextAction } from '../../../components/Update_User';
+import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-const Film = ({route, navigation}) => {
-  const {t} = useTranslation();
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
+
+const Film = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(1);
@@ -17,11 +26,13 @@ const Film = ({route, navigation}) => {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-    getStorage('user').then(fetchedUser => {
-      setUser(fetchedUser);
-    }).catch((error) => {
-      crashlytics().recordError(error)
-    });
+    getStorage('user')
+      .then(fetchedUser => {
+        setUser(fetchedUser);
+      })
+      .catch(error => {
+        crashlytics().recordError(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -77,6 +88,7 @@ const Film = ({route, navigation}) => {
 
   const updateMovie = async movieToUpdate => {
     try {
+      console.log('movieToUpdate : ', movieToUpdate);
       const url = `${TMDB_API_PATH}/genre/movie/list?api_key=${TMDB_API_KEY}`;
       const reponse = await fetch(url);
       const data = await reponse.json();
@@ -88,26 +100,25 @@ const Film = ({route, navigation}) => {
           name: genre?.name || '',
         };
       });
-      const updatedUser = {
-        ...user,
-        movie: {
-          id: movieToUpdate.id,
-          title: movieToUpdate.title,
-          images: {
-            backdrop_path: `${imageBaseUrl}${movieToUpdate.backdrop_path}`,
-            poster_path: `${imageBaseUrl}${movieToUpdate.poster_path}`,
-          },
-          genres_ids,
+      let newUser = user;
+      newUser.movie = {
+        id: movieToUpdate.id,
+        title: movieToUpdate.title,
+        images: {
+          backdrop_path: `${imageBaseUrl}${movieToUpdate.backdrop_path}`,
+          poster_path: `${imageBaseUrl}${movieToUpdate.poster_path}`,
         },
-      };
-      setUser(updatedUser);
+        genres_ids,
+      }
+      console.log('updatedUser : ', newUser);
+      setUser(newUser);
       nextAction('Profile7', navigation, user);
     } catch (error) {
       crashlytics().recordError(error);
     }
   };
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateMovie(item)}>
         <Image
@@ -126,29 +137,35 @@ const Film = ({route, navigation}) => {
   if (loading) return <MainText>Chargement...</MainText>;
 
   return (
-    <ViewCustom>
-      <Update_Button
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <FieldView>
+        <PageTitle>{t('profile.movie_condition')}</PageTitle>
+        <FieldInput
+          value={searchText}
+          onChangeText={setSearchText}
+          placeholder={t('profile.movie_placeholder')}
+        />
+        <FlatList
+          data={movies}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={() => {
+            setPage(page + 1);
+          }}
+          onEndReachedThreshold={0.4}
+          numColumns={2}
+        />
+      </FieldView>
+      <UpdateButton
         user={user}
         prevPage="Profile5"
-        nextPage=""
+        nextPage="Profile7"
         navigation={navigation}
       />
-      <Title>Choix du film</Title>
-      <FieldInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value={searchText}
-        onChangeText={setSearchText}
-      />
-      <FlatList
-        data={movies}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        onEndReached={() => {
-          setPage(page + 1);
-        }}
-        onEndReachedThreshold={0.4}
-      />
-    </ViewCustom>
+    </CustomView>
   );
 };
 

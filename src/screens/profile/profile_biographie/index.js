@@ -1,14 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {useTranslation} from 'react-i18next';
-import {Update_Button} from '../../../components/Update_User';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { UpdateButton } from '../../../components/Update_User';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {getStorage} from '../../../functions/storage';
+import { getStorage } from '../../../functions/storage';
 
-import {BioInput, ViewCustom, Title, ConditionText} from '../styles';
+import { BioInput } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
+import {
+  HeaderView,
+  HeaderText,
+} from '../../../components/StyledComponents/Profile/General/Header';
+import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
 
-const Biographie = ({route, navigation}) => {
-  const {t} = useTranslation();
+const Biographie = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState({});
   const [navButton, setNavButton] = useState(null);
 
@@ -29,15 +37,15 @@ const Biographie = ({route, navigation}) => {
     if (
       user.biographie != undefined &&
       user.biographie != '' &&
-      user.biographie.length < 200 &&
+      user.biographie.length < 400 &&
       user.biographie.length > 20
     ) {
       setNavButton(
         <>
-          <Update_Button
+          <UpdateButton
             user={user}
-            prevPage="Profile3"
-            nextPage="Profile5"
+            prevPage="Profile2"
+            nextPage="Profile4"
             navigation={navigation}
           />
         </>,
@@ -49,9 +57,9 @@ const Biographie = ({route, navigation}) => {
             <>
               <ConditionText>{t('profile.fill_min_bio')}</ConditionText>
               <ConditionText>{t('profile.fill')}</ConditionText>
-              <Update_Button
+              <UpdateButton
                 user={user}
-                prevPage="Profile3"
+                prevPage="Profile2"
                 nextPage=""
                 navigation={navigation}
               />
@@ -62,9 +70,9 @@ const Biographie = ({route, navigation}) => {
             <>
               <ConditionText>{t('profile.fill_max_bio')}</ConditionText>
               <ConditionText>{t('profile.fill')}</ConditionText>
-              <Update_Button
+              <UpdateButton
                 user={user}
-                prevPage="Profile3"
+                prevPage="Profile2"
                 nextPage=""
                 navigation={navigation}
               />
@@ -75,9 +83,9 @@ const Biographie = ({route, navigation}) => {
         setNavButton(
           <>
             <ConditionText>{t('profile.fill')}</ConditionText>
-            <Update_Button
+            <UpdateButton
               user={user}
-              prevPage="Profile3"
+              prevPage="Profile2"
               nextPage=""
               navigation={navigation}
             />
@@ -88,24 +96,28 @@ const Biographie = ({route, navigation}) => {
   }, [user]);
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.title')}</Title>
-      <View>
-        <BioInput
-          multiline
-          numberOfLines={10}
-          // style={styles.input}
-          onChangeText={text => {
-            let newUser = {...user};
-            newUser.biographie = text;
-            setUser(newUser);
-          }}
-          value={user.biographie}
-          placeholder={t('profile.biography')}
-        />
-      </View>
+    <CustomView>
+      <HeaderView>
+        <HeaderText>{t('profile.title')}</HeaderText>
+      </HeaderView>
+      <ContentView>
+        <PageTitle>{t('profile.biography')}</PageTitle>
+        <View>
+          <BioInput
+            multiline
+            numberOfLines={4}
+            onChangeText={text => {
+              let newUser = { ...user };
+              newUser.biographie = text;
+              setUser(newUser);
+            }}
+            value={user.biographie}
+            placeholder={t('profile.biography')}
+          />
+        </View>
+      </ContentView>
       {navButton}
-    </ViewCustom>
+    </CustomView>
   );
 };
 

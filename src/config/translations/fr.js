@@ -67,7 +67,12 @@ export default {
       question_select: 'Sélectionnez une question !',
       question_placeholder: 'Répondez à la question !',
       question_save: 'Sauvegarder',
+      gifs_condition: 'Choisissez un gif',
       gifs_placeholder: 'Rechercher un gif',
+      movie_condition: 'Choisissez un film',
+      movie_placeholder: 'Rechercher un film',
+      music_condition: 'Choisissez une musique',
+      music_placeholder: 'Rechercher une musique',
       custom: {
         title: 'Personnalisez votre profil !',
         text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',

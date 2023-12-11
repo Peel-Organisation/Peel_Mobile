@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const ViewAuth =  styled.View`
+export const ViewAuth = styled.SafeAreaView`
     flex: 1;
     align-items: center;
     justify-content: center;
@@ -46,4 +46,3 @@ export const MainText = styled.Text`
     font-family: 'Roboto-Regular';
     margin-top: 15px;
 `
- 

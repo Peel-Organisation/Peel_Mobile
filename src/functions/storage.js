@@ -5,7 +5,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
-export const  Logout = async ()  =>{
+export const Logout = async () => {
     const trace = await perf().startTrace('Logout');
     crashlytics().log("Logout")
     AsyncStorage.getAllKeys().then((keys) => {
@@ -19,15 +19,15 @@ export const  Logout = async ()  =>{
         });
     }).catch((error) => {
         showMessage({
-        message: "storage error : ", error,
-        type: "info",
+            message: "storage error : ", error,
+            type: "info",
         });
         crashlytics().recordError(error);
     });
     trace.stop();
 }
 
-export const  getStorage = async (value) =>{
+export const getStorage = async (value) => {
     const trace = await perf().startTrace('getStorage');
     crashlytics().log("get from storage : ", value)
     return AsyncStorage.getItem(value).then((getItem) => {
@@ -38,9 +38,10 @@ export const  getStorage = async (value) =>{
     })
 }
 
-export const  addStorage = async (name, value) =>{
+export const addStorage = async (name, value) => {
     const trace = await perf().startTrace('addStorage');
     crashlytics().log("add to storage : ", name, value)
+    if (value === undefined || value === null || value === "") return (false);
     if (name === undefined || name === null || name === "") return (false);
     return AsyncStorage.setItem(name, JSON.stringify(value)).then(() => {
         trace.stop();
@@ -51,7 +52,7 @@ export const  addStorage = async (name, value) =>{
     });
 }
 
-export const  removeStorage = async (name) =>{
+export const removeStorage = async (name) => {
     crashlytics().log("remove from storage : ", name)
     const trace = await perf().startTrace('removeStorage')
     return AsyncStorage.removeItem(name).then(() => {
@@ -63,10 +64,10 @@ export const  removeStorage = async (name) =>{
     });
 }
 
-export const  addStorageMessage = async (conversation_id, message) =>{
+export const addStorageMessage = async (conversation_id, message) => {
     const trace = await perf().startTrace('addStorageMessage');
     return getStorage(conversation_id).then((messages) => {
-        if (messages == null){
+        if (messages == null) {
             messages = [];
         }
         messages.push(message);
@@ -82,11 +83,11 @@ export const updateStorageMessage = async (conversation_id, messages) =>
     addStorage(conversation_id, messages);
 
 
-export const  getStorageMessage = async (conversation_id) =>{
+export const getStorageMessage = async (conversation_id) => {
     crashlytics().log("get from storage : ", conversation_id)
     const trace = await perf().startTrace('getStorageMessage');
     return getStorage(conversation_id).then((messages) => {
-        if (messages == null){
+        if (messages == null) {
             messages = [];
         }
         trace.stop();
