@@ -4,6 +4,7 @@ import perf from '@react-native-firebase/perf';
 
 export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) => {
     const trace = await perf().startTrace('FetchPeelApi');
+    console.log(`${process.env.API_LINK}${url}`)
     try {
         crashlytics().log("\n\n FetchPeelApi")
         const response = await fetch(`${process.env.API_LINK}${url}`, {

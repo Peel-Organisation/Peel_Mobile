@@ -32,7 +32,6 @@ export const updateUser = async (user) => {
     addStorage('user', user);
     const token = await  getStorage('token')
     return FetchPeelApi({url : "/api/user/", method:"PUT", body: user, token:token}).then(res => {
-        console.log(res);
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
@@ -65,11 +64,10 @@ export  const  TestAuth = async () => {
     });
 }
 
-export const GetMatchList = async () => {
+export const PostMatchList = async (filtersArray) => {
     crashlytics().log("\n\n GetMatchList")
     const token = await  getStorage('token')
-    const body = { interest: interest, music: music, sport: sport, movie: movie, games: games }
-    // return FetchPeelApi({url : "/api/match/swipeProfil", method:"GET", token:token}).then(res => {
+    const body = filtersArray
     return FetchPeelApi({url : "/api/match/getSwipeProfilUser", method:"POST", body:body, token:token}).then(res => {
         return (res);
     }).catch(error => {
@@ -78,6 +76,16 @@ export const GetMatchList = async () => {
 }
 
 
+export const GetMatchListByFilter = async (filtersArray) => {
+    crashlytics().log("\n\n SwipeProfil")
+    const token = await  getStorage('token')
+    const body = filtersArray
+    return FetchPeelApi({url : "/api/match/swipeProfil", method:"GET", token:token}).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}
 
 
 

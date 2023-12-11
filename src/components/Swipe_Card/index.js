@@ -132,7 +132,7 @@ const Swipe_Card = props => {
         {/* In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement */}
         {/* The value of each key is the name of the module */}
         {/* So we can use the value of each key to display the corresponding component */}
-        {Object.keys(User.profileModules).map(key => {
+        {User.profileModules && Object.keys(User.profileModules).map(key => {
           if (User.profileModules[key] != undefined) {
             return moduleComponents.map(module => {
               if (module.key == User.profileModules[key]) {

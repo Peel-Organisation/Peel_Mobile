@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe  from "../../components/Swipe";
 import crashlytics from '@react-native-firebase/crashlytics';
-import { GetMatchList} from "../../functions/api_request"
+import { PostMatchList } from "../../functions/api_request"
 import Loading from "../../components/loading";
-
+import Filter from "../../components/Filter";
 
 
 const Match = () => {
@@ -15,31 +15,26 @@ const Match = () => {
     const [loading, setLoading] = useState(true);
     const [userList, setUserList] = useState([{}]);
     const [filter, setFilter] = useState(false);
-    
-    
-    const [activeFilter, setActiveFilter] = useState([]);
-    
-    const handleFilterArray = ( filterName ) => {
-        const updatedFilterArray = {...activeFilter};
-        updatedFilterArray[filterName] = !updatedFilterArray[filterName];
-        setActiveFilter(updatedFilterArray);
-    };
-    
-    useEffect(() => {
-        setActiveFilter(filtersArray);
-    },[])
 
-    const filtersArray = {
+    const [filtersArray, setFiltersArray] = useState({
         interest: false,
         music: false,
         sport: false,
         movie: false,
         games: false,
-    };
+    });
+
+    const [activeFilters, setActiveFilters] = useState({
+        interest: false,
+        music: false,
+        sport: false,
+        movie: false,
+        games: false,
+    });
     
     useEffect(() => {
         crashlytics().log("Match screen mounted");
-        GetMatchList().then(matchList => {
+        PostMatchList(activeFilters).then(matchList => {
             if (matchList != undefined) {
                 setUserList(matchList);
                 setLoading(false);
@@ -49,7 +44,7 @@ const Match = () => {
         }).catch((error) => {
             crashlytics().recordError(error)
         })
-    }, [activeFilter]);
+    }, [activeFilters]);
 
     if (loading) {
         return (
@@ -64,25 +59,21 @@ const Match = () => {
                 <StatusBar backgroundColor="#FC912F"/>
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
-                    <FilterIcon>
+                    <FilterIcon onPress={()=>{setFilter(!filter)}}>
                         <FilterIconImg source={require('@/../assets/images/icons/sort.png')}/>
                     </FilterIcon>
                 </Header>
-                <Swipe userList={userList} />
+                <Swipe userList={userList}/>
                 
                 {
                     filter &&(
-                        <Filter filter={filter} setFilter={setFilter} handleFilterArray={handleFilterArray}/>
+                        <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
                     )
                 }
             </Container>
         </>
-    )
-}
+    );
+};
 
 
-export default Match
-
-
-
-
+export default Match;
