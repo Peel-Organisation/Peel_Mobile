@@ -23,6 +23,7 @@ const Music = ({ route, navigation }) => {
   const [page, setPage] = React.useState(1);
   const [musics, setMusics] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [navButton, setNavButton] = useState(null);
   useEffect(() => {
     getStorage('user')
       .then(fetchedUser => {
@@ -138,6 +139,31 @@ const Music = ({ route, navigation }) => {
     );
   };
 
+  useEffect(() => {
+    console.log('user : ', user.music);
+    if (
+      user.music?.title != undefined && user.music?.title != '' && user.music?.id != undefined && user.music?.id != '' && user.music?.artist != undefined && user.music?.artist != '' && user.music?.image != undefined && user.music?.image != '' && user.music?.album != undefined && user.music?.album != ''
+    ) {
+      setNavButton(
+        <UpdateButton
+          user={user}
+          prevPage="Profile6"
+          nextPage="Profile8"
+          navigation={navigation}
+        />
+      );
+    } else {
+      setNavButton(
+        <UpdateButton
+          user={user}
+          prevPage="Profile6"
+          nextPage=""
+          navigation={navigation}
+        />
+      );
+    }
+  }, [user]);
+
   return (
     <CustomView>
       <HeaderView>
@@ -166,12 +192,7 @@ const Music = ({ route, navigation }) => {
         />
       </FieldView>
       {loading && <MainText>Chargement...</MainText>}
-      <UpdateButton
-        user={user}
-        prevPage="Profile6"
-        nextPage="Profile8"
-        navigation={navigation}
-      />
+      {navButton}
     </CustomView>
   );
 };

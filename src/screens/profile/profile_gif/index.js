@@ -20,6 +20,7 @@ const Gif = ({ route, navigation }) => {
   const [user, setUser] = useState({});
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(0);
+  const [navButton, setNavButton] = useState(null);
 
   const [gifs, setGifs] = useState([]);
 
@@ -126,6 +127,33 @@ const Gif = ({ route, navigation }) => {
     );
   };
 
+  useEffect(() => {
+    if (
+      user.gif != undefined && user.gif != null && user.gif?.id != undefined && user.gif?.id != '' && user.gif?.title != undefined && user.gif?.title != '' && user.gif?.url != undefined && user.gif?.url != '' && user.gif?.image != undefined && user.gif?.image != null) {
+      setNavButton(
+        <>
+          <UpdateButton
+            user={user}
+            prevPage="Profile4"
+            nextPage="Profile6"
+            navigation={navigation}
+          />
+        </>,
+      );
+    } else {
+      setNavButton(
+        <>
+          <UpdateButton
+            user={user}
+            prevPage="Profile4"
+            nextPage=""
+            navigation={navigation}
+          />
+        </>,
+      );
+    }
+  }, [user]);
+
   return (
     <CustomView>
       <HeaderView>
@@ -149,12 +177,7 @@ const Gif = ({ route, navigation }) => {
           numColumns={2}
         />
       </FieldView>
-      <UpdateButton
-        user={user}
-        prevPage="Profile4"
-        nextPage="Profile6"
-        navigation={navigation}
-      />
+      {navButton}
     </CustomView>
   );
 };

@@ -42,6 +42,9 @@ const Profile2 = ({ route, navigation }) => {
             );
           }
         }
+        if (fetchedUser.gender == undefined) {
+          fetchedUser.gender = "Male";
+        }
         setUser(fetchedUser);
       })
       .catch(error => {

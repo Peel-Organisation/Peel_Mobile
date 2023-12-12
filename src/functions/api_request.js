@@ -41,22 +41,20 @@ export const updateUser = async (user) => {
 
 export const TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
-    messaging().getToken().then((firebaseToken) => {
-        console.log("test")
-        console.log(firebaseToken)
-        getStorage('token').then((token) => {
+    return messaging().getToken().then((firebaseToken) => {
+        return getStorage('token').then((token) => {
             if (token == null || token == undefined) {
                 crashlytics().log("User not authenticated");
                 Logout();
                 return false;
             }
-            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(res => {
-                if (res == null || res == undefined || res == "") {
+            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(({ auth, token, userId }) => {
+                if (auth == null || auth == undefined || auth == false) {
                     Logout();
                     return false;
                 } else {
                     crashlytics().log("User authenticated");
-                    crashlytics().setUserId(res.userId.toString());
+                    crashlytics().setUserId(userId.toString());
                     update_messaging();
                     return true;
                 }
@@ -66,13 +64,10 @@ export const TestAuth = async () => {
             });
         }).catch(error => {
             crashlytics().recordError(error)
-            console.error(error)
-
             return false;
         });
     }).catch(error => {
         crashlytics().recordError(error)
-        console.error(error)
         return false;
     });
 }
@@ -80,10 +75,19 @@ export const TestAuth = async () => {
 export const IsProfileCompleted = async () => {
     crashlytics().log("\n\n IsProfileCompleted")
     const token = await getStorage('token')
-    return FetchPeelApi({ url: "/api/user/verifyProfileCompleted", method: "GET", token: token }).then(res => {
-        return (res);
+    return FetchPeelApi({ url: "/api/auth/verifyProfileCompleted", method: "GET", token: token }).then(({ auth, userId }) => {
+        console.log("auth : ", auth)
+        if (auth == null || auth == undefined || auth == false) {
+            crashlytics().log("User profile not completed");
+            return false;
+        } else {
+            crashlytics().log("User profile completed");
+            crashlytics().setUserId(userId.toString());
+            return true;
+        }
     }).catch(error => {
         crashlytics().recordError(error)
+        return false;
     });
 }
 

@@ -37,7 +37,11 @@ const Login = ({ navigation }) => {
         if (!email.toLowerCase().match(email_regex)) {
             alert("erreur de saisie");
         } else {
-            const error = loginRequest(email, password, navigation);
+            loginRequest(email, password, navigation).then(({ error, message }) => {
+                if (error) {
+                    alert(message);
+                }
+            });
         }
     }
 
