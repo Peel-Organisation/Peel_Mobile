@@ -4,8 +4,6 @@ import messaging from '@react-native-firebase/messaging';
 import { update_messaging } from './update_messaging';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-
-
 export const GetUser = async (defaultUser) => {
     crashlytics().log("\n\n GetUser")
     const token = await getStorage('token')
@@ -37,7 +35,6 @@ export const updateUser = async (user) => {
         crashlytics().recordError(error)
     });
 }
-
 
 export const TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
@@ -88,21 +85,16 @@ export const IsProfileCompleted = async () => {
 }
 
 
-export const GetMatchList = async () => {
+export const PostMatchList = async (filtersArray) => {
     crashlytics().log("\n\n GetMatchList")
-    const token = await getStorage('token')
-    return FetchPeelApi({ url: "/api/match/swipeProfil", method: "GET", token: token }).then(res => {
+    const token = await  getStorage('token')
+    const body = filtersArray
+    return FetchPeelApi({url : "/api/match/getSwipeProfilUser", method:"POST", body:body, token:token}).then(res => {
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
     });
 }
-
-
-
-
-
-
 
 export const sendSwipe = async (user_target, typeOfLike) => {
     crashlytics().log("\n\n sendSwipe")
@@ -114,9 +106,6 @@ export const sendSwipe = async (user_target, typeOfLike) => {
         crashlytics().recordError(error)
     });
 }
-
-
-
 
 export const loginRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nlogin request")
@@ -148,7 +137,6 @@ export const registerRequest = async (email, password, navigation) => {
         crashlytics().recordError(error)
     })
 }
-
 
 export const getInterestList = async () => {
     crashlytics().log("\n\n GetInterestList")
@@ -185,7 +173,6 @@ export const GetContactList = async () => {
         crashlytics().recordError(error)
     });
 }
-
 
 export const getMessageList = async (conversationId) => {
     crashlytics().log("\n\n getMessageList")
