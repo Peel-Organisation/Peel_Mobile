@@ -44,6 +44,7 @@ const Swipe_Card = props => {
       key: 'gif',
       component: (
         <GifImage
+          key="gif"
           source={{
             uri: `${User?.gif?.image?.webp}`,
           }}
@@ -53,7 +54,7 @@ const Swipe_Card = props => {
     {
       key: 'biographie',
       component: (
-        <Biography>
+        <Biography key="biographie">
           <BiographyText>{User.biographie}</BiographyText>
         </Biography>
       ),
@@ -61,12 +62,12 @@ const Swipe_Card = props => {
     {
       key: 'interests',
       component: (
-        <View>
+        <View key="interests">
           <InteretTitle>{t('Card.interest')}</InteretTitle>
           <InteretView>
             {User.interests?.map(interet => {
               return (
-                <InteretBox key={interet._id}>
+                <InteretBox key={interet.name}>
                   <InteretText>{interet.name}</InteretText>
                 </InteretBox>
               );
@@ -78,11 +79,11 @@ const Swipe_Card = props => {
     {
       key: 'questions',
       component: (
-        <View>
+        <View key="questions">
           <QuestionView>
             {User.questions?.map(question => {
               return (
-                <View key={question._id}>
+                <View key={question.question?._id}>
                   <View>
                     <QuestionText>{question.question?.question}</QuestionText>
                   </View>
@@ -99,7 +100,7 @@ const Swipe_Card = props => {
     {
       key: 'movie',
       component: (
-        <View>
+        <View key="movie">
           <MovieImage
             source={{
               uri: `${User?.movie?.images?.poster_path}`,
@@ -111,7 +112,7 @@ const Swipe_Card = props => {
     {
       key: 'music',
       component: (
-        <View>
+        <View key="music">
           <MusicImage
             source={{
               uri: `${User?.music?.image}`,
@@ -138,11 +139,11 @@ const Swipe_Card = props => {
         {/* In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement */}
         {/* The value of each key is the name of the module */}
         {/* So we can use the value of each key to display the corresponding component */}
-        {User.profileModules && Object.keys(User.profileModules).map(key => {
+        {User.profileModules && Object.keys(User.profileModules).map((key) => {
           if (User.profileModules[key] != undefined) {
             return moduleComponents.map(module => {
               if (module.key == User.profileModules[key]) {
-                return module.component;
+                return (<View key={module.key}>{module.component}</View>);
               }
             });
           }
