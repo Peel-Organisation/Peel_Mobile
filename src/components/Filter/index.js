@@ -13,7 +13,7 @@ const Filter = ({ filter, setFilter, filtersArray, setFiltersArray, activeFilter
                 <Header>
                     <TitleText>{t("home.filter")}</TitleText>
                     <FilterIcon onPress={()=>{setFilter(!filter)}}>
-                        <FilterIconImg source={require('@/../assets/images/icons/sort.png')}/>
+                        <FilterIconImg source={require('../../../assets/images/icons/sort.png')}/>
                     </FilterIcon>
                 </Header>
                 <FiltersView>
