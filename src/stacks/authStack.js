@@ -5,10 +5,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTranslation} from 'react-i18next';
 import styled from 'styled-components/native';
 
-import HomeImage from '../img/tabIcons/home.png';
+import HomeImage from '../img/tabIcons/home-48px-shadow.png';
 import ChatImage from '../img/tabIcons/chat.png';
 import SettingsImage from '../img/tabIcons/settings.png';
-import HomeSelectedImage from '../img/tabIcons/homeSelected.png';
+import HomeSelectedImage from '../img/tabIcons/home-48px-color.png';
 import ChatSelectedImage from '../img/tabIcons/chatSelected.png';
 import SettingsSelectedImage from '../img/tabIcons/settingsSelected.png';
 
@@ -30,6 +30,14 @@ const TabStackScreen = () => {
           Icon({route, focused, color, size}),
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
+        tabBarShowLabel: false,
+        tabBarLabel: () => null, 
+        tabBarStyle: {
+          height: 60,
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
       })}>
       <TabStack.Screen
         name="Home"
@@ -70,7 +78,7 @@ const AuthStack = ({navigation}) => {
 export default AuthStack;
 
 const Icon = ({route, focused, color, size}) => {
-  let iconName = '';
+  let iconName = '';  
   if (color != 'gray') {
     if (route.name === 'Home') {
       iconName = <ImageLogo source={HomeSelectedImage} />;
@@ -95,11 +103,11 @@ const Icon = ({route, focused, color, size}) => {
 };
 
 const ImageLogo = styled.Image`
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
 `;
 
 const ImagePicto = styled.Image`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 `;

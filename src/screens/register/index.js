@@ -56,6 +56,7 @@ const Register = ({navigation}) => {
         <HeaderText>{t('register.title')}</HeaderText>
       </Header>
       <ViewCustom>
+        <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
         <Spacer />
         <MainText>{t('register.email')}</MainText>
         <FieldInput
