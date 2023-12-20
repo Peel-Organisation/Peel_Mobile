@@ -87,9 +87,9 @@ export const IsProfileCompleted = async () => {
 
 export const PostMatchList = async (filtersArray) => {
     crashlytics().log("\n\n GetMatchList")
-    const token = await  getStorage('token')
+    const token = await getStorage('token')
     const body = filtersArray
-    return FetchPeelApi({url : "/api/match/getSwipeProfilUser", method:"POST", body:body, token:token}).then(res => {
+    return FetchPeelApi({ url: "/api/match/getSwipeProfilUser", method: "POST", body: body, token: token }).then(res => {
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
@@ -126,7 +126,7 @@ export const loginRequest = async (email, password, navigation) => {
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
     const firebaseToken = await messaging().getToken()
-    const body = { email: email.toLowerCase, password: password }
+    const body = { email: email.toLowerCase(), password: password }
     return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
         addStorage("token", res['token'])
         addStorage("userId", res['userId'].toString())
