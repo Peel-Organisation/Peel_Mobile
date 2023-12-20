@@ -28,13 +28,13 @@ const Swipe_Card = props => {
   const getAge = birthday => {
     birthday = new Date(birthday);
     let now = new Date();
-    var month_diff = now.getTime() - birthday.getTime();
+    let month_diff = now.getTime() - birthday.getTime();
     //convert the calculated difference in date format
-    var age_dt = new Date(month_diff);
+    let age_dt = new Date(month_diff);
     //extract year from date
-    var year = age_dt.getUTCFullYear();
+    let year = age_dt.getUTCFullYear();
     //now calculate the age of the user
-    var user_age = Math.abs(year - 1970);
+    let user_age = Math.abs(year - 1970);
 
     return user_age;
   };
@@ -123,6 +123,7 @@ const Swipe_Card = props => {
   ];
 
   return (
+
     <HomeCard>
       <UserCont>
         <Name>
@@ -149,6 +150,8 @@ const Swipe_Card = props => {
         })}
       </UserCont>
     </HomeCard>
+  
+    
   );
 };
 
