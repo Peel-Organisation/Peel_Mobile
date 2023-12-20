@@ -103,8 +103,8 @@ const Icon = ({route, focused, color, size}) => {
 };
 
 const ImageLogo = styled.Image`
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
 `;
 
 const ImagePicto = styled.Image`
