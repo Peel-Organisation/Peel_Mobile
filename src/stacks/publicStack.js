@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from "react-i18next";
 import crashlytics from '@react-native-firebase/crashlytics';
-
+import RetryButton from '../components/Retry';
 
 
 import Login from '../screens/login';
@@ -16,15 +16,21 @@ import { TestAuth, IsProfileCompleted } from '../functions/api_request';
 const PublicStack = ({ navigation }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = React.useState(true);
-
+  const [retry, setRetry] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   useEffect(() => {
-    (async () => {
+    crashlytics().log("mounting public stack")
+    testProfile();
+  }, []);
+
+  const testProfile = async () => {
+    try {
+      console.log("testProfile")
       let auth_bool = await TestAuth()
-      let profile_bool = await IsProfileCompleted()
-      console.log("profile_bool : ", profile_bool)
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
+        let profile_bool = await IsProfileCompleted()
         if (profile_bool) {
           setLoading(false);
           crashlytics().log("navigate to auth");
@@ -39,17 +45,25 @@ const PublicStack = ({ navigation }) => {
         crashlytics().log("navigate to public")
         navigation.navigate('Public');
       }
-    })();
+    } catch (error) {
+      crashlytics().recordError(error);
+      setRetry(true);
+      setLoading(false);
+      setError(error.message);
+    }
+  }
 
-    return () => {
-      crashlytics().log("unmounting public stack")
-    };
-  }, []);
+
 
   if (loading) {
     return (
       <Loading />
     );
+  }
+  if (retry) {
+    return (
+      <RetryButton error={error} retryFunc={() => testProfile()} />
+    )
   }
 
 

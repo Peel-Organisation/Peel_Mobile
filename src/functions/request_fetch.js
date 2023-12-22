@@ -43,6 +43,9 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
     }
     catch (error) {
         crashlytics().recordError(error);
+        if (process.env.NODE_ENV === "development") {
+            console.log("error : ", error);
+        }
         trace.stop();
         return Promise.reject(error);
     }
