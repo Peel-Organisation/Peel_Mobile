@@ -43,7 +43,7 @@ const Biographie = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ biographie: user.biographie }}
             prevPage="Profile2"
             nextPage="Profile4"
             navigation={navigation}
@@ -58,7 +58,7 @@ const Biographie = ({ route, navigation }) => {
               <ConditionText>{t('profile.fill_min_bio')}</ConditionText>
               <ConditionText>{t('profile.fill')}</ConditionText>
               <UpdateButton
-                user={user}
+                user={{ biographie: user.biographie }}
                 prevPage="Profile2"
                 nextPage=""
                 navigation={navigation}

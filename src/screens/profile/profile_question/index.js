@@ -76,7 +76,7 @@ const QuestionProfil = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ questions: user.questions }}
             prevPage="Profile8"
             nextPage="Auth"
             navigation={navigation}
@@ -88,7 +88,7 @@ const QuestionProfil = ({ route, navigation }) => {
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ questions: user.questions }}
             prevPage="Profile8"
             nextPage=""
             navigation={navigation}
