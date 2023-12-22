@@ -47,7 +47,7 @@ export const TestAuth = async () => {
                 Logout();
                 return false;
             }
-            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(res => {
+            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", userToken: token, firebaseToken: firebaseToken }).then(res => {
                 if (res == null || res == undefined || res == "") {
                     Logout();
                     return false;
@@ -126,7 +126,7 @@ export const loginRequest = async (email, password, navigation) => {
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
     const firebaseToken = await messaging().getToken()
-    const body = { email: email.toLowerCase, password: password }
+    const body = { email: email.toLowerCase(), password: password }
     return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
         addStorage("token", res['token'])
         addStorage("userId", res['userId'].toString())
@@ -194,3 +194,14 @@ export const sendMessage = async (conversationId, message) => {
         crashlytics().recordError(error)
     });
 };
+
+export const createInstantConversation = async (user2) => {
+    crashlytics().log("\n\n createInstantConversation with:", user2._id)
+    const token = await getStorage('token')
+    const body = { user2: user2 }
+    return FetchPeelApi({ url: `/api/conversation/instant`, method: "POST", token: token, body: body }).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}
