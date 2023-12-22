@@ -8,18 +8,15 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
 export const CardStackView = styled(CardStack)`
-    margin-top: 12px;
-    width: 86%;
-    height: 77%;
+    width: ${DIMENSION_WIDTH - 40}px;
+    height: ${DIMENSION_HEIGHT - 240}px;
     align-self: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 13px;
-    border: 1px solid #DFD6CE;
-    `
+    margin-top: 5%;
+    border-radius: 15px;
+`
 
 export const ButtonStack = styled.SafeAreaView`
-    margin-top: 30px;
+    margin-top: 5%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -34,10 +31,10 @@ export const Button = styled.TouchableOpacity`
     height: 50px;
     align-items: center;
     justify-content: center;
+    ${Platform.OS === 'android' ? 'elevation: 3' : 'shadow-color: #000; shadow-offset: 0 2px; shadow-opacity: 0.1; shadow-radius: 4px;'};
 `
 
 export const Icon = styled.Image`
     width: 50%;
     height: 50%;
-
 `

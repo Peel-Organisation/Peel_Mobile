@@ -1,18 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
 import {
-  MovieImage
+  MovieImage,
+  MovieArea,
+  MovieInfo,
+  MovieTitle
 } from './styles';
 
-const MovieCard = ({ User }) => {
+const MovieCard = ({ MovieURL, MovieName, MovieGenre}) => {
   return (
-    <View>
-      <MovieImage
-        source={{
-          uri: `${User?.movie?.images?.poster_path}`,
-        }}
-      />
-    </View>
+    <MovieArea>
+      <MovieInfo>
+        <MovieTitle>{MovieName}</MovieTitle>
+        <MovieTitle>{MovieGenre}</MovieTitle>
+      </MovieInfo>
+      <MovieImage source={{uri: `${MovieURL}`}} resizeMode='contain'/>
+    </MovieArea>
   );
 };
 

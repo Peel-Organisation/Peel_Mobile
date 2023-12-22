@@ -13,12 +13,15 @@ import {
   QuestionView,
   QuestionText,
   ResponseText,
-  GifImage,
   Locate,
   UserCont,
   MovieImage,
   MusicImage,
 } from './styles';
+import BiographyCard from './Biography/index';
+import Gif_Card from './Gif/index';
+import MovieCard from './Movie/index';
+import SwipeCardSection from '../UI/SwipeCardSection';
 
 const Swipe_Card = props => {
   const { t } = useTranslation();
@@ -39,40 +42,66 @@ const Swipe_Card = props => {
     return user_age;
   };
 
+  // const moduleComponentsTopSection = [
+  //   {
+  //     key: 'gif',
+  //     component: (
+  //       <GifImage source={{uri: `${User?.gif?.image?.webp}`}} resizeMode="cover" />
+  //     ),
+  //   },
+  //   {
+  //     key: 'movie',
+  //     component: (
+  //       <View>
+  //         <MovieImage source={{uri: `${User?.movie?.images?.poster_path}`}}/>
+  //       </View>
+  //     ),
+  //   },
+  //   {
+  //     key: 'music',
+  //     component: (
+  //       <View>
+  //         <MusicImage source={{uri: `${User?.music?.image}`}}/>
+  //       </View>
+  //     ),
+  //   },
+  // ];
+
+
+
+
+
   const moduleComponents = [
     {
       key: 'gif',
       component: (
-        <GifImage
-          source={{
-            uri: `${User?.gif?.image?.webp}`,
-          }}
-        />
+        <Gif_Card User={User?.gif?.image?.webp} />
       ),
     },
     {
       key: 'biographie',
       component: (
-        <Biography>
+        <SwipeCardSection>
           <BiographyText>{User.biographie}</BiographyText>
-        </Biography>
+        </SwipeCardSection>
       ),
     },
     {
       key: 'interests',
       component: (
-        <View>
-          <InteretTitle>{t('Card.interest')}</InteretTitle>
-          <InteretView>
-            {User.interests?.map(interet => {
-              return (
-                <InteretBox key={interet._id}>
-                  <InteretText>{interet.name}</InteretText>
-                </InteretBox>
-              );
-            })}
-          </InteretView>
-        </View>
+        <InteretView>
+          <View>
+            <InteretTitle>{t('Card.interest')}</InteretTitle>
+          </View>
+           
+          {User.interests?.map(interet => {
+            return (
+              <InteretBox key={interet._id}>
+                <InteretText>{interet.name}</InteretText>
+              </InteretBox>
+            );
+          })}
+        </InteretView>
       ),
     },
     {
@@ -100,11 +129,7 @@ const Swipe_Card = props => {
       key: 'movie',
       component: (
         <View>
-          <MovieImage
-            source={{
-              uri: `${User?.movie?.images?.poster_path}`,
-            }}
-          />
+          <MovieCard MovieURL={User?.movie?.images?.backdrop_path} MovieGenre={User?.movie?.genre_ids?.name} MovieName={User?.movie?.title}/>
         </View>
       ),
     },
@@ -123,7 +148,6 @@ const Swipe_Card = props => {
   ];
 
   return (
-
     <HomeCard>
       <UserCont>
         <Name>
@@ -136,6 +160,10 @@ const Swipe_Card = props => {
             <>Recherche l'amour</>
           )}
         </Locate>
+
+
+         
+          
         {/* In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement */}
         {/* The value of each key is the name of the module */}
         {/* So we can use the value of each key to display the corresponding component */}
@@ -150,8 +178,6 @@ const Swipe_Card = props => {
         })}
       </UserCont>
     </HomeCard>
-  
-    
   );
 };
 

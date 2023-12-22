@@ -17,9 +17,6 @@ const Filter = ({ filter, setFilter, filtersArray, setFiltersArray, activeFilter
                     </FilterIcon>
                 </Header>
                 <FiltersView>
-
-                    <Search>{t("home.filter")}</Search>
-
                     <FilterSelector title={"Mes centres d'intérêts"} filterName="interest" filtersArray={filtersArray} setFiltersArray={setFiltersArray}/>
                     <FilterSelector title={"Musiques"} filterName="music" filtersArray={filtersArray} setFiltersArray={setFiltersArray}/>
                     <FilterSelector title={"Sports"} filterName="sport" filtersArray={filtersArray} setFiltersArray={setFiltersArray}/>
