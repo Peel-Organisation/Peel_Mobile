@@ -47,7 +47,7 @@ export const TestAuth = async () => {
                 Logout();
                 return false;
             }
-            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(res => {
+            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", userToken: token, firebaseToken: firebaseToken }).then(res => {
                 if (res == null || res == undefined || res == "") {
                     Logout();
                     return false;
@@ -194,3 +194,14 @@ export const sendMessage = async (conversationId, message) => {
         crashlytics().recordError(error)
     });
 };
+
+export const createInstantConversation = async (user2) => {
+    crashlytics().log("\n\n createInstantConversation with:", user2._id)
+    const token = await getStorage('token')
+    const body = { user2: user2 }
+    return FetchPeelApi({ url: `/api/conversation/instant`, method: "POST", token: token, body: body }).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}
