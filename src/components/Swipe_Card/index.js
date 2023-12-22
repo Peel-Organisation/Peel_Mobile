@@ -4,12 +4,6 @@ import { View } from 'react-native';
 import {
   HomeCard,
   Name,
-  Biography,
-  BiographyText,
-  InteretTitle,
-  InteretBox,
-  InteretView,
-  InteretText,
   QuestionView,
   QuestionText,
   ResponseText,
@@ -19,9 +13,10 @@ import {
   MusicImage,
 } from './styles';
 import BiographyCard from './Biography/index';
+import InterestsCard from './Interests/index';
 import Gif_Card from './Gif/index';
 import MovieCard from './Movie/index';
-import SwipeCardSection from '../UI/SwipeCardSection';
+import MusicCard from './Music';
 
 const Swipe_Card = props => {
   const { t } = useTranslation();
@@ -72,77 +67,55 @@ const Swipe_Card = props => {
 
 
   const moduleComponents = [
-    {
-      key: 'gif',
-      component: (
-        <Gif_Card User={User?.gif?.image?.webp} />
-      ),
-    },
-    {
-      key: 'biographie',
-      component: (
-        <SwipeCardSection>
-          <BiographyText>{User.biographie}</BiographyText>
-        </SwipeCardSection>
-      ),
-    },
-    {
-      key: 'interests',
-      component: (
-        <InteretView>
-          <View>
-            <InteretTitle>{t('Card.interest')}</InteretTitle>
-          </View>
-           
-          {User.interests?.map(interet => {
-            return (
-              <InteretBox key={interet._id}>
-                <InteretText>{interet.name}</InteretText>
-              </InteretBox>
-            );
-          })}
-        </InteretView>
-      ),
-    },
-    {
-      key: 'questions',
-      component: (
-        <View>
-          <QuestionView>
-            {User.questions?.map(question => {
-              return (
-                <View key={question._id}>
-                  <View>
-                    <QuestionText>{question.question?.question}</QuestionText>
-                  </View>
-                  <View>
-                    <ResponseText>{question.answer}</ResponseText>
-                  </View>
-                </View>
-              );
-            })}
-          </QuestionView>
-        </View>
-      ),
-    },
+    // {
+    //   key: 'gif',
+    //   component: (
+    //     <Gif_Card User={User?.gif?.image?.webp} />
+    //   ),
+    // },
+    // {
+    //   key: 'biographie',
+    //   component: (
+    //     <BiographyCard Bio={User?.biographie}/>
+    //   ),
+    // },
+    // {
+    //   key: 'interests',
+    //   component: (
+    //    <InterestsCard User={User}/>     
+    //   ),
+    // },
+    // {
+    //   key: 'questions',
+    //   component: (
+    //     <View>
+    //       <QuestionView>
+    //         {User.questions?.map(question => {
+    //           return (
+    //             <View key={question._id}>
+    //               <View>
+    //                 <QuestionText>{question.question?.question}</QuestionText>
+    //               </View>
+    //               <View>
+    //                 <ResponseText>{question.answer}</ResponseText>
+    //               </View>
+    //             </View>
+    //           );
+    //         })}
+    //       </QuestionView>
+    //     </View>
+    //   ),
+    // },
     {
       key: 'movie',
-      component: (
-        <View>
-          <MovieCard MovieURL={User?.movie?.images?.backdrop_path} MovieGenre={User?.movie?.genre_ids?.name} MovieName={User?.movie?.title}/>
-        </View>
+      component: ( 
+        <MovieCard MovieURL={User?.movie?.images?.backdrop_path} Movie={User?.movie?.title}/>
       ),
     },
     {
       key: 'music',
       component: (
-        <View>
-          <MusicImage
-            source={{
-              uri: `${User?.music?.image}`,
-            }}
-          />
-        </View>
+        <MusicCard MusicURL={User?.music?.image} MTitle={User?.music?.title} MArtist={User?.music?.artist?.name}/>
       ),
     },
   ];

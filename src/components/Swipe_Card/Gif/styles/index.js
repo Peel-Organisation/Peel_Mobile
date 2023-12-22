@@ -12,7 +12,9 @@ export const GifArea = styled.SafeAreaView`
     border-radius: 15px;
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
-    overflow: hidden;  
+    overflow: hidden;
+    margin-bottom: 2%;
+    margin-top: 2%;  
 `
 export const GifImage = styled.Image`
     flex:1;

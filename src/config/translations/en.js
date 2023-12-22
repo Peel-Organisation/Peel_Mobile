@@ -95,9 +95,11 @@ export default {
       main_text: 'To peel more than just an orange',
     },
     Card: {
+      gif: 'Gif',
       biography: 'Biography',
       interest: 'Hobbies',
       music: 'Latest favorite music',
+      movie: 'Latest favorite movie',
     },
     Contact: {
       title: 'Contacts',

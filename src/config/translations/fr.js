@@ -97,9 +97,11 @@ export default {
       main_text: "Pour peler autre chose qu'une orange",
     },
     Card: {
+      gif: 'Gif',
       biography: 'Biographie',
       interest: "Centres d'intérêts",
       music: 'Musique du moment',
+      movie: 'Film du moment',
     },
     Contact: {
       title: 'Contacts',

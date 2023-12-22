@@ -1,18 +1,26 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Biography,
-  BiographyText
+  BiographyText,
+  BiographyTitle,
+  Ellipsis
 } from './styles';
 
-const BiographyCard = ({ User }) => {
-
-
+const BiographyCard = ({ Bio }) => {
+  const { t } = useTranslation();
+  
   return (
-    <Biography>
-      <BiographyText>{User?.biographie}</BiographyText>
-    </Biography>
+    <>
+      <BiographyTitle>{t('Card.biography')}</BiographyTitle>
+      <Biography>
+        <BiographyText numberOfLines={3} ellipsizeMode='tail'>
+          {Bio}
+          <Ellipsis> ...</Ellipsis>  
+        </BiographyText>
+      </Biography>
+    </>
   );
-
 };
 
 export default BiographyCard;

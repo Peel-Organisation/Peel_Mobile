@@ -1,20 +1,26 @@
 import React from 'react';
-import {
+import { useTranslation } from 'react-i18next';
+import { 
   MovieImage,
   MovieArea,
   MovieInfo,
-  MovieTitle
+  MovieTitle,
+  MovieName 
 } from './styles';
 
-const MovieCard = ({ MovieURL, MovieName, MovieGenre}) => {
+const MovieCard = ({MovieURL, Movie}) => {
+  const {t} = useTranslation();
+
   return (
-    <MovieArea>
-      <MovieInfo>
-        <MovieTitle>{MovieName}</MovieTitle>
-        <MovieTitle>{MovieGenre}</MovieTitle>
-      </MovieInfo>
-      <MovieImage source={{uri: `${MovieURL}`}} resizeMode='contain'/>
-    </MovieArea>
+    <>
+      <MovieTitle>{t('Card.movie')}</MovieTitle>
+      <MovieArea>
+        <MovieImage source={{uri: `${MovieURL}`}} resizeMode="cover" />
+        <MovieInfo>
+          <MovieName>{Movie}</MovieName>
+        </MovieInfo>
+      </MovieArea>
+    </>
   );
 };
 

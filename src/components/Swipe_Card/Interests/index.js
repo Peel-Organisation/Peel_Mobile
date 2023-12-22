@@ -1,24 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
-  InteretBox,
-  InteretView,
-  InteretText
+  InterestBox,
+  InterestView,
+  InterestTitle,
+  InterestText
 } from './styles';
 
 const InterestsCard = ({ User }) => {
+  const { t } = useTranslation();
   return (
-    <View>
-      <InteretView>
-        {User?.interests?.map(interet => {
+    <>
+      <InterestTitle>{t('Card.interest')}</InterestTitle>
+      <InterestView>
+        {User?.interests?.map(interest => {
           return (
-            <InteretBox key={interet._id}>
-              <InteretText>{interet.name}</InteretText>
-            </InteretBox>
+            <InterestBox key={interest._id}>
+              {/* //TODO: Fix the interest object save and display name here with "interest.name" */}
+              <InterestText>Test</InterestText>
+            </InterestBox>
           );
         })}
-      </InteretView>
-    </View>
+      </InterestView>
+    </>
   );
 };
 

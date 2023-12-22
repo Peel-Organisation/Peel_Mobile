@@ -1,35 +1,30 @@
 import { Dimensions } from "react-native";
 import styled from 'styled-components/native';
 
-
-
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const InteretTitle = styled.Text`
-    font-size: 20px;
+export const InterestTitle = styled.Text`
+    padding: 10px 0px 0px 0px;
+    font-size: 16px;
     color: ${props => props.theme.text};
-    `
+`
 
-export const InteretView = styled.SafeAreaView`
+export const InterestView = styled.SafeAreaView`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    
-    /* width: 100%; */
-    /* display: block; */
-    /* display:inline; */
-    `
+`
 
-export const InteretBox = styled.Text`
+export const InterestBox = styled.Text`
     background-color: ${props => props.theme.primary};
     border-radius: 10px;
     padding: 2%;
     margin: 10px 0px;
 `
 
-export const InteretText = styled.Text`
+export const InterestText = styled.Text`
     font-size: 14px;
     color: ${props => props.theme.background};
 `
