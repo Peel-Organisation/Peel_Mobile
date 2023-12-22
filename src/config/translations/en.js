@@ -15,6 +15,7 @@ export default {
       language_en: 'English',
       edit_profile: 'Edit profile',
       edit_profile_title: 'Customize your profile',
+      contact: 'Contact us',
     },
     navbar: {
       home: 'Home',
