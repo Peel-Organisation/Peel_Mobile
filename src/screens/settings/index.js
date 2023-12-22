@@ -14,6 +14,7 @@ import {
 } from './styles';
 
 import '../../config/translationInit';
+import { Linking } from 'react-native';
 
 const Settings = ({navigation}) => {
   const {t, i18n} = useTranslation();
@@ -67,6 +68,11 @@ const Settings = ({navigation}) => {
         <Button_Settings onPress={() => navigation.navigate('EditProfile')}>
           <Button_Settings_Text>
             {t('settings.edit_profile')}
+          </Button_Settings_Text>
+        </Button_Settings>
+        <Button_Settings onPress={() => Linking.openURL('https://sites.google.com/view/peelapp/nous-contacter')}>
+          <Button_Settings_Text>
+            {t('settings.contact')}
           </Button_Settings_Text>
         </Button_Settings>
       </SettingsList>
