@@ -11,18 +11,28 @@ import Film from "../screens/profile/profile_film"
 import Gif from "../screens/profile/profile_gif"
 import Music from "../screens/profile/profile_music";
 import DateType from "../screens/profile/profile_date_type";
-
+import { useTranslation } from "react-i18next";
+import RetryButton from "../components/Retry";
 import { GetUser } from "../functions/api_request"
 import Loading from "../components/loading";
 const Stack = createNativeStackNavigator();
 const UserContext = React.createContext("token");
 
+
 const PublicStack = () => {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = useState({ "birthday": new Date, "interet": [], "longitude": 0, "latitude": 0, "searchRange": 0, "question_id": [1, 2, 0], "response": ["reponse 1", "reponse 2", "reponse 3"] });
-
+  const [retry, setRetry] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   useEffect(() => {
+    fetchUser()
+  }, []);
+
+  const fetchUser = async () => {
+    setLoading(true);
+    setRetry(false);
+    crashlytics().log("fetchUser")
     GetUser(user).then(user_data => {
       if (user_data) {
         setUser(user_data);
@@ -30,13 +40,21 @@ const PublicStack = () => {
       }
     }).catch((error) => {
       crashlytics().recordError(error)
+      setError(error);
+      setRetry(true);
     });
-  }, []);
+  }
 
   if (loading) {
     return (
       <Loading />
     );
+  }
+
+  if (retry) {
+    return (
+      <RetryButton error={error} retryFunc={() => fetchUser()} />
+    )
   }
 
   return (

@@ -1,4 +1,4 @@
-import { addStorage, getStorage, Logout } from './storage';
+import { addStorage, getStorage, Logout, putStorage } from './storage';
 import { FetchPeelApi } from "./request_fetch";
 import messaging from '@react-native-firebase/messaging';
 import { update_messaging } from './update_messaging';
@@ -25,9 +25,10 @@ export const GetUser = async (defaultUser) => {
     });
 }
 
+
 export const updateUser = async (user) => {
     crashlytics().log("\n\n updateUser")
-    addStorage('user', user);
+    putStorage('user', user);
     const token = await getStorage('token')
     return FetchPeelApi({ url: "/api/user/", method: "PUT", body: user, token: token }).then(res => {
         return (res);
@@ -38,28 +39,27 @@ export const updateUser = async (user) => {
 
 export const TestAuth = async () => {
     crashlytics().log("\n\n TestAuth")
-    const firebaseToken = null
-    try {
-        firebaseToken = await messaging().getToken()
-    } catch (error) {
-        crashlytics().recordError(error)
-    }
     return getStorage('token').then((token) => {
         if (token == null || token == undefined) {
             crashlytics().log("User not authenticated");
             Logout();
             return false;
         }
-        return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(({ auth, token, userId }) => {
-            if (auth == null || auth == undefined || auth == false) {
-                Logout();
-                return false;
-            } else {
-                crashlytics().log("User authenticated");
-                crashlytics().setUserId(userId.toString());
-                update_messaging();
-                return true;
-            }
+        return getFirebaseToken().then((firebaseToken) => {
+            return FetchPeelApi({ url: "/api/auth/protected", method: "GET", token: token, firebaseToken: firebaseToken }).then(({ auth, token, userId }) => {
+                if (auth == null || auth == undefined || auth == false) {
+                    Logout();
+                    return false;
+                } else {
+                    crashlytics().log("User authenticated");
+                    crashlytics().setUserId(userId.toString());
+                    update_messaging();
+                    return true;
+                }
+            }).catch(error => {
+                crashlytics().recordError(error)
+                throw error;
+            });
         }).catch(error => {
             crashlytics().recordError(error)
             throw error;
@@ -67,22 +67,39 @@ export const TestAuth = async () => {
     }).catch(error => {
         crashlytics().recordError(error)
         throw error;
+    }
+    );
+}
+
+getFirebaseToken = async () => {
+    crashlytics().log("\n\n getFirebaseToken")
+    return messaging().getToken().then((firebaseToken) => {
+        return firebaseToken;
+    }).catch(error => {
+        crashlytics().recordError(error)
+        console.log("can't get firebase token : ", error)
+        return null;
     });
 }
 
 export const IsProfileCompleted = async () => {
     crashlytics().log("\n\n IsProfileCompleted")
-    const token = await getStorage('token')
-    return FetchPeelApi({ url: "/api/auth/verifyProfileCompleted", method: "GET", token: token }).then(({ auth, userId }) => {
-        console.log("auth : ", auth)
-        if (auth == null || auth == undefined || auth == false) {
-            crashlytics().log("User profile not completed");
+    getStorage('token').then((token) => {
+        return FetchPeelApi({ url: "/api/auth/verifyProfileCompleted", method: "GET", token: token }).then(({ auth, userId }) => {
+            console.log("auth : ", auth)
+            if (auth == null || auth == undefined || auth == false) {
+                crashlytics().log("User profile not completed");
+                console.log("User profile not completed")
+                return false;
+            } else {
+                crashlytics().log("User profile completed");
+                crashlytics().setUserId(userId.toString());
+                return true;
+            }
+        }).catch(error => {
+            crashlytics().recordError(error)
             return false;
-        } else {
-            crashlytics().log("User profile completed");
-            crashlytics().setUserId(userId.toString());
-            return true;
-        }
+        });
     }).catch(error => {
         crashlytics().recordError(error)
         return false;
@@ -98,6 +115,7 @@ export const PostMatchList = async (filtersArray) => {
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
+        throw error;
     });
 }
 
@@ -114,21 +132,20 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 
 export const loginRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nlogin request")
-    const firebaseToken = null
-    try {
-        firebaseToken = await messaging().getToken()
-    } catch (error) {
-        crashlytics().recordError(error)
-    }
-    const body = { email: email.toLowerCase(), password: password }
-    return FetchPeelApi({ url: `/api/auth/login`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
-        addStorage("token", res['token'].toString())
-        addStorage("userId", res['userId'].toString())
-        crashlytics().log("connecté")
-        crashlytics().setUserId(res['userId'].toString());
-        navigation.navigate("Auth");
-        update_messaging();
-        return { error: false, message: "connecté" };
+    getFirebaseToken().then((firebaseToken) => {
+        const body = { email: email.toLowerCase(), password: password }
+        return FetchPeelApi({ url: `/api/auth/login`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
+            addStorage("token", res['token'].toString())
+            addStorage("userId", res['userId'].toString())
+            crashlytics().log("connecté")
+            crashlytics().setUserId(res['userId'].toString());
+            navigation.navigate("Auth");
+            update_messaging();
+            return { error: false, message: "connecté" };
+        }).catch(error => {
+            crashlytics().recordError(error);
+            return { error: true, message: error.message };
+        });
     }).catch(error => {
         crashlytics().recordError(error);
         return { error: true, message: error.message };
@@ -137,26 +154,25 @@ export const loginRequest = async (email, password, navigation) => {
 
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
-    const firebaseToken = null
-    try {
-        firebaseToken = await messaging().getToken()
-    } catch (error) {
-        crashlytics().recordError(error)
-    }
-    const body = { email: email.toLowerCase(), password: password }
-    console.log("body : ", body)
-    return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
-        addStorage("token", res['token'])
-        addStorage("userId", res['userId'].toString())
-        crashlytics().log("connecté")
-        crashlytics().setUserId(res['userId'].toString());
-        navigation.navigate("Profile");
-        update_messaging();
-        return { error: false, message: "connecté" };
-    }).catch((error) => {
-        crashlytics().recordError(error)
+    getFirebaseToken().then((firebaseToken) => {
+        const body = { email: email.toLowerCase(), password: password }
+        console.log("body : ", body)
+        return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
+            addStorage("token", res['token'])
+            addStorage("userId", res['userId'].toString())
+            crashlytics().log("connecté")
+            crashlytics().setUserId(res['userId'].toString());
+            navigation.navigate("Profile");
+            update_messaging();
+            return { error: false, message: "connecté" };
+        }).catch((error) => {
+            crashlytics().recordError(error)
+            return { error: true, message: error.message };
+        })
+    }).catch(error => {
+        crashlytics().recordError(error);
         return { error: true, message: error.message };
-    })
+    });
 }
 
 export const getInterestList = async () => {
@@ -192,6 +208,7 @@ export const GetContactList = async () => {
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
+        throw error;
     });
 }
 

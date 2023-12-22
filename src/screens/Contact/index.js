@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { ButtonContact, ButtonContactText, Container, ButtonContactSubText } from './styles';
 import { ScrollView } from "react-native";
 import { RefreshControl } from "react-native";
+import RetryButton from "../../components/Retry";
+
 
 const Contact = ({ navigation }) => {
 
@@ -16,6 +18,8 @@ const Contact = ({ navigation }) => {
     const [contactList, setContactList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState()
+    const [retry, setRetry] = React.useState(false);
+    const [error, setError] = React.useState("");
 
     useEffect(() => {
         crashlytics().log("Contact screen mounted");
@@ -23,6 +27,9 @@ const Contact = ({ navigation }) => {
     }, []);
 
     const getContactList = () => {
+        setLoading(true);
+        setRetry(false);
+        setError("");
         getStorage('userId').then(userId => {
             setUserId(userId)
         }).catch((error) => {
@@ -35,8 +42,12 @@ const Contact = ({ navigation }) => {
             }
         }).catch((error) => {
             crashlytics().recordError(error)
+            setError(error.message);
+            setRetry(true);
+            setLoading(false);
         })
     }
+
 
     const refresh = () => {
         setLoading(true);
@@ -48,7 +59,11 @@ const Contact = ({ navigation }) => {
             <Loading />
         );
     }
-
+    if (retry) {
+        return (
+            <RetryButton error={error} retryFunc={() => getContactList()} />
+        )
+    }
 
 
     return (

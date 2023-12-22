@@ -42,7 +42,7 @@ const Profile1 = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ firstName: user.firstName, lastName: user.lastName }}
             prevPage=""
             nextPage="Profile2"
             navigation={navigation}
@@ -54,7 +54,7 @@ const Profile1 = ({ route, navigation }) => {
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ firstName: user.firstName, lastName: user.lastName }}
             prevPage=""
             nextPage=""
             navigation={navigation}

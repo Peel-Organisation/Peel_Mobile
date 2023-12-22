@@ -133,7 +133,7 @@ const Gif = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ gif: user.gif }}
             prevPage="Profile4"
             nextPage="Profile6"
             navigation={navigation}
@@ -144,7 +144,7 @@ const Gif = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ gif: user.gif }}
             prevPage="Profile4"
             nextPage=""
             navigation={navigation}

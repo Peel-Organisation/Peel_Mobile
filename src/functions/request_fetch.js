@@ -33,7 +33,7 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
             console.log("dataJson : ", dataJson);
         }
         let status_code = response.status;
-        if (status_code !== 200) {
+        if (status_code < 200 || status_code >= 300) {
             throw new Error(dataJson.message);
         }
         dataJson.success = true;
@@ -44,7 +44,7 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
     catch (error) {
         crashlytics().recordError(error);
         if (process.env.NODE_ENV === "development") {
-            console.log("error : ", error);
+            console.log("error fetch : ", error);
         }
         trace.stop();
         return Promise.reject(error);

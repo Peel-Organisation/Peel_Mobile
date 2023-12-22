@@ -39,12 +39,13 @@ const Register = ({ navigation }) => {
     const email_regex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (
-      email.length < 5 ||
-      password.length < 8 ||
-      password != repeatPassword ||
-      !email.toLowerCase().match(email_regex)
+      password.length < 8
     ) {
-      alert('erreur de saisie');
+      alert('mot de passe trop court');
+    } else if (email.length < 5 || !email.toLowerCase().match(email_regex)) {
+      alert('email invalide');
+    } else if (password != repeatPassword) {
+      alert('mot de passe non identique');
     } else {
       registerRequest(email, password, navigation).then(({ error, message }) => {
         if (error) {

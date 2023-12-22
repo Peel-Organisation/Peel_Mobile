@@ -66,7 +66,7 @@ const Profile2 = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ birthday: user.birthday, gender: user.gender }}
             prevPage="Profile1"
             nextPage="Profile3"
             navigation={navigation}
@@ -78,7 +78,7 @@ const Profile2 = ({ route, navigation }) => {
         <>
           <ConditionText>Remplissez tous les champs</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ birthday: user.birthday, gender: user.gender }}
             prevPage="Profile1"
             nextPage=""
             navigation={navigation}

@@ -31,6 +31,7 @@ const PublicStack = ({ navigation }) => {
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
         let profile_bool = await IsProfileCompleted()
+        crashlytics().log("profile_bool : ", profile_bool)
         if (profile_bool) {
           setLoading(false);
           crashlytics().log("navigate to auth");

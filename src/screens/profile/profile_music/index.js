@@ -146,7 +146,7 @@ const Music = ({ route, navigation }) => {
     ) {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ music: user.music }}
           prevPage="Profile6"
           nextPage="Profile8"
           navigation={navigation}
@@ -155,7 +155,7 @@ const Music = ({ route, navigation }) => {
     } else {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ music: user.music }}
           prevPage="Profile6"
           nextPage=""
           navigation={navigation}

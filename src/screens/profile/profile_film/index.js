@@ -145,7 +145,7 @@ const Film = ({ route, navigation }) => {
     ) {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ movie: user.movie }}
           prevPage="Profile5"
           nextPage="Profile7"
           navigation={navigation}
@@ -154,7 +154,7 @@ const Film = ({ route, navigation }) => {
     } else {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ movie: user.movie }}
           prevPage="Profile5"
           nextPage=""
           navigation={navigation}
