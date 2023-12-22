@@ -7,7 +7,7 @@ const FilterDetails = ({ title, setFilterPage }) => {
         <Container>
             <TopContainer>
                 <FilterText>{title}</FilterText>
-                <CloseButton onPress={()=>{setFilterPage(true)}}><Image source={require('@/../assets/images/icons/top-arrow.png')}/></CloseButton>
+                <CloseButton onPress={()=>{setFilterPage(true)}}><Image source={require('../../../assets/images/icons/top-arrow.png')}/></CloseButton>
             </TopContainer>
             <FilterInput placeholder="Taper pour rechercher"/>
         </Container>
