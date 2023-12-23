@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Card} from 'react-native-card-stack-swiper';
-import {sendSwipe} from '../../functions/api_request';
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-native-card-stack-swiper';
+import { sendSwipe } from '../../functions/api_request';
 import Swipe_Card from '../Swipe_Card';
-import {ButtonStack, CardStackView, Button, Icon} from './styles';
+import { ButtonStack, CardStackView, Button, Icon } from './styles';
 
 const Swipe = props => {
   const [userList, setUserList] = useState(props.userList);
