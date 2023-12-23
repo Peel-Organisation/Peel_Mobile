@@ -9,8 +9,6 @@ import {
   ResponseText,
   Locate,
   UserCont,
-  MovieImage,
-  MusicImage,
 } from './styles';
 import BiographyCard from './Biography/index';
 import InterestsCard from './Interests/index';
@@ -18,6 +16,18 @@ import Gif_Card from './Gif/index';
 import MovieCard from './Movie/index';
 import MusicCard from './Music';
 
+/*
+  This component is used to display the card of the user that is currently being swiped.
+  It is composed of the following components:
+    - BiographyCard
+    - InterestsCard
+    - Gif_Card
+    - MovieCard
+    - MusicCard
+    - QuestionCard
+  In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement 
+  The value of each key is the name of the module that should be displayed in the corresponding section of the card.
+*/
 const Swipe_Card = props => {
   const { t } = useTranslation();
 
@@ -64,12 +74,6 @@ const Swipe_Card = props => {
 
   const moduleComponents = [
     {
-      key: 'gif',
-      component: (
-        <Gif_Card User={User?.gif?.image?.webp} />
-      ),
-    },
-    {
       key: 'biographie',
       component: (
         <BiographyCard Bio={User?.biographie}/>
@@ -102,18 +106,6 @@ const Swipe_Card = props => {
         </View>
       ),
     },
-    {
-      key: 'movie',
-      component: ( 
-        <MovieCard MovieURL={User?.movie?.images?.backdrop_path} Movie={User?.movie?.title}/>
-      ),
-    },
-    {
-      key: 'music',
-      component: (
-        <MusicCard MusicURL={User?.music?.image} MTitle={User?.music?.title} MArtist={User?.music?.artist?.name}/>
-      ),
-    },
   ];
 
   return (
@@ -129,22 +121,84 @@ const Swipe_Card = props => {
             <>Recherche l'amour</>
           )}
         </Locate>
+          {/* {console.log(User)} */}
+
+        {/* {User.profileModules && Object.keys(User.profileModules).map(key => {
+          console.log('key : ',key);
+          if((key == 'mainElement' || key == 'secondaryElement' || key == 'tertiaryElement' || key == 'quaternaryElement') && User.profileModules[key] != undefined) {
+            console.log('Profile modules : ',User.profileModules[key]);
+            if(User.profileModules[key] == 'movie') {
+              return moduleComponentsTopSection.map(module => {
+                console.log('Module', module);
+                if (module.key == User.profileModules[key]) {
+                  return module.component;
+                }
+              });
+            } else if(User.profileModules[key] == 'music') {
+              return moduleComponentsTopSection.map(module => {
+                console.log('Module', module);
+                if (module.key == User.profileModules[key]) {
+                  return module.component;
+                }
+              });
+            } else if(User.profileModules[key] == 'gif') {
+              return moduleComponentsTopSection.map(module => {
+                console.log('Module', module);
+                if (module.key == User.profileModules[key]) {
+                  return module.component;
+                }
+              });
+            }
+          }})} */}
 
 
+          {User.profileModules && Object.keys(User.profileModules).map(key => {
+            if ((key === 'mainElement') && User.profileModules[key]) {
+              const moduleType = User.profileModules[key];
+              console.log('Profile module type: ', moduleType);
+              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
+              if (matchingModule) {
+                console.log('Matching module: ', matchingModule);
+                return matchingModule.component;
+              } 
+            } else if ((key === 'secondaryElement') && User.profileModules[key]) {
+              const moduleType = User.profileModules[key];
+              console.log('Profile module type: ', moduleType);
+              const matchingModule = moduleComponents.find(module => module.key === moduleType);
+              if (matchingModule) {
+                console.log('Matching module: ', matchingModule);
+                return matchingModule.component;
+              } 
+            } else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
+              const moduleType = User.profileModules[key];
+              console.log('Profile module type: ', moduleType);
+              const matchingModule = moduleComponents.find(module => module.key === moduleType);
+              if (matchingModule) {
+                console.log('Matching module: ', matchingModule);
+                return matchingModule.component;
+              } 
+            }
+          })}
+
+
+
+           
          
           
-        {/* In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement */}
-        {/* The value of each key is the name of the module */}
+       
         {/* So we can use the value of each key to display the corresponding component */}
-        {User.profileModules && Object.keys(User.profileModules).map(key => {
+        {/* {User.profileModules && Object.keys(User.profileModules).map(key => {
+          console.log('key : ',key);
           if (User.profileModules[key] != undefined) {
+            console.log('Pofile modules : ',User.profileModules[key]);
             return moduleComponents.map(module => {
+              console.log('Module',module);
               if (module.key == User.profileModules[key]) {
                 return module.component;
               }
             });
           }
-        })}
+        })} */}
       </UserCont>
     </HomeCard>
   );
