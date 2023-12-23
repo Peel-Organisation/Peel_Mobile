@@ -3,8 +3,6 @@ import styled from 'styled-components/native';
 import CardStack from "react-native-card-stack-swiper";
 
 
-const DIMENSION_WIDTH = Dimensions.get("window").width;
-const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
 export const CardStackView = styled(CardStack)`
@@ -37,4 +35,20 @@ export const Button = styled.TouchableOpacity`
 export const Icon = styled.Image`
     width: 50%;
     height: 50%;
+
+`
+export const ModalButton = styled.TouchableOpacity`
+    width: 70%;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.background};
+`
+
+export const ModalButtonText = styled.Text`
+    font-size: 20px;
+    color: ${props => props.theme.background};
+    align-self: center;
+    padding-top: 10px;
 `
