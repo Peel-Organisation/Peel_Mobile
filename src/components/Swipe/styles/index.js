@@ -2,8 +2,8 @@ import { Dimensions } from "react-native";
 import styled from 'styled-components/native';
 import CardStack from "react-native-card-stack-swiper";
 
-
-
+const DIMENSION_WIDTH = Dimensions.get("window").width;
+const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const CardStackView = styled(CardStack)`
     width: ${DIMENSION_WIDTH - 40}px;
@@ -37,18 +37,44 @@ export const Icon = styled.Image`
     height: 50%;
 
 `
+
 export const ModalButton = styled.TouchableOpacity`
-    width: 70%;
+    align-self: center;
+    width: 60%;
     height: 50px;
-    margin: 10px;
+    margin-top: 10px;
     border-radius: 10px;
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
 `
 
 export const ModalButtonText = styled.Text`
-    font-size: 20px;
+    font-size: 18px;
     color: ${props => props.theme.background};
     align-self: center;
     padding-top: 10px;
+`
+
+export const ModalTitle = styled.Text`
+    font-size: 18px;
+    color: ${props => props.theme.primary};
+    align-self: center;
+    margin-bottom: 3%;
+`
+
+export const ModalQuestion = styled.Text`
+    font-size: 16px;
+    text-align: center;
+    color: ${props => props.theme.text};
+    margin-top: 3%;
+    margin-bottom: 3%;
+`
+
+export const ModalWarning = styled.Text`
+    font-size: 12px;
+    font-style: italic;
+    text-align: justify;
+    color: ${props => props.theme.text};
+    margin-top: 3%;
+    margin-bottom: 3%;
 `

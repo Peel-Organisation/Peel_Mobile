@@ -107,5 +107,11 @@ export default {
       title: 'Contacts',
       newMatchs: 'Nouveaux matchs',
     },
+    Instant_Message: {
+      title: 'Message Instantané',
+      send: 'Envoyer',
+      question:'Etes vous sur de vouloir envoyer un message à cette personne ?',
+      warning:'Vous ne pourrez utiliser cette fonctionalité qu\'une seule fois. Après avoir appuyé vous pourrez directement retrouver l\'utilisateur dans vos contacts.',
+    },
   },
 };

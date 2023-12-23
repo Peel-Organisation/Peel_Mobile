@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-native-card-stack-swiper';
 import Swipe_Card from '../Swipe_Card';
+import { useTranslation } from 'react-i18next';
 import { sendSwipe, createInstantConversation } from '../../functions/api_request';
-import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText } from './styles';
+import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText, ModalTitle, ModalQuestion, ModalWarning } from './styles';
 import Modal from '../UI/Modal';
-import { Text } from 'react-native';
 
 
 const Swipe = (props) => {
+    const { t } = useTranslation();
   const [userList, setUserList] = useState(props.userList);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,23 +18,23 @@ const Swipe = (props) => {
 
   const ModalContent = (
     <>
-      <Text>Etes vous sur de vouloir envoyer un message a cette personne ?</Text>
-      <Text>Vous ne pourrez utiliser cette fonctionalité qu'une seule fois</Text>
-      <Text>Après avoir appuyé vous pourrez directement retrouver l'utilisateur dans vos contacts</Text>
-      <ModalButton onPress={() => {
-        const currentUser = this.swiper.state.topCard;
-        if (currentUser == "cardA") {
-          const user = this.swiper.state.cardA.props.user;
-          createInstantConversation(user._id);
-        } else if (currentUser == "cardB") {
-          const user = this.swiper.state.cardB.props.user;
-          createInstantConversation(user._id);
-        }
-        closeModal();
-      }}
-      >
-        <ModalButtonText>Send Message</ModalButtonText>
-      </ModalButton>
+        <ModalTitle>{t('Instant_Message.title')}</ModalTitle>
+        <ModalQuestion>{t('Instant_Message.question')}</ModalQuestion>
+        <ModalWarning>{t('Instant_Message.warning')}</ModalWarning>
+        <ModalButton onPress={() => {
+            const currentUser = this.swiper.state.topCard;
+            if (currentUser == "cardA") {
+            const user = this.swiper.state.cardA.props.user;
+            createInstantConversation(user._id);
+            } else if (currentUser == "cardB") {
+            const user = this.swiper.state.cardB.props.user;
+            createInstantConversation(user._id);
+            }
+            closeModal();
+        }}
+        >
+            <ModalButtonText>{t('Instant_Message.send')}</ModalButtonText>
+        </ModalButton>
 
     </>
   );

@@ -105,5 +105,11 @@ export default {
       title: 'Contacts',
       newMatchs: 'New matches',
     },
+    Instant_Message: {
+      title: 'Instant Message',
+      send: 'Send',
+      question: 'Are you sure you want to send a message to this person?',
+      warning: 'You can only use this feature once. After pressing, you will be able to find the user directly in your contacts.',
+    },
   },
 };
