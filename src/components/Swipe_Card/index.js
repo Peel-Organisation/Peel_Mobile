@@ -37,75 +37,71 @@ const Swipe_Card = props => {
     return user_age;
   };
 
-  // const moduleComponentsTopSection = [
-  //   {
-  //     key: 'gif',
-  //     component: (
-  //       <GifImage source={{uri: `${User?.gif?.image?.webp}`}} resizeMode="cover" />
-  //     ),
-  //   },
-  //   {
-  //     key: 'movie',
-  //     component: (
-  //       <View>
-  //         <MovieImage source={{uri: `${User?.movie?.images?.poster_path}`}}/>
-  //       </View>
-  //     ),
-  //   },
-  //   {
-  //     key: 'music',
-  //     component: (
-  //       <View>
-  //         <MusicImage source={{uri: `${User?.music?.image}`}}/>
-  //       </View>
-  //     ),
-  //   },
-  // ];
+  const moduleComponentsTopSection = [
+    {
+      key: 'gif',
+      component: (
+        <Gif_Card User={User?.gif?.image?.webp} />
+      ),
+    },
+    {
+      key: 'movie',
+      component: ( 
+        <MovieCard MovieURL={User?.movie?.images?.backdrop_path} Movie={User?.movie?.title}/>
+      ),
+    },
+    {
+      key: 'music',
+      component: (
+        <MusicCard MusicURL={User?.music?.image} MTitle={User?.music?.title} MArtist={User?.music?.artist?.name}/>
+      ),
+    },
+  ];
 
 
 
 
 
   const moduleComponents = [
-    // {
-    //   key: 'gif',
-    //   component: (
-    //     <Gif_Card User={User?.gif?.image?.webp} />
-    //   ),
-    // },
-    // {
-    //   key: 'biographie',
-    //   component: (
-    //     <BiographyCard Bio={User?.biographie}/>
-    //   ),
-    // },
-    // {
-    //   key: 'interests',
-    //   component: (
-    //    <InterestsCard User={User}/>     
-    //   ),
-    // },
-    // {
-    //   key: 'questions',
-    //   component: (
-    //     <View>
-    //       <QuestionView>
-    //         {User.questions?.map(question => {
-    //           return (
-    //             <View key={question._id}>
-    //               <View>
-    //                 <QuestionText>{question.question?.question}</QuestionText>
-    //               </View>
-    //               <View>
-    //                 <ResponseText>{question.answer}</ResponseText>
-    //               </View>
-    //             </View>
-    //           );
-    //         })}
-    //       </QuestionView>
-    //     </View>
-    //   ),
-    // },
+    {
+      key: 'gif',
+      component: (
+        <Gif_Card User={User?.gif?.image?.webp} />
+      ),
+    },
+    {
+      key: 'biographie',
+      component: (
+        <BiographyCard Bio={User?.biographie}/>
+      ),
+    },
+    {
+      key: 'interests',
+      component: (
+       <InterestsCard User={User}/>     
+      ),
+    },
+    {
+      key: 'questions',
+      component: (
+        <View>
+          <QuestionView>
+            {User.questions?.map(question => {
+              return (
+                <View key={question._id}>
+                  <View>
+                    <QuestionText>{question.question?.question}</QuestionText>
+                  </View>
+                  <View>
+                    <ResponseText>{question.answer}</ResponseText>
+                  </View>
+                </View>
+              );
+            })}
+          </QuestionView>
+        </View>
+      ),
+    },
     {
       key: 'movie',
       component: ( 
