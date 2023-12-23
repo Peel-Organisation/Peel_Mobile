@@ -52,6 +52,18 @@ export const addStorage = async (name, value) => {
     });
 }
 
+export const putStorage = async (name, value) => {
+    crashlytics().log("put to storage : ", name, value)
+    const trace = await perf().startTrace('putStorage')
+    return AsyncStorage.mergeItem(name, JSON.stringify(value)).then(() => {
+        trace.stop();
+        return (true);
+    }).catch((error) => {
+        crashlytics().recordError(error);
+        return (false);
+    });
+}
+
 export const removeStorage = async (name) => {
     crashlytics().log("remove from storage : ", name)
     const trace = await perf().startTrace('removeStorage')
@@ -63,6 +75,8 @@ export const removeStorage = async (name) => {
         return (false);
     });
 }
+
+
 
 export const addStorageMessage = async (conversation_id, message) => {
     const trace = await perf().startTrace('addStorageMessage');

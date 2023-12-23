@@ -7,7 +7,7 @@ import { loginRequest, IsProfileCompleted } from "../../functions/api_request";
 
 
 
-const Login = ({ navigation }) => { 
+const Login = ({ navigation }) => {
     const { t } = useTranslation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,20 +34,24 @@ const Login = ({ navigation }) => {
 
     const log = () => {
         const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if ( !email.toLowerCase().match(email_regex)) {
+        if (!email.toLowerCase().match(email_regex)) {
             alert("erreur de saisie");
         } else {
-            loginRequest(email, password, navigation);
+            loginRequest(email, password, navigation).then(({ error, message }) => {
+                if (error) {
+                    alert(message);
+                }
+            });
         }
     }
-    
+
 
     return (
         <>
             <Header>
-                <HeaderText> 
-                    {t("login.title")} 
-                </HeaderText> 
+                <HeaderText>
+                    {t("login.title")}
+                </HeaderText>
             </Header>
             <ViewCustom>
                 <Spacer />
@@ -80,7 +84,7 @@ const Login = ({ navigation }) => {
                 </ButtonOrange>
 
                 <MainText>{t("login.no_account")}</MainText>
-                
+
                 <Link onPress={() => navigation.navigate('Register')} >
                     {t("login.button_register")}
                 </Link>
@@ -90,6 +94,6 @@ const Login = ({ navigation }) => {
 }
 
 
- 
+
 
 export default Login; 

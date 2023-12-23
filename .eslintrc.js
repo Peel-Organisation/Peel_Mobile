@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   extends: '@react-native-community',
   rules: {
+    'react/prop-types': 'off',
     'prettier/prettier': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
@@ -11,7 +12,7 @@ module.exports = {
       'error',
       { devDependencies: ['**/*.test.js', '**/*.spec.js'] },
     ],
-    'react-native/no-unused-styles': 'error',    
+    'react-native/no-unused-styles': 'error',
   },
   endOfLine: 'auto',
 };

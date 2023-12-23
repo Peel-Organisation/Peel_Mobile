@@ -74,7 +74,7 @@ const Recherche = ({ route, navigation }) => {
     ) {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ preferences: user.preferences }}
           prevPage="Profile2"
           nextPage="Profile4"
           navigation={navigation}
@@ -85,7 +85,7 @@ const Recherche = ({ route, navigation }) => {
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ preferences: user.preferences }}
             prevPage="Profile2"
             nextPage=""
             navigation={navigation}
