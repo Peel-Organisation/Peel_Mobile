@@ -50,7 +50,7 @@ const Recherche = ({ route, navigation }) => {
     ) {
       setNavButton(
         <UpdateButton
-          user={user}
+          user={{ preferences: user.preferences }}
           prevPage="Profile3"
           nextPage="Profile5"
           navigation={navigation}
@@ -61,7 +61,7 @@ const Recherche = ({ route, navigation }) => {
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ preferences: user.preferences }}
             prevPage="Profile3"
             nextPage=""
             navigation={navigation}
@@ -80,7 +80,7 @@ const Recherche = ({ route, navigation }) => {
         <PageTitle>Que recherchez vous sur l'application ?</PageTitle>
         <InputView>
           <SwitchSelectorCustom
-            initial={0}
+            initial={user?.preferences?.searchLove ? 0 : 1}
             onPress={value => {
               if (value === 'Love') {
                 user.preferences.searchLove = true;

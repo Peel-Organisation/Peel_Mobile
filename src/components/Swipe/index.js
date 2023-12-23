@@ -7,7 +7,7 @@ import Modal from '../UI/Modal';
 import { Text } from 'react-native';
 
 
-const Swipe = props => {
+const Swipe = (props) => {
   const [userList, setUserList] = useState(props.userList);
   const [modalVisible, setModalVisible] = useState(false);
 

@@ -72,7 +72,7 @@ const Location = ({ route, navigation }) => {
       setNavButton(
         <>
           <UpdateButton
-            user={user}
+            user={{ position: user.position, preferences: user.preferences }}
             prevPage="Profile6"
             nextPage="Profile8"
             navigation={navigation}
@@ -84,7 +84,7 @@ const Location = ({ route, navigation }) => {
         <>
           <ConditionText>{t('profile.fill')}</ConditionText>
           <UpdateButton
-            user={user}
+            user={{ position: user.position, preferences: user.preferences }}
             prevPage="Profile5"
             nextPage=""
             navigation={navigation}
