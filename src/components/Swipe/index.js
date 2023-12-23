@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Card} from 'react-native-card-stack-swiper';
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-native-card-stack-swiper';
 import Swipe_Card from '../Swipe_Card';
-import {sendSwipe, createInstantConversation} from '../../functions/api_request';
-import {Text, Image} from 'react-native';
-import {ButtonStack, CardStackView, Button, Icon} from './styles';
-import { create } from 'react-test-renderer';
+import { sendSwipe, createInstantConversation } from '../../functions/api_request';
+import { ButtonStack, CardStackView, Button, Icon } from './styles';
 
-// import SVG from "./styles/cross.svg"
 
 const Swipe = props => {
   const [userList, setUserList] = useState(props.userList);
@@ -42,13 +39,7 @@ const Swipe = props => {
             onPress={() => {
               this.swiper.swipeLeft();
             }}>
-            <Icon source={require('./styles/cross.png')} />
-          </Button>
-          <Button
-            onPress={() => {
-              this.swiper.swipeRight();
-            }}>
-            <Icon source={require('./styles/heart.png')} />
+            <Icon source={require("../../../assets/images/icons/cross.png")} />
           </Button>
           <Button
             onPress={() => {
@@ -59,11 +50,15 @@ const Swipe = props => {
               } else if (currentUser == "cardB") {
                 const user = this.swiper.state.cardB.props.user;
                 createInstantConversation(user._id);
-              } else {
-                console.log("error");
               }
             }}>
-            <Icon source={require('./styles/instantmessage.png')} />
+            <Icon source={require('../../../assets/images/icons/instantmessage.png')} />
+          </Button>
+          <Button
+            onPress={() => {
+              this.swiper.swipeRight();
+            }}>
+            <Icon source={require('../../../assets/images/icons/heart.png')} />
           </Button>
         </ButtonStack>
       </>
