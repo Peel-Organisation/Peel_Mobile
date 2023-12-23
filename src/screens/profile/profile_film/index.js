@@ -23,6 +23,7 @@ const Film = ({ route, navigation }) => {
   const [page, setPage] = React.useState(1);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [navButton, setNavButton] = useState(null);
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
@@ -52,6 +53,8 @@ const Film = ({ route, navigation }) => {
       getPopularMovies();
     }
   }, [searchText]);
+
+
 
   const getPopularMovies = async () => {
     const url = `${TMDB_API_PATH}/trending/movie/day?api_key=${TMDB_API_KEY}&page=${page}`;
@@ -118,6 +121,8 @@ const Film = ({ route, navigation }) => {
     }
   };
 
+
+
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => updateMovie(item)}>
@@ -133,6 +138,30 @@ const Film = ({ route, navigation }) => {
       </TouchableOpacity>
     );
   };
+
+  useEffect(() => {
+    if (
+      user.movie?.title != undefined && user.movie?.title != '' && user.movie?.id != undefined && user.movie?.id != '' && user.movie?.images != undefined && user.movie?.images != ''
+    ) {
+      setNavButton(
+        <UpdateButton
+          user={{ movie: user.movie }}
+          prevPage="Profile5"
+          nextPage="Profile7"
+          navigation={navigation}
+        />
+      );
+    } else {
+      setNavButton(
+        <UpdateButton
+          user={{ movie: user.movie }}
+          prevPage="Profile5"
+          nextPage=""
+          navigation={navigation}
+        />
+      );
+    }
+  }, [user]);
 
   if (loading) return <MainText>Chargement...</MainText>;
 
@@ -159,12 +188,7 @@ const Film = ({ route, navigation }) => {
           numColumns={2}
         />
       </FieldView>
-      <UpdateButton
-        user={user}
-        prevPage="Profile5"
-        nextPage="Profile7"
-        navigation={navigation}
-      />
+      {navButton}
     </CustomView>
   );
 };
