@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe from "../../components/Swipe";
@@ -31,7 +31,7 @@ const Match = () => {
         movie: false,
         games: false,
     });
-    
+
     useEffect(() => {
         crashlytics().log("Match screen mounted");
         PostMatchList(activeFilters).then(matchList => {
@@ -61,15 +61,15 @@ const Match = () => {
                 <StatusBar backgroundColor="#FC912F" />
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
-                    <FilterIcon onPress={()=>{setFilter(!filter)}}>
-                        <FilterIconImg source={require('../../../assets/images/icons/sort.png')}/>
+                    <FilterIcon onPress={() => { setFilter(!filter) }}>
+                        <FilterIconImg source={require('../../../assets/images/icons/sort.png')} />
                     </FilterIcon>
                 </Header>
-                <Swipe userList={userList}/>
-                
+                <Swipe userList={userList} />
+
                 {
-                    filter &&(
-                        <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
+                    filter && (
+                        <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
                     )
                 }
             </Container>
