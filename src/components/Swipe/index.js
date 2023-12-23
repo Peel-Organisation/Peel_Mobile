@@ -6,15 +6,14 @@ import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText 
 import Modal from '../UI/Modal';
 import { Text } from 'react-native';
 
-  useEffect(() => {
-    setUserList(props.userList);
-  }, [props.userList]);
 
 const Swipe = (props) => {
   const [userList, setUserList] = useState(props.userList);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const closeModal = () => {setModalVisible(false)};
+  const closeModal = () => {
+    setModalVisible(false);
+  }
 
   const ModalContent = (
     <>
