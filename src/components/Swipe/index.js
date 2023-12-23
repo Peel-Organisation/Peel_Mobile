@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from 'react-native-card-stack-swiper';
-import SwipeCard from "../Swipe_Card";
+import Swipe_Card from "../Swipe_Card";
 import { sendSwipe } from "../../functions/api_request"
 import { Text, Image } from "react-native";
 import { ButtonStack, CardStackView, Button, Icon } from "./styles";
@@ -32,8 +32,7 @@ const Swipe = (props) => {
                             key={user._id}
                             user={user}
                         >
-                            <SwipeCard
-                                key={user._id}
+                            <Swipe_Card
                                 User={user}
                             />
                         </Card>

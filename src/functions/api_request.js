@@ -71,7 +71,7 @@ export const TestAuth = async () => {
     );
 }
 
-getFirebaseToken = async () => {
+export const getFirebaseToken = async () => {
     crashlytics().log("\n\n getFirebaseToken")
     return messaging().getToken().then((firebaseToken) => {
         return firebaseToken;
