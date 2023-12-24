@@ -12,7 +12,7 @@ export const MovieTitle = styled.Text`
 `  
 
 export const MovieArea = styled.SafeAreaView`
-    height: ${DIMENSION_HEIGHT - 580}px;
+    height: ${DIMENSION_HEIGHT - 590}px;
     width: ${DIMENSION_WIDTH - 90}px;
     border-radius: 15px;
     background-color: ${props => props.theme.background};

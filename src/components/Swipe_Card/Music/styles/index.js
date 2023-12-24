@@ -11,7 +11,7 @@ export const MusicTitle = styled.Text`
     color: ${props => props.theme.text};
 `  
 export const MusicArea = styled.SafeAreaView`
-    height: ${DIMENSION_HEIGHT - 570}px;
+    height: ${DIMENSION_HEIGHT - 600}px;
     width: ${DIMENSION_WIDTH - 90}px;
     border-radius: 15px;
     background-color: ${props => props.theme.background};
