@@ -14,6 +14,8 @@ import {
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
+import Loading from '../../../components/loading';
+
 
 const Gif = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -21,7 +23,7 @@ const Gif = ({ route, navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [page, setPage] = React.useState(0);
   const [navButton, setNavButton] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const [gifs, setGifs] = useState([]);
 
   useEffect(() => {
@@ -51,7 +53,31 @@ const Gif = ({ route, navigation }) => {
     }
   }, [searchText]);
 
+  useEffect(() => {
+    if (
+      user.gif != undefined && user.gif != null && user.gif?.id != undefined && user.gif?.id != '' && user.gif?.title != undefined && user.gif?.title != '' && user.gif?.url != undefined && user.gif?.url != '' && user.gif?.image != undefined && user.gif?.image != null) {
+      setNavButton(
+        <UpdateButton
+          user={{ gif: user.gif }}
+          prevPage="Profile4"
+          nextPage="Profile6"
+          navigation={navigation}
+        />
+      );
+    } else {
+      setNavButton(
+        <UpdateButton
+          user={{ gif: user.gif }}
+          prevPage="Profile4"
+          nextPage=""
+          navigation={navigation}
+        />
+      );
+    }
+  }, [user]);
+
   const getPopularGifs = async () => {
+    setLoading(true);
     const limit = 20;
     let link = '';
     if (searchText.length > 0) {
@@ -77,12 +103,14 @@ const Gif = ({ route, navigation }) => {
         } else {
           newGifs = jsonData.data;
         }
+        setLoading(false);
         setGifs(newGifs);
       }
     }
   };
 
   const searchGif = async () => {
+    setLoading(true);
     const limit = 20;
     const link = `${GIPHY_PATH}/search?api_key=${GIPHY_API_KEY}&limit=${limit}&q=${searchText}`;
     crashlytics().log('serach link : ', link);
@@ -94,6 +122,7 @@ const Gif = ({ route, navigation }) => {
         jsonData.meta.status == 200 &&
         jsonData.data.length > 0
       ) {
+        setLoading(false);
         setGifs(jsonData.data);
       }
     }
@@ -127,32 +156,8 @@ const Gif = ({ route, navigation }) => {
     );
   };
 
-  useEffect(() => {
-    if (
-      user.gif != undefined && user.gif != null && user.gif?.id != undefined && user.gif?.id != '' && user.gif?.title != undefined && user.gif?.title != '' && user.gif?.url != undefined && user.gif?.url != '' && user.gif?.image != undefined && user.gif?.image != null) {
-      setNavButton(
-        <>
-          <UpdateButton
-            user={{ gif: user.gif }}
-            prevPage="Profile4"
-            nextPage="Profile6"
-            navigation={navigation}
-          />
-        </>,
-      );
-    } else {
-      setNavButton(
-        <>
-          <UpdateButton
-            user={{ gif: user.gif }}
-            prevPage="Profile4"
-            nextPage=""
-            navigation={navigation}
-          />
-        </>,
-      );
-    }
-  }, [user]);
+
+
 
   return (
     <CustomView>
@@ -166,16 +171,18 @@ const Gif = ({ route, navigation }) => {
           onChangeText={text => setSearchText(text)}
           placeholder={t('profile.gifs_condition')}
         />
-        <FlatList
-          data={gifs}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          onEndReached={() => {
-            setPage(page + 1);
-          }}
-          onEndReachedThreshold={0.4}
-          numColumns={2}
-        />
+        {loading ? <Loading /> :
+          <FlatList
+            data={gifs}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            onEndReached={() => {
+              setPage(page + 1);
+            }}
+            onEndReachedThreshold={0.4}
+            numColumns={2}
+          />
+        }
       </FieldView>
       {navButton}
     </CustomView>
