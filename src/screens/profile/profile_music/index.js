@@ -15,6 +15,7 @@ import {
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
+import Loading from '../../../components/loading';
 
 const Music = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ const Music = ({ route, navigation }) => {
   const [musics, setMusics] = useState([]);
   const [loading, setLoading] = useState(false);
   const [navButton, setNavButton] = useState(null);
+
   useEffect(() => {
     getStorage('user')
       .then(fetchedUser => {
@@ -180,16 +182,18 @@ const Music = ({ route, navigation }) => {
           }}
           placeholder={t('profile.music_placeholder')}
         />
-        <FlatList
-          data={musics}
-          renderItem={renderItem}
-          keyExtractor={item => item.result.id.toString()}
-          onEndReached={() => {
-            setPage(page + 1);
-          }}
-          onEndReachedThreshold={0.4}
-          numColumns={2}
-        />
+        {loading ? <Loading /> : (
+          <FlatList
+            data={musics}
+            renderItem={renderItem}
+            keyExtractor={item => item.result.id.toString()}
+            onEndReached={() => {
+              setPage(page + 1);
+            }}
+            onEndReachedThreshold={0.4}
+            numColumns={2}
+          />
+        )}
       </FieldView>
       {loading && <MainText>Chargement...</MainText>}
       {navButton}
