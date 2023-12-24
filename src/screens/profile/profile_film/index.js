@@ -8,13 +8,13 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
 import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
 import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
+import Loading from '../../../components/loading';
 
 const Film = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -163,7 +163,6 @@ const Film = ({ route, navigation }) => {
     }
   }, [user]);
 
-  if (loading) return <MainText>Chargement...</MainText>;
 
   return (
     <CustomView>
@@ -177,16 +176,18 @@ const Film = ({ route, navigation }) => {
           onChangeText={setSearchText}
           placeholder={t('profile.movie_placeholder')}
         />
-        <FlatList
-          data={movies}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-          onEndReached={() => {
-            setPage(page + 1);
-          }}
-          onEndReachedThreshold={0.4}
-          numColumns={2}
-        />
+        {loading ? <Loading /> :
+          <FlatList
+            data={movies}
+            renderItem={renderItem}
+            keyExtractor={item => item.id.toString()}
+            onEndReached={() => {
+              setPage(page + 1);
+            }}
+            onEndReachedThreshold={0.4}
+            numColumns={2}
+          />
+        }
       </FieldView>
       {navButton}
     </CustomView>

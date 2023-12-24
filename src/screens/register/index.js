@@ -46,7 +46,14 @@ const Register = ({navigation}) => {
     ) {
       alert('erreur de saisie');
     } else {
-      registerRequest(email, password, navigation);
+      registerRequest(email, password, navigation).then(({ error, message }) => {
+        if (error) {
+          alert(message);
+        }
+      }).catch((error) => {
+        crashlytics().recordError(error)
+        alert(error.message);
+      });
     }
   };
 
