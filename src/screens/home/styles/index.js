@@ -24,8 +24,6 @@ export const BackgroundTop = styled.SafeAreaView`
 export const Container = styled.SafeAreaView`
     width: 100%;
     height: 100%;
-    /* border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px; */
 `
 
 export const Header = styled.SafeAreaView`
@@ -43,7 +41,8 @@ export const TitleText = styled.Text`
 
 export const FilterIcon = styled.TouchableOpacity`
     position: absolute;
-    left: 7%;
+    top: 10%;
+    left: 4%;
     width: 45px;
     height: 45px;
     border-radius: 50px;

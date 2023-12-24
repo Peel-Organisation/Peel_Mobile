@@ -78,7 +78,7 @@ const Match = () => {
         <>
             <Background><BackgroundTop /></Background>
             <Container>
-                <StatusBar backgroundColor="#FC912F" />
+                <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
                     <FilterIcon onPress={() => { setFilter(!filter) }}>
