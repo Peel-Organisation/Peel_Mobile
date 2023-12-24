@@ -98,9 +98,8 @@ const Swipe_Card = props => {
           {User?.preferences?.searchFriend && <>Recherche l'amitié</>}
           {User?.preferences?.searchLove && <>Recherche l'amour</>}
         </Locate>
-
+        {console.log(User.profileModules)}
         {User.profileModules && Object.keys(User.profileModules).map(key => {
-
             // Main element is the top section of the card
             if ((key === 'mainElement') && User.profileModules[key]) {
               const moduleType = User.profileModules[key];
@@ -137,7 +136,12 @@ const Swipe_Card = props => {
                 const matchingModule = moduleComponentsTopSection.find(module => module.key === User.profileModules[key]);
                 if (matchingModule) {
                   return matchingModule.component;
-                } 
+                } else {
+                  const matchingModule = moduleComponents.find(module => module.key === moduleType);
+                  if (matchingModule) {
+                    return matchingModule.component;
+                  } 
+                }
               } 
             } else {
               return null;

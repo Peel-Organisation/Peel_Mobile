@@ -22,8 +22,8 @@ export const InterestBox = styled.Text`
     background-color: ${props => props.theme.primary};
     border-radius: 10px;
     align-self: center;
-    padding: 2px 3px 2px 4px;
-    margin: 1px;
+    padding: 2%;
+    margin: 2px;
 `
 
 export const InterestText = styled.Text`

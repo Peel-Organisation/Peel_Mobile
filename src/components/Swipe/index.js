@@ -6,6 +6,7 @@ import { sendSwipe, createInstantConversation, GetUser } from '../../functions/a
 import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText, ModalTitle, ModalQuestion, ModalWarning } from './styles';
 import Modal from '../UI/Modal';
 import { getStorage, putStorage } from '../../functions/storage';
+import { Text } from 'react-native';
 
 
 
@@ -25,7 +26,7 @@ const Swipe = (props) => {
         <ModalTitle>{t('Instant_Message.title')}</ModalTitle>
         <ModalQuestion>{t('Instant_Message.question')}</ModalQuestion>
         <ModalWarning>{t('Instant_Message.warning')}</ModalWarning>
-        <Text>Nombre d'envoi de messages restant : {loggedUser.nbInstantConversationPossibilities}</Text>
+        <ModalWarning>{t('Instant_Message.message_remaining')} {loggedUser.nbInstantConversationPossibilities}</ModalWarning>
         <ModalButton onPress={() => {
             const currentUser = this.swiper.state.topCard;
             if (currentUser == "cardA") {
@@ -39,7 +40,7 @@ const Swipe = (props) => {
             setLoggedUser({ ...loggedUser, nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
             closeModal();
         }}
-            disabled={loggedUser.nbInstantConversationPossibilities == 0}
+            // disabled={loggedUser.nbInstantConversationPossibilities == 0}
         >
             <ModalButtonText>{t('Instant_Message.send')}</ModalButtonText>
         </ModalButton>
@@ -48,8 +49,12 @@ const Swipe = (props) => {
 
   const ModalNoMoreSwipe = (
     <>
-      <Text>Vous avez atteint la limite de swipe pour aujourd'hui</Text>
-      <Text>Vous pourrez recommencer demain</Text>
+        <ModalTitle>{t('Swipe.title_warning')}</ModalTitle>
+        <ModalQuestion>{t('Swipe.no_more_swipe')}</ModalQuestion>
+        <ModalWarning>{t('Swipe.no_more_swipe_text')}</ModalWarning>
+        <ModalButton onPress={closeModal}>
+            <ModalButtonText>{t('Swipe.no_more_swipe_button')}</ModalButtonText>
+        </ModalButton>
     </>
   );
 
@@ -88,8 +93,6 @@ const Swipe = (props) => {
       sendSwipe(user, value)
     }
   }
-
-
 
   useEffect(() => {
     setUserList(props.userList);

@@ -27,7 +27,7 @@ export const ResponseText = styled.Text`
     letter-spacing: 1px;
     color: ${props => props.theme.text};
     text-align: justify;
-    line-height: 22px;   
+    line-height: 20px;   
 `
 
 export const Ellipsis = styled.Text`    
