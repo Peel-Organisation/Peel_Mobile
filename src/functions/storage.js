@@ -38,6 +38,8 @@ export const getStorage = async (value) => {
     })
 }
 
+
+
 export const addStorage = async (name, value) => {
     const trace = await perf().startTrace('addStorage');
     crashlytics().log("add to storage : ", name, value)
