@@ -23,15 +23,11 @@ import Loading from '../../../components/loading';
 const QuestionProfil = ({ route, navigation }) => {
   const { t } = useTranslation();
   const [user, setUser] = useState({ questions: [{}, {}, {}] });
-  let index = 0;
   const [navButton, setNavButton] = useState(null);
   const [questionList, setquestionList] = useState([
     { key: 1, label: 'question 1 ?' },
     { key: 2, label: 'question 2 ?' },
-    { key: index++, label: 'question 3 ?' },
-    {},
-    {},
-    {},
+    { key: 3, label: 'question 3 ?' },
   ]);
   const [loading, setLoading] = React.useState(true);
 
@@ -44,6 +40,7 @@ const QuestionProfil = ({ route, navigation }) => {
         ) {
           fetchedUser.questions = [{}, {}, {}];
         }
+        console.log('fetchedUser : ', fetchedUser.questions);
         setUser(fetchedUser);
       })
       .catch(error => {
@@ -113,7 +110,7 @@ const QuestionProfil = ({ route, navigation }) => {
           <View>
             <ModalSelectorCustom
               data={questionList}
-              initValue={t('profile.question_select')}
+              initValue={user?.questions[0]?.question?.question}
               onChange={option => {
                 let newUser = user;
                 newUser.questions[0].question = option.key;
@@ -138,7 +135,7 @@ const QuestionProfil = ({ route, navigation }) => {
           <View>
             <ModalSelectorCustom
               data={questionList}
-              initValue={t('profile.question_select')}
+              initValue={user?.questions[1]?.question?.question}
               onChange={option => {
                 let newUser = user;
                 newUser.questions[1].question = option.key;
@@ -163,7 +160,7 @@ const QuestionProfil = ({ route, navigation }) => {
           <View>
             <ModalSelectorCustom
               data={questionList}
-              initValue={t('profile.question_select')}
+              initValue={user?.questions[2]?.question?.question}
               onChange={option => {
                 let newUser = user;
                 newUser.questions[2].question = option.key;
