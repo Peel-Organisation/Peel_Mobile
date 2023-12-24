@@ -100,6 +100,7 @@ export default {
       interest: 'Hobbies',
       music: 'Latest favorite music',
       movie: 'Latest favorite movie',
+      read_more: 'Read more',
     },
     Contact: {
       title: 'Contacts',

@@ -1,5 +1,5 @@
+import { Modal } from 'react-native';
 import { Container, Overlay, Button, Icon, Content } from "./styles";
-import { Modal, StatusBar } from 'react-native';
 
 
 const ModalCustom = ({ closeModal, content, modalVisible }) => {

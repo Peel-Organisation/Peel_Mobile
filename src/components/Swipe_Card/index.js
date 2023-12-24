@@ -68,10 +68,6 @@ const Swipe_Card = props => {
     },
   ];
 
-
-
-
-
   const moduleComponents = [
     {
       key: 'biographie',
@@ -85,27 +81,27 @@ const Swipe_Card = props => {
        <InterestsCard User={User}/>     
       ),
     },
-    {
-      key: 'questions',
-      component: (
-        <View>
-          <QuestionView>
-            {User.questions?.map(question => {
-              return (
-                <View key={question._id}>
-                  <View>
-                    <QuestionText>{question.question?.question}</QuestionText>
-                  </View>
-                  <View>
-                    <ResponseText>{question.answer}</ResponseText>
-                  </View>
-                </View>
-              );
-            })}
-          </QuestionView>
-        </View>
-      ),
-    },
+    // {
+    //   key: 'questions',
+    //   component: (
+    //     <View>
+    //       <QuestionView>
+    //         {User.questions?.map(question => {
+    //           return (
+    //             <View key={question._id}>
+    //               <View>
+    //                 <QuestionText>{question.question?.question}</QuestionText>
+    //               </View>
+    //               <View>
+    //                 <ResponseText>{question.answer}</ResponseText>
+    //               </View>
+    //             </View>
+    //           );
+    //         })}
+    //       </QuestionView>
+    //     </View>
+    //   ),
+    // },
   ];
 
   return (
@@ -121,36 +117,6 @@ const Swipe_Card = props => {
             <>Recherche l'amour</>
           )}
         </Locate>
-          {/* {console.log(User)} */}
-
-        {/* {User.profileModules && Object.keys(User.profileModules).map(key => {
-          console.log('key : ',key);
-          if((key == 'mainElement' || key == 'secondaryElement' || key == 'tertiaryElement' || key == 'quaternaryElement') && User.profileModules[key] != undefined) {
-            console.log('Profile modules : ',User.profileModules[key]);
-            if(User.profileModules[key] == 'movie') {
-              return moduleComponentsTopSection.map(module => {
-                console.log('Module', module);
-                if (module.key == User.profileModules[key]) {
-                  return module.component;
-                }
-              });
-            } else if(User.profileModules[key] == 'music') {
-              return moduleComponentsTopSection.map(module => {
-                console.log('Module', module);
-                if (module.key == User.profileModules[key]) {
-                  return module.component;
-                }
-              });
-            } else if(User.profileModules[key] == 'gif') {
-              return moduleComponentsTopSection.map(module => {
-                console.log('Module', module);
-                if (module.key == User.profileModules[key]) {
-                  return module.component;
-                }
-              });
-            }
-          }})} */}
-
 
           {User.profileModules && Object.keys(User.profileModules).map(key => {
             if ((key === 'mainElement') && User.profileModules[key]) {
@@ -179,26 +145,6 @@ const Swipe_Card = props => {
               } 
             }
           })}
-
-
-
-           
-         
-          
-       
-        {/* So we can use the value of each key to display the corresponding component */}
-        {/* {User.profileModules && Object.keys(User.profileModules).map(key => {
-          console.log('key : ',key);
-          if (User.profileModules[key] != undefined) {
-            console.log('Pofile modules : ',User.profileModules[key]);
-            return moduleComponents.map(module => {
-              console.log('Module',module);
-              if (module.key == User.profileModules[key]) {
-                return module.component;
-              }
-            });
-          }
-        })} */}
       </UserCont>
     </HomeCard>
   );

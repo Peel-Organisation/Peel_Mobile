@@ -102,6 +102,7 @@ export default {
       interest: "Centres d'intérêts",
       music: 'Musique du moment',
       movie: 'Film du moment',
+      read_more: 'Lire la suite',
     },
     Contact: {
       title: 'Contacts',
