@@ -6,11 +6,10 @@ const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const Container = styled.View`
-    top: 18%;
-    left: 9%;
+    top: 15%;
+    left: 10%;
     padding: 15px;
-    width: ${DIMENSION_WIDTH - 70}px;
-    height: ${DIMENSION_HEIGHT - 1000}px;
+    width: ${DIMENSION_WIDTH - 78}px;
     border-radius: 15px;
     z-index: 999999;
     background: ${props => props.theme.background};
