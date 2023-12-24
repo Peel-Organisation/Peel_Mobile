@@ -129,7 +129,7 @@ export const sendSwipe = async (user_target, typeOfLike) => {
 
 export const loginRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nlogin request")
-    getFirebaseToken().then((firebaseToken) => {
+    return getFirebaseToken().then((firebaseToken) => {
         const body = { email: email.toLowerCase(), password: password }
         return FetchPeelApi({ url: `/api/auth/login`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
             addStorage("token", res['token'].toString())
@@ -151,7 +151,7 @@ export const loginRequest = async (email, password, navigation) => {
 
 export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
-    getFirebaseToken().then((firebaseToken) => {
+    return getFirebaseToken().then((firebaseToken) => {
         const body = { email: email.toLowerCase(), password: password }
         return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
             addStorage("token", res['token'])

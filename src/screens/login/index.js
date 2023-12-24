@@ -41,6 +41,9 @@ const Login = ({ navigation }) => {
                 if (error) {
                     alert(message);
                 }
+            }).catch((error) => {
+                crashlytics().recordError(error)
+                alert(error.message);
             });
         }
     }
