@@ -97,13 +97,32 @@ export default {
       main_text: "Pour peler autre chose qu'une orange",
     },
     Card: {
+      gif: 'Gif',
       biography: 'Biographie',
       interest: "Centres d'intérêts",
+      question: 'Questions',
       music: 'Musique du moment',
+      movie: 'Film du moment',
+      read_more: 'Lire la suite',
+      see_more: 'Voir plus',
     },
     Contact: {
       title: 'Contacts',
       newMatchs: 'Nouveaux matchs',
+    },
+    Instant_Message: {
+      title: 'Message Instantané',
+      send: 'Envoyer',
+      question:'Etes vous sur de vouloir envoyer un message à cette personne ?',
+      warning:'Vous ne pourrez utiliser cette fonctionalité qu\'une seule fois. Après avoir appuyé vous pourrez directement retrouver l\'utilisateur dans vos contacts.',
+      message_remaining: 'Nombre de messages restants :',
+    },
+    Swipe: {
+      title: 'Swipe',
+      title_warning:'Limite de swipe atteinte',
+      no_more_swipe: 'Vous avez atteint la limite de swipe pour aujourd\'hui',
+      no_more_swipe_text: 'Vous pourrez recommencer demain',
+      no_more_swipe_button: 'OK',
     },
   },
 };

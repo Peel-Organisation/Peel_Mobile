@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { loginRequest, IsProfileCompleted } from "../../functions/api_request";
+import { StatusBar } from "react-native";
 
 
 
@@ -57,6 +58,7 @@ const Login = ({ navigation }) => {
                 </HeaderText>
             </Header>
             <ViewCustom>
+                <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
                 <Spacer />
                 <MainText>
                     {t("login.email")}
