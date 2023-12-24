@@ -84,10 +84,9 @@ export const getFirebaseToken = async () => {
 
 export const IsProfileCompleted = async () => {
     crashlytics().log("\n\n IsProfileCompleted")
-    getStorage('token').then((token) => {
+    return getStorage('token').then((token) => {
         return FetchPeelApi({ url: "/api/auth/verifyProfileCompleted", method: "GET", token: token }).then(({ auth, userId }) => {
-            console.log("auth : ", auth)
-            if (auth == null || auth == undefined || auth == false) {
+            if (!auth) {
                 crashlytics().log("User profile not completed");
                 console.log("User profile not completed")
                 return false;
@@ -98,10 +97,12 @@ export const IsProfileCompleted = async () => {
             }
         }).catch(error => {
             crashlytics().recordError(error)
+            console.log("error : ", error)
             return false;
         });
     }).catch(error => {
         crashlytics().recordError(error)
+        console.log("error : ", error)
         return false;
     });
 }
@@ -122,8 +123,8 @@ export const PostMatchList = async (filtersArray) => {
 export const sendSwipe = async (user_target, typeOfLike) => {
     crashlytics().log("\n\n sendSwipe")
     const token = await getStorage('token')
-    const body = { type: typeOfLike }
-    return FetchPeelApi({ url: `/api/match/like/${user_target._id}`, method: "POST", body: body, token: token }).then(res => {
+    const body = { statelike: typeOfLike }
+    return FetchPeelApi({ url: `/api/match/like_dislike/${user_target._id}`, method: "POST", body: body, token: token }).then(res => {
         return (res);
     }).catch(error => {
         crashlytics().recordError(error)
