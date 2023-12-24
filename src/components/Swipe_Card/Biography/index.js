@@ -34,9 +34,7 @@ const BiographyCard = ({ Bio }) => {
           {Bio}
           <Ellipsis> ...</Ellipsis>  
         </BiographyText>
-        <BiographyFull onPress={() => setModalVisible(true)}
-        
-        >
+        <BiographyFull onPress={() => setModalVisible(true)}>
           <Ellipsis>{t('Card.read_more')}</Ellipsis>
         </BiographyFull>
       </Biography>

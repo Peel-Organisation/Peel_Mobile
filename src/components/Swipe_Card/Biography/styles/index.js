@@ -35,5 +35,6 @@ export const BiographyTitle = styled.Text`
 export const BiographyFull = styled.TouchableOpacity`
     padding: 10px 0px 0px 0px;
     font-size: 16px;
+    align-items: flex-end;
     color: ${props => props.theme.primary};
 `
