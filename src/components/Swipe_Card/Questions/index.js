@@ -22,8 +22,8 @@ const QuestionsCard = ({ Questions }) => {
     <>
       {Questions.map((question) => (
         <QuestionView key={question._id}>
-          <QuestionText>{question.question.question}</QuestionText>
-          <ResponseText>{question.answer}</ResponseText>
+          <QuestionText>{question?.question?.question}</QuestionText>
+          <ResponseText>{question?.answer}</ResponseText>
         </QuestionView>
       ))}
     </>
@@ -41,7 +41,7 @@ const QuestionsCard = ({ Questions }) => {
         <>
           <QuestionView key={Questions[0]._id} numberOfLines={1} ellipsizeMode='tail'>
             <QuestionText>
-              {Questions[0].question.question}
+              {Questions[0].question?.question}
             </QuestionText>
             <ResponseText>
               {Questions[0].answer}
