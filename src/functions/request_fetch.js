@@ -2,8 +2,15 @@ import crashlytics from '@react-native-firebase/crashlytics';
 import perf from '@react-native-firebase/perf';
 
 
+
+
 export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) => {
     const trace = await perf().startTrace('FetchPeelApi');
+    const timeout = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error('Request timed out'));
+        }, 10000);
+    });
     try {
         if (process.env.NODE_ENV === "development") {
             console.log("url : ", `${process.env.API_LINK}${url}`);
@@ -11,9 +18,8 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
             // console.log("body : ", body);
             console.log("token : ", token);
         }
-        crashlytics().log("\n\n FetchPeelApi")
-        const response = await fetch(`${process.env.API_LINK}${url}`, {
 
+        const responsePromise = fetch(`${process.env.API_LINK}${url}`, {
             headers: {
                 "Content-Type": "Application/json",
                 ...token && {
@@ -28,6 +34,10 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
                 body: JSON.stringify(body)
             }
         });
+
+
+        crashlytics().log("\n\n FetchPeelApi")
+        const response = await Promise.race([responsePromise, timeout]);
         const dataJson = await response.json();
         if (process.env.NODE_ENV === "development") {
             console.log("dataJson : ", dataJson);
@@ -49,5 +59,6 @@ export const FetchPeelApi = async ({ url, method, body, token, firebaseToken }) 
         trace.stop();
         return Promise.reject(error);
     }
+
 }
 
