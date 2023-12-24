@@ -16,7 +16,7 @@ export const Biography = styled.SafeAreaView`
     margin-bottom: 2%;
 `
 export const BiographyText = styled.Text`
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 1px;
     color: ${props => props.theme.text};
     text-align: justify;
@@ -24,6 +24,7 @@ export const BiographyText = styled.Text`
 `
 export const Ellipsis = styled.Text`
     color:  ${props => props.theme.ellipsisColor || 'gray'};
+    font-size: 11px;
 `
 
 export const BiographyTitle = styled.Text`

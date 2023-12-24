@@ -100,9 +100,11 @@ export default {
       gif: 'Gif',
       biography: 'Biographie',
       interest: "Centres d'intérêts",
+      question: 'Questions',
       music: 'Musique du moment',
       movie: 'Film du moment',
       read_more: 'Lire la suite',
+      see_more: 'Voir plus',
     },
     Contact: {
       title: 'Contacts',

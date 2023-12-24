@@ -98,9 +98,11 @@ export default {
       gif: 'Gif',
       biography: 'Biography',
       interest: 'Hobbies',
+      question: 'Questions',
       music: 'Latest favorite music',
       movie: 'Latest favorite movie',
       read_more: 'Read more',
+      see_more: 'See more',
     },
     Contact: {
       title: 'Contacts',

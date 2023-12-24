@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {View} from 'react-native';
 import {
   HomeCard,
   Name,
-  QuestionView,
-  QuestionText,
-  ResponseText,
   Locate,
   UserCont,
 } from './styles';
@@ -15,6 +12,7 @@ import InterestsCard from './Interests/index';
 import Gif_Card from './Gif/index';
 import MovieCard from './Movie/index';
 import MusicCard from './Music';
+import QuestionsCard from './Questions';
 
 /*
   This component is used to display the card of the user that is currently being swiped.
@@ -29,7 +27,7 @@ import MusicCard from './Music';
   The value of each key is the name of the module that should be displayed in the corresponding section of the card.
 */
 const Swipe_Card = props => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   const [User, setUser] = useState(props.User);
 
@@ -50,20 +48,25 @@ const Swipe_Card = props => {
   const moduleComponentsTopSection = [
     {
       key: 'gif',
-      component: (
-        <Gif_Card User={User?.gif?.image?.webp} />
-      ),
+      component: <Gif_Card User={User?.gif?.image?.webp} />,
     },
     {
       key: 'movie',
-      component: ( 
-        <MovieCard MovieURL={User?.movie?.images?.backdrop_path} Movie={User?.movie?.title}/>
+      component: (
+        <MovieCard
+          MovieURL={User?.movie?.images?.backdrop_path}
+          Movie={User?.movie?.title}
+        />
       ),
     },
     {
       key: 'music',
       component: (
-        <MusicCard MusicURL={User?.music?.image} MTitle={User?.music?.title} MArtist={User?.music?.artist?.name}/>
+        <MusicCard
+          MusicURL={User?.music?.image}
+          MTitle={User?.music?.title}
+          MArtist={User?.music?.artist?.name}
+        />
       ),
     },
   ];
@@ -71,37 +74,18 @@ const Swipe_Card = props => {
   const moduleComponents = [
     {
       key: 'biographie',
-      component: (
-        <BiographyCard Bio={User?.biographie}/>
-      ),
+      component: <BiographyCard Bio={User?.biographie} />,
     },
     {
       key: 'interests',
+      component: <InterestsCard User={User} />,
+    },
+    {
+      key: 'questions',
       component: (
-       <InterestsCard User={User}/>     
+        <QuestionsCard Questions={User?.questions} />
       ),
     },
-    // {
-    //   key: 'questions',
-    //   component: (
-    //     <View>
-    //       <QuestionView>
-    //         {User.questions?.map(question => {
-    //           return (
-    //             <View key={question._id}>
-    //               <View>
-    //                 <QuestionText>{question.question?.question}</QuestionText>
-    //               </View>
-    //               <View>
-    //                 <ResponseText>{question.answer}</ResponseText>
-    //               </View>
-    //             </View>
-    //           );
-    //         })}
-    //       </QuestionView>
-    //     </View>
-    //   ),
-    // },
   ];
 
   return (
@@ -110,39 +94,53 @@ const Swipe_Card = props => {
         <Name>
           {User.firstName} {getAge(User.birthday)}
         </Name>
-        <Locate>{User?.preferences?.searchFriend && (
-          <>Recherche l'amitié</>
-        )}
-          {User?.preferences?.searchLove && (
-            <>Recherche l'amour</>
-          )}
+        <Locate>
+          {User?.preferences?.searchFriend && <>Recherche l'amitié</>}
+          {User?.preferences?.searchLove && <>Recherche l'amour</>}
         </Locate>
 
-          {User.profileModules && Object.keys(User.profileModules).map(key => {
+        {User.profileModules && Object.keys(User.profileModules).map(key => {
+
+            // Main element is the top section of the card
             if ((key === 'mainElement') && User.profileModules[key]) {
               const moduleType = User.profileModules[key];
-              console.log('Profile module type: ', moduleType);
-              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
-              if (matchingModule) {
-                console.log('Matching module: ', matchingModule);
-                return matchingModule.component;
-              } 
-            } else if ((key === 'secondaryElement') && User.profileModules[key]) {
+              if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {      
+                const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
+                if (matchingModule) {
+                  return matchingModule.component;
+                } 
+              } else {
+                const matchingModule = moduleComponents.find(module => module.key === moduleType);
+                if (matchingModule) {
+                  return matchingModule.component;
+                } 
+              }
+            } 
+            // Secondary element is the middle section of the card
+            else if ((key === 'secondaryElement') && User.profileModules[key]) {
               const moduleType = User.profileModules[key];
-              console.log('Profile module type: ', moduleType);
-              const matchingModule = moduleComponents.find(module => module.key === moduleType);
-              if (matchingModule) {
-                console.log('Matching module: ', matchingModule);
-                return matchingModule.component;
+              if(moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
+                const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
+                if (matchingModule) {
+                  return matchingModule.component;
+                } 
+              } else {
+                const matchingModule = moduleComponents.find(module => module.key === moduleType);
+                if (matchingModule) {
+                  return matchingModule.component;
+                } 
+              }
+            } 
+            // Tertiary and quaternary elements are the bottom section of the card
+            else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
+              if (User.profileModules[key] === 'gif' || User.profileModules[key] === 'movie' || User.profileModules[key] === 'music') {
+                const matchingModule = moduleComponentsTopSection.find(module => module.key === User.profileModules[key]);
+                if (matchingModule) {
+                  return matchingModule.component;
+                } 
               } 
-            } else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
-              const moduleType = User.profileModules[key];
-              console.log('Profile module type: ', moduleType);
-              const matchingModule = moduleComponents.find(module => module.key === moduleType);
-              if (matchingModule) {
-                console.log('Matching module: ', matchingModule);
-                return matchingModule.component;
-              } 
+            } else {
+              return null;
             }
           })}
       </UserCont>
