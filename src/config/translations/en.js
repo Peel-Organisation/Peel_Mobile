@@ -95,13 +95,32 @@ export default {
       main_text: 'To peel more than just an orange',
     },
     Card: {
+      gif: 'Gif',
       biography: 'Biography',
       interest: 'Hobbies',
+      question: 'Questions',
       music: 'Latest favorite music',
+      movie: 'Latest favorite movie',
+      read_more: 'Read more',
+      see_more: 'See more',
     },
     Contact: {
       title: 'Contacts',
       newMatchs: 'New matches',
+    },
+    Instant_Message: {
+      title: 'Instant Message',
+      send: 'Send',
+      question: 'Are you sure you want to send a message to this person?',
+      warning: 'You can only use this feature once. After pressing, you will be able to find the user directly in your contacts.',
+      message_remaining: 'Number of messages remaining :',
+    },
+    Swipe: {
+      title: 'Swipe',
+      title_warning:'Swipe limit reached',
+      no_more_swipe: 'You have reached the swipe limit for today',
+      no_more_swipe_text: 'You will be able to start again tomorrow',
+      no_more_swipe_button: 'OK',
     },
   },
 };

@@ -15,9 +15,9 @@ export const ViewAuth = styled.SafeAreaView`
 
 
 export const ButtonAuth = styled.TouchableOpacity`
-    width: 70%;
+    width: 60%;
     height: 50px;
-    margin: 10px;
+    margin: 20px;
     border-radius: 25px;
     border: 2px solid ${props => props.theme.background};
     background-color: ${props => props.theme.primary};
@@ -34,15 +34,21 @@ export const ButtonAuthText = styled.Text`
 `
 
 export const Title = styled.Text`
-    font-size: 50px;
+    font-size: 48px;
+    padding: 10px;
     color: ${props => props.theme.background};
     font-family: 'Roboto-Medium';
     letter-spacing: 2px;
 `
 
 export const MainText = styled.Text`
-    font-size: 16px;
+    font-size: 18px;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
     color: ${props => props.theme.background};
     font-family: 'Roboto-Regular';
-    margin-top: 15px;
+    letter-spacing: 2px;
+    width: 70%;
+    line-height: 30px;
 `

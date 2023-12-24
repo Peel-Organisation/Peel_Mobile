@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BiographyEdit from '../../../components/Profile/Biography';
-import GifEdit from '../../../components/Profile/Gifs';
-import InterestEdit from '../../../components/Profile/Interest';
-import QuestionEdit from '../../../components/Profile/Question';
-import MovieEdit from '../../../components/Profile/Movie';
-import MusicEdit from '../../../components/Profile/Music';
 import BiographyCard from '../../../components/Swipe_Card/Biography';
 import GifCard from '../../../components/Swipe_Card/Gif';
 import InterestsCard from '../../../components/Swipe_Card/Interests';
@@ -27,6 +21,7 @@ const EditProfile = () => {
   const [user, setUser] = useState({});
   const [selectedModules, setSelectedModules] = useState([]);
   const [modules, setModules] = useState([]);
+  const [modulesTop, setModulesTop] = useState([]);
 
   useEffect(() => {
     GetUser(user).then(user_data => {
@@ -55,8 +50,15 @@ const EditProfile = () => {
         modules.push(module);
       }
     });
-    console.log('modules', modules);
     setModules(modules);
+
+    let modulesTop = [];
+    availableModulesTop.forEach(module => {
+      if (!isModuleSelected(module.value)) {
+        modulesTop.push(module);
+      }
+    });
+    setModulesTop(modulesTop);
   };
 
   // Tableau des modules disponibles dans l'API
@@ -69,6 +71,12 @@ const EditProfile = () => {
     { value: 'music', label: t('profile.custom.music') },
   ];
 
+  const availableModulesTop = [
+    { value: 'gif', label: t('profile.custom.gifs') },
+    { value: 'movie', label: t('profile.custom.movie') },
+    { value: 'music', label: t('profile.custom.music') }
+  ];
+
   // Vérifier si un module est sélectionné
   const isModuleSelected = module => {
     return selectedModules.includes(module);
@@ -76,6 +84,8 @@ const EditProfile = () => {
 
   // Gérer la sélection d'un module
   const handleModuleSelection = (value, index) => {
+    console.log('value', value);
+    console.log('index', index);
     const updatedModules = [...selectedModules];
     const moduleToSelect = availableModules.find(
       module => module.value === value,
@@ -102,66 +112,76 @@ const EditProfile = () => {
     <ViewCustom>
       <Title>{t('profile.custom.title')}</Title>
       <MainText>{t('profile.custom.text')}</MainText>
-      {selectedModules && selectedModules.map((module) => (
+      {selectedModules?.map((module, moduleIndex) => (
         <ModuleView key={module}>
           <ModulePicker
             selectedValue={module}
             onValueChange={itemValue =>
-              handleModuleSelection(itemValue, index)
+              handleModuleSelection(itemValue, moduleIndex)
             }>
             <ModulePicker.Item
               label={module}
               value=""
             />
-            {modules.map((availableModule, index) => (
+            {/* si le module est le premier alors on affiche availableModulesTop sinon on envoie availableModules*/}
+            {moduleIndex === 0 ? modulesTop.map((availableModule, index) => (
               <ModulePicker.Item
                 key={availableModule.value}
                 label={availableModule.label}
                 value={availableModule.value}
               />
-            ))}
+            )) : (
+              modules.map((availableModule, index) => (
+                <ModulePicker.Item
+                  key={availableModule.value}
+                  label={availableModule.label}
+                  value={availableModule.value}
+                />
+              ))
+            )}
           </ModulePicker>
           {/* Afficher les composants correspondant aux modules sélectionnés */}
           {module === 'biographie' && (
             <>
               <ModuleTitle>{t('profile.custom.biography')}</ModuleTitle>
-              <BiographyCard User={user} />
-              {/* <Biography user={user} setUser={setUser} /> */}
+              <BiographyCard Bio={user.biographie} />
             </>
           )}
           {module === 'interests' && (
             <>
               <ModuleTitle>{t('profile.custom.interests')}</ModuleTitle>
-              <InterestsCard User={user} />
-              {/* <Interest user={user} setUser={setUser} /> */}
+              <InterestsCard interests={user.interests} />
             </>
           )}
           {module === 'questions' && (
             <>
               <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
-              <QuestionsCard User={user} />
-              {/* <Question user={user} setUser={setUser} /> */}
+              <QuestionsCard Questions={user?.questions} />
             </>
           )}
           {module === 'gif' && (
             <>
               <ModuleTitle>{t('profile.custom.gifs')}</ModuleTitle>
-              <GifCard User={user} />
-              {/* <Gif user={user} setUser={setUser} /> */}
+              <GifCard GifUrl={user?.gif?.image?.webp} />
             </>
           )}
           {module === 'movie' && (
             <>
               <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
-              <MovieCard User={user} />
-              {/* <Movie user={user} setUser={setUser} /> */}
+              <MovieCard
+                MovieURL={user?.movie?.images?.backdrop_path}
+                Movie={user?.movie?.title}
+              />
             </>
           )}
           {module === 'music' && (
             <>
               <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
-              <MusicCard User={user} />
-              {/* <Music user={user} setUser={setUser} /> */}
+              <MusicCard
+                MusicURL={user?.music?.image}
+                MTitle={user?.music?.title}
+                MArtist={user?.music?.artist?.name}
+              />
             </>
           )}
         </ModuleView>

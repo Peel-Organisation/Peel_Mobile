@@ -1,16 +1,18 @@
 import React from 'react';
-import {
-  GifImage
-} from './styles';
 
-const Gif_Card = ({ User }) => {
+import {
+  GifImage,
+  GifArea
+} from './styles';
+const Gif_Card = ({ GifUrl }) => {
 
   return (
-    <GifImage
-      source={{
-        uri: `${User?.gif?.image?.webp}`,
-      }}
-    />
+    <GifArea>
+      <GifImage
+        source={{ uri: `${GifUrl}` }}
+        resizeMode="cover"
+      />
+    </GifArea>
   );
 };
 

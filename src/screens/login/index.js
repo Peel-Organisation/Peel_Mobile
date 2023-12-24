@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { loginRequest, IsProfileCompleted } from "../../functions/api_request";
+import { StatusBar } from "react-native";
 
 
 
@@ -35,7 +36,7 @@ const Login = ({ navigation }) => {
     const log = () => {
         const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if (!email.toLowerCase().match(email_regex)) {
-            alert("erreur de saisie");
+            alert("addresse email non valide");
         } else {
             loginRequest(email, password, navigation).then(({ error, message }) => {
                 if (error) {
@@ -57,6 +58,7 @@ const Login = ({ navigation }) => {
                 </HeaderText>
             </Header>
             <ViewCustom>
+                <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
                 <Spacer />
                 <MainText>
                     {t("login.email")}
