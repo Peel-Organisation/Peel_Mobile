@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import {
   HomeCard,
   Name,
@@ -27,7 +27,7 @@ import QuestionsCard from './Questions';
   The value of each key is the name of the module that should be displayed in the corresponding section of the card.
 */
 const Swipe_Card = props => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const [User, setUser] = useState(props.User);
 
@@ -48,7 +48,7 @@ const Swipe_Card = props => {
   const moduleComponentsTopSection = [
     {
       key: 'gif',
-      component: <Gif_Card User={User?.gif?.image?.webp} />,
+      component: <Gif_Card GifUrl={User?.gif?.image?.webp} />,
     },
     {
       key: 'movie',
@@ -78,7 +78,7 @@ const Swipe_Card = props => {
     },
     {
       key: 'interests',
-      component: <InterestsCard User={User} />,
+      component: <InterestsCard interests={User.interests} />,
     },
     {
       key: 'questions',
@@ -100,53 +100,53 @@ const Swipe_Card = props => {
         </Locate>
         {console.log(User.profileModules)}
         {User.profileModules && Object.keys(User.profileModules).map(key => {
-            // Main element is the top section of the card
-            if ((key === 'mainElement') && User.profileModules[key]) {
-              const moduleType = User.profileModules[key];
-              if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {      
-                const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
-                if (matchingModule) {
-                  return matchingModule.component;
-                } 
-              } else {
-                const matchingModule = moduleComponents.find(module => module.key === moduleType);
-                if (matchingModule) {
-                  return matchingModule.component;
-                } 
+          // Main element is the top section of the card
+          if ((key === 'mainElement') && User.profileModules[key]) {
+            const moduleType = User.profileModules[key];
+            if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
+              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
+              if (matchingModule) {
+                return matchingModule.component;
               }
-            } 
-            // Secondary element is the middle section of the card
-            else if ((key === 'secondaryElement') && User.profileModules[key]) {
-              const moduleType = User.profileModules[key];
-              if(moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
-                const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
-                if (matchingModule) {
-                  return matchingModule.component;
-                } 
-              } else {
-                const matchingModule = moduleComponents.find(module => module.key === moduleType);
-                if (matchingModule) {
-                  return matchingModule.component;
-                } 
-              }
-            } 
-            // Tertiary and quaternary elements are the bottom section of the card
-            else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
-              if (User.profileModules[key] === 'gif' || User.profileModules[key] === 'movie' || User.profileModules[key] === 'music') {
-                const matchingModule = moduleComponentsTopSection.find(module => module.key === User.profileModules[key]);
-                if (matchingModule) {
-                  return matchingModule.component;
-                } else {
-                  const matchingModule = moduleComponents.find(module => module.key === moduleType);
-                  if (matchingModule) {
-                    return matchingModule.component;
-                  } 
-                }
-              } 
             } else {
-              return null;
+              const matchingModule = moduleComponents.find(module => module.key === moduleType);
+              if (matchingModule) {
+                return matchingModule.component;
+              }
             }
-          })}
+          }
+          // Secondary element is the middle section of the card
+          else if ((key === 'secondaryElement') && User.profileModules[key]) {
+            const moduleType = User.profileModules[key];
+            if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
+              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
+              if (matchingModule) {
+                return matchingModule.component;
+              }
+            } else {
+              const matchingModule = moduleComponents.find(module => module.key === moduleType);
+              if (matchingModule) {
+                return matchingModule.component;
+              }
+            }
+          }
+          // Tertiary and quaternary elements are the bottom section of the card
+          else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
+            if (User.profileModules[key] === 'gif' || User.profileModules[key] === 'movie' || User.profileModules[key] === 'music') {
+              const matchingModule = moduleComponentsTopSection.find(module => module.key === User.profileModules[key]);
+              if (matchingModule) {
+                return matchingModule.component;
+              } else {
+                const matchingModule = moduleComponents.find(module => module.key === moduleType);
+                if (matchingModule) {
+                  return matchingModule.component;
+                }
+              }
+            }
+          } else {
+            return null;
+          }
+        })}
       </UserCont>
     </HomeCard>
   );

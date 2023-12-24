@@ -4,15 +4,15 @@ import {
   GifImage,
   GifArea
 } from './styles';
-const Gif_Card = ({ User }) => {
+const Gif_Card = ({ GifUrl }) => {
 
   return (
-      <GifArea>
-        <GifImage
-          source={{uri: `${User}`}}
-          resizeMode="cover"
-        />
-      </GifArea>
+    <GifArea>
+      <GifImage
+        source={{ uri: `${GifUrl}` }}
+        resizeMode="cover"
+      />
+    </GifArea>
   );
 };
 

@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import {
   ViewCustom,
   ButtonOrange,
@@ -14,10 +14,10 @@ import {
   Spacer,
 } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {registerRequest} from '../../functions/api_request';
+import { registerRequest } from '../../functions/api_request';
 
-const Register = ({navigation}) => {
-  const {t} = useTranslation();
+const Register = ({ navigation }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -39,12 +39,13 @@ const Register = ({navigation}) => {
     const email_regex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (
-      email.length < 5 ||
-      password.length < 8 ||
-      password != repeatPassword ||
-      !email.toLowerCase().match(email_regex)
+      password.length < 8
     ) {
-      alert('erreur de saisie');
+      alert('mot de passe trop court');
+    } else if (email.length < 5 || !email.toLowerCase().match(email_regex)) {
+      alert('email invalide');
+    } else if (password != repeatPassword) {
+      alert('mot de passe non identique');
     } else {
       registerRequest(email, password, navigation).then(({ error, message }) => {
         if (error) {
@@ -67,7 +68,7 @@ const Register = ({navigation}) => {
         <Spacer />
         <MainText>{t('register.email')}</MainText>
         <FieldInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={email}
           onChangeText={text => setEmail(text)}
           keyboardType="email-address"
@@ -75,7 +76,7 @@ const Register = ({navigation}) => {
         />
         <MainText>{t('register.password')}</MainText>
         <PasswordInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={password}
           secureTextEntry={true}
           onChangeText={text => setPassword(text)}
@@ -83,7 +84,7 @@ const Register = ({navigation}) => {
         />
         <MainText>{t('register.password_confirm')}</MainText>
         <PasswordInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={repeatPassword}
           secureTextEntry={true}
           onChangeText={text => setRepeatPassword(text)}

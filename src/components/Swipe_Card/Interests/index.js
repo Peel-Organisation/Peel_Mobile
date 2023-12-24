@@ -12,7 +12,7 @@ import {
 } from './styles';
 import Modal from '../../UI/ModalSwipeCard';
 
-const InterestsCard = ({ User }) => {
+const InterestsCard = ({ interests }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { t } = useTranslation();
 
@@ -20,11 +20,11 @@ const InterestsCard = ({ User }) => {
     setModalVisible(false);
   }
 
-  const displayedInterests = User?.interests?.slice(0, 3);
+  const displayedInterests = interests?.slice(0, 3);
 
   const ModalContent = (
     <>
-      {User?.interests?.map(interest => {
+      {interests?.map(interest => {
         return (
           <InterestBoxFull key={interest._id}>
             <InterestTextFull>{interest.name}</InterestTextFull>
@@ -48,7 +48,7 @@ const InterestsCard = ({ User }) => {
           </InterestBox>
         ))}
         <InterestFull onPress={() => setModalVisible(true)}>
-            <Ellipsis>{t('Card.see_more')}</Ellipsis>
+          <Ellipsis>{t('Card.see_more')}</Ellipsis>
         </InterestFull>
       </InterestView>
     </>
