@@ -119,7 +119,7 @@ export const PostMatchList = async (filtersArray) => {
 export const sendSwipe = async (user_target, typeOfLike) => {
     crashlytics().log("\n\n sendSwipe")
     const token = await getStorage('token')
-    const body = { stateliker: typeOfLike }
+    const body = { statelike: typeOfLike }
     return FetchPeelApi({ url: `/api/match/like_dislike/${user_target._id}`, method: "POST", body: body, token: token }).then(res => {
         return (res);
     }).catch(error => {
