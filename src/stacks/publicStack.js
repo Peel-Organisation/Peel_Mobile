@@ -26,11 +26,15 @@ const PublicStack = ({ navigation }) => {
 
   const testProfile = async () => {
     try {
+      setLoading(true);
+      setRetry(false);
+      setError("");
       console.log("testProfile")
       let auth_bool = await TestAuth()
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
         let profile_bool = await IsProfileCompleted()
+        console.log("profile_bool : ", profile_bool)
         crashlytics().log("profile_bool : ", profile_bool)
         if (profile_bool) {
           setLoading(false);
