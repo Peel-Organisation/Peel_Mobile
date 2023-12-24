@@ -77,7 +77,6 @@ export const getFirebaseToken = async () => {
         return firebaseToken;
     }).catch(error => {
         crashlytics().recordError(error)
-        console.log("can't get firebase token : ", error)
         return null;
     });
 }
@@ -88,7 +87,6 @@ export const IsProfileCompleted = async () => {
         return FetchPeelApi({ url: "/api/auth/verifyProfileCompleted", method: "GET", token: token }).then(({ auth, userId }) => {
             if (!auth) {
                 crashlytics().log("User profile not completed");
-                console.log("User profile not completed")
                 return false;
             } else {
                 crashlytics().log("User profile completed");
@@ -97,12 +95,10 @@ export const IsProfileCompleted = async () => {
             }
         }).catch(error => {
             crashlytics().recordError(error)
-            console.log("error : ", error)
             return false;
         });
     }).catch(error => {
         crashlytics().recordError(error)
-        console.log("error : ", error)
         return false;
     });
 }
@@ -123,7 +119,7 @@ export const PostMatchList = async (filtersArray) => {
 export const sendSwipe = async (user_target, typeOfLike) => {
     crashlytics().log("\n\n sendSwipe")
     const token = await getStorage('token')
-    const body = { statelike: typeOfLike }
+    const body = { stateliker: typeOfLike }
     return FetchPeelApi({ url: `/api/match/like_dislike/${user_target._id}`, method: "POST", body: body, token: token }).then(res => {
         return (res);
     }).catch(error => {
@@ -157,7 +153,6 @@ export const registerRequest = async (email, password, navigation) => {
     crashlytics().log("\n\nregister request")
     getFirebaseToken().then((firebaseToken) => {
         const body = { email: email.toLowerCase(), password: password }
-        console.log("body : ", body)
         return FetchPeelApi({ url: `/api/auth/register`, method: "POST", body: body, firebaseToken: firebaseToken }).then(res => {
             addStorage("token", res['token'])
             addStorage("userId", res['userId'].toString())
