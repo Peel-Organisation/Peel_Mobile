@@ -6,38 +6,37 @@ const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const Container = styled.View`
-    padding: 20px 10px;
     background: white;
+    padding: 15px;
     z-index: 999999;
-    width: 70%;
-    border-radius: 5px;
-    margin-top: 30%;
-    margin-left: 15%;
+    width: 90%;
+    top: 25%;
+    left: 5%;
+    border-radius: 15px;
 `
 export const Content = styled.View`
-    padding: 20px 10px;
+    padding: 15px;
 `
-
 
 export const Overlay = styled.TouchableOpacity`
     position: absolute;
     width: ${DIMENSION_WIDTH}px;
     height: ${DIMENSION_HEIGHT}px;
-    background: #0000005c;
+    background: rgba(0,0,0,0.5);
     top: 0;
     z-index: 999998;
 `
 
 export const Button = styled.TouchableOpacity`
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5%;
+    right: 5%;
     z-index: 2;
 `
 
 export const Icon = styled.Image`
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 `
 
 

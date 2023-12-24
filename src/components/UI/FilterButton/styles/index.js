@@ -2,8 +2,9 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity `
     flex: 1;
-    height: 50px;
+    height: 45px;
     border-radius: 50px;
+    margin: 3%;
     justify-content: center;
     align-items: center;
     background-color: ${props => (props.primary ? props.theme.white : 'rgba(255, 255, 255, 0.5)')};

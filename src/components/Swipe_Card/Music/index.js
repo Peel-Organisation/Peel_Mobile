@@ -1,18 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   MusicImage,
+  MusicArea,
+  MusicInfo,
+  MusicName,
+  MusicArtist,
+  MusicTitle
 } from './styles';
 
-const MusicCard = ({ User }) => {
+const MusicCard = ({ MusicURL, MTitle, MArtist}) => {
+const { t } = useTranslation();
+
   return (
-    <View>
-      <MusicImage
-        source={{
-          uri: `${User?.music?.image}`,
-        }}
-      />
-    </View>
+    <>
+      <MusicTitle>{t('Card.music')}</MusicTitle>
+      <MusicArea>
+        <MusicImage source={{uri: `${MusicURL}`}} resizeMode="cover"/>
+        <MusicInfo>
+          <MusicName>{MTitle}</MusicName>
+          <MusicArtist>{MArtist}</MusicArtist>
+        </MusicInfo>
+      </MusicArea>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ const theme = {
     text: '#000000',
     sub_text: '#A9A9A9',
     background: '#FFF5EC',
+    background_light_blur:'#fff4ebea',
     white: '#FFFFFF',
     black: '#000000',
     grey: '#A9A9A9',

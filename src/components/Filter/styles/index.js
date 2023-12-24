@@ -29,7 +29,8 @@ export const TitleText = styled.Text`
 
 export const FilterIcon = styled.TouchableOpacity `
     position: absolute;
-    left: 7%;
+    top: 10%;
+    left: 4%;
     width: 45px;
     height: 45px;
     border-radius: 50px;
@@ -43,6 +44,7 @@ export const FilterIconImg = styled.Image `
 `
 
 export const FiltersView = styled.View `
+    margin-top: 8%;
     width: 75%;
     align-self: center;
 `
