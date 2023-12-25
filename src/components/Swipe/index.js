@@ -40,7 +40,7 @@ const Swipe = (props) => {
             setLoggedUser({ ...loggedUser, nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
             closeModal();
         }}
-            // disabled={loggedUser.nbInstantConversationPossibilities == 0}
+            disabled={loggedUser.nbInstantConversationPossibilities == 0}
         >
             <ModalButtonText>{t('Instant_Message.send')}</ModalButtonText>
         </ModalButton>
