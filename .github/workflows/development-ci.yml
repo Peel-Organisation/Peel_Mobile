@@ -7,18 +7,26 @@ on:
       - '!main'
       - '!master'
       - '!feature*'
+      - '!feature/*'
       - '!fix*'
+      - '!fix/*'
       - '!hotfix*'
+      - '!hotfix/*'
       - '!feat*'
+      - '!feat/*'
   pull_request:
     branches: 
       - 'development'
       - '!main'
       - '!master'
       - '!feature*'
+      - '!feature/*'
       - '!fix*'
+      - '!fix/*'
       - '!hotfix*'
+      - '!hotfix/*'
       - '!feat*'
+      - '!feat/*'
 
 jobs:
     Test:
