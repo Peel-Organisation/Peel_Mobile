@@ -3,10 +3,6 @@ import { useTranslation } from "react-i18next";
 import { StatusBar } from "react-native";
 import { ViewAuth, ButtonAuth, ButtonAuthText, Title, MainText } from './styles';
 import Logo from "../../components/Logo";
-import { Spacer } from "../../components/StyledComponents/Profile/General/ConditionText/Test";
-
-
-
 
 const Auth = ({ navigation }) => {
     const { t } = useTranslation();
@@ -37,9 +33,5 @@ const Auth = ({ navigation }) => {
         </>
     );
 }
-
-
-
-
 
 export default Auth; 

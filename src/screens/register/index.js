@@ -64,7 +64,6 @@ const Register = ({ navigation }) => {
         <HeaderText>{t('register.title')}</HeaderText>
       </Header>
       <ViewCustom>
-        <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
         <Spacer />
         <MainText>{t('register.email')}</MainText>
         <FieldInput
@@ -97,7 +96,7 @@ const Register = ({ navigation }) => {
             {t('register.button_register').toUpperCase()}
           </ButtonOrangeText>
         </ButtonOrange>
-        <MainText>{t('register.already_account')} </MainText>
+        <MainText>{t('register.already_account')} </MainText> 
         <Link onPress={() => navigation.navigate('Login')}>
           {t('register.button_login')}
         </Link>
