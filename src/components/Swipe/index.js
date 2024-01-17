@@ -77,20 +77,24 @@ const Swipe = (props) => {
       newUser.swipeCount = { count: 0, date: new Date() }
     }
     // increment the counter
-    newUser.swipeCount.count++;
+    const mode = process.env.NODE_ENV
+
     // if the counter is above 10, return true
-    if (newUser.swipeCount.count > 10) {
-      if (value == 'like') {
-        this.swiper.goBackFromLeft();
+    if (mode != "development") {
+      newUser.swipeCount.count++;
+      if (newUser.swipeCount.count > 10) {
+        if (value == 'like') {
+          this.swiper.goBackFromLeft();
+        } else {
+          this.swiper.goBackFromRight();
+        }
+        setModalContent(ModalNoMoreSwipe);
+        setModalVisible(true);
       } else {
-        this.swiper.goBackFromRight();
+        setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount });
+        putStorage('user', newUser);
+        sendSwipe(user, value)
       }
-      setModalContent(ModalNoMoreSwipe);
-      setModalVisible(true);
-    } else {
-      setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount });
-      putStorage('user', newUser);
-      sendSwipe(user, value)
     }
   }
 
