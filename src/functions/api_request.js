@@ -5,6 +5,7 @@ import { update_messaging } from './update_messaging';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 export const GetUser = async (defaultUser) => {
+    
     crashlytics().log("\n\n GetUser")
     const token = await getStorage('token')
     return FetchPeelApi({ url: "/api/user/", method: "GET", token: token }).then(res => {
