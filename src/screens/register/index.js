@@ -12,6 +12,7 @@ import {
   PasswordInput,
   Header,
   Spacer,
+  BarStyle,
 } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { registerRequest } from '../../functions/api_request';
@@ -62,32 +63,29 @@ const Register = ({ navigation }) => {
     <>
       <Header>
         <HeaderText>{t('register.title')}</HeaderText>
+        <BarStyle />
       </Header>
       <ViewCustom>
-        <Spacer />
-        <MainText>{t('register.email')}</MainText>
         <FieldInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={email}
           onChangeText={text => setEmail(text)}
           keyboardType="email-address"
           autoComplete="email"
+          placeholder={t('register.email_placeholder')}
         />
-        <MainText>{t('register.password')}</MainText>
         <PasswordInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={password}
           secureTextEntry={true}
           onChangeText={text => setPassword(text)}
           autoComplete="password"
+          placeholder={t('register.password_placeholder')}
         />
-        <MainText>{t('register.password_confirm')}</MainText>
         <PasswordInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           value={repeatPassword}
           secureTextEntry={true}
           onChangeText={text => setRepeatPassword(text)}
           autoComplete="password"
+          placeholder={t('register.password_confirm')}
         />
         <ButtonOrange
           title={t('register.button_register')}

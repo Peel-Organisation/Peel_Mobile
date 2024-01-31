@@ -13,6 +13,14 @@ export const ViewCustom = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
 `
 
+export const BarStyle = styled.View`
+    background-color: #F5F5F5;
+    border: 1px solid #F5F5F5;
+    height: 1px;
+    margin-top: 10px;
+    width: 120px;
+`;
+
 export const ButtonOrange = styled.TouchableOpacity`
     width: 70%;
     height: 50px;
@@ -42,7 +50,9 @@ export const Header = styled.SafeAreaView`
 `
 
 export const HeaderText = styled.Text`
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: ${props => props.theme.background};
 `
 

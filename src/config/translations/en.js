@@ -36,7 +36,9 @@ export default {
     register: {
       title: 'Register',
       email: 'Email',
+      email_placeholder: 'Enter your email',
       password: 'Password',
+      password_placeholder: 'Enter your password',
       password_confirm: 'Confirm password',
       button_register: 'Register',
       already_account: 'Already have an account ?',

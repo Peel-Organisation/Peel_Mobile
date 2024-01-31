@@ -8,10 +8,18 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const ViewCustom = styled.SafeAreaView`
     flex: 1;
-    align-items: center;
-    /* justify-content: center; */
+    /* align-items: center; */
+    /* justify-content: space-around; */
     background-color: ${props => props.theme.background};
 `
+
+export const BarStyle = styled.View`
+    width: ${DIMENSION_WIDTH-250}px;
+    background-color: ${props => props.theme.background};
+    border: 1px solid ${props => props.theme.background};
+    height: 1px;
+    margin-top: 10px;
+`;
 
 export const ButtonOrange = styled.TouchableOpacity`
     width: 70%;
@@ -42,26 +50,32 @@ export const Header = styled.View`
 `
 
 export const HeaderText = styled.Text`
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: ${props => props.theme.background};
 `
 
 export const FieldInput = styled.TextInput`
-    width: 70%;
-    height: 50px;
-    margin: 10px;
+    width: ${DIMENSION_WIDTH-70}px;
+    padding : 10px;
+    font-size: 13px;
+    border: 1px solid  ${props => props.theme.grey};
     border-radius: 10px;
     background-color: ${props => props.theme.background};
     color: ${props => props.theme.text};
+    letter-spacing: 4px;
 `
 
 export const PasswordInput = styled.TextInput`
-    width: 70%;
-    height: 50px;
-    margin: 10px;
+    width: ${DIMENSION_WIDTH-70}px;
+    padding : 10px;
+    font-size: 13px;
+    border: 1px solid  ${props => props.theme.grey};
     border-radius: 10px;
     background-color: ${props => props.theme.background};
     color: ${props => props.theme.text};
+    letter-spacing: 4px;
 `
 
 export const Link = styled.Text`

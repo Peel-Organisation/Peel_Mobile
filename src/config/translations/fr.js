@@ -34,9 +34,11 @@ export default {
       button_register: 'Inscrivez-vous !',
     },
     register: {
-      title: 'Créer un compte',
+      title: 'Inscription',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       password_confirm: 'Confirmer le mot de passe',
       button_register: 'Créer son profil',
       already_account: 'Déjà un compte ?',

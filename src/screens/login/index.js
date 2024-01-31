@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from "react-i18next";
-import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer } from './styles';
+import { ViewCustom, ButtonOrange, ButtonOrangeText, HeaderText, MainText, Link, FieldInput, PasswordInput, Header, Spacer, BarStyle } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { loginRequest, IsProfileCompleted } from "../../functions/api_request";
 import { StatusBar } from "react-native";
@@ -57,6 +57,7 @@ const Login = ({ navigation }) => {
                 <HeaderText>
                     {t("login.title")}
                 </HeaderText>
+                <BarStyle />
             </Header>
             <ViewCustom>
                 <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
