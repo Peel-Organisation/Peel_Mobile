@@ -78,8 +78,16 @@ const Swipe = (props) => {
     }
     // increment the counter
     newUser.swipeCount.count++;
-    // if the counter is above 10, return true
-    if (newUser.swipeCount.count > 10) {
+
+
+    //if the counter is a multiple of 10, notify the parent component
+    if (newUser.swipeCount.count % 10 === 0) {
+      props.onSwipeCountOffsetThreshold();
+      console.log("Nouvelle liste de matchs");
+    }
+
+    // if the counter is above 20, return true
+    if (newUser.swipeCount.count > 20) {
       if (value == 'like') {
         this.swiper.goBackFromLeft();
       } else {
