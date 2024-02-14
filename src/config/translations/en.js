@@ -41,6 +41,7 @@ export default {
       password_placeholder: 'Enter your password',
       password_confirm: 'Confirm password',
       button_register: 'Register',
+      button_register_text: 'Register',
       already_account: 'Already have an account ?',
       button_login: 'Login',
     },

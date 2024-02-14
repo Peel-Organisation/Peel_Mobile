@@ -41,6 +41,7 @@ export default {
       password_placeholder: 'Entrez votre mot de passe',
       password_confirm: 'Confirmer le mot de passe',
       button_register: 'Créer son profil',
+      button_register_text: 'S\'inscrire',
       already_account: 'Déjà un compte ?',
       button_login: 'Connexion',
     },

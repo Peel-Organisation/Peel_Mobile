@@ -66,6 +66,7 @@ const Register = ({ navigation }) => {
         <BarStyle />
       </Header>
       <ViewCustom>
+        <Spacer />
         <FieldInput
           value={email}
           onChangeText={text => setEmail(text)}
@@ -73,6 +74,7 @@ const Register = ({ navigation }) => {
           autoComplete="email"
           placeholder={t('register.email_placeholder')}
         />
+        <Spacer />
         <PasswordInput
           value={password}
           secureTextEntry={true}
@@ -80,6 +82,7 @@ const Register = ({ navigation }) => {
           autoComplete="password"
           placeholder={t('register.password_placeholder')}
         />
+        <Spacer />
         <PasswordInput
           value={repeatPassword}
           secureTextEntry={true}
@@ -87,13 +90,15 @@ const Register = ({ navigation }) => {
           autoComplete="password"
           placeholder={t('register.password_confirm')}
         />
+        <Spacer />
         <ButtonOrange
           title={t('register.button_register')}
           onPress={() => SignIn()}>
           <ButtonOrangeText>
-            {t('register.button_register').toUpperCase()}
+            {t('register.button_register_text').toUpperCase()}
           </ButtonOrangeText>
         </ButtonOrange>
+        <Spacer />
         <MainText>{t('register.already_account')} </MainText> 
         <Link onPress={() => navigation.navigate('Login')}>
           {t('register.button_login')}
