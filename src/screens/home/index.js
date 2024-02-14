@@ -8,6 +8,7 @@ import { PostMatchList } from "../../functions/api_request"
 import Loading from "../../components/loading";
 import Filter from "../../components/Filter";
 import RetryButton from "../../components/Retry";
+import { use } from "i18next";
 
 
 
@@ -15,7 +16,7 @@ const Match = () => {
     const { t } = useTranslation();
 
     const [loading, setLoading] = useState(true);
-    const [userList, setUserList] = useState([{}]);
+    const [userList, setUserList] = useState([]);
     const [filter, setFilter] = useState(false);
     const [retry, setRetry] = React.useState(false);
     const [error, setError] = React.useState("");
@@ -37,17 +38,17 @@ const Match = () => {
     });
 
     useEffect(() => {
+        setLoading(true);
+        setRetry(false);
+        setError("");
         crashlytics().log("Match screen mounted");
         getMatchList()
     }, [activeFilters]);
 
     const getMatchList = () => {
-        setLoading(true);
-        setRetry(false);
-        setError("");
         PostMatchList(activeFilters).then(matchList => {
             if (matchList != undefined) {
-                setUserList(matchList);
+                setUserList(userList.concat(matchList.splice(0, 10)));
                 setLoading(false);
             } else {
                 navigation.navigate('Public');
@@ -59,6 +60,7 @@ const Match = () => {
             setLoading(false);
         })
     }
+
 
     if (loading) {
         return (
@@ -85,7 +87,7 @@ const Match = () => {
                         <FilterIconImg source={require('../../../assets/images/icons/sort.png')} />
                     </FilterIcon>
                 </Header>
-                <Swipe userList={userList} />
+                <Swipe userList={userList} onSwipeCountOffsetThreshold={() => getMatchList()} />
 
                 {
                     filter && (
