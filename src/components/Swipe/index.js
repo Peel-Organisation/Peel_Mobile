@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-native-card-stack-swiper';
 import Swipe_Card from '../Swipe_Card';
 import { useTranslation } from 'react-i18next';
-import { sendSwipe, createInstantConversation, GetUser } from '../../functions/api_request';
+import { sendSwipe, createInstantConversation, GetUser, updateUser } from '../../functions/api_request';
 import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText, ModalTitle, ModalQuestion, ModalWarning } from './styles';
 import Modal from '../UI/Modal';
 import { getStorage, putStorage } from '../../functions/storage';
@@ -11,7 +11,7 @@ import { Text } from 'react-native';
 
 
 const Swipe = (props) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const [userList, setUserList] = useState(props.userList);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -49,48 +49,57 @@ const Swipe = (props) => {
 
   const ModalNoMoreSwipe = (
     <>
-        <ModalTitle>{t('Swipe.title_warning')}</ModalTitle>
-        <ModalQuestion>{t('Swipe.no_more_swipe')}</ModalQuestion>
-        <ModalWarning>{t('Swipe.no_more_swipe_text')}</ModalWarning>
-        <ModalButton onPress={closeModal}>
-            <ModalButtonText>{t('Swipe.no_more_swipe_button')}</ModalButtonText>
-        </ModalButton>
+      <ModalTitle>{t('Swipe.title_warning')}</ModalTitle>
+      <ModalQuestion>{t('Swipe.no_more_swipe')}</ModalQuestion>
+      <ModalWarning>{t('Swipe.no_more_swipe_text')}</ModalWarning>
+      <ModalButton onPress={closeModal}>
+        <ModalButtonText>{t('Swipe.no_more_swipe_button')}</ModalButtonText>
+      </ModalButton>
     </>
   );
 
   const checkSwipePossible = async (user, value) => {
-    let loggedUser = await getStorage('user');
 
+    let loggedUser = await getStorage('user');
+    
     let newUser = { swipeCount: loggedUser.swipeCount };
+    
     if (newUser.swipeCount == undefined) {
       newUser.swipeCount = { count: 0, date: new Date() }
     }
+    
     const swipeDate = new Date(newUser.swipeCount?.date).getDate();
     const swipeMonth = new Date(newUser.swipeCount?.date).getMonth();
     const swipeYear = new Date(newUser.swipeCount?.date).getFullYear();
     const todayDate = new Date().getDate();
     const todayMonth = new Date().getMonth();
     const todayYear = new Date().getFullYear();
-
+    
     // if the date is not today, reset the counter
     if (swipeDate !== todayDate || swipeMonth !== todayMonth || swipeYear !== todayYear) {
       newUser.swipeCount = { count: 0, date: new Date() }
+      setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount })
+      updateUser(newUser);
     }
     // increment the counter
-    newUser.swipeCount.count++;
+    const mode = process.env.NODE_ENV
+    
     // if the counter is above 10, return true
-    if (newUser.swipeCount.count > 10) {
-      if (value == 'like') {
-        this.swiper.goBackFromLeft();
+    if (mode != "development") {
+      newUser.swipeCount.count++;
+      if (newUser.swipeCount.count > 10) {
+        if (value == 'like') {
+          this.swiper.goBackFromLeft();
+        } else {
+          this.swiper.goBackFromRight();
+        }
+        setModalContent(ModalNoMoreSwipe);
+        setModalVisible(true);
       } else {
-        this.swiper.goBackFromRight();
+        setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount });
+        putStorage('user', newUser);
+        sendSwipe(user, value)
       }
-      setModalContent(ModalNoMoreSwipe);
-      setModalVisible(true);
-    } else {
-      setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount });
-      putStorage('user', newUser);
-      sendSwipe(user, value)
     }
   }
 
