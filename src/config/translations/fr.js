@@ -28,7 +28,9 @@ export default {
     login: {
       title: 'Connexion',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       button_login: 'Se connecter',
       no_account: 'Pas encore de profil ?',
       button_register: 'Inscrivez-vous !',

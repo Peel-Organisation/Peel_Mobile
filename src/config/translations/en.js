@@ -29,6 +29,8 @@ export default {
       title: 'Login',
       email: 'Email',
       password: 'Password',
+      email_placeholder: 'Enter your email',
+      password_placeholder: 'Enter your password',
       button_login: 'Login',
       no_account: "Don't have an account yet ?",
       button_register: 'Register',
