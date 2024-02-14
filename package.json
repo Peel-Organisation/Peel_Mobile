@@ -17,7 +17,8 @@
     "deleteBuild-android": "shx rm -r android/app/build && shx rm -r android/build && shx rm -r android/.gradle && shx rm -r package-lock.json && shx rm -r node_modules && npm install --legacy-peer-deps",
     "deleteBuild-ios": "shx rm -r ios/build  && shx rm -r ios/Podfile.lock && shx rm -r package-lock.json && shx rm -r node_modules && shx rm -r ios/Pods && npm install --legacy-peer-deps",
     "build-android": "cd android && ./gradlew assembleRelease && cd ..",
-    "build-ios": "cd ios && xcodebuild -workspace peel.xcworkspace -scheme peel -configuration Release -sdk iphoneos -derivedDataPath build"
+    "build-ios": "cd ios && xcodebuild -workspace peel.xcworkspace -scheme peel -configuration Release -sdk iphoneos -derivedDataPath build",
+    "iav": "perl -i -pe 's/(versionCode)(\\d+)/$1.($2+1)/e' android/app/build.gradle"
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.3.1",
