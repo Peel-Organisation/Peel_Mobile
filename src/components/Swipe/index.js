@@ -23,27 +23,27 @@ const Swipe = (props) => {
 
   const ModalCreateConversation = (
     <>
-        <ModalTitle>{t('Instant_Message.title')}</ModalTitle>
-        <ModalQuestion>{t('Instant_Message.question')}</ModalQuestion>
-        <ModalWarning>{t('Instant_Message.warning')}</ModalWarning>
-        <ModalWarning>{t('Instant_Message.message_remaining')} {loggedUser.nbInstantConversationPossibilities}</ModalWarning>
-        <ModalButton onPress={() => {
-            const currentUser = this.swiper.state.topCard;
-            if (currentUser == "cardA") {
-            const user = this.swiper.state.cardA.props.user;
-            createInstantConversation(user._id);
-            } else if (currentUser == "cardB") {
-            const user = this.swiper.state.cardB.props.user;
-            createInstantConversation(user._id);
-            }
-            putStorage('user', { nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
-            setLoggedUser({ ...loggedUser, nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
-            closeModal();
-        }}
-            disabled={loggedUser.nbInstantConversationPossibilities == 0}
-        >
-            <ModalButtonText>{t('Instant_Message.send')}</ModalButtonText>
-        </ModalButton>
+      <ModalTitle>{t('Instant_Message.title')}</ModalTitle>
+      <ModalQuestion>{t('Instant_Message.question')}</ModalQuestion>
+      <ModalWarning>{t('Instant_Message.warning')}</ModalWarning>
+      <ModalWarning>{t('Instant_Message.message_remaining')} {loggedUser.nbInstantConversationPossibilities}</ModalWarning>
+      <ModalButton onPress={() => {
+        const currentUser = this.swiper.state.topCard;
+        if (currentUser == "cardA") {
+          const user = this.swiper.state.cardA.props.user;
+          createInstantConversation(user._id);
+        } else if (currentUser == "cardB") {
+          const user = this.swiper.state.cardB.props.user;
+          createInstantConversation(user._id);
+        }
+        putStorage('user', { nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
+        setLoggedUser({ ...loggedUser, nbInstantConversationPossibilities: loggedUser.nbInstantConversationPossibilities - 1 });
+        closeModal();
+      }}
+        disabled={loggedUser.nbInstantConversationPossibilities == 0}
+      >
+        <ModalButtonText>{t('Instant_Message.send')}</ModalButtonText>
+      </ModalButton>
     </>
   );
 
@@ -61,29 +61,38 @@ const Swipe = (props) => {
   const checkSwipePossible = async (user, value) => {
 
     let loggedUser = await getStorage('user');
-    
+
     let newUser = { swipeCount: loggedUser.swipeCount };
-    
+
     if (newUser.swipeCount == undefined) {
       newUser.swipeCount = { count: 0, date: new Date() }
     }
-    
+
     const swipeDate = new Date(newUser.swipeCount?.date).getDate();
     const swipeMonth = new Date(newUser.swipeCount?.date).getMonth();
     const swipeYear = new Date(newUser.swipeCount?.date).getFullYear();
     const todayDate = new Date().getDate();
     const todayMonth = new Date().getMonth();
     const todayYear = new Date().getFullYear();
-    
+
     // if the date is not today, reset the counter
     if (swipeDate !== todayDate || swipeMonth !== todayMonth || swipeYear !== todayYear) {
       newUser.swipeCount = { count: 0, date: new Date() }
       setLoggedUser({ ...loggedUser, swipeCount: newUser.swipeCount })
       updateUser(newUser);
     }
+
     // increment the counter
+    newUser.swipeCount.count++;
+
+    //if the counter is a multiple of 10, notify the parent component
+    if (newUser.swipeCount.count % 10 === 0) {
+      props.onSwipeCountOffsetThreshold();
+      console.log("Nouvelle liste de matchs");
+    }
+
     const mode = process.env.NODE_ENV
-    
+
     // if the counter is above 10, return true
     if (mode != "development") {
       newUser.swipeCount.count++;
