@@ -32,7 +32,7 @@ export const ButtonOrangeText = styled.Text`
     text-align: center;
     letter-spacing: 2px; 
     color: ${props => props.theme.background};
-    padding-top: 10px;
+    padding: 12px;
 `
 
 export const Spacer = styled.View`
