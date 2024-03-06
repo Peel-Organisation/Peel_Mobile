@@ -1,4 +1,4 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import t from 'translations';
 
 export default {
   translation: {
