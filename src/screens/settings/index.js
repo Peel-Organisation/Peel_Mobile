@@ -1,8 +1,8 @@
-import React, {useState, Image, Text} from 'react';
+import React, { useState, Image } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {onDisplayNotification} from '../../functions/notification';
+import { onDisplayNotification } from '../../functions/notification';
 import Modal from '../../components/UI/ModalSettings';
 import {
   Header,
@@ -13,11 +13,10 @@ import {
   SettingsList,
   ButtonSettings,
   ButtonSettingsText,
-  ViewCustom,
 } from './styles';
 
 import '../../config/translationInit';
-import {Linking} from 'react-native';
+import { Linking } from 'react-native';
 
 const Settings = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,9 +24,9 @@ const Settings = ({navigation}) => {
 
   const closeModal = () => {
     setModalVisible(false);
-  }
+  };
 
-  const ModalContent = () => {
+  const ModalContent= () => {
     return (
       <>
         <ButtonSettings onPress={() => i18n.changeLanguage('en')}>
@@ -67,7 +66,11 @@ const Settings = ({navigation}) => {
   return (
     <>
       { modalVisible && (
-        <Modal closeModal={closeModal} content={ModalContent} modalVisible={modalVisible} />
+        <Modal
+          closeModal={closeModal}
+          modalVisible={modalVisible}
+          // ModalContent={ModalContent}
+        />
       )}
       <Header>
         <HeaderText>{t('settings.title')}</HeaderText>
@@ -82,7 +85,7 @@ const Settings = ({navigation}) => {
             </ButtonSettingsText>
           </ButtonSettings>
 
-          <ButtonSettings onPress={() => setModalVisible(true)}>
+          <ButtonSettings onPress={() => { setModalVisible(true);}}>
             <IconSettings source={require('../../img/tabIcons/language.png')} />
             <ButtonSettingsText>
               {t('settings.language')}
@@ -124,7 +127,7 @@ const Settings = ({navigation}) => {
               {t('settings.logout')}
               </ButtonSettingsText>
           </ButtonSettings>
-          
+
         </SettingsList>
       </SettingsView>
     </>

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-native-card-stack-swiper';
-import Swipe_Card from '../Swipe_Card';
+import SwipeCard from '../SwipeCard';
 import { useTranslation } from 'react-i18next';
 import { sendSwipe, createInstantConversation, GetUser, updateUser } from '../../functions/api_request';
 import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText, ModalTitle, ModalQuestion, ModalWarning } from './styles';
 import Modal from '../UI/Modal';
 import { getStorage, putStorage } from '../../functions/storage';
-import { Text } from 'react-native';
 
 
 
@@ -141,7 +140,7 @@ const Swipe = (props) => {
               }}
               key={user._id}
               user={user}>
-              <Swipe_Card User={user} />
+              <SwipeCard User={user} />
             </Card>
           ))}
         </CardStackView>

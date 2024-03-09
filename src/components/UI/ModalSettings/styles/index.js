@@ -40,9 +40,9 @@ export const Icon = styled.Image`
     height: 15px;
 `
 
-export const Button_Settings = styled.TouchableOpacity`
+export const ButtonSettings = styled.TouchableOpacity`
     width: 100%;
-    height: 60px;
+    padding: 2%;
     display: flex;
     border: 2px solid ${props => props.theme.background_button_border};
     background-color: ${props => props.theme.background};;
@@ -64,4 +64,8 @@ export const ButtonText = styled.Text`
     color: ${props => props.theme.text};
     align-self: center;
     padding: 8px;
+`
+export const ButtonSettingsText = styled.Text`
+    font-size: 20px;
+    color: ${props => props.theme.text};
 `

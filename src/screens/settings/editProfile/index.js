@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BiographyCard from '../../../components/Swipe_Card/Biography';
-import GifCard from '../../../components/Swipe_Card/Gif';
-import InterestsCard from '../../../components/Swipe_Card/Interests';
-import QuestionsCard from '../../../components/Swipe_Card/Questions';
-import MovieCard from '../../../components/Swipe_Card/Movie';
-import MusicCard from '../../../components/Swipe_Card/Music';
+import BiographyCard from '../../../components/SwipeCard/Biography';
+import GifCard from '../../../components/SwipeCard/Gif';
+import InterestsCard from '../../../components/SwipeCard/Interests';
+import QuestionsCard from '../../../components/SwipeCard/Questions';
+import MovieCard from '../../../components/SwipeCard/Movie';
+import MusicCard from '../../../components/SwipeCard/Music';
 import {
   ViewCustom,
   Title,
