@@ -11,8 +11,9 @@ import {
   SettingsView,
   IconSettings,
   SettingsList,
-  Button_Settings,
-  Button_Settings_Text,
+  ButtonSettings,
+  ButtonSettingsText,
+  ViewCustom,
 } from './styles';
 
 import '../../config/translationInit';
@@ -29,18 +30,18 @@ const Settings = ({navigation}) => {
   const ModalContent = () => {
     return (
       <>
-        <Button_Settings onPress={() => i18n.changeLanguage('en')}>
-          <Button_Settings_Text>
+        <ButtonSettings onPress={() => i18n.changeLanguage('en')}>
+          <ButtonSettingsText>
             <Image source={require('../../img/tabIcons/flagEnglish.png')} />
             {t('settings.language_en')}
-          </Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => i18n.changeLanguage('fr')}>
-          <Button_Settings_Text>
+          </ButtonSettingsText>
+        </ButtonSettings>
+        <ButtonSettings onPress={() => i18n.changeLanguage('fr')}>
+          <ButtonSettingsText>
             <Image source={require('../../img/tabIcons/flagFrench.png')} />
             {t('settings.language_fr')}
-          </Button_Settings_Text>
-        </Button_Settings>
+          </ButtonSettingsText>
+        </ButtonSettings>
       </>
     );
   };
@@ -74,56 +75,56 @@ const Settings = ({navigation}) => {
       </Header>
       <SettingsView>
         <SettingsList>
-         
-          <Button_Settings onPress={() => navigation.navigate('Profile')}>
-            <Button_Settings_Text>
-              <IconSettings source={require('../../img/tabIcons/preferences.png')} />
+          <ButtonSettings onPress={() => navigation.navigate('Profile')}>
+            <IconSettings source={require('../../img/tabIcons/preferences.png')} />
+            <ButtonSettingsText>
               {t('settings.preferences')}
-            </Button_Settings_Text>
-          </Button_Settings>
+            </ButtonSettingsText>
+          </ButtonSettings>
 
-          <Button_Settings onPress={() => setModalVisible(true)}>
-            <Button_Settings_Text>
-              <IconSettings source={require('../../img/tabIcons/language.png')} />
+          <ButtonSettings onPress={() => setModalVisible(true)}>
+            <IconSettings source={require('../../img/tabIcons/language.png')} />
+            <ButtonSettingsText>
               {t('settings.language')}
-            </Button_Settings_Text>
-          </Button_Settings>
+            </ButtonSettingsText>
+          </ButtonSettings>
 
-          <Button_Settings
+          <ButtonSettings
             onPress={() =>
               onDisplayNotification('settings', 'Voici la notification de test')
             }>
-              <Button_Settings_Text>
-                <IconSettings source={require('../../img/tabIcons/notification.png')} />
-                Notification
-              </Button_Settings_Text>
-          </Button_Settings>
+            <IconSettings source={require('../../img/tabIcons/notification.png')} />
+            <ButtonSettingsText>
+              Notification
+            </ButtonSettingsText>
+          </ButtonSettings>
 
-          <Button_Settings onPress={() => navigation.navigate('EditProfile')}>
-            <Button_Settings_Text>
-              <IconSettings source={require('../../img/tabIcons/edit.png')} />
+          <ButtonSettings onPress={() => navigation.navigate('EditProfile')}>
+            <IconSettings source={require('../../img/tabIcons/edit.png')} />
+            <ButtonSettingsText>
               {t('settings.edit_profile')}
-            </Button_Settings_Text>
-          </Button_Settings>
+            </ButtonSettingsText>
+          </ButtonSettings>
 
-          <Button_Settings
+          <ButtonSettings
             onPress={() =>
               Linking.openURL(
                 'https://sites.google.com/view/peelapp/nous-contacter',
               )
             }>
-            <Button_Settings_Text>
-              <IconSettings source={require('../../img/tabIcons/contact-mail.png')} />
+            <IconSettings source={require('../../img/tabIcons/contact-mail.png')} />
+            <ButtonSettingsText>
               {t('settings.contact')}
-            </Button_Settings_Text>
-          </Button_Settings>
+            </ButtonSettingsText>
+          </ButtonSettings>
 
-          <Button_Settings onPress={Logout}>
-            <Button_Settings_Text>
-              <IconSettings source={require('../../img/tabIcons/logout.png')} />
+          <ButtonSettings onPress={Logout}>
+            <IconSettings source={require('../../img/tabIcons/logout.png')} />
+            <ButtonSettingsText>
               {t('settings.logout')}
-              </Button_Settings_Text>
-          </Button_Settings>
+              </ButtonSettingsText>
+          </ButtonSettings>
+          
         </SettingsList>
       </SettingsView>
     </>
