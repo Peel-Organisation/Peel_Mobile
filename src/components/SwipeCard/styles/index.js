@@ -14,7 +14,7 @@ export const HomeCard = styled.SafeAreaView`
     border: 5px solid white;
     ${Platform.OS === 'android' ? 'elevation: 3' : 'shadow-color: #000; shadow-offset: 0 2px; shadow-opacity: 0.1; shadow-radius: 4px;'};
 `
-export const UserCont = styled.SafeAreaView`
+export const UserCont = styled.ScrollView`
     display: block;
     padding: 5px;
 `

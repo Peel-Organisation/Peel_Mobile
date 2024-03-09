@@ -1,4 +1,4 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import t from 'translations';
 
 export default {
   translation: {
@@ -28,17 +28,22 @@ export default {
     login: {
       title: 'Connexion',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       button_login: 'Se connecter',
       no_account: 'Pas encore de profil ?',
       button_register: 'Inscrivez-vous !',
     },
     register: {
-      title: 'Créer un compte',
+      title: 'Inscription',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       password_confirm: 'Confirmer le mot de passe',
       button_register: 'Créer son profil',
+      button_register_text: 'S\'inscrire',
       already_account: 'Déjà un compte ?',
       button_login: 'Connexion',
     },

@@ -1,4 +1,4 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import en from 'config/translations/en.js';
 
 export default {
   translation: {
@@ -29,6 +29,8 @@ export default {
       title: 'Login',
       email: 'Email',
       password: 'Password',
+      email_placeholder: 'Enter your email',
+      password_placeholder: 'Enter your password',
       button_login: 'Login',
       no_account: "Don't have an account yet ?",
       button_register: 'Register',
@@ -36,9 +38,12 @@ export default {
     register: {
       title: 'Register',
       email: 'Email',
+      email_placeholder: 'Enter your email',
       password: 'Password',
+      password_placeholder: 'Enter your password',
       password_confirm: 'Confirm password',
       button_register: 'Register',
+      button_register_text: 'Register',
       already_account: 'Already have an account ?',
       button_login: 'Login',
     },

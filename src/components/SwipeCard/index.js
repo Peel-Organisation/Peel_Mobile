@@ -9,7 +9,7 @@ import {
 } from './styles';
 import BiographyCard from './Biography/index';
 import InterestsCard from './Interests/index';
-import Gif_Card from './Gif/index';
+import GifCard from './Gif/index';
 import MovieCard from './Movie/index';
 import MusicCard from './Music';
 import QuestionsCard from './Questions';
@@ -19,14 +19,14 @@ import QuestionsCard from './Questions';
   It is composed of the following components:
     - BiographyCard
     - InterestsCard
-    - Gif_Card
+    - GifCard
     - MovieCard
     - MusicCard
     - QuestionCard
   In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement 
   The value of each key is the name of the module that should be displayed in the corresponding section of the card.
 */
-const Swipe_Card = props => {
+const SwipeCard = props => {
   const { t } = useTranslation();
 
   const [User, setUser] = useState(props.User);
@@ -48,7 +48,7 @@ const Swipe_Card = props => {
   const moduleComponentsTopSection = [
     {
       key: 'gif',
-      component: <Gif_Card GifUrl={User?.gif?.image?.webp} />,
+      component: <GifCard GifUrl={User?.gif?.image?.webp} />,
     },
     {
       key: 'movie',
@@ -152,4 +152,4 @@ const Swipe_Card = props => {
   );
 };
 
-export default Swipe_Card;
+export default SwipeCard;
