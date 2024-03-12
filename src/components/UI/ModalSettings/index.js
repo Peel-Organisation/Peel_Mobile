@@ -36,13 +36,13 @@ const ModalSettings = ({ closeModal, modalVisible }) => {
           <Content>
             <ButtonSettings onPress={() => {i18n.changeLanguage('en'); closeModal()}}>
               <ButtonView>
-                <Flag source={require('../../../img/tabIcons/flagEnglish.png')} /> 
+                <Flag source={require('../../../../assets/images/icons/flagEnglish.png')} /> 
                 <ButtonText>{t('settings.language_en')}</ButtonText>
               </ButtonView>
             </ButtonSettings>
             <ButtonSettings onPress={() => {i18n.changeLanguage('fr'); closeModal()}}>
               <ButtonView>
-                <Flag source={require('../../../img/tabIcons/flagFrench.png')} /> 
+                <Flag source={require('../../../../assets/images/icons/flagFrench.png')} /> 
                 <ButtonText>{t('settings.language_fr')}</ButtonText>
               </ButtonView>
             </ButtonSettings>

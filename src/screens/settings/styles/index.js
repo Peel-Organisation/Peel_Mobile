@@ -52,6 +52,7 @@ export const SettingsList = styled.ScrollView`
 
 export const ButtonSettingsText = styled.Text`
     font-size: 20px;
+    letter-spacing: 2px;
     color: ${props => props.theme.text};
 `
 

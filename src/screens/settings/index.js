@@ -31,13 +31,13 @@ const Settings = ({navigation}) => {
       <>
         <ButtonSettings onPress={() => i18n.changeLanguage('en')}>
           <ButtonSettingsText>
-            <Image source={require('../../img/tabIcons/flagEnglish.png')} />
+            <Image source={require('../../../assets/images/icons/flagEnglish.png')} />
             {t('settings.language_en')}
           </ButtonSettingsText>
         </ButtonSettings>
         <ButtonSettings onPress={() => i18n.changeLanguage('fr')}>
           <ButtonSettingsText>
-            <Image source={require('../../img/tabIcons/flagFrench.png')} />
+            <Image source={require('../../../assets/images/icons/flagFrench.png')} />
             {t('settings.language_fr')}
           </ButtonSettingsText>
         </ButtonSettings>
@@ -79,14 +79,14 @@ const Settings = ({navigation}) => {
       <SettingsView>
         <SettingsList>
           <ButtonSettings onPress={() => navigation.navigate('Profile')}>
-            <IconSettings source={require('../../img/tabIcons/preferences.png')} />
+            <IconSettings source={require('../../../assets/images/icons/preferences.png')} />
             <ButtonSettingsText>
               {t('settings.preferences')}
             </ButtonSettingsText>
           </ButtonSettings>
 
           <ButtonSettings onPress={() => { setModalVisible(true);}}>
-            <IconSettings source={require('../../img/tabIcons/language.png')} />
+            <IconSettings source={require('../../../assets/images/icons/language.png')} />
             <ButtonSettingsText>
               {t('settings.language')}
             </ButtonSettingsText>
@@ -96,14 +96,14 @@ const Settings = ({navigation}) => {
             onPress={() =>
               onDisplayNotification('settings', 'Voici la notification de test')
             }>
-            <IconSettings source={require('../../img/tabIcons/notification.png')} />
+            <IconSettings source={require('../../../assets/images/icons/notification.png')} />
             <ButtonSettingsText>
               Notification
             </ButtonSettingsText>
           </ButtonSettings>
 
           <ButtonSettings onPress={() => navigation.navigate('EditProfile')}>
-            <IconSettings source={require('../../img/tabIcons/edit.png')} />
+            <IconSettings source={require('../../../assets/images/icons/edit.png')} />
             <ButtonSettingsText>
               {t('settings.edit_profile')}
             </ButtonSettingsText>
@@ -115,14 +115,14 @@ const Settings = ({navigation}) => {
                 'https://sites.google.com/view/peelapp/nous-contacter',
               )
             }>
-            <IconSettings source={require('../../img/tabIcons/contact-mail.png')} />
+            <IconSettings source={require('../../../assets/images/icons/contact-mail.png')} />
             <ButtonSettingsText>
               {t('settings.contact')}
             </ButtonSettingsText>
           </ButtonSettings>
 
           <ButtonSettings onPress={Logout}>
-            <IconSettings source={require('../../img/tabIcons/logout.png')} />
+            <IconSettings source={require('../../../assets/images/icons/logout.png')} />
             <ButtonSettingsText>
               {t('settings.logout')}
               </ButtonSettingsText>

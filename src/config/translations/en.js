@@ -77,8 +77,10 @@ export default {
       movie_placeholder: 'Search a movie',
       music_condition: 'Choose a music',
       music_placeholder: 'Search a music',
+      search_love: 'Search love',
+      search_friend: 'Search friends',
       custom: {
-        title: 'Customize your profile !',
+        title: 'Modify Profile',
         text: 'Select the elements you want other users to see when they want to check on your profile',
         biography: 'Biography',
         gifs: 'Gifs',
@@ -127,5 +129,14 @@ export default {
       no_more_swipe_text: 'You will be able to start again tomorrow',
       no_more_swipe_button: 'OK',
     },
+    Filter:{
+      interest: "Interests",
+      music: "Music",
+      sport: "Sport",
+      movie: "Films",
+      games: "Games",
+      cancel: "Cancel",
+      apply: "Apply",
+    }
   },
 };

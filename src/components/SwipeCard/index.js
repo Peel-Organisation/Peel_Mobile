@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import {
@@ -14,138 +14,50 @@ import MovieCard from './Movie/index';
 import MusicCard from './Music';
 import QuestionsCard from './Questions';
 
-/*
-  This component is used to display the card of the user that is currently being swiped.
-  It is composed of the following components:
-    - BiographyCard
-    - InterestsCard
-    - GifCard
-    - MovieCard
-    - MusicCard
-    - QuestionCard
-  In the API, the user's profileModules is an object with 4 keys: mainElement, secondaryElement, tertiaryElement, quaternaryElement 
-  The value of each key is the name of the module that should be displayed in the corresponding section of the card.
-*/
-const SwipeCard = props => {
+const SwipeCard = ({ User }) => {
   const { t } = useTranslation();
 
-  const [User, setUser] = useState(props.User);
+  // Memoize the user's age calculation
+  const userAge = useMemo(() => {
+    const birthday = new Date(User.birthday);
+    const now = new Date();
+    const ageInMs = now - birthday;
+    const ageInYears = ageInMs / (1000 * 60 * 60 * 24 * 365);
+    return Math.floor(ageInYears);
+  }, [User.birthday]);
 
-  const getAge = birthday => {
-    birthday = new Date(birthday);
-    let now = new Date();
-    let month_diff = now.getTime() - birthday.getTime();
-    //convert the calculated difference in date format
-    let age_dt = new Date(month_diff);
-    //extract year from date
-    let year = age_dt.getUTCFullYear();
-    //now calculate the age of the user
-    let user_age = Math.abs(year - 1970);
-
-    return user_age;
+  const renderComponent = (moduleType) => {
+    switch (moduleType) {
+      case 'gif':
+        return <GifCard GifUrl={User?.gif?.image?.webp} />;
+      case 'movie':
+        return <MovieCard MovieURL={User?.movie?.images?.backdrop_path} Movie={User?.movie?.title} />;
+      case 'music':
+        return <MusicCard MusicURL={User?.music?.image} MTitle={User?.music?.title} MArtist={User?.music?.artist?.name} />;
+      case 'biographie':
+        return <BiographyCard Bio={User?.biographie} />;
+      case 'interests':
+        return <InterestsCard interests={User.interests} />;
+      case 'questions':
+        return <QuestionsCard Questions={User?.questions} />;
+      default:
+        return null;
+    }
   };
-
-  const moduleComponentsTopSection = [
-    {
-      key: 'gif',
-      component: <GifCard GifUrl={User?.gif?.image?.webp} />,
-    },
-    {
-      key: 'movie',
-      component: (
-        <MovieCard
-          MovieURL={User?.movie?.images?.backdrop_path}
-          Movie={User?.movie?.title}
-        />
-      ),
-    },
-    {
-      key: 'music',
-      component: (
-        <MusicCard
-          MusicURL={User?.music?.image}
-          MTitle={User?.music?.title}
-          MArtist={User?.music?.artist?.name}
-        />
-      ),
-    },
-  ];
-
-  const moduleComponents = [
-    {
-      key: 'biographie',
-      component: <BiographyCard Bio={User?.biographie} />,
-    },
-    {
-      key: 'interests',
-      component: <InterestsCard interests={User.interests} />,
-    },
-    {
-      key: 'questions',
-      component: (
-        <QuestionsCard Questions={User?.questions} />
-      ),
-    },
-  ];
 
   return (
     <HomeCard>
       <UserCont>
         <Name>
-          {User.firstName} {getAge(User.birthday)}
+          {User.firstName} {userAge}
         </Name>
         <Locate>
-          {User?.preferences?.searchFriend && <>Recherche l'amitié</>}
-          {User?.preferences?.searchLove && <>Recherche l'amour</>}
+          {User?.preferences?.searchFriend && <>{t('profile.search_friends')}</>}
+          {User?.preferences?.searchLove && <>{t('profile.search_love')}</>}
         </Locate>
-        {console.log(User.profileModules)}
-        {User.profileModules && Object.keys(User.profileModules).map(key => {
-          // Main element is the top section of the card
-          if ((key === 'mainElement') && User.profileModules[key]) {
-            const moduleType = User.profileModules[key];
-            if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
-              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
-              if (matchingModule) {
-                return matchingModule.component;
-              }
-            } else {
-              const matchingModule = moduleComponents.find(module => module.key === moduleType);
-              if (matchingModule) {
-                return matchingModule.component;
-              }
-            }
-          }
-          // Secondary element is the middle section of the card
-          else if ((key === 'secondaryElement') && User.profileModules[key]) {
-            const moduleType = User.profileModules[key];
-            if (moduleType === 'gif' || moduleType === 'movie' || moduleType === 'music') {
-              const matchingModule = moduleComponentsTopSection.find(module => module.key === moduleType);
-              if (matchingModule) {
-                return matchingModule.component;
-              }
-            } else {
-              const matchingModule = moduleComponents.find(module => module.key === moduleType);
-              if (matchingModule) {
-                return matchingModule.component;
-              }
-            }
-          }
-          // Tertiary and quaternary elements are the bottom section of the card
-          else if ((key === 'tertiaryElement') || (key === 'quaternaryElement') && User.profileModules[key]) {
-            if (User.profileModules[key] === 'gif' || User.profileModules[key] === 'movie' || User.profileModules[key] === 'music') {
-              const matchingModule = moduleComponentsTopSection.find(module => module.key === User.profileModules[key]);
-              if (matchingModule) {
-                return matchingModule.component;
-              } else {
-                const matchingModule = moduleComponents.find(module => module.key === moduleType);
-                if (matchingModule) {
-                  return matchingModule.component;
-                }
-              }
-            }
-          } else {
-            return null;
-          }
+        {Object.entries(User.profileModules || {}).map(([key, moduleType]) => {
+          const component = renderComponent(moduleType);
+          return component ? <View key={key}>{component}</View> : null;
         })}
       </UserCont>
     </HomeCard>

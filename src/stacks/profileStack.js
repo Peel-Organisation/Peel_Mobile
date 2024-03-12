@@ -14,7 +14,7 @@ import DateType from "../screens/profile/profile_date_type";
 import { useTranslation } from "react-i18next";
 import RetryButton from "../components/Retry";
 import { GetUser } from "../functions/api_request"
-import Loading from "../components/loading";
+import Loading from "../components/Loading";
 const Stack = createNativeStackNavigator();
 const UserContext = React.createContext("token");
 

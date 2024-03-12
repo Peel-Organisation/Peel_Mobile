@@ -17,15 +17,15 @@ const Filter = ({ filter, setFilter, filtersArray, setFiltersArray, activeFilter
                     </FilterIcon>
                 </Header>
                 <FiltersView>
-                    <FilterSelector title={"Mes centres d'intérêts"} filterName="interest" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
-                    <FilterSelector title={"Musiques"} filterName="music" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
-                    <FilterSelector title={"Sports"} filterName="sport" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
-                    <FilterSelector title={"Films"} filterName="movie" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
-                    <FilterSelector title={"Jeux"} filterName="games" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
+                    <FilterSelector title={t('Filter.interest')} filterName="interest" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
+                    <FilterSelector title={t('Filter.music')} filterName="music" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
+                    <FilterSelector title={t('Filter.sport')} filterName="sport" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
+                    <FilterSelector title={t('Filter.movie')} filterName="movie" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
+                    <FilterSelector title={t('Filter.games')} filterName="games" filtersArray={filtersArray} setFiltersArray={setFiltersArray} />
                     
                     <ButtonView>
-                        <FilterButton title={"Annuler"} setActiveFilters={setActiveFilters} activeFilters={activeFilters} filtersArray={filtersArray} setFiltersArray={setFiltersArray} filter={filter} setFilter={setFilter} />
-                        <FilterButton primary={true} title={"Appliquer"} setActiveFilters={setActiveFilters} activeFilters={activeFilters} filtersArray={filtersArray} setFiltersArray={setFiltersArray} filter={filter} setFilter={setFilter} />
+                        <FilterButton title={t('Filter.cancel')} setActiveFilters={setActiveFilters} activeFilters={activeFilters} filtersArray={filtersArray} setFiltersArray={setFiltersArray} filter={filter} setFilter={setFilter} />
+                        <FilterButton primary={true} title={t('Filter.apply')} setActiveFilters={setActiveFilters} activeFilters={activeFilters} filtersArray={filtersArray} setFiltersArray={setFiltersArray} filter={filter} setFilter={setFilter} />
                     </ButtonView>
 
                 </FiltersView>

@@ -79,8 +79,10 @@ export default {
       movie_placeholder: 'Rechercher un film',
       music_condition: 'Choisissez une musique',
       music_placeholder: 'Rechercher une musique',
+      search_love: 'Recherche l\'amour',
+      search_friend: 'Recherche des amis',
       custom: {
-        title: 'Personnalisez votre profil !',
+        title: 'Modifier Profil',
         text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',
         biography: 'Biographie',
         gifs: 'Gifs',
@@ -129,5 +131,14 @@ export default {
       no_more_swipe_text: 'Vous pourrez recommencer demain',
       no_more_swipe_button: 'OK',
     },
+    Filter:{
+      interest: "Intérêts",
+      music: "Musique",
+      sport: "Sport",
+      movie: "Films",
+      games: "Jeux",
+      cancel: "Annuler",
+      apply: "Appliquer",
+    }
   },
 };
