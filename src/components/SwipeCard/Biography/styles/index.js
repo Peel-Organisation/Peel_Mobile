@@ -9,11 +9,12 @@ export const Biography = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
     height: ${DIMENSION_HEIGHT - 800}px;
-    width: auto;
+    width: ${DIMENSION_WIDTH - 80}px;
     padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
     margin-bottom: 2%;
+    align-self: center;
 `
 export const BiographyText = styled.Text`
     font-size: 12px;

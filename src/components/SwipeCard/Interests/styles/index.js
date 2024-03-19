@@ -11,19 +11,19 @@ export const InterestTitle = styled.Text`
 `
 
 export const InterestView = styled.SafeAreaView`
+    flex: 1;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: ${DIMENSION_WIDTH - 90}px;
-    height: ${DIMENSION_HEIGHT - 900}px;
+    align-items: center;
 `
 
-export const InterestBox = styled.Text`
+export const InterestBox = styled.View`
     background-color: ${props => props.theme.primary};
     border-radius: 10px;
     align-self: center;
     padding: 2%;
-    margin: 2px;
+    margin: 2%;
 `
 
 export const InterestText = styled.Text`

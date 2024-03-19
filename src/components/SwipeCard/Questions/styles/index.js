@@ -7,12 +7,10 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const QuestionView = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
-    height: ${DIMENSION_HEIGHT - 800}px;
     width: auto;
     padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
-    margin-bottom: 2%;
 `
 
 export const QuestionText = styled.Text`
@@ -27,6 +25,7 @@ export const ResponseText = styled.Text`
     letter-spacing: 1px;
     color: ${props => props.theme.text};
     text-align: justify;
+    align-self: center;
     line-height: 20px;   
 `
 

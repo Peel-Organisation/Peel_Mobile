@@ -10,7 +10,7 @@ const GifCard = ({ GifUrl }) => {
     <GifArea>
       <GifImage
         source={{ uri: `${GifUrl}` }}
-        resizeMode="cover"
+        resizeMode='contain'
       />
     </GifArea>
   );

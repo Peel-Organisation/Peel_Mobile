@@ -1,11 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
 import {
   HomeCard,
   Name,
   Locate,
-  UserCont,
+  Block
 } from './styles';
 import BiographyCard from './Biography/index';
 import InterestsCard from './Interests/index';
@@ -18,6 +17,7 @@ const SwipeCard = ({ User }) => {
   const { t } = useTranslation();
 
   // Memoize the user's age calculation
+  // TODO: Fix the userAge 
   const userAge = useMemo(() => {
     const birthday = new Date(User.birthday);
     const now = new Date();
@@ -46,21 +46,26 @@ const SwipeCard = ({ User }) => {
   };
 
   return (
-    <HomeCard>
-      <UserCont>
-        <Name>
-          {User.firstName} {userAge}
-        </Name>
-        <Locate>
-          {User?.preferences?.searchFriend && <>{t('profile.search_friends')}</>}
-          {User?.preferences?.searchLove && <>{t('profile.search_love')}</>}
-        </Locate>
-        {Object.entries(User.profileModules || {}).map(([key, moduleType]) => {
-          const component = renderComponent(moduleType);
-          return component ? <View key={key}>{component}</View> : null;
-        })}
-      </UserCont>
-    </HomeCard>
+    <HomeCard
+      data={Object.entries(User.profileModules || {})}
+      keyExtractor={(item) => item[0]}
+      renderItem={({ item }) => {
+        const moduleType = item[1];
+        const component = renderComponent(moduleType);
+        return component ? <Block>{component}</Block> : null;
+      }}
+      ListHeaderComponent={() => (
+        <>
+          <Name>
+            {User.firstName} {userAge.toString()}
+          </Name>
+          <Locate>
+            {User?.preferences?.searchFriend && <>{t('profile.search_friend')}</>}
+            {User?.preferences?.searchLove && <>{t('profile.search_love')}</>}
+          </Locate>
+        </>
+      )}
+    />
   );
 };
 
