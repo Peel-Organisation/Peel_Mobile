@@ -240,3 +240,13 @@ export const createInstantConversation = async (user2) => {
         crashlytics().recordError(error)
     });
 }
+
+export const getNumberOfMessages = async (conversationId) => {
+    crashlytics().log("\n\n getNumberOfMessages")
+    const token = await getStorage('token')
+    return FetchPeelApi({ url: `/api/conversation/${conversationId}/nb_messages`, method: "GET", token: token }).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}

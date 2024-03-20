@@ -21,6 +21,7 @@ export default {
       home: 'Accueil',
       settings: 'Paramètres',
       contact: 'Contact',
+      chat: 'Chat',
     },
     contact: {
       title: 'Contact',
