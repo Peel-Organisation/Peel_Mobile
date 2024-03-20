@@ -9,38 +9,42 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const ViewCustom = styled.SafeAreaView`
     flex-direction: row;
     background-color: ${props => props.theme.background};
+    top: ${DIMENSION_HEIGHT * 0.02}px;
+    bottom: ${DIMENSION_HEIGHT * 0.1}px;
 `
 
 export const FieldInput = styled.TextInput`
-    width: 80%;
-    height: 40px;
-    margin: 20px;
+    width: ${DIMENSION_WIDTH * 0.8}px;
+    height: ${DIMENSION_HEIGHT * 0.05}px;
+    margin: ${DIMENSION_WIDTH * 0.02}px;
+    bottom: ${DIMENSION_HEIGHT * 0.01}px;
     border-radius: 10px;
-    border: 1px solid ${props => props.theme.primary};
+    border: ${DIMENSION_HEIGHT * 0.002}px solid ${props => props.theme.primary};
     background-color: ${props => props.theme.white};
     color: ${props => props.theme.text};
     flex: 1;
 `
 
 export const MessageButton = styled.TouchableOpacity`
-    width: 40px;
-    height: 40px;
-    margin: 20px;
+    width: ${DIMENSION_WIDTH * 0.1}px;
+    height: ${DIMENSION_HEIGHT * 0.05}px;
+    margin: ${DIMENSION_WIDTH * 0.02}px;
+    bottom: ${DIMENSION_HEIGHT * 0.01}px;
     border-radius: 25px;
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
 `
 export const MessageButtonText = styled.Text`
-    margin-top: 10px;
+    top: ${DIMENSION_HEIGHT * 0.01}px;
     font-size: 20px;
     color: ${props => props.theme.background};
     align-self: center;
 `;
 
 export const SendIcon = styled.Image`
-    width: 20px;
-    height: 20px;
+    width: ${DIMENSION_WIDTH * 0.05}px;
+    height: ${DIMENSION_HEIGHT * 0.03}px;
     align-self: center;
-    margin-top: 10px;
-    margin-left: 5px;
+    margin-top: ${DIMENSION_HEIGHT * 0.01}px;
+    margin-left: ${DIMENSION_WIDTH * 0.01}px;
 `
