@@ -12,6 +12,8 @@ const theme = {
     user_message: '#FC912F',
     contact_message: '#D1D2D8',
     background_button_border: '#fceee1',
+    progressBar : '#D9D9D9',
+    progressBarBackground : '#bebebe',
 };
 
 export default theme;

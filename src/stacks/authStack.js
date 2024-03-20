@@ -13,7 +13,7 @@ import ChatSelectedImage from '../img/tabIcons/chatSelected.png';
 import SettingsSelectedImage from '../img/tabIcons/settingsSelected.png';
 
 import HomeScreen from '../screens/home';
-import ContactScreen from '../screens/Contact';
+import ContactScreen from '../screens/contact';
 import SettingsScreen from '../screens/settings';
 import Chat from '../screens/chat';
 import EditProfile from '../screens/settings/editProfile';
@@ -69,7 +69,7 @@ const AuthStack = ({navigation}) => {
         component={TabStackScreen}
         options={{title: 'Home', headerShown: false}}
       />
-      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Chat" component={Chat} options={{title: t('navbar.contact'), headerShown: false}}/>
       <Stack.Screen name="EditProfile" component={EditProfile} options={{title: t("settings.edit_profile_title")}} />
     </Stack.Navigator>
   );
