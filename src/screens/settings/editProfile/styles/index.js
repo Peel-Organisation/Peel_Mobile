@@ -42,10 +42,10 @@ export const ModuleTitle = styled.Text`
 `;
 
 export const ModulePicker = styled(Picker)`
-    width: 50%;
-    margin: 10px;
-    background-color: ${props => props.theme.grey};
-    color: ${props => props.theme.text};
-    align-self: center;
+  width: 50%;
+  margin: 10px;
+  background-color: ${props => props.theme.grey};
+  color: ${props => props.theme.text};
+  align-self: center;
 `;
 

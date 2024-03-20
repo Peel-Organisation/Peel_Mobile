@@ -11,7 +11,7 @@ export const Container = styled.View`
     padding: 15px;
     width: ${DIMENSION_WIDTH - 78}px;
     border-radius: 15px;
-    z-index: 999999;
+    z-index: 999998;
     background: ${props => props.theme.background_light_blur};
 `
 export const Content = styled.View`
