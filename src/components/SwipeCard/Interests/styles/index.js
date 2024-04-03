@@ -17,8 +17,8 @@ export const InterestView = styled.SafeAreaView`
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 100px;
-    margin-bottom: 2%;
+    height: 70px;
+    margin-bottom: 1%;
 `
 
 export const InterestBox = styled.View`

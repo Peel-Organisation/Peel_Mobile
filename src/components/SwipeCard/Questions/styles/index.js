@@ -8,7 +8,6 @@ export const QuestionView = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
     width: 100%;
-    padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
     margin-bottom: 4%;

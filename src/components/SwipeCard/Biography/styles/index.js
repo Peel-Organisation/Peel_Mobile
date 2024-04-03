@@ -10,7 +10,6 @@ export const Biography = styled.SafeAreaView`
     border: 2px solid ${props => props.theme.background_button_border};
     height: 120px;
     width: 100%;
-    padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
     margin-bottom: 2%;
@@ -37,7 +36,6 @@ export const BiographyTitle = styled.Text`
 `
 
 export const BiographyFull = styled.TouchableOpacity`
-    padding: 10px 0px 0px 0px;
     font-size: 16px;
     align-items: flex-end;
     color: ${props => props.theme.primary};
