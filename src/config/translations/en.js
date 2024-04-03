@@ -1,4 +1,4 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import en from 'config/translations/en.js';
 
 export default {
   translation: {
@@ -29,6 +29,8 @@ export default {
       title: 'Login',
       email: 'Email',
       password: 'Password',
+      email_placeholder: 'Enter your email',
+      password_placeholder: 'Enter your password',
       button_login: 'Login',
       no_account: "Don't have an account yet ?",
       button_register: 'Register',
@@ -36,9 +38,12 @@ export default {
     register: {
       title: 'Register',
       email: 'Email',
+      email_placeholder: 'Enter your email',
       password: 'Password',
+      password_placeholder: 'Enter your password',
       password_confirm: 'Confirm password',
       button_register: 'Register',
+      button_register_text: 'Register',
       already_account: 'Already have an account ?',
       button_login: 'Login',
     },
@@ -72,8 +77,10 @@ export default {
       movie_placeholder: 'Search a movie',
       music_condition: 'Choose a music',
       music_placeholder: 'Search a music',
+      search_love: 'Search love',
+      search_friend: 'Search friends',
       custom: {
-        title: 'Customize your profile !',
+        title: 'Modify Profile',
         text: 'Select the elements you want other users to see when they want to check on your profile',
         biography: 'Biography',
         gifs: 'Gifs',
@@ -122,5 +129,14 @@ export default {
       no_more_swipe_text: 'You will be able to start again tomorrow',
       no_more_swipe_button: 'OK',
     },
+    Filter:{
+      interest: "Interests",
+      music: "Music",
+      sport: "Sport",
+      movie: "Films",
+      games: "Games",
+      cancel: "Cancel",
+      apply: "Apply",
+    }
   },
 };

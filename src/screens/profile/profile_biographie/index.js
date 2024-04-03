@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton } from '../../../components/Update_User';
+import { UpdateButton } from '../../../components/UpdateUser';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
 

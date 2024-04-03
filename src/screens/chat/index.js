@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import MessageList from '../../components/Message_List';
-import MessageInput from '../../components/Message_Input';
+import MessageList from '../../components/MessageList';
+import MessageInput from '../../components/MessageInput';
 import { KeyboardAvoidingViewCustom } from './styles';
-
-
 
 const Chat = ({ route }) => {
     const { conversation } = route.params;
@@ -17,8 +15,6 @@ const Chat = ({ route }) => {
     );
 
 }
-
-
 
 export default Chat;
 
