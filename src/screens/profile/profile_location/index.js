@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, Platform, PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, { Circle, PROVIDER_GOOGLE } from 'react-native-maps';
-import { UpdateButton } from '../../../components/Update_User';
+import { UpdateButton } from '../../../components/UpdateUser';
 import { useTranslation } from 'react-i18next';
 import { Slider } from '@miblanchard/react-native-slider';
 import crashlytics from '@react-native-firebase/crashlytics';
