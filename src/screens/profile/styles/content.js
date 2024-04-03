@@ -84,8 +84,8 @@ export const ModalSelectorCustom = styled(ModalSelector)`
 
 export const FlatListCustom = styled.FlatList`
     width: 100%;
-    margin-top: 20px;
-    margin-left: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
     background-color: ${props => props.theme.background};
 `;
 
@@ -102,4 +102,7 @@ export const ImageCustom = styled.Image`
     width: 170px;
     height: 170px;
     margin: 1px;
+`;
+export const LittleSpacer = styled.View`
+    height: 10px;
 `;

@@ -17,6 +17,7 @@ import {
   LabelInput,
   SwitchSelectorCustom,
   DatePickerCustom,
+  LittleSpacer
 } from '../styles/content.js';
 import arrow from '../../../../assets/images/icons/top-arrow-white.png';
 import { Spacer } from '../../login/styles/index.js';
@@ -80,14 +81,13 @@ const Profile2 = ({ route, navigation }) => {
       age < 99
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ birthday: user.birthday, gender: user.gender, preferences: user.preferences }}
-            prevPage="Profile1"
-            nextPage="Profile3"
-            navigation={navigation}
-          />
-        </>,
+
+        <UpdateButton
+          user={{ birthday: user.birthday, gender: user.gender, preferences: user.preferences }}
+          prevPage="Profile1"
+          nextPage="Profile3"
+          navigation={navigation}
+        />,
       );
     } else {
       setNavButton(
@@ -108,7 +108,7 @@ const Profile2 = ({ route, navigation }) => {
     <CustomView>
       <HeaderView>
         <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={arrow} />
+          <GoBackArrowImage source={arrow}/>
         </GoBackArrow>
         <HeaderTextView> 
           <HeaderText>{t('profile.title')}</HeaderText>
@@ -116,7 +116,7 @@ const Profile2 = ({ route, navigation }) => {
         </HeaderTextView>
       </HeaderView>
       <ContentView>
-        <Spacer />
+        <LittleSpacer />
         <LabelInput>{t('profile.birth_date')}</LabelInput>
         <DatePickerCustom
           date={user['birthday']}
@@ -127,8 +127,9 @@ const Profile2 = ({ route, navigation }) => {
           }}
           mode="date"
         />
-        <Spacer />
+        <LittleSpacer />
         <LabelInput>{t('profile.gender')}</LabelInput>
+        <LittleSpacer />
         <SwitchSelectorCustom
           initial={0}
           onPress={value => {
@@ -144,8 +145,9 @@ const Profile2 = ({ route, navigation }) => {
             { label: t('profile.other_gender'), value: 'Other' },
           ]}
         />
-        <Spacer />
+        <LittleSpacer />
         <LabelInput>{t('profile.type_of_search')}</LabelInput>
+        <LittleSpacer />
         <SwitchSelectorCustom
             initial={user?.preferences?.searchLove ? 0 : 1}
             onPress={value => {
