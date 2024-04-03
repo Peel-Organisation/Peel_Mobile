@@ -38,19 +38,17 @@ const QuestionsCard = ({ Questions }) => {
       )}
       <QuestionTitle>{t('Card.question')}</QuestionTitle>
       {Questions && Questions.length > 0 && (
-        <>
-          <QuestionView key={Questions[0]._id} numberOfLines={1} ellipsizeMode='tail'>
-            <QuestionText>
-              {Questions[0].question?.question}
-            </QuestionText>
-            <ResponseText>
-              {Questions[0].answer}
-            </ResponseText>
-            <QuestionFull onPress={() => setModalVisible(true)}>
-              <Ellipsis>{t('Card.read_more')}</Ellipsis>
-            </QuestionFull>
-          </QuestionView>
-        </>
+        <QuestionView key={Questions[0]._id} numberOfLines={1} ellipsizeMode='tail'>
+          <QuestionText>
+            {Questions[0].question?.question}
+          </QuestionText>
+          <ResponseText>
+            {Questions[0].answer}
+          </ResponseText>
+          <QuestionFull onPress={() => setModalVisible(true)}>
+            <Ellipsis>{t('Card.read_more')}</Ellipsis>
+          </QuestionFull>
+        </QuestionView>
       )}
     </>
   );

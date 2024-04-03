@@ -18,9 +18,7 @@ const BiographyCard = ({ Bio }) => {
   }
 
   const ModalContent = (
-    <>
-      <BiographyText>{Bio}</BiographyText>
-    </>
+    <BiographyText>{Bio}</BiographyText>
   );
 
   return (
