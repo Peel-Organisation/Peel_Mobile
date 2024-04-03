@@ -7,10 +7,7 @@ const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const ViewCustom = styled.SafeAreaView`
-    display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 20%;
     background-color: ${props => props.theme.background};
@@ -18,7 +15,7 @@ export const ViewCustom = styled.SafeAreaView`
 
 export const FieldInput = styled.TextInput`
     width: 100%;
-    height: 30%;
+    height: 40px;
     margin: 20px;
     border-radius: 10px;
     border: 1px solid ${props => props.theme.primary};

@@ -9,7 +9,6 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const UserMessage = styled.SafeAreaView`
     background-color: ${props => props.theme.user_message};
     border-radius: 5px;
-    padding: 10px;
     margin: 10px;
     align-self: flex-end;
     max-width: 70%;
@@ -34,7 +33,6 @@ export const UserMessageDate = styled.Text`
 export const ContactMessage = styled.SafeAreaView`
     background-color: ${props => props.theme.contact_message};
     border-radius: 5px;
-    padding: 10px;
     margin: 10px;
     align-self: flex-start;
     max-width: 70%;
