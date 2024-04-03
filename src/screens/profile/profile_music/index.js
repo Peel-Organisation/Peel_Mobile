@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
-import { UpdateButton, nextAction } from '../../../components/Update_User';
+import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -15,7 +15,7 @@ import {
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
-import Loading from '../../../components/loading';
+import Loading from '../../../components/Loading';
 
 const Music = ({ route, navigation }) => {
   const { t } = useTranslation();
