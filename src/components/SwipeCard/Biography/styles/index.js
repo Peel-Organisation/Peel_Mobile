@@ -40,3 +40,13 @@ export const BiographyFull = styled.TouchableOpacity`
     align-items: flex-end;
     color: ${props => props.theme.primary};
 `
+
+export const BiographyTextModal = styled.Text`
+    font-size: 12px;
+    font-family: 'Roboto-Regular';
+    padding: 18px;
+    letter-spacing: 1px;
+    color: ${props => props.theme.text};
+    text-align: justify;
+    line-height: 20px;   
+`

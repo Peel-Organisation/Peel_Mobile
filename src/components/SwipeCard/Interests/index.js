@@ -8,7 +8,9 @@ import {
   Ellipsis,
   InterestFull,
   InterestBoxFull,
-  InterestTextFull
+  InterestTextFull,
+  ModalInterestView,
+  ModalInterestText
 } from './styles';
 import Modal from '../../UI/ModalSwipeCard';
 
@@ -26,9 +28,9 @@ const InterestsCard = ({ interests }) => {
     <>
       {interests?.map(interest => {
         return (
-          <InterestBoxFull key={interest._id}>
-            <InterestTextFull>{interest.name}</InterestTextFull>
-          </InterestBoxFull>
+          <ModalInterestView key={interest._id}>
+            <ModalInterestText>{interest.name}</ModalInterestText>
+          </ModalInterestView>
         );
       }
       )}

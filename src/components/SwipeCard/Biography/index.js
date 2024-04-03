@@ -5,7 +5,8 @@ import {
   BiographyText,
   BiographyTitle,
   BiographyFull,
-  Ellipsis
+  Ellipsis,
+  BiographyTextModal
 } from './styles';
 import Modal from '../../UI/ModalSwipeCard';
 
@@ -18,7 +19,7 @@ const BiographyCard = ({ Bio }) => {
   }
 
   const ModalContent = (
-    <BiographyText>{Bio}</BiographyText>
+    <BiographyTextModal>{Bio}</BiographyTextModal>
   );
 
   return (

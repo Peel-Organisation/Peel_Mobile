@@ -47,16 +47,18 @@ export const InterestFull = styled.TouchableOpacity`
     color: ${props => props.theme.primary};
 `
 
-export const InterestBoxFull = styled.Text`
+export const ModalInterestView = styled.SafeAreaView`
     background-color: ${props => props.theme.primary};
-    text-align: center;
     border-radius: 10px;
-    padding: 2%;
-    margin: 2%;
-    width: 100%;
+    margin: 3%;
+    left: 2%;
+    top: 2%;
+    width: 90%;
+    align-items: center;
 `
-export const InterestTextFull = styled.Text`
+
+export const ModalInterestText = styled.Text`
     font-size: 13px;
-    text-align: justify;
+    padding: 5px;
     color: ${props => props.theme.background};
 `

@@ -6,7 +6,10 @@ import {
   ResponseText,
   QuestionTitle,
   Ellipsis,
-  QuestionFull
+  QuestionFull,
+  ModalResponseText,
+  ModalQuestionText,
+  ModalQuestionView
 } from './styles';
 import Modal from '../../UI/ModalSwipeCard';
 
@@ -20,16 +23,15 @@ const QuestionsCard = ({ Questions }) => {
 
   const ModalContent = (
     <>
-      {Questions.map((question) => (
-        <QuestionView key={question._id}>
-          <QuestionText>{question?.question?.question}</QuestionText>
-          <ResponseText>{question?.answer}</ResponseText>
-        </QuestionView>
+      {Questions?.map((question) => (
+        <ModalQuestionView key={question._id}>
+          <ModalQuestionText>{question?.question?.question}</ModalQuestionText>
+          <ModalResponseText>{question?.answer}</ModalResponseText>
+        </ModalQuestionView>
       ))}
     </>
   );
   
-  console.log(Questions);
 
   return (
     <>

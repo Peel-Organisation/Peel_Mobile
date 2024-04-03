@@ -51,3 +51,29 @@ export const QuestionFull = styled.TouchableOpacity`
     color: ${props => props.theme.primary};
 `
 
+export const ModalQuestionView = styled.SafeAreaView`
+    background-color: ${props => props.theme.background};
+    border: 2px solid ${props => props.theme.background_button_border};
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 4%;
+    align-self: center;
+`
+
+export const ModalQuestionText = styled.Text`
+    font-size: 13px;
+    color: ${props => props.theme.text};
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+`
+
+export const ModalResponseText = styled.Text`
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: ${props => props.theme.text};
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;   
+`
+
