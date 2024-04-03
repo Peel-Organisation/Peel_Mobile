@@ -11,6 +11,7 @@ export const QuestionView = styled.SafeAreaView`
     padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
+    margin-bottom: 4%;
 `
 
 export const QuestionText = styled.Text`

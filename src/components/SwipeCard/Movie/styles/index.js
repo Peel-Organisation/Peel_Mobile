@@ -12,12 +12,13 @@ export const MovieTitle = styled.Text`
 `  
 
 export const MovieArea = styled.SafeAreaView`
-    height: ${DIMENSION_HEIGHT - 600}px;
-    width: ${DIMENSION_WIDTH - 90}px;
+    height: 150px;
+    width: 100%;
     border-radius: 15px;
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
     overflow: hidden; 
+    margin-bottom: 4%;
 `
 
 export const MovieImage = styled.Image`
