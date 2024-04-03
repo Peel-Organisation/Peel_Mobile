@@ -12,6 +12,7 @@ import {
 import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
+import { Text } from 'react-native';
 
 const Profile1 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -36,14 +37,12 @@ const Profile1 = ({ route, navigation }) => {
       user.lastName != ''
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ firstName: user.firstName, lastName: user.lastName }}
-            prevPage=""
-            nextPage="Profile2"
-            navigation={navigation}
-          />
-        </>,
+        <UpdateButton
+          user={{ firstName: user.firstName, lastName: user.lastName }}
+          prevPage=""
+          nextPage="Profile2"
+          navigation={navigation}
+        />,
       );
     } else {
       setNavButton(
@@ -88,6 +87,7 @@ const Profile1 = ({ route, navigation }) => {
             placeholder={t('profile.lastname')}
           />
         </InputView>
+        <Text onPress={() => navigation.navigate('Settings')}>{t('settings.return')}</Text>  
       </ContentView>
       {navButton}
     </CustomView>

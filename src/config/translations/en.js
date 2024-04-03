@@ -16,6 +16,7 @@ export default {
       edit_profile: 'Edit profile',
       edit_profile_title: 'Customize your profile',
       contact: 'Contact us',
+      return: 'Return',
     },
     navbar: {
       home: 'Home',
