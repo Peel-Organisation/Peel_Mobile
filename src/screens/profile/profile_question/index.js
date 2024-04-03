@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton } from '../../../components/Update_User';
+import { UpdateButton } from '../../../components/UpdateUser';
 
 import { getStorage } from '../../../functions/storage';
 import { getQuestionList } from '../../../functions/api_request';
@@ -18,7 +18,7 @@ import {
 import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
 
 import crashlytics from '@react-native-firebase/crashlytics';
-import Loading from '../../../components/loading';
+import Loading from '../../../components/Loading';
 
 const QuestionProfil = ({ route, navigation }) => {
   const { t } = useTranslation();
