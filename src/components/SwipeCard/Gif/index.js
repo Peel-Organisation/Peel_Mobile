@@ -5,7 +5,6 @@ import {
   GifArea
 } from './styles';
 const GifCard = ({ GifUrl }) => {
-
   return (
     <GifArea>
       <GifImage

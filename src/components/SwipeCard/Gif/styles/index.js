@@ -5,13 +5,13 @@ const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const GifArea = styled.SafeAreaView`
-    height: ${DIMENSION_HEIGHT - 500}px;
-    width: ${DIMENSION_WIDTH - 90}px;
-    /* background-color: ${props => props.theme.background}; */
+    height: 150px;
+    width: 100%;
     align-self: center;
     overflow: hidden;
     border-radius: 15px;
-    margin-top: 2%;  
+    margin-top: 1%;
+    margin-bottom:4%;
 `
 
 export const GifImage = styled.Image`

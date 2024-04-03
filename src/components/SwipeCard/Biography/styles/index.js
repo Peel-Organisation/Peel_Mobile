@@ -8,8 +8,8 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const Biography = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
-    height: ${DIMENSION_HEIGHT - 800}px;
-    width: ${DIMENSION_WIDTH - 80}px;
+    height: 120px;
+    width: 100%;
     padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
@@ -18,6 +18,7 @@ export const Biography = styled.SafeAreaView`
 `
 export const BiographyText = styled.Text`
     font-size: 12px;
+    padding: 10px;
     letter-spacing: 1px;
     color: ${props => props.theme.text};
     text-align: justify;
@@ -25,7 +26,8 @@ export const BiographyText = styled.Text`
 `
 export const Ellipsis = styled.Text`
     color:  ${props => props.theme.ellipsisColor || 'gray'};
-    font-size: 11px;
+    font-size: 12px;
+    padding: 5px;
 `
 
 export const BiographyTitle = styled.Text`

@@ -16,6 +16,9 @@ export const InterestView = styled.SafeAreaView`
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
+    height: 100px;
+    border-radius: 4%;
 `
 
 export const InterestBox = styled.View`
@@ -34,7 +37,7 @@ export const InterestText = styled.Text`
 
 export const Ellipsis = styled.Text`    
     color:  ${props => props.theme.ellipsisColor || 'gray'};
-    font-size: 11px;
+    font-size: 12px;
 `
 
 export const InterestFull = styled.TouchableOpacity`

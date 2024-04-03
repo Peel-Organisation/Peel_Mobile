@@ -31,6 +31,7 @@ export const MovieImage = styled.Image`
 
 export const MovieInfo = styled.SafeAreaView`
     top: 10%;
+    width: 100%;
     align-items: center;
     padding: 10px;
 `
