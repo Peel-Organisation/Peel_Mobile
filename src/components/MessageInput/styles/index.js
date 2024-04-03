@@ -9,7 +9,8 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const ViewCustom = styled.SafeAreaView`
     flex-direction: row;
     width: 100%;
-    height: 20%;
+    height: 100%;
+    bottom: 5%;
     background-color: ${props => props.theme.background};
 `
 
