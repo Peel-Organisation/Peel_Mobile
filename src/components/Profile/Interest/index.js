@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Loading from '../../../components/loading';
+import Loading from '../../../components/Loading';
 
 import { updateUser, getInterestList } from '../../../functions/api_request';
 import { getStorage } from '../../../functions/storage';
