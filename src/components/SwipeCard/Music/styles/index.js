@@ -26,7 +26,7 @@ export const MusicImage = styled.Image`
     border-radius: 10px;
 `
 export const MusicInfo = styled.SafeAreaView`
-    left: 52%;
+    left: 53%;
     top: -40%;
     padding: 10px;
     height: 50%;
