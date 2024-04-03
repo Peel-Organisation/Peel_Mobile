@@ -78,8 +78,11 @@ export default {
       movie_placeholder: 'Search a movie',
       music_condition: 'Choose a music',
       music_placeholder: 'Search a music',
+      type_of_search: 'what are you looking for?',
       search_love: 'Search love',
       search_friend: 'Search friends',
+      modify_name: 'Change your name',
+      modify_firstname: 'Change your surname',
       custom: {
         title: 'Modify Profile',
         text: 'Select the elements you want other users to see when they want to check on your profile',

@@ -37,10 +37,10 @@ const Music = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    setPage(1);
-    setMusics([]);
     if (searchText.length > 0) {
       searchMusics();
+    } else {
+      // getPopularMusic();
     }
   }, [searchText]);
 
@@ -52,8 +52,6 @@ const Music = ({ route, navigation }) => {
 
   const searchMusics = async () => {
     const url = `https://${GENIUS_API_PATH}search?q=${searchText}&page=${page}`;
-    console.log('url : ', url);
-    console.log('authorization : ', `Bearer ${GENIUS_API_TOKEN}`);
     setLoading(true);
     try {
       const response = await fetch(url, {
@@ -84,10 +82,38 @@ const Music = ({ route, navigation }) => {
         setLoading(false);
       }
     } catch (error) {
-      console.log('error : ', error);
+
       crashlytics().recordError(error);
     }
   };
+
+  // const getPopularMusic = async () => {
+  //   const url = `https://${GENIUS_API_PATH}search?q=popular&page=${page}`;
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${GENIUS_API_TOKEN}`,
+  //       },
+  //     });
+  //     console.log('response : ', response);
+  //     const data = await response.json();
+  //     console.log('data : ', data);
+  //     if (data != null && data.response.hits != null && data.response.hits.length > 0) {
+  //       if (page > 1) {
+  //         setMusics([...musics, ...data.response.hits]);
+  //         setLoading(false);
+  //       } else {
+  //         setMusics(data.response.hits);
+  //         setLoading(false);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     crashlytics().recordError(error);
+  //   }
+  // };
+        
 
   const updateMusic = async musicToUpdate => {
     try {

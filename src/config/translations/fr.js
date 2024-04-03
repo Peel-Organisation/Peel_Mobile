@@ -80,8 +80,11 @@ export default {
       movie_placeholder: 'Rechercher un film',
       music_condition: 'Choisissez une musique',
       music_placeholder: 'Rechercher une musique',
+      type_of_search: 'Que recherchez-vous?',
       search_love: 'Recherche l\'amour',
       search_friend: 'Recherche des amis',
+      modify_name: 'Modifier votre nom',
+      modify_firstname: 'Modifier votre prénom',
       custom: {
         title: 'Modifier Profil',
         text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',

@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from 'react-i18next';
-import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js';
+import {
+  CustomView,
+  ContentView,
+  FieldInput,
+  LabelInput
+} from '../styles/content.js';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+
 import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
-import { Text } from 'react-native';
+import arrow from '../../../../assets/images/icons/top-arrow-white.png';
+import { Spacer } from '../../login/styles/index.js';
 
 const Profile1 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -62,32 +70,37 @@ const Profile1 = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={arrow} />
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
       <ContentView>
-        <InputView>
-          <FieldInput
-            value={user.firstName}
-            onChangeText={text => {
-              let newUser = { ...user };
-              newUser.firstName = text;
-              setUser(newUser);
-            }}
-            placeholder={t('profile.firstname')}
-          />
-        </InputView>
-        <InputView>
-          <FieldInput
-            value={user.lastName}
-            onChangeText={text => {
-              let newUser = { ...user };
-              newUser.lastName = text;
-              setUser(newUser);
-            }}
-            placeholder={t('profile.lastname')}
-          />
-        </InputView>
-        <Text onPress={() => navigation.navigate('Settings')}>{t('settings.return')}</Text>  
+        <Spacer />
+        <LabelInput>{t('profile.modify_firstname')}</LabelInput>
+        <FieldInput
+          value={user.firstName}
+          onChangeText={text => {
+            let newUser = { ...user };
+            newUser.firstName = text;
+            setUser(newUser);
+          }}
+          placeholder={t('profile.firstname')}
+        />
+        <Spacer />
+        <LabelInput>{t('profile.modify_name')}</LabelInput>
+        <FieldInput
+          value={user.lastName}
+          onChangeText={text => {
+            let newUser = { ...user };
+            newUser.lastName = text;
+            setUser(newUser);
+          }}
+          placeholder={t('profile.lastname')}
+        />
       </ContentView>
       {navButton}
     </CustomView>

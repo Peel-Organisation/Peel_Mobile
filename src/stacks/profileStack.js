@@ -10,7 +10,6 @@ import Question from "../screens/profile/profile_question";
 import Film from "../screens/profile/profile_film";
 import Gif from "../screens/profile/profile_gif";
 import Music from "../screens/profile/profile_music";
-import DateType from "../screens/profile/profile_date_type";
 import RetryButton from "../components/Retry";
 import { GetUser } from "../functions/api_request";
 import Loading from "../components/Loading";
@@ -62,7 +61,6 @@ const PublicStack = () => {
         <Stack.Screen name="Profile1" component={Profile1} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Biographie} />
-        <Stack.Screen name="Profile4" component={DateType} />
         <Stack.Screen name="Profile5" component={Gif} />
         <Stack.Screen name="Profile6" component={Film} />
         <Stack.Screen name="Profile7" component={Music} />
