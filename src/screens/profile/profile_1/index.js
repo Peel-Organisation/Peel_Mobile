@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from 'react-i18next';
-
 import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
 import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
@@ -12,9 +10,7 @@ import {
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
-
-import { UpdateButton } from '../../../components/Update_User';
-
+import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
 
 const Profile1 = ({ route, navigation }) => {
