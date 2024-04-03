@@ -13,15 +13,22 @@ export const UserMessage = styled.SafeAreaView`
     margin: 10px;
     align-self: flex-end;
     max-width: 70%;
-    right: 0px;
-    
+    width: 50%;
 `
-
 
 export const UserMessageText = styled.Text`
     font-size: 14px;
+    width: 100%;
+    padding: 7px;
     color: ${props => props.theme.background};
     text-align: left;
+`
+
+export const UserMessageDate = styled.Text`
+    font-size: 10px;
+    color: ${props => props.theme.background};
+    padding: 5px;
+    text-align: right;
 `
 
 export const ContactMessage = styled.SafeAreaView`
@@ -31,26 +38,27 @@ export const ContactMessage = styled.SafeAreaView`
     margin: 10px;
     align-self: flex-start;
     max-width: 70%;
+    width: 50%;
 `
 
 export const ContactMessageText = styled.Text`
     font-size: 14px;
-    color: ${props => props.theme.black};
+    width: 100%;
+    padding: 7px;
     text-align: left;
 `
 
+export const ContactMessageDate = styled.Text`
+    font-size: 10px;
+    color: ${props => props.theme.black};
+    text-align: right;
+    padding: 5px;
+`
+
 export const CustomFlatList = styled.SafeAreaView`
-    /* background-color: ${props => props.theme.background}; */
     bottom: 50px;
-    /* border-radius: 5px; */
-    /* word-wrap:break-word; */
     padding: 10px;
-    /* margin: 10px 0; */
     flex-direction: column;
-    
-    /* flex-grow: 1; */
-    /* min-width: 120px; */
-    /* width: 100%; */
     height: 88%;
     background-color: ${props => props.theme.background};
 `

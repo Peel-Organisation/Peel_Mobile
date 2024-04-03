@@ -1,4 +1,11 @@
-import { UserMessage, UserMessageText, ContactMessage, ContactMessageText } from './styles';
+import { 
+  UserMessage, 
+  UserMessageText,
+  UserMessageDate,
+  ContactMessage,
+  ContactMessageText,
+  ContactMessageDate
+} from './styles';
 
 
 export const MessageUser = (params) => {
@@ -12,7 +19,7 @@ export const MessageUser = (params) => {
           title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
         >
           <UserMessageText>{message.content}</UserMessageText>
-          <UserMessageText>{new Date(message.createdAt).toLocaleTimeString()}</UserMessageText>
+          <UserMessageDate>{new Date(message.createdAt).toLocaleTimeString()}</UserMessageDate>
         </UserMessage>
       );
     }else{
@@ -21,7 +28,7 @@ export const MessageUser = (params) => {
           title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
         >
           <ContactMessageText>{message.content}</ContactMessageText>
-          <ContactMessageText>{new Date(message.createdAt).toLocaleTimeString()}</ContactMessageText>
+          <ContactMessageDate>{new Date(message.createdAt).toLocaleTimeString()}</ContactMessageDate>
         </ContactMessage>
       );
     }
