@@ -29,7 +29,7 @@ export const Container = styled.SafeAreaView`
 
 export const Header = styled.SafeAreaView`
     width: 100%;
-    height: 8%;
+    height: 7%;
     display: flex;
     justify-content: center;
     align-items: center;

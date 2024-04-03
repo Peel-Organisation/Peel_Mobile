@@ -6,6 +6,7 @@ import { sendSwipe, createInstantConversation, GetUser, updateUser } from '../..
 import { ButtonStack, CardStackView, Button, Icon, ModalButton, ModalButtonText, ModalTitle, ModalQuestion, ModalWarning } from './styles';
 import Modal from '../UI/Modal';
 import { getStorage, putStorage } from '../../functions/storage';
+import { Text } from 'react-native';
 
 
 

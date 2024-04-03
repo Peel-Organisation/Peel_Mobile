@@ -83,7 +83,6 @@ const Match = () => {
                     </FilterIcon>
                 </Header>
                 <Swipe userList={userList} onSwipeCountOffsetThreshold={() => getMatchList()} />
-
                 {
                     filter && (
                         <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />

@@ -9,7 +9,7 @@ export const GifArea = styled.SafeAreaView`
     width: ${DIMENSION_WIDTH - 90}px;
     /* background-color: ${props => props.theme.background}; */
     align-self: center;
-    /* overflow: hidden; */
+    overflow: hidden;
     border-radius: 15px;
     margin-top: 2%;  
 `
