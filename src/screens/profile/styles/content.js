@@ -104,5 +104,5 @@ export const ImageCustom = styled.Image`
     margin: 1px;
 `;
 export const LittleSpacer = styled.View`
-    height: 10px;
+    height: 15px;
 `;

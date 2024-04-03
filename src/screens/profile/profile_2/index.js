@@ -118,6 +118,7 @@ const Profile2 = ({ route, navigation }) => {
       <ContentView>
         <LittleSpacer />
         <LabelInput>{t('profile.birth_date')}</LabelInput>
+        <LittleSpacer />
         <DatePickerCustom
           date={user['birthday']}
           onDateChange={date => {
