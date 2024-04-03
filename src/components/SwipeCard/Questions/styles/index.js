@@ -18,6 +18,7 @@ export const QuestionText = styled.Text`
     color: ${props => props.theme.text};
     font-weight: bold;
     text-align: center;
+    padding: 10px;
 `
 
 export const ResponseText = styled.Text`
@@ -26,11 +27,15 @@ export const ResponseText = styled.Text`
     color: ${props => props.theme.text};
     text-align: justify;
     align-self: center;
-    line-height: 20px;   
+    line-height: 20px;
+    padding: 10px;   
 `
 
 export const Ellipsis = styled.Text`    
+    font-size: 12px;
     color:  ${props => props.theme.ellipsisColor || 'gray'};
+    margin-bottom: 5px;
+    padding: 10px;
 `
 
 export const QuestionTitle = styled.Text`
