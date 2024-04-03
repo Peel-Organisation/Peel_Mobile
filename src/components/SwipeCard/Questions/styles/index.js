@@ -7,7 +7,7 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const QuestionView = styled.SafeAreaView`
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
-    width: auto;
+    width: 100%;
     padding: 10px;
     margin-top: 4%;
     border-radius: 10px;
