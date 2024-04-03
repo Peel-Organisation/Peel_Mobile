@@ -3,13 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from "react-i18next";
 import crashlytics from '@react-native-firebase/crashlytics';
 import RetryButton from '../components/Retry';
-
-
 import Login from '../screens/login';
 import Register from '../screens/register';
 import Auth from '../screens/auth';
 const Stack = createNativeStackNavigator();
-import Loading from '../components/loading';
+import Loading from '../components/Loading';
 
 import { TestAuth, IsProfileCompleted } from '../functions/api_request';
 
@@ -29,7 +27,6 @@ const PublicStack = ({ navigation }) => {
       setLoading(true);
       setRetry(false);
       setError("");
-      console.log("testProfile")
       let auth_bool = await TestAuth()
       crashlytics().log("auth_bool : ", auth_bool)
       if (auth_bool) {
@@ -58,8 +55,6 @@ const PublicStack = ({ navigation }) => {
     }
   }
 
-
-
   if (loading) {
     return (
       <Loading />
@@ -70,9 +65,6 @@ const PublicStack = ({ navigation }) => {
       <RetryButton error={error} retryFunc={() => testProfile()} />
     )
   }
-
-
-
 
   return (
     <Stack.Navigator initialRouteName="AuthHome" screenOptions={{ headerShown: false }}>

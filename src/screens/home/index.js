@@ -5,11 +5,9 @@ import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, Fi
 import Swipe from "../../components/Swipe";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { PostMatchList } from "../../functions/api_request"
-import Loading from "../../components/loading";
+import Loading from "../../components/Loading";
 import Filter from "../../components/Filter";
 import RetryButton from "../../components/Retry";
-import { use } from "i18next";
-
 
 
 const Match = () => {
@@ -61,7 +59,6 @@ const Match = () => {
         })
     }
 
-
     if (loading) {
         return (
             <Loading />
@@ -73,8 +70,6 @@ const Match = () => {
             <RetryButton error={error} retryFunc={() => getMatchList()} />
         )
     }
-
-
 
     return (
         <>
@@ -88,7 +83,6 @@ const Match = () => {
                     </FilterIcon>
                 </Header>
                 <Swipe userList={userList} onSwipeCountOffsetThreshold={() => getMatchList()} />
-
                 {
                     filter && (
                         <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
