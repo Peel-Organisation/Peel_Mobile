@@ -11,8 +11,8 @@ export const MusicTitle = styled.Text`
     color: ${props => props.theme.text};
 `  
 export const MusicArea = styled.SafeAreaView`
-    height: ${DIMENSION_HEIGHT - 600}px;
-    width: ${DIMENSION_WIDTH - 90}px;
+    height: 150px;
+    width: 100%;
     border-radius: 15px;
     background-color: ${props => props.theme.background};
     border: 2px solid ${props => props.theme.background_button_border};
@@ -26,18 +26,28 @@ export const MusicImage = styled.Image`
     border-radius: 10px;
 `
 export const MusicInfo = styled.SafeAreaView`
-    left: 55%;
+    left: 52%;
     top: -40%;
     padding: 10px;
     height: 50%;
-    width: 50%
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 export const MusicName = styled.Text`
     font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    width: 80%;
     font-weight: bold;
     color: ${props => props.theme.text};
 `
 export const MusicArtist = styled.Text`
     font-size: 12px;
+    padding: 5px;
+    text-align: center;
+    padding: 5px;
+    width: 80%;
     color: ${props => props.theme.text};
 `
