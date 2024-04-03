@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from 'react-i18next';
-
 import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
 import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
@@ -12,10 +10,9 @@ import {
   HeaderText,
 } from '../../../components/StyledComponents/Profile/General/Header';
 import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
-
-import { UpdateButton } from '../../../components/Update_User';
-
+import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
+import { Text } from 'react-native';
 
 const Profile1 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -40,14 +37,12 @@ const Profile1 = ({ route, navigation }) => {
       user.lastName != ''
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ firstName: user.firstName, lastName: user.lastName }}
-            prevPage=""
-            nextPage="Profile2"
-            navigation={navigation}
-          />
-        </>,
+        <UpdateButton
+          user={{ firstName: user.firstName, lastName: user.lastName }}
+          prevPage=""
+          nextPage="Profile2"
+          navigation={navigation}
+        />,
       );
     } else {
       setNavButton(
@@ -92,6 +87,7 @@ const Profile1 = ({ route, navigation }) => {
             placeholder={t('profile.lastname')}
           />
         </InputView>
+        <Text onPress={() => navigation.navigate('Settings')}>{t('settings.return')}</Text>  
       </ContentView>
       {navButton}
     </CustomView>
