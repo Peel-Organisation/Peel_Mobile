@@ -22,7 +22,7 @@ import {
   BioInput,
   FlatListCustom,
   ListItem,
-  ImageCustom
+  FilmImage
 } from '../styles/content.js';
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import arrow from '../../../../assets/images/icons/top-arrow-white.png';
@@ -137,7 +137,7 @@ const Film = ({ route, navigation }) => {
   const renderItem = ({ item }) => {
     return (
       <ListItem onPress={() => updateMovie(item)}>
-        <ImageCustom
+        <FilmImage
           source={{
             uri: `${imageBaseUrl}${item.poster_path}`,
           }}

@@ -85,26 +85,33 @@ export const ModalSelectorCustom = styled(ModalSelector)`
 `;
 
 export const FlatListCustom = styled.FlatList`
-    width: 100%;
-    margin-top: 10px;
-    margin-left: 10px;
-    background-color: ${props => props.theme.background};
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: ${props => props.theme.background};
 `;
 
 export const ListItem = styled.TouchableOpacity`
-    background-color: ${props => props.theme.background};
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 5px; 
+  background-color: ${props => props.theme.background};
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  padding: 5px; 
 `;
 
-export const ImageCustom = styled.Image`
-    width: 170px;
-    height: 170px;
-    margin: 1px;
+export const FilmImage = styled.Image`
+  width: 150px;
+  height: 250px;
+  margin: 15px;
+  object-fit: cover;
+`;
+
+export const GifImage = styled.Image`
+  width: 150px;
+  height: 250px;
+  margin: 1px;
+  object-fit: cover;
 `;
 export const LittleSpacer = styled.View`
-    height: 15px;
+  height: 15px;
 `;

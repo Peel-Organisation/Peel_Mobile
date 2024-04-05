@@ -22,7 +22,7 @@ import {
   BioInput,
   FlatListCustom,
   ListItem,
-  ImageCustom
+  GifImage
 } from '../styles/content.js';
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import arrow from '../../../../assets/images/icons/top-arrow-white.png';
@@ -156,7 +156,7 @@ const Gif = ({ route, navigation }) => {
   const renderItem = ({ item }) => {
     return (
       <ListItem onPress={() => updateGif(item)}>
-        <ImageCustom
+        <GifImage
           source={{
             uri: `${item?.images?.original?.webp}`,
           }}
