@@ -97,12 +97,13 @@ export const ListItem = styled.TouchableOpacity`
   flex-wrap: wrap; 
   align-items: center; 
   padding: 5px; 
+  margin-left: 5%;
 `;
 
 export const FilmImage = styled.Image`
   width: 150px;
   height: 250px;
-  margin: 15px;
+  margin: 1px;
   object-fit: cover;
 `;
 
