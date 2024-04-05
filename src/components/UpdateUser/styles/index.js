@@ -7,10 +7,11 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const NavigatorView = styled.SafeAreaView`
     flex-direction: row;
     width: 100%;
+    height: 10%;
     align-items: center;
     justify-content: space-around;
     position: absolute;
-    bottom: 20px;
+    bottom: 0%;
     background-color: ${props => props.theme.background};
 `
 
@@ -31,7 +32,6 @@ export const Next_Button_Text = styled.Text`
 
 export const Prev_Button = styled.TouchableOpacity`
     width: 40%;
-    margin: 10px;
     border-radius: 10px;
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
