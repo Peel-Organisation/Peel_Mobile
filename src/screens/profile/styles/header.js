@@ -36,7 +36,8 @@ export const BarStyle = styled.View`
 `
 export const GoBackArrow = styled.TouchableOpacity`
   background-color: ${props => props.theme.primary};
-  margin-left: 30px;
+  margin-left: 35px;
+  z-index: 1;
 `
 export const GoBackArrowImage = styled.Image`
   width: 30px;

@@ -55,6 +55,7 @@ export const BioInput = styled.TextInput`
   border: 1px solid  ${props => props.theme.grey};
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.text};
+  padding: 10px;
 `;
 
 export const SwitchSelectorCustom = styled(SwitchSelector)`
@@ -68,6 +69,7 @@ export const DatePickerCustom = styled(DatePicker)`
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.text};
   fadetocolor: ${props => props.theme.primary};
+  height: 150px;
 `;
 
 export const SliderCustom = styled.SafeAreaView`

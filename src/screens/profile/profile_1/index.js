@@ -16,7 +16,6 @@ import {
   LabelInput
 } from '../styles/content.js';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
-
 import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
 import arrow from '../../../../assets/images/icons/top-arrow-white.png';
@@ -79,6 +78,7 @@ const Profile1 = ({ route, navigation }) => {
         </HeaderTextView>
       </HeaderView>
       <ContentView>
+      
         <Spacer />
         <LabelInput>{t('profile.modify_firstname')}</LabelInput>
         <FieldInput

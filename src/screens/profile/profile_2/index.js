@@ -13,14 +13,12 @@ import {
 import {
   CustomView,
   ContentView,
-  FieldInput,
   LabelInput,
   SwitchSelectorCustom,
   DatePickerCustom,
   LittleSpacer
 } from '../styles/content.js';
 import arrow from '../../../../assets/images/icons/top-arrow-white.png';
-import { Spacer } from '../../login/styles/index.js';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 
