@@ -7,7 +7,7 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export const NavigatorView = styled.SafeAreaView`
     flex-direction: row;
     width: 100%;
-    height: 10%;
+    height: 11%;
     align-items: center;
     justify-content: space-around;
     position: absolute;
