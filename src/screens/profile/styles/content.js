@@ -85,19 +85,13 @@ export const ModalSelectorCustom = styled(ModalSelector)`
 `;
 
 export const FlatListCustom = styled.FlatList`
-  width: 100%;
-  margin-top: 10px;
-  margin-left: 10px;
   background-color: ${props => props.theme.background};
+  margin-top: 5px;
 `;
 
 export const ListItem = styled.TouchableOpacity`
   background-color: ${props => props.theme.background};
-  flex-direction: row; 
-  flex-wrap: wrap; 
-  align-items: center; 
   padding: 5px; 
-  margin-left: 5%;
 `;
 
 export const FilmImage = styled.Image`
@@ -109,7 +103,7 @@ export const FilmImage = styled.Image`
 
 export const GifImage = styled.Image`
   width: 150px;
-  height: 250px;
+  height: 150px;
   margin: 1px;
   object-fit: cover;
 `;
