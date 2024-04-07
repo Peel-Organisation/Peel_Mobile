@@ -86,6 +86,7 @@ export default {
       modify_firstname: 'Change your surname',
       custom: {
         title: 'Modify Profile',
+        blocs: 'Personalize your profile blocks',
         text: 'Select the elements you want other users to see when they want to check on your profile',
         biography: 'Biography',
         gifs: 'Gifs',
