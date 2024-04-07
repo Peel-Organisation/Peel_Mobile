@@ -29,7 +29,6 @@ import { UpdateButton } from '../../../components/UpdateUser';
 import settings from '../../../../assets/images/icons/settings-white.png';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
 
 
 const Recherche = ({ route, navigation }) => {
