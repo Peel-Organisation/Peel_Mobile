@@ -138,6 +138,7 @@ const QuestionProfil = ({route, navigation}) => {
             width: '90%',
             alignSelf: 'center',
             borderWidth: 0,
+            borderRadius: 10,
             padding: 10,
           }}
           selectTextStyle={{
@@ -185,6 +186,7 @@ const QuestionProfil = ({route, navigation}) => {
             width: '90%',
             alignSelf: 'center',
             borderWidth: 0,
+            borderRadius: 10,
             padding: 10,
           }}
           selectTextStyle={{
@@ -233,6 +235,7 @@ const QuestionProfil = ({route, navigation}) => {
             width: '90%',
             alignSelf: 'center',
             borderWidth: 0,
+            borderRadius: 10,
             padding: 10,
           }}
           selectTextStyle={{
