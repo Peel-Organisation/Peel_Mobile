@@ -3,8 +3,8 @@
 export default {
   translation: {
     home: {
-        title: "Peel",
-        filter: 'Filtre'
+      title: "Peel",
+      filter: 'Filtre'
     },
     settings: {
       title: 'Paramètres',
@@ -68,9 +68,10 @@ export default {
       biography: 'Biographie',
       fill_min_bio: '20 caractères minimum',
       fill_max_bio: '200 caractères maximum',
-      interest: "Merci de choisir cinq centres d'intérêts",
+      interest_choice: "Choisissez 5 centres d'intérêts",
       search_zone: 'Zone géographique',
       question_title: 'Décrivez vous en répondant à ces trois questions',
+      question_choice: 'Choisissez 3 questions',
       question_select: 'Sélectionnez une question !',
       question_placeholder: 'Répondez à la question !',
       question_save: 'Sauvegarder',

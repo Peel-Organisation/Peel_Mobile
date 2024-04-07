@@ -18,7 +18,7 @@ import {
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
-import arrow from '../../../../assets/images/icons/top-arrow-white.png';
+import settings from '../../../../assets/images/icons/settings-white.png';
 import { Spacer } from '../../login/styles/index.js';
 
 const Profile1 = ({ route, navigation }) => {
@@ -70,7 +70,7 @@ const Profile1 = ({ route, navigation }) => {
     <CustomView>
       <HeaderView>
         <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={arrow} />
+          <GoBackArrowImage source={settings} />
         </GoBackArrow>
         <HeaderTextView> 
           <HeaderText>{t('profile.title')}</HeaderText>

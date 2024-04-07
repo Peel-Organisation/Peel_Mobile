@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton } from '../../../components/UpdateUser';
-import Loading from '../../../components/Loading';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
 import { getInterestList } from '../../../functions/api_request';
-
 import {
+  HeaderView,
+  HeaderText,
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js';
+import {
+  CustomView,
+  LittleSpacer,
+  PageTitle,
   InterestButton,
   InterestButtonText,
   InterestButtonSelected,
   InterestButtonDisabled,
   InterestView,
-} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
+  ScrollContainer,
+} from '../styles/content.js';
+import { Spacer } from '../../login/styles/index.js';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import Loading from '../../../components/Loading';
+import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
-import {
-  HeaderView,
-  HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { ScrollContainer } from '../../../components/StyledComponents/Profile/General/ScrollContainer';
 
 const ProfileInterest = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -73,14 +79,12 @@ const ProfileInterest = ({ route, navigation }) => {
   useEffect(() => {
     if (user.interests?.length == 5) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ interests: user.interests }}
-            prevPage="Profile7"
-            nextPage="Profile9"
-            navigation={navigation}
-          />
-        </>,
+        <UpdateButton
+          user={{ interests: user.interests }}
+          prevPage="Profile7"
+          nextPage="Profile9"
+          navigation={navigation}
+        />,
       );
     } else {
       setNavButton(
@@ -125,8 +129,17 @@ const ProfileInterest = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.interest')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings}/>
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
+      <Spacer />
+      <PageTitle>{t('profile.interest_choice')}</PageTitle>
+      <LittleSpacer />
       <ScrollContainer>
         <InterestView>
           {InterestList.map(interest => {
@@ -151,7 +164,6 @@ const ProfileInterest = ({ route, navigation }) => {
                 <InterestButtonDisabled
                   key={interest._id}
                   onPress={() => addInterest(interest)}
-                  color="#ff5c5c"
                   disabled>
                   <InterestButtonText>{interest.name}</InterestButtonText>
                 </InterestButtonDisabled>

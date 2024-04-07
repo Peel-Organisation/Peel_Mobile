@@ -25,7 +25,7 @@ import {
   GifImage
 } from '../styles/content.js';
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
-import arrow from '../../../../assets/images/icons/top-arrow-white.png';
+import settings from '../../../../assets/images/icons/settings-white.png';
 import Loading from '../../../components/Loading';
 import { Spacer } from '../../login/styles/index.js';
 
@@ -165,14 +165,11 @@ const Gif = ({ route, navigation }) => {
     );
   };
 
-
-
-
   return (
     <CustomView>
       <HeaderView>
         <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={arrow} />
+          <GoBackArrowImage source={settings} />
         </GoBackArrow>
         <HeaderTextView> 
           <HeaderText>{t('profile.title')}</HeaderText>

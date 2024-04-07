@@ -28,36 +28,22 @@ export const PageTitle = styled.Text`
 `;
 
 export const LabelInput = styled.Text`
-    font-size: 14px;
-    color: ${props => props.theme.text};
-    letter-spacing: 4px;
+  font-size: 14px;
+  color: ${props => props.theme.text};
+  letter-spacing: 4px;
 `
 
 export const FieldInput = styled.TextInput`
-    width: ${DIMENSION_WIDTH-70}px;
-    margin-top: 20px;
-    padding : 10px;
-    font-size: 13px;
-    border: 1px solid  ${props => props.theme.grey};
-    border-radius: 10px;
-    background-color: ${props => props.theme.background};
-    color: ${props => props.theme.text};
-    letter-spacing: 4px;
-`
-export const BioInput = styled.TextInput`
   width: ${DIMENSION_WIDTH-70}px;
-  height: 50%;
-  margin: 20px;
+  margin-top: 20px;
+  padding : 10px;
   font-size: 13px;
-  border-radius: 10px;
-  letter-spacing: 4px;
-  line-height: 25px;
   border: 1px solid  ${props => props.theme.grey};
+  border-radius: 10px;
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.text};
-  padding: 10px;
-`;
-
+  letter-spacing: 4px;
+`
 export const SwitchSelectorCustom = styled(SwitchSelector)`
   width: 80%;
   align-items: center;
@@ -84,6 +70,20 @@ export const ModalSelectorCustom = styled(ModalSelector)`
   border-radius: 10px;
 `;
 
+export const BioInput = styled.TextInput`
+  width: ${DIMENSION_WIDTH-70}px;
+  height: 50%;
+  margin: 20px;
+  font-size: 13px;
+  border-radius: 10px;
+  letter-spacing: 4px;
+  line-height: 25px;
+  border: 1px solid  ${props => props.theme.grey};
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
+  padding: 10px;
+`;
+
 export const FlatListCustom = styled.FlatList`
   background-color: ${props => props.theme.background};
   margin-top: 5px;
@@ -107,6 +107,75 @@ export const GifImage = styled.Image`
   margin: 1px;
   object-fit: cover;
 `;
+
 export const LittleSpacer = styled.View`
   height: 15px;
 `;
+
+export const ScrollContainer = styled.ScrollView`
+  background-color: ${props => props.theme.background};
+  width: 90%;
+  flex-grow: 1;
+  align-self: center;
+`;
+
+export const InterestView = styled.SafeAreaView`
+  background-color: ${props => props.theme.background};
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+  
+`;
+
+export const InterestButton = styled.TouchableOpacity`
+  width: 40%;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.background_button};
+  color: ${props => props.theme.text};
+`;
+
+export const InterestButtonSelected = styled.TouchableOpacity`
+  width: 40%;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: red;
+  color: ${props => props.theme.background};
+`;
+
+export const InterestButtonDisabled = styled.TouchableOpacity`
+  width: 40%;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: ${props => props.theme.grey};
+  color: ${props => props.theme.background};
+`;
+
+export const InterestButtonText = styled.Text`
+  font-size: 13px;
+  letter-spacing: 2px;
+  line-height: 22px;
+  text-align: center;
+  margin: 2%;
+  padding: 3%;
+  color: ${props => props.theme.text};
+`;
+
+export const ModalSelectorQuestion = styled(ModalSelector)`
+  width: 90%;
+  border-radius: 10px;
+`;
+
+export const QuestionFieldInput = styled.TextInput`
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding : 10px;
+  font-size: 13px;
+  border: 1px solid  ${props => props.theme.grey};
+  border-radius: 10px;
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.text};
+  letter-spacing: 4px;
+`

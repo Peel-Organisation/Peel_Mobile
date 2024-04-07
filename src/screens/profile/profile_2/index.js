@@ -18,7 +18,7 @@ import {
   DatePickerCustom,
   LittleSpacer
 } from '../styles/content.js';
-import arrow from '../../../../assets/images/icons/top-arrow-white.png';
+import settings from '../../../../assets/images/icons/settings-white.png';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 
@@ -106,7 +106,7 @@ const Profile2 = ({ route, navigation }) => {
     <CustomView>
       <HeaderView>
         <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={arrow}/>
+          <GoBackArrowImage source={settings}/>
         </GoBackArrow>
         <HeaderTextView> 
           <HeaderText>{t('profile.title')}</HeaderText>
