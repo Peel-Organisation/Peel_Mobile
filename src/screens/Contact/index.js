@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GetContactList } from "../../functions/api_request";
 import { ContactView, ContactTitle, NewMatchTitle, NewMatchView, OrangeView } from './styles';
-import Loading from "../../components/loading";
+import Loading from "../../components/Loading";
 import { getStorage } from '../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { useTranslation } from "react-i18next";

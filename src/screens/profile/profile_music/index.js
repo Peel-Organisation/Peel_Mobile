@@ -2,20 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
-import { UpdateButton, nextAction } from '../../../components/Update_User';
+
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js';
+import { Spacer } from '../../login/styles/index.js';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import {
+  CustomView,
+  ContentView,
+  PageTitle,
+
+} from '../styles/content.js';
+
+import { UpdateButton, nextAction } from '../../../components/UpdateUser';
+
 import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
-import Loading from '../../../components/loading';
+import Loading from '../../../components/Loading';
+
+
+
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 
 const Music = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -37,10 +53,10 @@ const Music = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    setPage(1);
-    setMusics([]);
     if (searchText.length > 0) {
       searchMusics();
+    } else {
+      // getPopularMusic();
     }
   }, [searchText]);
 
@@ -52,8 +68,6 @@ const Music = ({ route, navigation }) => {
 
   const searchMusics = async () => {
     const url = `https://${GENIUS_API_PATH}search?q=${searchText}&page=${page}`;
-    console.log('url : ', url);
-    console.log('authorization : ', `Bearer ${GENIUS_API_TOKEN}`);
     setLoading(true);
     try {
       const response = await fetch(url, {
@@ -84,10 +98,38 @@ const Music = ({ route, navigation }) => {
         setLoading(false);
       }
     } catch (error) {
-      console.log('error : ', error);
+
       crashlytics().recordError(error);
     }
   };
+
+  // const getPopularMusic = async () => {
+  //   const url = `https://${GENIUS_API_PATH}search?q=popular&page=${page}`;
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${GENIUS_API_TOKEN}`,
+  //       },
+  //     });
+  //     console.log('response : ', response);
+  //     const data = await response.json();
+  //     console.log('data : ', data);
+  //     if (data != null && data.response.hits != null && data.response.hits.length > 0) {
+  //       if (page > 1) {
+  //         setMusics([...musics, ...data.response.hits]);
+  //         setLoading(false);
+  //       } else {
+  //         setMusics(data.response.hits);
+  //         setLoading(false);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     crashlytics().recordError(error);
+  //   }
+  // };
+        
 
   const updateMusic = async musicToUpdate => {
     try {
@@ -169,9 +211,16 @@ const Music = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings} />
+        </GoBackArrow>
+        <HeaderTextView>
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
-      <FieldView>
+      <Spacer />
+      <ContentView>
         <PageTitle>{t('profile.music_condition')}</PageTitle>
         <FieldInput
           value={searchText}
@@ -194,7 +243,7 @@ const Music = ({ route, navigation }) => {
             numColumns={2}
           />
         )}
-      </FieldView>
+      </ContentView>
       {loading && <MainText>Chargement...</MainText>}
       {navButton}
     </CustomView>

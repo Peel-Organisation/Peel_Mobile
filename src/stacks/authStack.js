@@ -1,17 +1,16 @@
 import React from 'react';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useTranslation} from 'react-i18next';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/native';
 
-import HomeImage from '../img/tabIcons/home-48px-shadow.png';
-import ChatImage from '../img/tabIcons/chat.png';
-import SettingsImage from '../img/tabIcons/settings.png';
-import HomeSelectedImage from '../img/tabIcons/home-48px-color.png';
-import ChatSelectedImage from '../img/tabIcons/chatSelected.png';
-import SettingsSelectedImage from '../img/tabIcons/settingsSelected.png';
-
+import HomeImage from '../../assets/images/logo/peel_logo-48px.png';
+import HomeSelectedImage from '../../assets/images/logo/peel_logo3-48px-color.png';
+import ChatImage from '../../assets/images/icons/chat.png';
+import ChatSelectedImage from '../../assets/images/icons/chatSelected.png';
+import SettingsImage from '../../assets/images/icons/settings.png';
+import SettingsSelectedImage from '../../assets/images/icons/settingsSelected.png';
 import HomeScreen from '../screens/home';
 import ContactScreen from '../screens/Contact';
 import SettingsScreen from '../screens/settings';
@@ -33,7 +32,7 @@ const TabStackScreen = () => {
         tabBarShowLabel: false,
         tabBarLabel: () => null, 
         tabBarStyle: {
-          height: 60,
+          height: 65,
           borderTopWidth: 1,
           elevation: 1,
           shadowOpacity: 0,
@@ -70,7 +69,11 @@ const AuthStack = ({navigation}) => {
         options={{title: 'Home', headerShown: false}}
       />
       <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="EditProfile" component={EditProfile} options={{title: t("settings.edit_profile_title")}} />
+      <Stack.Screen 
+        name="EditProfile" 
+        component={EditProfile} 
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
