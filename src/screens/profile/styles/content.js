@@ -124,15 +124,19 @@ export const GifImage = styled.Image`
 //end Film
 
 // Profile Music
+export const MusicContainer = styled.SafeAreaView`
+  background-color: ${props => props.theme.background};
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
 export const ListMusic = styled.TouchableOpacity`
-  width: 90%;
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
-  border: 1px solid ${props => props.theme.primary};
-  background-color: ${props => props.theme.background};
-  padding: 2%;
-
+  padding: 3%;
 `;
 
 export const MusicImage = styled.Image`
@@ -143,7 +147,7 @@ export const MusicImage = styled.Image`
 `;
 
 export const MusicText = styled.Text`
-  width: 35%;
+  width: 50%;
   font-size: 13px;
   text-align: center;
   color: ${props => props.theme.text};

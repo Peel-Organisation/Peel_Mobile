@@ -15,13 +15,13 @@ import { Spacer } from '../../login/styles/index.js';
 import settings from '../../../../assets/images/icons/settings-white.png';
 import {
   CustomView,
-  ContentView,
   PageTitle,
   FieldInput,
   ListMusic,
   MusicImage,
   FlatListCustom,
   MusicText,
+  MusicContainer
 } from '../styles/content.js';
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import Loading from '../../../components/Loading';
@@ -181,7 +181,7 @@ const Music = ({ route, navigation }) => {
         </HeaderTextView>
       </HeaderView>
       <Spacer />
-      <ContentView>
+      <MusicContainer>
         <PageTitle>{t('profile.music_condition')}</PageTitle>
         <FieldInput
           value={searchText}
@@ -201,10 +201,10 @@ const Music = ({ route, navigation }) => {
               setPage(page + 1);
             }}
             onEndReachedThreshold={0.4}
-            numColumns={2}
+            numColumns={1}
           />
         )}
-      </ContentView>
+      </MusicContainer>
       {loading && <MusicText>Chargement...</MusicText>}
       {navButton}
     </CustomView>
