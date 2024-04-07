@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import BiographyCard from '../../../components/Swipe_Card/Biography';
-import GifCard from '../../../components/Swipe_Card/Gif';
-import InterestsCard from '../../../components/Swipe_Card/Interests';
-import QuestionsCard from '../../../components/Swipe_Card/Questions';
-import MovieCard from '../../../components/Swipe_Card/Movie';
-import MusicCard from '../../../components/Swipe_Card/Music';
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import BiographyCard from '../../../components/SwipeCard/Biography';
+import GifCard from '../../../components/SwipeCard/Gif';
+import InterestsCard from '../../../components/SwipeCard/Interests';
+import QuestionsCard from '../../../components/SwipeCard/Questions';
+import MovieCard from '../../../components/SwipeCard/Movie';
+import MusicCard from '../../../components/SwipeCard/Music';
 import {
-  ViewCustom,
-  Title,
+  HeaderView,
+  HeaderText,
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+  CustomView,
+  LittleSpacer,
+  PageTitle,
+
   MainText,
   ModuleView,
   ModuleTitle,
   ModulePicker,
 } from './styles';
-import { GetUser, updateUser } from '../../../functions/api_request';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import {GetUser, updateUser} from '../../../functions/api_request';
 
-const EditProfile = () => {
-  const { t } = useTranslation();
+const EditProfile = ({navigation}) => {
+  const {t} = useTranslation();
   const [user, setUser] = useState({});
   const [selectedModules, setSelectedModules] = useState([]);
   const [modules, setModules] = useState([]);
@@ -63,18 +72,18 @@ const EditProfile = () => {
 
   // Tableau des modules disponibles dans l'API
   const availableModules = [
-    { value: 'gif', label: t('profile.custom.gifs') },
-    { value: 'biographie', label: t('profile.custom.biography') },
-    { value: 'interests', label: t('profile.custom.interests') },
-    { value: 'questions', label: t('profile.custom.questions') },
-    { value: 'movie', label: t('profile.custom.movie') },
-    { value: 'music', label: t('profile.custom.music') },
+    {value: 'gif', label: t('profile.custom.gifs')},
+    {value: 'biographie', label: t('profile.custom.biography')},
+    {value: 'interests', label: t('profile.custom.interests')},
+    {value: 'questions', label: t('profile.custom.questions')},
+    {value: 'movie', label: t('profile.custom.movie')},
+    {value: 'music', label: t('profile.custom.music')},
   ];
 
   const availableModulesTop = [
-    { value: 'gif', label: t('profile.custom.gifs') },
-    { value: 'movie', label: t('profile.custom.movie') },
-    { value: 'music', label: t('profile.custom.music') }
+    {value: 'gif', label: t('profile.custom.gifs')},
+    {value: 'movie', label: t('profile.custom.movie')},
+    {value: 'music', label: t('profile.custom.music')},
   ];
 
   // Vérifier si un module est sélectionné
@@ -98,7 +107,7 @@ const EditProfile = () => {
     }
 
     //  update user
-    const updatedUser = { ...user };
+    const updatedUser = {...user};
     updatedUser.profileModules = {
       mainElement: updatedModules[0],
       secondaryElement: updatedModules[1],
@@ -109,8 +118,19 @@ const EditProfile = () => {
   };
 
   return (
-    <ViewCustom>
-      <Title>{t('profile.custom.title')}</Title>
+    <CustomView>
+      <HeaderView>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings} />
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.custom.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
+      </HeaderView>
+      <LittleSpacer />
+      <PageTitle>{t('profile.custom.blocs')}</PageTitle>
+      <LittleSpacer />
       <MainText>{t('profile.custom.text')}</MainText>
       {selectedModules?.map((module, moduleIndex) => (
         <ModuleView key={module}>
@@ -119,26 +139,23 @@ const EditProfile = () => {
             onValueChange={itemValue =>
               handleModuleSelection(itemValue, moduleIndex)
             }>
-            <ModulePicker.Item
-              label={module}
-              value=""
-            />
+            <ModulePicker.Item label={module} value="" />
             {/* si le module est le premier alors on affiche availableModulesTop sinon on envoie availableModules*/}
-            {moduleIndex === 0 ? modulesTop.map((availableModule, index) => (
-              <ModulePicker.Item
-                key={availableModule.value}
-                label={availableModule.label}
-                value={availableModule.value}
-              />
-            )) : (
-              modules.map((availableModule, index) => (
-                <ModulePicker.Item
-                  key={availableModule.value}
-                  label={availableModule.label}
-                  value={availableModule.value}
-                />
-              ))
-            )}
+            {moduleIndex === 0
+              ? modulesTop.map((availableModule, index) => (
+                  <ModulePicker.Item
+                    key={availableModule.value}
+                    label={availableModule.label}
+                    value={availableModule.value}
+                  />
+                ))
+              : modules.map((availableModule, index) => (
+                  <ModulePicker.Item
+                    key={availableModule.value}
+                    label={availableModule.label}
+                    value={availableModule.value}
+                  />
+                ))}
           </ModulePicker>
           {/* Afficher les composants correspondant aux modules sélectionnés */}
           {module === 'biographie' && (
@@ -186,7 +203,7 @@ const EditProfile = () => {
           )}
         </ModuleView>
       ))}
-    </ViewCustom>
+    </CustomView>
   );
 };
 
