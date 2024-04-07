@@ -1,10 +1,10 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import t from 'translations';
 
 export default {
   translation: {
     home: {
-        title: "Peel",
-        filter: 'Filtre'
+      title: "Peel",
+      filter: 'Filtre'
     },
     settings: {
       title: 'Paramètres',
@@ -16,6 +16,7 @@ export default {
       edit_profile: 'Éditer profil',
       edit_profile_title: 'Personnalisez votre profil',
       contact: 'Nous contacter',
+      return: 'Retour',
     },
     navbar: {
       home: 'Accueil',
@@ -28,17 +29,22 @@ export default {
     login: {
       title: 'Connexion',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       button_login: 'Se connecter',
       no_account: 'Pas encore de profil ?',
       button_register: 'Inscrivez-vous !',
     },
     register: {
-      title: 'Créer un compte',
+      title: 'Inscription',
       email: 'Email',
+      email_placeholder: 'Entrez votre email',
       password: 'Mot de passe',
+      password_placeholder: 'Entrez votre mot de passe',
       password_confirm: 'Confirmer le mot de passe',
       button_register: 'Créer son profil',
+      button_register_text: 'S\'inscrire',
       already_account: 'Déjà un compte ?',
       button_login: 'Connexion',
     },
@@ -62,9 +68,10 @@ export default {
       biography: 'Biographie',
       fill_min_bio: '20 caractères minimum',
       fill_max_bio: '200 caractères maximum',
-      interest: "Merci de choisir cinq centres d'intérêts",
+      interest_choice: "Choisissez 5 centres d'intérêts",
       search_zone: 'Zone géographique',
       question_title: 'Décrivez vous en répondant à ces trois questions',
+      question_choice: 'Choisissez 3 questions',
       question_select: 'Sélectionnez une question !',
       question_placeholder: 'Répondez à la question !',
       question_save: 'Sauvegarder',
@@ -74,8 +81,13 @@ export default {
       movie_placeholder: 'Rechercher un film',
       music_condition: 'Choisissez une musique',
       music_placeholder: 'Rechercher une musique',
+      type_of_search: 'Que recherchez-vous?',
+      search_love: 'Recherche l\'amour',
+      search_friend: 'Recherche des amis',
+      modify_name: 'Modifier votre nom',
+      modify_firstname: 'Modifier votre prénom',
       custom: {
-        title: 'Personnalisez votre profil !',
+        title: 'Modifier Profil',
         text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',
         biography: 'Biographie',
         gifs: 'Gifs',
@@ -124,5 +136,14 @@ export default {
       no_more_swipe_text: 'Vous pourrez recommencer demain',
       no_more_swipe_button: 'OK',
     },
+    Filter:{
+      interest: "Intérêts",
+      music: "Musique",
+      sport: "Sport",
+      movie: "Films",
+      games: "Jeux",
+      cancel: "Annuler",
+      apply: "Appliquer",
+    }
   },
 };
