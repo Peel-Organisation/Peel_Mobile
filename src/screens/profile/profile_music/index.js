@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
-
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
-
 import {
   HeaderView,
   HeaderText,
@@ -20,18 +17,15 @@ import {
   CustomView,
   ContentView,
   PageTitle,
-
+  FieldInput,
+  ListMusic,
+  MusicImage,
+  FlatListCustom,
+  MusicText,
 } from '../styles/content.js';
-
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
-
-import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
 import Loading from '../../../components/Loading';
 
-
-
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 
 const Music = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -56,7 +50,7 @@ const Music = ({ route, navigation }) => {
     if (searchText.length > 0) {
       searchMusics();
     } else {
-      // getPopularMusic();
+      //TODO: getPopularMusic();
     }
   }, [searchText]);
 
@@ -103,34 +97,6 @@ const Music = ({ route, navigation }) => {
     }
   };
 
-  // const getPopularMusic = async () => {
-  //   const url = `https://${GENIUS_API_PATH}search?q=popular&page=${page}`;
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: 'GET',
-  //       headers: {
-  //         Authorization: `Bearer ${GENIUS_API_TOKEN}`,
-  //       },
-  //     });
-  //     console.log('response : ', response);
-  //     const data = await response.json();
-  //     console.log('data : ', data);
-  //     if (data != null && data.response.hits != null && data.response.hits.length > 0) {
-  //       if (page > 1) {
-  //         setMusics([...musics, ...data.response.hits]);
-  //         setLoading(false);
-  //       } else {
-  //         setMusics(data.response.hits);
-  //         setLoading(false);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     crashlytics().recordError(error);
-  //   }
-  // };
-        
-
   const updateMusic = async musicToUpdate => {
     try {
       const url = `https://${GENIUS_API_PATH}songs/${musicToUpdate.result.id}?text_format=plain&`;
@@ -168,23 +134,18 @@ const Music = ({ route, navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => updateMusic(item)}>
-        <Image
-          style={{
-            width: 200,
-            height: 200,
-          }}
+      <ListMusic onPress={() => updateMusic(item)}>
+        <MusicImage
           source={{
             uri: `${item.result.song_art_image_thumbnail_url}`,
           }}
         />
-        <MainText>{item.result.title}</MainText>
-      </TouchableOpacity>
+        <MusicText>{item.result.full_title}</MusicText>
+      </ListMusic>
     );
   };
 
   useEffect(() => {
-    console.log('user : ', user.music);
     if (
       user.music?.title != undefined && user.music?.title != '' && user.music?.id != undefined && user.music?.id != '' && user.music?.artist != undefined && user.music?.artist != '' && user.music?.image != undefined && user.music?.image != '' && user.music?.album != undefined && user.music?.album != ''
     ) {
@@ -232,7 +193,7 @@ const Music = ({ route, navigation }) => {
           placeholder={t('profile.music_placeholder')}
         />
         {loading ? <Loading /> : (
-          <FlatList
+          <FlatListCustom
             data={musics}
             renderItem={renderItem}
             keyExtractor={item => item.result.id.toString()}
@@ -244,7 +205,7 @@ const Music = ({ route, navigation }) => {
           />
         )}
       </ContentView>
-      {loading && <MainText>Chargement...</MainText>}
+      {loading && <MusicText>Chargement...</MusicText>}
       {navButton}
     </CustomView>
   );

@@ -15,11 +15,7 @@ import {
   CustomView,
   ContentView,
   FieldInput,
-  LabelInput,
   PageTitle,
-  SwitchSelectorCustom,
-  DatePickerCustom,
-  BioInput,
   FlatListCustom,
   ListItem,
   FilmImage
