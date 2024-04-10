@@ -87,6 +87,7 @@ export const ModuleView = styled.SafeAreaView`
   border-radius: 10px;
   flex: 1;
   margin: 5%;
+  overflow: hidden;
 `;
 
 export const ModulePicker = styled(Picker)`
@@ -95,13 +96,11 @@ export const ModulePicker = styled(Picker)`
   color: ${props => props.theme.text};
   align-self: center;
   margin: 3%;
-  margin-top: -10%;
-
 `;
 
-export const ModuleContainer = styled.SafeAreaView`
-  margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
+export const ModuleContainer = styled.View`
+  padding: 10%;
+  height: 100%;
+  overflow: hidden;
 `;  
 

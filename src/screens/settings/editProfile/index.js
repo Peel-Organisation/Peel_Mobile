@@ -170,41 +170,26 @@ const EditProfile = ({navigation}) => {
           {/* Afficher les composants correspondant aux modules sélectionnés */}
           {module === 'biographie' && (
             <ModuleContainer>
-              <Spacer />
-              <ModuleTitle>{t('profile.custom.biography')}</ModuleTitle>
-              <LittleSpacer />
               <BiographyCard Bio={user.biographie} />
             </ModuleContainer>
           )}
           {module === 'interests' && (
             <ModuleContainer>
-              <Spacer />
-              <ModuleTitle>{t('profile.custom.interests')}</ModuleTitle>
-              <LittleSpacer />
               <InterestsCard interests={user.interests} />
             </ModuleContainer>
           )}
           {module === 'questions' && (
            <ModuleContainer>
-              <Spacer />
-              <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
-              <LittleSpacer />
               <QuestionsCard Questions={user?.questions} />
             </ModuleContainer>
           )}
           {module === 'gif' && (
             <ModuleContainer>
-              <LittleSpacer />
-              <ModuleTitle>{t('profile.custom.gifs')}</ModuleTitle>
-              <LittleSpacer />
               <GifCard GifUrl={user?.gif?.image?.webp} />
             </ModuleContainer>
           )}
           {module === 'movie' && (
             <ModuleContainer>
-              <Spacer />
-              <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
-              <LittleSpacer />
               <MovieCard
                 MovieURL={user?.movie?.images?.backdrop_path}
                 Movie={user?.movie?.title}
@@ -213,14 +198,12 @@ const EditProfile = ({navigation}) => {
           )}
           {module === 'music' && (
             <ModuleContainer>
-              <Spacer />
-              <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
-              <LittleSpacer />
               <MusicCard
                 MusicURL={user?.music?.image}
                 MTitle={user?.music?.title}
                 MArtist={user?.music?.artist?.name}
               />
+              <Spacer />
             </ModuleContainer>
           )}
         </ModuleView>
