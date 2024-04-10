@@ -87,7 +87,7 @@ export default {
       custom: {
         title: 'Modify Profile',
         blocs: 'Personalize your profile blocks',
-        text: 'Select the elements you want other users to see when they want to check on your profile',
+        text: 'Choose the blocks you want to be visible and their order on your profile.',
         biography: 'Biography',
         gifs: 'Gifs',
         interests: 'Interests',

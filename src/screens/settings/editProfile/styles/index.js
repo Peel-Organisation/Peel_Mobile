@@ -58,51 +58,50 @@ export const LittleSpacer = styled.View`
 export const PageTitle = styled.Text`
   font-size: 16px;
   line-height: 30px;
+  padding: 1%;
   text-align: center;
   color: ${props => props.theme.text};
-    letter-spacing: 4px;
-`;
-
-
-export const ConditionText = styled.Text`
-  font-size: 16px;
-  color: ${props => props.theme.text};
-  text-align: center;
-  margin-top: 10px;
-`;
-
-export const Title = styled.Text`
-  font-size: 20px;
-  margin-top: 30px;
-  text-align: center;
-  color: ${props => props.theme.primary};
+  letter-spacing: 4px;
 `;
 
 export const MainText = styled.Text`
-  font-size: 16px;
+  font-size: 14px;
+  padding: 5%;
+  font-style: italic;
+  text-align: justify;
   color: ${props => props.theme.text};
-`;
-
-export const ModuleView = styled.SafeAreaView`
-  background-color: ${props => props.theme.white};
-  padding: 5px;
-  margin: 10%;
-  border-radius: 10px;
-  flex: 1;
+  letter-spacing: 2px;
+  line-height: 22px;
 `;
 
 export const ModuleTitle = styled.Text`
   font-size: 18px;
   color: ${props => props.theme.text};
-  margin: 10px;
   text-align: center;
 `;
 
+export const ModuleView = styled.SafeAreaView`
+  width: 90%;
+  background-color: ${props => props.theme.white};
+  border: 1px solid ${props => props.theme.grey};
+  border-radius: 10px;
+  flex: 1;
+  margin: 5%;
+`;
+
 export const ModulePicker = styled(Picker)`
-  width: 50%;
-  margin: 10px;
-  background-color: ${props => props.theme.grey};
+  width: 70%;
+  height: 30%;
   color: ${props => props.theme.text};
   align-self: center;
+  margin: 3%;
+  margin-top: -10%;
+
 `;
+
+export const ModuleContainer = styled.SafeAreaView`
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+`;  
 

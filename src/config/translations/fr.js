@@ -89,7 +89,7 @@ export default {
       custom: {
         title: 'Modifier Profil',
         blocs: 'Personnalisez vos blocs de profil',
-        text: 'Sélectionnez les éléments que vous souhaitez que les autres utilisateurs voient quand ils veulent regarder votre profil',
+        text: 'Choisissez les blocs que vous souhaitez rendre visible et leur ordre sur votre profil',
         biography: 'Biographie',
         gifs: 'Gifs',
         interests: 'Intérêts',

@@ -21,8 +21,10 @@ import {
   ModuleView,
   ModuleTitle,
   ModulePicker,
+  ModuleContainer
 } from './styles';
 import settings from '../../../../assets/images/icons/settings-white.png';
+import { Spacer } from '../../login/styles';
 import {GetUser, updateUser} from '../../../functions/api_request';
 
 const EditProfile = ({navigation}) => {
@@ -35,7 +37,6 @@ const EditProfile = ({navigation}) => {
   useEffect(() => {
     GetUser(user).then(user_data => {
       if (user_data) {
-        console.log('user_data', user_data);
         setUser(user_data);
         // Pré-remplir les modules sélectionnés par l'utilisateur
         setSelectedModules([
@@ -86,6 +87,13 @@ const EditProfile = ({navigation}) => {
     {value: 'music', label: t('profile.custom.music')},
   ];
 
+  const translateModuleLabel = (module, availableModules) => {
+    const moduleFound = availableModules.find(
+      availableModule => availableModule.value === module,
+    );
+    return moduleFound ? moduleFound.label : '';
+  };
+
   // Vérifier si un module est sélectionné
   const isModuleSelected = module => {
     return selectedModules.includes(module);
@@ -93,8 +101,6 @@ const EditProfile = ({navigation}) => {
 
   // Gérer la sélection d'un module
   const handleModuleSelection = (value, index) => {
-    console.log('value', value);
-    console.log('index', index);
     const updatedModules = [...selectedModules];
     const moduleToSelect = availableModules.find(
       module => module.value === value,
@@ -102,7 +108,6 @@ const EditProfile = ({navigation}) => {
 
     if (moduleToSelect && !isModuleSelected(moduleToSelect.value)) {
       updatedModules[index] = moduleToSelect.value;
-      console.log('updatedModules', updatedModules);
       setSelectedModules(updatedModules);
     }
 
@@ -133,13 +138,18 @@ const EditProfile = ({navigation}) => {
       <LittleSpacer />
       <MainText>{t('profile.custom.text')}</MainText>
       {selectedModules?.map((module, moduleIndex) => (
-        <ModuleView key={module}>
+        <ModuleView key={module}>        
           <ModulePicker
             selectedValue={module}
             onValueChange={itemValue =>
               handleModuleSelection(itemValue, moduleIndex)
-            }>
-            <ModulePicker.Item label={module} value="" />
+            }
+          >
+            <ModulePicker.Item 
+              label={translateModuleLabel(module, availableModules)}
+              value=""
+              color= '#FC912F'
+            />
             {/* si le module est le premier alors on affiche availableModulesTop sinon on envoie availableModules*/}
             {moduleIndex === 0
               ? modulesTop.map((availableModule, index) => (
@@ -159,47 +169,59 @@ const EditProfile = ({navigation}) => {
           </ModulePicker>
           {/* Afficher les composants correspondant aux modules sélectionnés */}
           {module === 'biographie' && (
-            <>
+            <ModuleContainer>
+              <Spacer />
               <ModuleTitle>{t('profile.custom.biography')}</ModuleTitle>
+              <LittleSpacer />
               <BiographyCard Bio={user.biographie} />
-            </>
+            </ModuleContainer>
           )}
           {module === 'interests' && (
-            <>
+            <ModuleContainer>
+              <Spacer />
               <ModuleTitle>{t('profile.custom.interests')}</ModuleTitle>
+              <LittleSpacer />
               <InterestsCard interests={user.interests} />
-            </>
+            </ModuleContainer>
           )}
           {module === 'questions' && (
-            <>
+           <ModuleContainer>
+              <Spacer />
               <ModuleTitle>{t('profile.custom.questions')}</ModuleTitle>
+              <LittleSpacer />
               <QuestionsCard Questions={user?.questions} />
-            </>
+            </ModuleContainer>
           )}
           {module === 'gif' && (
-            <>
+            <ModuleContainer>
+              <LittleSpacer />
               <ModuleTitle>{t('profile.custom.gifs')}</ModuleTitle>
+              <LittleSpacer />
               <GifCard GifUrl={user?.gif?.image?.webp} />
-            </>
+            </ModuleContainer>
           )}
           {module === 'movie' && (
-            <>
+            <ModuleContainer>
+              <Spacer />
               <ModuleTitle>{t('profile.custom.movie')}</ModuleTitle>
+              <LittleSpacer />
               <MovieCard
                 MovieURL={user?.movie?.images?.backdrop_path}
                 Movie={user?.movie?.title}
               />
-            </>
+            </ModuleContainer>
           )}
           {module === 'music' && (
-            <>
+            <ModuleContainer>
+              <Spacer />
               <ModuleTitle>{t('profile.custom.music')}</ModuleTitle>
+              <LittleSpacer />
               <MusicCard
                 MusicURL={user?.music?.image}
                 MTitle={user?.music?.title}
                 MArtist={user?.music?.artist?.name}
               />
-            </>
+            </ModuleContainer>
           )}
         </ModuleView>
       ))}
