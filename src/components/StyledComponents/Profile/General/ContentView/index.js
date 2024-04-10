@@ -2,9 +2,8 @@ import styled from 'styled-components/native';
 
 export const ContentView = styled.SafeAreaView`
   width: 100%;
-  height: 60%;
-  margin-top: 10px;
-  justify-content: space-evenly;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  background-color: ${props => props.theme.background};
 `;
