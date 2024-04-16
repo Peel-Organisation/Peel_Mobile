@@ -4,9 +4,25 @@ on:
   push:
     branches:
       - development
+      - '!feature*'
+      - '!feature/*'
+      - '!fix*'
+      - '!fix/*'
+      - '!hotfix*'
+      - '!hotfix/*'
+      - '!feat*'
+      - '!feat/*'
   pull_request:
     branches: 
       - development
+      - '!feature*'
+      - '!feature/*'
+      - '!fix*'
+      - '!fix/*'
+      - '!hotfix*'
+      - '!hotfix/*'
+      - '!feat*'
+      - '!feat/*'
 
 jobs:
     Test:
