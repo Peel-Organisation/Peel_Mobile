@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { TMDB_API_KEY, TMDB_API_PATH } from '@env';
-import { UpdateButton, nextAction } from '../../../components/Update_User';
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
-
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
-import Loading from '../../../components/loading';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js'
+import {
+  CustomView,
+  ContentView,
+  FieldInput,
+  PageTitle,
+  FlatListCustom,
+  ListItem,
+  FilmImage
+} from '../styles/content.js';
+import { UpdateButton, nextAction } from '../../../components/UpdateUser';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import { Spacer } from '../../login/styles/index.js';
+import Loading from '../../../components/Loading';
 
 const Film = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -121,21 +130,15 @@ const Film = ({ route, navigation }) => {
     }
   };
 
-
-
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => updateMovie(item)}>
-        <Image
-          style={{
-            width: 200,
-            height: 200,
-          }}
+      <ListItem onPress={() => updateMovie(item)}>
+        <FilmImage
           source={{
             uri: `${imageBaseUrl}${item.poster_path}`,
           }}
         />
-      </TouchableOpacity>
+      </ListItem>
     );
   };
 
@@ -167,9 +170,16 @@ const Film = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings} />
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
-      <FieldView>
+      <ContentView>
+        <Spacer />
         <PageTitle>{t('profile.movie_condition')}</PageTitle>
         <FieldInput
           value={searchText}
@@ -177,7 +187,7 @@ const Film = ({ route, navigation }) => {
           placeholder={t('profile.movie_placeholder')}
         />
         {loading ? <Loading /> :
-          <FlatList
+          <FlatListCustom
             data={movies}
             renderItem={renderItem}
             keyExtractor={item => item.id.toString()}
@@ -188,7 +198,7 @@ const Film = ({ route, navigation }) => {
             numColumns={2}
           />
         }
-      </FieldView>
+      </ContentView>
       {navButton}
     </CustomView>
   );

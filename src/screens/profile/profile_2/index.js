@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
-import { UpdateButton } from '../../../components/Update_User';
 import { getStorage } from '../../../functions/storage';
-
-import {
-  SwitchSelectorCustom,
-  DatePickerCustom,
-} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
-import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js'
+import {
+  CustomView,
+  ContentView,
+  LabelInput,
+  SwitchSelectorCustom,
+  DatePickerCustom,
+  LittleSpacer
+} from '../styles/content.js';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import { UpdateButton } from '../../../components/UpdateUser';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 
 const Profile2 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -45,6 +49,15 @@ const Profile2 = ({ route, navigation }) => {
         if (fetchedUser.gender == undefined) {
           fetchedUser.gender = "Male";
         }
+        if (fetchedUser.preferences == undefined) {
+          fetchedUser.preferences = {};
+        }
+        if (fetchedUser.preferences.searchFriend == undefined) {
+          fetchedUser.preferences.searchFriend = false;
+        }
+        if (fetchedUser.preferences.searchLove == undefined) {
+          fetchedUser.preferences.searchLove = true;
+        }
         setUser(fetchedUser);
       })
       .catch(error => {
@@ -60,25 +73,26 @@ const Profile2 = ({ route, navigation }) => {
       user.birthday != '' &&
       user.gender != undefined &&
       user.gender != '' &&
+      user.preferences?.searchFriend != undefined &&
+      user.preferences?.searchLove != undefined &&
       age >= 18 &&
       age < 99
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ birthday: user.birthday, gender: user.gender }}
-            prevPage="Profile1"
-            nextPage="Profile3"
-            navigation={navigation}
-          />
-        </>,
+
+        <UpdateButton
+          user={{ birthday: user.birthday, gender: user.gender, preferences: user.preferences }}
+          prevPage="Profile1"
+          nextPage="Profile3"
+          navigation={navigation}
+        />,
       );
     } else {
       setNavButton(
         <>
           <ConditionText>Remplissez tous les champs</ConditionText>
           <UpdateButton
-            user={{ birthday: user.birthday, gender: user.gender }}
+            user={{ birthday: user.birthday, gender: user.gender, preferences: user.preferences }}
             prevPage="Profile1"
             nextPage=""
             navigation={navigation}
@@ -91,40 +105,67 @@ const Profile2 = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings}/>
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
       <ContentView>
-        <InputView>
-          <MainText>{t('profile.birth_date')}</MainText>
-          <DatePickerCustom
-            date={user['birthday']}
-            onDateChange={date => {
-              let newUser = { ...user };
-              newUser['birthday'] = date;
-              setUser(newUser);
-            }}
-            mode="date"
-          />
-        </InputView>
-        <InputView>
-          <MainText>{t('profile.gender')}</MainText>
-
-          <SwitchSelectorCustom
-            initial={0}
+        <LittleSpacer />
+        <LabelInput>{t('profile.birth_date')}</LabelInput>
+        <LittleSpacer />
+        <DatePickerCustom
+          date={user['birthday']}
+          onDateChange={date => {
+            let newUser = { ...user };
+            newUser['birthday'] = date;
+            setUser(newUser);
+          }}
+          mode="date"
+        />
+        <LittleSpacer />
+        <LabelInput>{t('profile.gender')}</LabelInput>
+        <LittleSpacer />
+        <SwitchSelectorCustom
+          initial={0}
+          onPress={value => {
+            let newUser = { ...user };
+            newUser.gender = value;
+            setUser(newUser);
+          }}
+          buttonColor="#FC912F"
+          hasPadding
+          options={[
+            { label: t('profile.male_gender'), value: 'Male' },
+            { label: t('profile.female_gender'), value: 'Female' },
+            { label: t('profile.other_gender'), value: 'Other' },
+          ]}
+        />
+        <LittleSpacer />
+        <LabelInput>{t('profile.type_of_search')}</LabelInput>
+        <LittleSpacer />
+        <SwitchSelectorCustom
+            initial={user?.preferences?.searchLove ? 0 : 1}
             onPress={value => {
-              let newUser = { ...user };
-              newUser.gender = value;
-              setUser(newUser);
+              if (value === 'Love') {
+                user.preferences.searchLove = true;
+                user.preferences.searchFriend = false;
+              } else {
+                user.preferences.searchLove = false;
+                user.preferences.searchFriend = true;
+              }
             }}
             buttonColor="#FC912F"
             hasPadding
             options={[
-              { label: t('profile.male_gender'), value: 'Male' },
-              { label: t('profile.female_gender'), value: 'Female' },
-              { label: t('profile.other_gender'), value: 'Other' },
+              { label: t('profile.search_love'), value: 'Love' },
+              { label: t('profile.search_friend'), value: 'Friends' }
             ]}
           />
-        </InputView>
+
       </ContentView>
       {navButton}
     </CustomView>
