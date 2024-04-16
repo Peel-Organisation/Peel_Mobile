@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe from "../../components/Swipe";
@@ -75,7 +74,6 @@ const Match = () => {
         <>
             <Background><BackgroundTop /></Background>
             <Container>
-                <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
                     <FilterIcon onPress={() => { setFilter(!filter) }}>

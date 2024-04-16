@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from "react-native";
 import crashlytics from '@react-native-firebase/crashlytics';
 import Profile1 from "../screens/profile/profile_1";
 import Profile2 from "../screens/profile/profile_2";
@@ -16,7 +17,6 @@ import Loading from "../components/Loading";
 const Stack = createNativeStackNavigator();
 const UserContext = React.createContext("token");
 
-
 const PublicStack = () => {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = useState({ "birthday": new Date, "interet": [], "longitude": 0, "latitude": 0, "searchRange": 0, "question_id": [1, 2, 0], "response": ["reponse 1", "reponse 2", "reponse 3"] });
@@ -24,7 +24,21 @@ const PublicStack = () => {
   const [error, setError] = React.useState("");
 
   useEffect(() => {
-    fetchUser()
+    fetchUser();
+
+    // Status bar gestion and fix issues
+    StatusBar.setBarStyle('light-content', true);
+    // Hide the status bar on Android
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#FC912F');
+      StatusBar.setHidden(true, 'fade');
+    };
+    // Hide the status bar on iOS
+    StatusBar.setHidden(true, 'fade');
+    // render the status bar on iOS
+    return () => { 
+      StatusBar.setHidden(false, 'fade');
+    };
   }, []);
 
   const fetchUser = async () => {
@@ -57,7 +71,7 @@ const PublicStack = () => {
 
   return (
     <UserContext.Provider value={"user"}>
-      <Stack.Navigator initialRouteName="Profile1" screenOptions={{ headerShown: false }} >
+      <Stack.Navigator initialRouteName="Profile1" screenOptions={{ headerShown:false, headerShadowVisible:false, headerStyle:{backgroundColor:'#FC912F'} }}>
         <Stack.Screen name="Profile1" component={Profile1} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Biographie} />

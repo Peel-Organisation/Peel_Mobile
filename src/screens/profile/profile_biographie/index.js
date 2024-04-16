@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Keyboard } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
@@ -53,14 +54,12 @@ const Biographie = ({ route, navigation }) => {
       user.biographie.length > 20
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ biographie: user.biographie }}
-            prevPage="Profile2"
-            nextPage="Profile5"
-            navigation={navigation}
-          />
-        </>,
+        <UpdateButton
+          user={{ biographie: user.biographie }}
+          prevPage="Profile2"
+          nextPage="Profile5"
+          navigation={navigation}
+        />,
       );
     } else {
       if (user.biographie != undefined) {
@@ -131,6 +130,7 @@ const Biographie = ({ route, navigation }) => {
           }}
           value={user.biographie}
           placeholder={t('profile.biography')}
+          onSubmitEditing={Keyboard.dismiss}
         />
       </ContentView>
       {navButton}

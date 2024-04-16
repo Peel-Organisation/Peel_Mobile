@@ -78,7 +78,6 @@ const Profile1 = ({ route, navigation }) => {
         </HeaderTextView>
       </HeaderView>
       <ContentView>
-      
         <Spacer />
         <LabelInput>{t('profile.modify_firstname')}</LabelInput>
         <FieldInput

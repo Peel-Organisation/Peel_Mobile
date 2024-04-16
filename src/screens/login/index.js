@@ -16,7 +16,6 @@ import {
 } from './styles';
 import crashlytics from '@react-native-firebase/crashlytics';
 import {loginRequest, IsProfileCompleted} from '../../functions/api_request';
-import {StatusBar} from 'react-native';
 
 const Login = ({navigation}) => {
   const {t} = useTranslation();

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
 import MessageList from '../../components/MessageList';
 import MessageInput from '../../components/MessageInput';
 
@@ -11,7 +10,6 @@ const Chat = ({ route }) => {
         <>
             <MessageList conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
             <MessageInput conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}/>
         </>
 
     );

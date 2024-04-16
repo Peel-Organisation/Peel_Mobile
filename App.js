@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from './src/config/routes';
 import { NavigationContainer } from '@react-navigation/native';
-import { View, StatusBar } from 'react-native';
+import { View } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/config/theme';
@@ -20,7 +20,6 @@ const App = () => {
           </View>
         </ThemeProvider>
       </NavigationContainer>
-      <StatusBar />
     </>
   );
 };
