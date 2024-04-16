@@ -5,7 +5,7 @@ import { getStorage } from '../../../functions/storage';
 import { getQuestionList, updateUser } from '../../../functions/api_request';
 import { KeyboardAvoidingView } from 'react-native';
 
-import Loading from '../../../components/loading';
+import Loading from '../../../components/Loading';
 import { Button, Text } from 'react-native';
 import {
   InputView,
