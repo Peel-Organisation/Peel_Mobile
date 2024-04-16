@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
@@ -107,34 +107,35 @@ const Biographie = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings} />
-        </GoBackArrow>
-        <HeaderTextView> 
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <ContentView>
-        <Spacer />
-        <PageTitle>{t('profile.biography')}</PageTitle>
-        <BioInput
-          multiline
-          numberOfLines={4}
-          onChangeText={text => {
-            let newUser = { ...user };
-            newUser.biographie = text;
-            setUser(newUser);
-          }}
-          value={user.biographie}
-          placeholder={t('profile.biography')}
-          onSubmitEditing={Keyboard.dismiss}
-        />
-      </ContentView>
-      {navButton}
-    </CustomView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <ContentView>
+          <Spacer />
+          <PageTitle>{t('profile.biography')}</PageTitle>
+          <BioInput
+            multiline={true}
+            numberOfLines={4}
+            onChangeText={text => {
+              let newUser = { ...user };
+              newUser.biographie = text;
+              setUser(newUser);
+            }}
+            value={user.biographie}
+            placeholder={t('profile.biography')}
+          />
+        </ContentView>
+        {navButton}
+      </CustomView>
+    </TouchableWithoutFeedback>
   );
 };
 
