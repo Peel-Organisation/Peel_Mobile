@@ -6,7 +6,7 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const HomeCard = styled.FlatList`
     width: ${DIMENSION_WIDTH - 40}px;
-    height: 435px;
+    height: ${DIMENSION_HEIGHT - 260}px;
     background-color: white;
     border-radius: 15px;
     padding: 10px;
