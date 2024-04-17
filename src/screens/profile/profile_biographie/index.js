@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton } from '../../../components/Update_User';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
-
-import { BioInput } from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js'
+import {
+  CustomView,
+  ContentView,
+  FieldInput,
+  LabelInput,
+  PageTitle,
+  SwitchSelectorCustom,
+  DatePickerCustom,
+  BioInput
+} from '../styles/content.js';
+
+import { UpdateButton } from '../../../components/UpdateUser';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import { Spacer } from '../../login/styles/index.js';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
+
 
 const Biographie = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -41,14 +55,12 @@ const Biographie = ({ route, navigation }) => {
       user.biographie.length > 20
     ) {
       setNavButton(
-        <>
-          <UpdateButton
-            user={{ biographie: user.biographie }}
-            prevPage="Profile2"
-            nextPage="Profile4"
-            navigation={navigation}
-          />
-        </>,
+        <UpdateButton
+          user={{ biographie: user.biographie }}
+          prevPage="Profile2"
+          nextPage="Profile5"
+          navigation={navigation}
+        />,
       );
     } else {
       if (user.biographie != undefined) {
@@ -96,28 +108,38 @@ const Biographie = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
-      </HeaderView>
-      <ContentView>
-        <PageTitle>{t('profile.biography')}</PageTitle>
-        <View>
-          <BioInput
-            multiline
-            numberOfLines={4}
-            onChangeText={text => {
-              let newUser = { ...user };
-              newUser.biographie = text;
-              setUser(newUser);
-            }}
-            value={user.biographie}
-            placeholder={t('profile.biography')}
-          />
-        </View>
-      </ContentView>
-      {navButton}
-    </CustomView>
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <CustomView>
+          <HeaderView>
+            <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+              <GoBackArrowImage source={settings} />
+            </GoBackArrow>
+            <HeaderTextView> 
+              <HeaderText>{t('profile.title')}</HeaderText>
+              <BarStyle />
+            </HeaderTextView>
+          </HeaderView>
+          <ContentView>
+            <Spacer />
+            <PageTitle>{t('profile.biography')}</PageTitle>
+            <BioInput
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={text => {
+                let newUser = { ...user };
+                newUser.biographie = text;
+                setUser(newUser);
+              }}
+              value={user.biographie}
+              placeholder={t('profile.biography')}
+            />
+          </ContentView>
+          {navButton}
+        </CustomView>
+      </TouchableWithoutFeedback>
+    </>
   );
 };
 

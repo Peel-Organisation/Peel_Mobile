@@ -12,6 +12,7 @@ const theme = {
     user_message: '#FC912F',
     contact_message: '#D1D2D8',
     background_button_border: '#fceee1',
+    background_button: '#ffdcae',
 };
 
 export default theme;
