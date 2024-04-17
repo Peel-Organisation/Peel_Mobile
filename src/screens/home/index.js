@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Background, BackgroundTop, Container, Header, TitleText, FilterIcon, FilterIconImg } from "./styles"
 import Swipe from "../../components/Swipe";
 import crashlytics from '@react-native-firebase/crashlytics';
 import { PostMatchList } from "../../functions/api_request"
-import Loading from "../../components/loading";
+import Loading from "../../components/Loading";
 import Filter from "../../components/Filter";
 import RetryButton from "../../components/Retry";
-import { use } from "i18next";
-
 
 
 const Match = () => {
@@ -61,7 +58,6 @@ const Match = () => {
         })
     }
 
-
     if (loading) {
         return (
             <Loading />
@@ -74,13 +70,10 @@ const Match = () => {
         )
     }
 
-
-
     return (
         <>
             <Background><BackgroundTop /></Background>
             <Container>
-                <StatusBar barStyle="light-content" backgroundColor="#FC912F" />
                 <Header>
                     <TitleText>{t("home.title")}</TitleText>
                     <FilterIcon onPress={() => { setFilter(!filter) }}>
@@ -88,7 +81,6 @@ const Match = () => {
                     </FilterIcon>
                 </Header>
                 <Swipe userList={userList} onSwipeCountOffsetThreshold={() => getMatchList()} />
-
                 {
                     filter && (
                         <Filter filter={filter} setFilter={setFilter} filtersArray={filtersArray} setFiltersArray={setFiltersArray} activeFilters={activeFilters} setActiveFilters={setActiveFilters} />
