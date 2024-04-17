@@ -24,6 +24,7 @@ import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import settings from '../../../../assets/images/icons/settings-white.png';
 import { Spacer } from '../../login/styles/index.js';
 import Loading from '../../../components/Loading';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 const Film = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -168,39 +169,42 @@ const Film = ({ route, navigation }) => {
 
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings} />
-        </GoBackArrow>
-        <HeaderTextView> 
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <ContentView>
-        <Spacer />
-        <PageTitle>{t('profile.movie_condition')}</PageTitle>
-        <FieldInput
-          value={searchText}
-          onChangeText={setSearchText}
-          placeholder={t('profile.movie_placeholder')}
-        />
-        {loading ? <Loading /> :
-          <FlatListCustom
-            data={movies}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={() => {
-              setPage(page + 1);
-            }}
-            onEndReachedThreshold={0.4}
-            numColumns={2}
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <ContentView>
+          <Spacer />
+          <PageTitle>{t('profile.movie_condition')}</PageTitle>
+          <FieldInput
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder={t('profile.movie_placeholder')}
           />
-        }
-      </ContentView>
-      {navButton}
-    </CustomView>
+          {loading ? <Loading /> :
+            <FlatListCustom
+              data={movies}
+              renderItem={renderItem}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={() => {
+                setPage(page + 1);
+              }}
+              onEndReachedThreshold={0.4}
+              numColumns={2}
+            />
+          }
+        </ContentView>
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 

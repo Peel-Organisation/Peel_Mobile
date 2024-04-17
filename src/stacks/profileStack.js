@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from "react-native";
 import crashlytics from '@react-native-firebase/crashlytics';
 import Profile1 from "../screens/profile/profile_1";
 import Profile2 from "../screens/profile/profile_2";
@@ -25,20 +24,6 @@ const PublicStack = () => {
 
   useEffect(() => {
     fetchUser();
-
-    // Status bar gestion and fix issues
-    StatusBar.setBarStyle('light-content', true);
-    // Hide the status bar on Android
-    if (Platform.OS === 'android') {
-      StatusBar.setBackgroundColor('#FC912F');
-      StatusBar.setHidden(true, 'fade');
-    };
-    // Hide the status bar on iOS
-    StatusBar.setHidden(true, 'fade');
-    // render the status bar on iOS
-    return () => { 
-      StatusBar.setHidden(false, 'fade');
-    };
   }, []);
 
   const fetchUser = async () => {

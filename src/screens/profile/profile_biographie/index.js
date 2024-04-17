@@ -26,6 +26,7 @@ import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
 import settings from '../../../../assets/images/icons/settings-white.png';
 import { Spacer } from '../../login/styles/index.js';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 
 const Biographie = ({ route, navigation }) => {
@@ -107,35 +108,38 @@ const Biographie = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <CustomView>
-        <HeaderView>
-          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-            <GoBackArrowImage source={settings} />
-          </GoBackArrow>
-          <HeaderTextView> 
-            <HeaderText>{t('profile.title')}</HeaderText>
-            <BarStyle />
-          </HeaderTextView>
-        </HeaderView>
-        <ContentView>
-          <Spacer />
-          <PageTitle>{t('profile.biography')}</PageTitle>
-          <BioInput
-            multiline={true}
-            numberOfLines={4}
-            onChangeText={text => {
-              let newUser = { ...user };
-              newUser.biographie = text;
-              setUser(newUser);
-            }}
-            value={user.biographie}
-            placeholder={t('profile.biography')}
-          />
-        </ContentView>
-        {navButton}
-      </CustomView>
-    </TouchableWithoutFeedback>
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <CustomView>
+          <HeaderView>
+            <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+              <GoBackArrowImage source={settings} />
+            </GoBackArrow>
+            <HeaderTextView> 
+              <HeaderText>{t('profile.title')}</HeaderText>
+              <BarStyle />
+            </HeaderTextView>
+          </HeaderView>
+          <ContentView>
+            <Spacer />
+            <PageTitle>{t('profile.biography')}</PageTitle>
+            <BioInput
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={text => {
+                let newUser = { ...user };
+                newUser.biographie = text;
+                setUser(newUser);
+              }}
+              value={user.biographie}
+              placeholder={t('profile.biography')}
+            />
+          </ContentView>
+          {navButton}
+        </CustomView>
+      </TouchableWithoutFeedback>
+    </>
   );
 };
 

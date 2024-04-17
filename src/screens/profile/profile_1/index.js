@@ -20,6 +20,7 @@ import { UpdateButton } from '../../../components/UpdateUser';
 import { getStorage } from '../../../functions/storage';
 import settings from '../../../../assets/images/icons/settings-white.png';
 import { Spacer } from '../../login/styles/index.js';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 const Profile1 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -67,42 +68,45 @@ const Profile1 = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings} />
-        </GoBackArrow>
-        <HeaderTextView> 
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <ContentView>
-        <Spacer />
-        <LabelInput>{t('profile.modify_firstname')}</LabelInput>
-        <FieldInput
-          value={user.firstName}
-          onChangeText={text => {
-            let newUser = { ...user };
-            newUser.firstName = text;
-            setUser(newUser);
-          }}
-          placeholder={t('profile.firstname')}
-        />
-        <Spacer />
-        <LabelInput>{t('profile.modify_name')}</LabelInput>
-        <FieldInput
-          value={user.lastName}
-          onChangeText={text => {
-            let newUser = { ...user };
-            newUser.lastName = text;
-            setUser(newUser);
-          }}
-          placeholder={t('profile.lastname')}
-        />
-      </ContentView>
-      {navButton}
-    </CustomView>
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView> 
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <ContentView>
+          <Spacer />
+          <LabelInput>{t('profile.modify_firstname')}</LabelInput>
+          <FieldInput
+            value={user.firstName}
+            onChangeText={text => {
+              let newUser = { ...user };
+              newUser.firstName = text;
+              setUser(newUser);
+            }}
+            placeholder={t('profile.firstname')}
+          />
+          <Spacer />
+          <LabelInput>{t('profile.modify_name')}</LabelInput>
+          <FieldInput
+            value={user.lastName}
+            onChangeText={text => {
+              let newUser = { ...user };
+              newUser.lastName = text;
+              setUser(newUser);
+            }}
+            placeholder={t('profile.lastname')}
+          />
+        </ContentView>
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 

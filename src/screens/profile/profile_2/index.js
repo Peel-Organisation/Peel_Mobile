@@ -21,6 +21,7 @@ import {
 import settings from '../../../../assets/images/icons/settings-white.png';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 const Profile2 = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -103,72 +104,74 @@ const Profile2 = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings}/>
-        </GoBackArrow>
-        <HeaderTextView> 
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <ContentView>
-        <LittleSpacer />
-        <LabelInput>{t('profile.birth_date')}</LabelInput>
-        <LittleSpacer />
-        <DatePickerCustom
-          date={user['birthday']}
-          onDateChange={date => {
-            let newUser = { ...user };
-            newUser['birthday'] = date;
-            setUser(newUser);
-          }}
-          mode="date"
-        />
-        <LittleSpacer />
-        <LabelInput>{t('profile.gender')}</LabelInput>
-        <LittleSpacer />
-        <SwitchSelectorCustom
-          initial={0}
-          onPress={value => {
-            let newUser = { ...user };
-            newUser.gender = value;
-            setUser(newUser);
-          }}
-          buttonColor="#FC912F"
-          hasPadding
-          options={[
-            { label: t('profile.male_gender'), value: 'Male' },
-            { label: t('profile.female_gender'), value: 'Female' },
-            { label: t('profile.other_gender'), value: 'Other' },
-          ]}
-        />
-        <LittleSpacer />
-        <LabelInput>{t('profile.type_of_search')}</LabelInput>
-        <LittleSpacer />
-        <SwitchSelectorCustom
-            initial={user?.preferences?.searchLove ? 0 : 1}
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings}/>
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <ContentView>
+          <LittleSpacer />
+          <LabelInput>{t('profile.birth_date')}</LabelInput>
+          <LittleSpacer />
+          <DatePickerCustom
+            date={user['birthday']}
+            onDateChange={date => {
+              let newUser = { ...user };
+              newUser['birthday'] = date;
+              setUser(newUser);
+            }}
+            mode="date"
+          />
+          <LittleSpacer />
+          <LabelInput>{t('profile.gender')}</LabelInput>
+          <LittleSpacer />
+          <SwitchSelectorCustom
+            initial={0}
             onPress={value => {
-              if (value === 'Love') {
-                user.preferences.searchLove = true;
-                user.preferences.searchFriend = false;
-              } else {
-                user.preferences.searchLove = false;
-                user.preferences.searchFriend = true;
-              }
+              let newUser = { ...user };
+              newUser.gender = value;
+              setUser(newUser);
             }}
             buttonColor="#FC912F"
             hasPadding
             options={[
-              { label: t('profile.search_love'), value: 'Love' },
-              { label: t('profile.search_friend'), value: 'Friends' }
+              { label: t('profile.male_gender'), value: 'Male' },
+              { label: t('profile.female_gender'), value: 'Female' },
+              { label: t('profile.other_gender'), value: 'Other' },
             ]}
           />
-
-      </ContentView>
-      {navButton}
-    </CustomView>
+          <LittleSpacer />
+          <LabelInput>{t('profile.type_of_search')}</LabelInput>
+          <LittleSpacer />
+          <SwitchSelectorCustom
+              initial={user?.preferences?.searchLove ? 0 : 1}
+              onPress={value => {
+                if (value === 'Love') {
+                  user.preferences.searchLove = true;
+                  user.preferences.searchFriend = false;
+                } else {
+                  user.preferences.searchLove = false;
+                  user.preferences.searchFriend = true;
+                }
+              }}
+              buttonColor="#FC912F"
+              hasPadding
+              options={[
+                { label: t('profile.search_love'), value: 'Love' },
+                { label: t('profile.search_friend'), value: 'Friends' }
+              ]}
+            />
+        </ContentView>
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 

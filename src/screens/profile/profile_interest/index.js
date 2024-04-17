@@ -27,6 +27,7 @@ import settings from '../../../../assets/images/icons/settings-white.png';
 import Loading from '../../../components/Loading';
 import { UpdateButton } from '../../../components/UpdateUser';
 import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 const ProfileInterest = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -127,53 +128,56 @@ const ProfileInterest = ({ route, navigation }) => {
   }
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings}/>
-        </GoBackArrow>
-        <HeaderTextView> 
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <Spacer />
-      <PageTitle>{t('profile.interest_choice')}</PageTitle>
-      <LittleSpacer />
-      <ScrollContainer>
-        <InterestView>
-          {InterestList.map(interest => {
-            if (containsObject(interest, user.interests)) {
-              return (
-                <InterestButtonSelected
-                  key={interest._id}
-                  onPress={() => removeInterest(interest)}>
-                  <InterestButtonText>{interest.name}</InterestButtonText>
-                </InterestButtonSelected>
-              );
-            } else if (user.interests?.length < 5) {
-              return (
-                <InterestButton
-                  key={interest._id}
-                  onPress={() => addInterest(interest)}>
-                  <InterestButtonText>{interest.name}</InterestButtonText>
-                </InterestButton>
-              );
-            } else {
-              return (
-                <InterestButtonDisabled
-                  key={interest._id}
-                  onPress={() => addInterest(interest)}
-                  disabled>
-                  <InterestButtonText>{interest.name}</InterestButtonText>
-                </InterestButtonDisabled>
-              );
-            }
-          })}
-        </InterestView>
-      </ScrollContainer>
-      {navButton}
-    </CustomView>
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content"/>
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings}/>
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <Spacer />
+        <PageTitle>{t('profile.interest_choice')}</PageTitle>
+        <LittleSpacer />
+        <ScrollContainer>
+          <InterestView>
+            {InterestList.map(interest => {
+              if (containsObject(interest, user.interests)) {
+                return (
+                  <InterestButtonSelected
+                    key={interest._id}
+                    onPress={() => removeInterest(interest)}>
+                    <InterestButtonText>{interest.name}</InterestButtonText>
+                  </InterestButtonSelected>
+                );
+              } else if (user.interests?.length < 5) {
+                return (
+                  <InterestButton
+                    key={interest._id}
+                    onPress={() => addInterest(interest)}>
+                    <InterestButtonText>{interest.name}</InterestButtonText>
+                  </InterestButton>
+                );
+              } else {
+                return (
+                  <InterestButtonDisabled
+                    key={interest._id}
+                    onPress={() => addInterest(interest)}
+                    disabled>
+                    <InterestButtonText>{interest.name}</InterestButtonText>
+                  </InterestButtonDisabled>
+                );
+              }
+            })}
+          </InterestView>
+        </ScrollContainer>
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 

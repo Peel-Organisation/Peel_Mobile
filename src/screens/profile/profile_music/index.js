@@ -25,6 +25,7 @@ import {
 } from '../styles/content.js';
 import { UpdateButton, nextAction } from '../../../components/UpdateUser';
 import Loading from '../../../components/Loading';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 
 const Music = ({ route, navigation }) => {
@@ -170,44 +171,47 @@ const Music = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
-          <GoBackArrowImage source={settings} />
-        </GoBackArrow>
-        <HeaderTextView>
-          <HeaderText>{t('profile.title')}</HeaderText>
-          <BarStyle />
-        </HeaderTextView>
-      </HeaderView>
-      <Spacer />
-      <MusicContainer>
-        <PageTitle>{t('profile.music_condition')}</PageTitle>
-        <FieldInput
-          value={searchText}
-          onChangeText={text => {
-            setSearchText(text);
-            setPage(1);
-            setMusics([]);
-          }}
-          placeholder={t('profile.music_placeholder')}
-        />
-        {loading ? <Loading /> : (
-          <FlatListCustom
-            data={musics}
-            renderItem={renderItem}
-            keyExtractor={item => item.result.id.toString()}
-            onEndReached={() => {
-              setPage(page + 1);
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView>
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <Spacer />
+        <MusicContainer>
+          <PageTitle>{t('profile.music_condition')}</PageTitle>
+          <FieldInput
+            value={searchText}
+            onChangeText={text => {
+              setSearchText(text);
+              setPage(1);
+              setMusics([]);
             }}
-            onEndReachedThreshold={0.4}
-            numColumns={1}
+            placeholder={t('profile.music_placeholder')}
           />
-        )}
-      </MusicContainer>
-      {loading && <MusicText>Chargement...</MusicText>}
-      {navButton}
-    </CustomView>
+          {loading ? <Loading /> : (
+            <FlatListCustom
+              data={musics}
+              renderItem={renderItem}
+              keyExtractor={item => item.result.id.toString()}
+              onEndReached={() => {
+                setPage(page + 1);
+              }}
+              onEndReachedThreshold={0.4}
+              numColumns={1}
+            />
+          )}
+        </MusicContainer>
+        {loading && <MusicText>Chargement...</MusicText>}
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 
