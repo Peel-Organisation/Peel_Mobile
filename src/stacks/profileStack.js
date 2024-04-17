@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from "react-native";
 import crashlytics from '@react-native-firebase/crashlytics';
-import Profile1 from "../screens/profile/profile_1"
-import Profile2 from "../screens/profile/profile_2"
-import Profile3 from "../screens/profile/profile_3"
-import Biographie from "../screens/profile/profile_biographie"
-import ProfileInterest from "../screens/profile/profile_interest"
-import Question from "../screens/profile/profile_question"
-import Film from "../screens/profile/profile_film"
-import Gif from "../screens/profile/profile_gif"
+import Profile1 from "../screens/profile/profile_1";
+import Profile2 from "../screens/profile/profile_2";
+import Profile3 from "../screens/profile/profile_3";
+import Biographie from "../screens/profile/profile_biographie";
+import ProfileInterest from "../screens/profile/profile_interest";
+import Question from "../screens/profile/profile_question";
+import Film from "../screens/profile/profile_film";
+import Gif from "../screens/profile/profile_gif";
 import Music from "../screens/profile/profile_music";
-import DateType from "../screens/profile/profile_date_type";
-import { useTranslation } from "react-i18next";
 import RetryButton from "../components/Retry";
-import { GetUser } from "../functions/api_request"
-import Loading from "../components/loading";
+import { GetUser } from "../functions/api_request";
+import Loading from "../components/Loading";
 const Stack = createNativeStackNavigator();
 const UserContext = React.createContext("token");
-
 
 const PublicStack = () => {
   const [loading, setLoading] = React.useState(true);
@@ -26,7 +24,21 @@ const PublicStack = () => {
   const [error, setError] = React.useState("");
 
   useEffect(() => {
-    fetchUser()
+    fetchUser();
+
+    // Status bar gestion and fix issues
+    StatusBar.setBarStyle('light-content', true);
+    // Hide the status bar on Android
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#FC912F');
+      StatusBar.setHidden(true, 'fade');
+    };
+    // Hide the status bar on iOS
+    StatusBar.setHidden(true, 'fade');
+    // render the status bar on iOS
+    return () => { 
+      StatusBar.setHidden(false, 'fade');
+    };
   }, []);
 
   const fetchUser = async () => {
@@ -59,11 +71,10 @@ const PublicStack = () => {
 
   return (
     <UserContext.Provider value={"user"}>
-      <Stack.Navigator initialRouteName="Profile1" screenOptions={{ headerShown: false }} >
+      <Stack.Navigator initialRouteName="Profile1" screenOptions={{ headerShown:false, headerShadowVisible:false, headerStyle:{backgroundColor:'#FC912F'} }}>
         <Stack.Screen name="Profile1" component={Profile1} />
         <Stack.Screen name="Profile2" component={Profile2} />
         <Stack.Screen name="Profile3" component={Biographie} />
-        <Stack.Screen name="Profile4" component={DateType} />
         <Stack.Screen name="Profile5" component={Gif} />
         <Stack.Screen name="Profile6" component={Film} />
         <Stack.Screen name="Profile7" component={Music} />
