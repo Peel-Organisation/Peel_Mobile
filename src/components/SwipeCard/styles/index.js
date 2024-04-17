@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import styled from 'styled-components/native';
 
 const DIMENSION_WIDTH = Dimensions.get("window").width;
@@ -6,7 +6,7 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const HomeCard = styled.FlatList`
     width: ${DIMENSION_WIDTH - 40}px;
-    height: ${DIMENSION_HEIGHT - 230}px;
+    height: 435px;
     background-color: white;
     border-radius: 15px;
     padding: 10px;

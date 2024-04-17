@@ -32,7 +32,7 @@ const TabStackScreen = () => {
         tabBarShowLabel: false,
         tabBarLabel: () => null, 
         tabBarStyle: {
-          height: 65,
+          height: 80,
           borderTopWidth: 1,
           elevation: 1,
           shadowOpacity: 0,

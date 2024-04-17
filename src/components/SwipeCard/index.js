@@ -49,6 +49,7 @@ const SwipeCard = ({ User }) => {
     <HomeCard
       data={Object.entries(User.profileModules || {})}
       keyExtractor={(item) => item[0]}
+      height={500}
       renderItem={({ item }) => {
         const moduleType = item[1];
         const component = renderComponent(moduleType);
