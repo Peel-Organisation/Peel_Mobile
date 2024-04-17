@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton, nextAction } from '../../../components/Update_User';
 import { GIPHY_API_KEY, GIPHY_PATH } from '@env';
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
-import { FlatList, TouchableOpacity, Image } from 'react-native';
-
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
-import Loading from '../../../components/loading';
-
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js'
+import {
+  CustomView,
+  ContentView,
+  FieldInput,
+  LabelInput,
+  PageTitle,
+  SwitchSelectorCustom,
+  DatePickerCustom,
+  BioInput,
+  FlatListCustom,
+  ListItem,
+  GifImage
+} from '../styles/content.js';
+import { UpdateButton, nextAction } from '../../../components/UpdateUser';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import Loading from '../../../components/Loading';
+import { Spacer } from '../../login/styles/index.js';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 
 const Gif = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -59,7 +72,7 @@ const Gif = ({ route, navigation }) => {
       setNavButton(
         <UpdateButton
           user={{ gif: user.gif }}
-          prevPage="Profile4"
+          prevPage="Profile3"
           nextPage="Profile6"
           navigation={navigation}
         />
@@ -68,7 +81,7 @@ const Gif = ({ route, navigation }) => {
       setNavButton(
         <UpdateButton
           user={{ gif: user.gif }}
-          prevPage="Profile4"
+          prevPage="Profile3"
           nextPage=""
           navigation={navigation}
         />
@@ -142,50 +155,54 @@ const Gif = ({ route, navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => updateGif(item)}>
-        <Image
-          style={{
-            width: 200,
-            height: 200,
-          }}
+      <ListItem onPress={() => updateGif(item)}>
+        <GifImage
           source={{
             uri: `${item?.images?.original?.webp}`,
           }}
         />
-      </TouchableOpacity>
+      </ListItem>
     );
   };
 
-
-
-
   return (
-    <CustomView>
-      <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
-      </HeaderView>
-      <FieldView>
-        <PageTitle>{t('profile.gifs_condition')}</PageTitle>
-        <FieldInput
-          value={searchText}
-          onChangeText={text => setSearchText(text)}
-          placeholder={t('profile.gifs_condition')}
-        />
-        {loading ? <Loading /> :
-          <FlatList
-            data={gifs}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            onEndReached={() => {
-              setPage(page + 1);
-            }}
-            onEndReachedThreshold={0.4}
-            numColumns={2}
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView> 
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <ContentView>
+          <Spacer />
+          <PageTitle>{t('profile.gifs_condition')}</PageTitle>
+          <FieldInput
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+            placeholder={t('profile.gifs_condition')}
           />
-        }
-      </FieldView>
-      {navButton}
-    </CustomView>
+          {loading ? <Loading /> :
+            <FlatListCustom
+              data={gifs}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+              onEndReached={() => {
+                setPage(page + 1);
+              }}
+              onEndReachedThreshold={0.4}
+              numColumns={2}
+            />
+          }
+        </ContentView>
+        {navButton}
+      </CustomView>
+    </>
+   
   );
 };
 

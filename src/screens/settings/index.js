@@ -1,23 +1,49 @@
-import React from 'react';
+import React, { useState, Image } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import crashlytics from '@react-native-firebase/crashlytics';
-
-import {onDisplayNotification} from '../../functions/notification';
-
+import { onDisplayNotification } from '../../functions/notification';
+import Modal from '../../components/UI/ModalSettings';
 import {
+  Header,
+  HeaderText,
+  BarStyle,
   SettingsView,
+  IconSettings,
   SettingsList,
-  Button_Settings,
-  Button_Settings_Text,
-  SettingsTitle,
+  ButtonSettings,
+  ButtonSettingsText,
 } from './styles';
 
 import '../../config/translationInit';
 import { Linking } from 'react-native';
 
 const Settings = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const {t, i18n} = useTranslation();
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const ModalContent= () => {
+    return (
+      <>
+        <ButtonSettings onPress={() => i18n.changeLanguage('en')}>
+          <ButtonSettingsText>
+            <Image source={require('../../../assets/images/icons/flagEnglish.png')} />
+            {t('settings.language_en')}
+          </ButtonSettingsText>
+        </ButtonSettings>
+        <ButtonSettings onPress={() => i18n.changeLanguage('fr')}>
+          <ButtonSettingsText>
+            <Image source={require('../../../assets/images/icons/flagFrench.png')} />
+            {t('settings.language_fr')}
+          </ButtonSettingsText>
+        </ButtonSettings>
+      </>
+    );
+  };
 
   const Logout = () => {
     crashlytics().log('Logout pressed');
@@ -38,45 +64,73 @@ const Settings = ({navigation}) => {
   };
 
   return (
-    <SettingsView>
-      <SettingsTitle>{t('settings.title')}</SettingsTitle>
-      <SettingsList>
-        <Button_Settings onPress={Logout}>
-          <Button_Settings_Text>{t('settings.logout')}</Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => navigation.navigate('Profile')}>
-          <Button_Settings_Text>
-            {t('settings.preferences')}
-          </Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => i18n.changeLanguage('fr')}>
-          <Button_Settings_Text>
-            {t('settings.language_fr')}
-          </Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => i18n.changeLanguage('en')}>
-          <Button_Settings_Text>
-            {t('settings.language_en')}
-          </Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings
-          onPress={() =>
-            onDisplayNotification('settings', 'Voici la notification de test')
-          }>
-          <Button_Settings_Text>Notification</Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => navigation.navigate('EditProfile')}>
-          <Button_Settings_Text>
-            {t('settings.edit_profile')}
-          </Button_Settings_Text>
-        </Button_Settings>
-        <Button_Settings onPress={() => Linking.openURL('https://sites.google.com/view/peelapp/nous-contacter')}>
-          <Button_Settings_Text>
-            {t('settings.contact')}
-          </Button_Settings_Text>
-        </Button_Settings>
-      </SettingsList>
-    </SettingsView>
+    <>
+      { modalVisible && (
+        <Modal
+          closeModal={closeModal}
+          modalVisible={modalVisible}
+          // ModalContent={ModalContent}
+        />
+      )}
+      <Header>
+        <HeaderText>{t('settings.title')}</HeaderText>
+        <BarStyle />
+      </Header>
+      <SettingsView>
+        <SettingsList>
+          <ButtonSettings onPress={() => navigation.navigate('Profile')}>
+            <IconSettings source={require('../../../assets/images/icons/preferences.png')} />
+            <ButtonSettingsText>
+              {t('settings.preferences')}
+            </ButtonSettingsText>
+          </ButtonSettings>
+
+          <ButtonSettings onPress={() => { setModalVisible(true);}}>
+            <IconSettings source={require('../../../assets/images/icons/language.png')} />
+            <ButtonSettingsText>
+              {t('settings.language')}
+            </ButtonSettingsText>
+          </ButtonSettings>
+
+          <ButtonSettings
+            onPress={() =>
+              onDisplayNotification('settings', 'Voici la notification de test')
+            }>
+            <IconSettings source={require('../../../assets/images/icons/notification.png')} />
+            <ButtonSettingsText>
+              Notification
+            </ButtonSettingsText>
+          </ButtonSettings>
+
+          <ButtonSettings onPress={() => navigation.navigate('EditProfile')}>
+            <IconSettings source={require('../../../assets/images/icons/edit.png')} />
+            <ButtonSettingsText>
+              {t('settings.edit_profile')}
+            </ButtonSettingsText>
+          </ButtonSettings>
+
+          <ButtonSettings
+            onPress={() =>
+              Linking.openURL(
+                'https://sites.google.com/view/peelapp/nous-contacter',
+              )
+            }>
+            <IconSettings source={require('../../../assets/images/icons/contact-mail.png')} />
+            <ButtonSettingsText>
+              {t('settings.contact')}
+            </ButtonSettingsText>
+          </ButtonSettings>
+
+          <ButtonSettings onPress={Logout}>
+            <IconSettings source={require('../../../assets/images/icons/logout.png')} />
+            <ButtonSettingsText>
+              {t('settings.logout')}
+              </ButtonSettingsText>
+          </ButtonSettings>
+
+        </SettingsList>
+      </SettingsView>
+    </>
   );
 };
 

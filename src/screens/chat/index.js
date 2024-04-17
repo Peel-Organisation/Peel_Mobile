@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import MessageList from '../../components/Message_List';
-import MessageInput from '../../components/Message_Input';
-import { KeyboardAvoidingViewCustom } from './styles';
-
-
+import MessageList from '../../components/MessageList';
+import MessageInput from '../../components/MessageInput';
+import { KeyboardAvoidingView } from "react-native";
 
 const Chat = ({ route }) => {
     const { conversation } = route.params;
     const [messages, setMessages] = useState([]);
 
     return (
-        <KeyboardAvoidingViewCustom behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
+            style={{ flex: 1 }}
+        >
             <MessageList conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
-            <MessageInput conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
-        </KeyboardAvoidingViewCustom>
+            <MessageInput conversation_id={conversation._id} messages={messages} setMessages={setMessages} />   
+        </KeyboardAvoidingView>
     );
-
 }
-
-
 
 export default Chat;
 
