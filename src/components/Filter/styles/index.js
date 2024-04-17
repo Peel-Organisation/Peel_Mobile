@@ -1,9 +1,10 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView `
     position: absolute;
     width: 100%;
-    top: 3%;
+    top: ${Platform.OS === 'android' ? '0%' : '3%'};
     height: 64%;
     background-color: ${props => props.theme.primary};
     border-bottom-left-radius: 39px;

@@ -10,7 +10,7 @@ const Chat = ({ route }) => {
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : null}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 92 : 0}
             style={{ flex: 1 }}
         >
             <MessageList conversation_id={conversation._id} messages={messages} setMessages={setMessages} />

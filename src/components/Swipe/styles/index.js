@@ -9,12 +9,12 @@ export const CardStackView = styled(CardStack)`
     width: ${DIMENSION_WIDTH - 40}px;
     height: ${DIMENSION_HEIGHT - 270}px;
     align-self: center;
-    margin-top: 5%;
+    margin-top: 3%;
     border-radius: 15px;
 `
 
 export const ButtonStack = styled.SafeAreaView`
-    margin-top: 3%;
+    margin-top: 2%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;

@@ -28,9 +28,8 @@ import {ConditionText} from '../../../components/StyledComponents/Profile/Genera
 
 import Loading from '../../../components/Loading';
 import {UpdateButton} from '../../../components/UpdateUser';
-import {StatusBar} from 'react-native';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
 import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const QuestionProfil = ({route, navigation}) => {
   const {t} = useTranslation();
@@ -112,9 +111,7 @@ const QuestionProfil = ({route, navigation}) => {
   return (
     <>
       <View style={{ backgroundColor: '#FC912F'}}>
-        <SafeAreaView>
-          <StatusBar backgroundColor="#FC912F" theme="light-content" />
-        </SafeAreaView>
+        <StatusBarCustom backgroundColor="#FC912F" theme="light-content" />
       </View>
       <CustomView>
         <HeaderView>
