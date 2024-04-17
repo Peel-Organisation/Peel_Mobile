@@ -1,0 +1,25 @@
+import React, { useState } from "react";
+import { Text } from "react-native";
+import DatePicker from 'react-native-date-picker'
+
+const DateInput = (props) => {
+    const [user, setUser] = useState(props.user);
+    const type = props.type;
+
+    return (
+        <>
+            <Text>{type}</Text>
+            <DatePicker
+                date={user[type]}
+                onDateChange={(date) => {
+                    var newUser = user;
+                    newUser[type] = date;
+                    setUser(newUser)
+                }}
+                mode="date"
+            />
+        </>
+    );
+}
+
+export default DateInput; 

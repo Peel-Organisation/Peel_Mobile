@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { GENIUS_API_TOKEN, GENIUS_API_PATH } from '@env';
-import { UpdateButton, nextAction } from '../../../components/Update_User';
 import { getStorage } from '../../../functions/storage';
 import crashlytics from '@react-native-firebase/crashlytics';
-
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { FieldInput } from '../../../components/StyledComponents/Profile/General/FieldInput';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { FieldView } from '../../../components/StyledComponents/Profile/General/FieldView';
-import Loading from '../../../components/loading';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js';
+import { Spacer } from '../../login/styles/index.js';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import {
+  CustomView,
+  PageTitle,
+  FieldInput,
+  ListMusic,
+  MusicImage,
+  FlatListCustom,
+  MusicText,
+  MusicContainer
+} from '../styles/content.js';
+import { UpdateButton, nextAction } from '../../../components/UpdateUser';
+import Loading from '../../../components/Loading';
+import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
+
 
 const Music = ({ route, navigation }) => {
   const { t } = useTranslation();
@@ -37,10 +48,10 @@ const Music = ({ route, navigation }) => {
   }, []);
 
   useEffect(() => {
-    setPage(1);
-    setMusics([]);
     if (searchText.length > 0) {
       searchMusics();
+    } else {
+      //TODO: getPopularMusic();
     }
   }, [searchText]);
 
@@ -52,8 +63,6 @@ const Music = ({ route, navigation }) => {
 
   const searchMusics = async () => {
     const url = `https://${GENIUS_API_PATH}search?q=${searchText}&page=${page}`;
-    console.log('url : ', url);
-    console.log('authorization : ', `Bearer ${GENIUS_API_TOKEN}`);
     setLoading(true);
     try {
       const response = await fetch(url, {
@@ -84,7 +93,7 @@ const Music = ({ route, navigation }) => {
         setLoading(false);
       }
     } catch (error) {
-      console.log('error : ', error);
+
       crashlytics().recordError(error);
     }
   };
@@ -126,23 +135,18 @@ const Music = ({ route, navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => updateMusic(item)}>
-        <Image
-          style={{
-            width: 200,
-            height: 200,
-          }}
+      <ListMusic onPress={() => updateMusic(item)}>
+        <MusicImage
           source={{
             uri: `${item.result.song_art_image_thumbnail_url}`,
           }}
         />
-        <MainText>{item.result.title}</MainText>
-      </TouchableOpacity>
+        <MusicText>{item.result.full_title}</MusicText>
+      </ListMusic>
     );
   };
 
   useEffect(() => {
-    console.log('user : ', user.music);
     if (
       user.music?.title != undefined && user.music?.title != '' && user.music?.id != undefined && user.music?.id != '' && user.music?.artist != undefined && user.music?.artist != '' && user.music?.image != undefined && user.music?.image != '' && user.music?.album != undefined && user.music?.album != ''
     ) {
@@ -167,37 +171,47 @@ const Music = ({ route, navigation }) => {
   }, [user]);
 
   return (
-    <CustomView>
-      <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
-      </HeaderView>
-      <FieldView>
-        <PageTitle>{t('profile.music_condition')}</PageTitle>
-        <FieldInput
-          value={searchText}
-          onChangeText={text => {
-            setSearchText(text);
-            setPage(1);
-            setMusics([]);
-          }}
-          placeholder={t('profile.music_placeholder')}
-        />
-        {loading ? <Loading /> : (
-          <FlatList
-            data={musics}
-            renderItem={renderItem}
-            keyExtractor={item => item.result.id.toString()}
-            onEndReached={() => {
-              setPage(page + 1);
+    <>
+      <StatusBarCustom bgColor="#FC912F" theme="light-content" />
+      <CustomView>
+        <HeaderView>
+          <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+            <GoBackArrowImage source={settings} />
+          </GoBackArrow>
+          <HeaderTextView>
+            <HeaderText>{t('profile.title')}</HeaderText>
+            <BarStyle />
+          </HeaderTextView>
+        </HeaderView>
+        <Spacer />
+        <MusicContainer>
+          <PageTitle>{t('profile.music_condition')}</PageTitle>
+          <FieldInput
+            value={searchText}
+            onChangeText={text => {
+              setSearchText(text);
+              setPage(1);
+              setMusics([]);
             }}
-            onEndReachedThreshold={0.4}
-            numColumns={2}
+            placeholder={t('profile.music_placeholder')}
           />
-        )}
-      </FieldView>
-      {loading && <MainText>Chargement...</MainText>}
-      {navButton}
-    </CustomView>
+          {loading ? <Loading /> : (
+            <FlatListCustom
+              data={musics}
+              renderItem={renderItem}
+              keyExtractor={item => item.result.id.toString()}
+              onEndReached={() => {
+                setPage(page + 1);
+              }}
+              onEndReachedThreshold={0.4}
+              numColumns={1}
+            />
+          )}
+        </MusicContainer>
+        {loading && <MusicText>Chargement...</MusicText>}
+        {navButton}
+      </CustomView>
+    </>
   );
 };
 
