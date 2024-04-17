@@ -9,22 +9,7 @@ import crashlytics from '@react-native-firebase/crashlytics';
 
 
 
-const MessageList = ({ conversation_id, messages, setMessages }) => {
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    getStorageMessage(conversation_id).then(data => {
-      setMessages(data);
-    }).catch((error) => {
-      crashlytics().recordError(error)
-    })
-
-    getStorage('userId').then(data => {
-      setUserId(data);
-    }).catch((error) => {
-      crashlytics().recordError(error)
-    })
-  }, []);
+const MessageList = ({ messages, setMessages, userId }) => {
 
   messaging().onMessage(async remoteMessage => {
     crashlytics().log('A new FCM message arrived in front!', JSON.stringify(remoteMessage));

@@ -46,4 +46,3 @@ export const messageLisner = () => {
   messaging().setBackgroundMessageHandler(onMessageReceived);
   messaging().onMessage(onMessageReceived);
 }
-

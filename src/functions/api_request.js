@@ -241,3 +241,12 @@ export const createInstantConversation = async (user2) => {
         crashlytics().recordError(error)
     });
 }
+
+export const getIceBreakerQuestions = async () => {
+    crashlytics().log("\n\n getIceBreakerQuestions")
+    return FetchPeelApi({ url: `/api/question/icebreaker/`, method: "GET" }).then(res => {
+        return (res);
+    }).catch(error => {
+        crashlytics().recordError(error)
+    });
+}
