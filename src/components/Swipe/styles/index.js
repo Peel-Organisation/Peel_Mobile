@@ -7,9 +7,8 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const CardStackView = styled(CardStack)`
     width: ${DIMENSION_WIDTH - 40}px;
-    /* height: ${DIMENSION_HEIGHT - 230}px; */
+    height: ${DIMENSION_HEIGHT - 260}px;
     /* height: 430px; */
-    height: 78%;
     align-self: center;
     margin-top: 4%;
     border-radius: 15px;
