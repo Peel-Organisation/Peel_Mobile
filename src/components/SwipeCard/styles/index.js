@@ -6,10 +6,10 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const HomeCard = styled.FlatList`
     width: ${DIMENSION_WIDTH - 40}px;
-    height: ${DIMENSION_HEIGHT - 260}px;
+    height: ${DIMENSION_HEIGHT - 270}px;
     background-color: white;
     border-radius: 15px;
-    padding: 10px;
+    padding: 15px;
     border: 5px solid white;
     ${Platform.OS === 'android' ? 'elevation: 3' : 'shadow-color: #000; shadow-offset: 0 2px; shadow-opacity: 0.1; shadow-radius: 4px;'};
 `

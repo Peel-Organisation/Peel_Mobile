@@ -28,7 +28,7 @@ import {ConditionText} from '../../../components/StyledComponents/Profile/Genera
 
 import Loading from '../../../components/Loading';
 import {UpdateButton} from '../../../components/UpdateUser';
-import StatusBarCustom from '../../../components/UI/StatusBarCustom/index.js';
+import {StatusBar} from 'react-native';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -113,7 +113,7 @@ const QuestionProfil = ({route, navigation}) => {
     <>
       <View style={{ backgroundColor: '#FC912F'}}>
         <SafeAreaView>
-          <StatusBarCustom backgroundColor="#FC912F" theme="light-content" />
+          <StatusBar backgroundColor="#FC912F" theme="light-content" />
         </SafeAreaView>
       </View>
       <CustomView>

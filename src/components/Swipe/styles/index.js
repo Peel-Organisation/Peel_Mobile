@@ -7,14 +7,14 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const CardStackView = styled(CardStack)`
     width: ${DIMENSION_WIDTH - 40}px;
-    height: ${DIMENSION_HEIGHT - 250}px;
+    height: ${DIMENSION_HEIGHT - 270}px;
     align-self: center;
-    margin-top: 4%;
+    margin-top: 5%;
     border-radius: 15px;
 `
 
 export const ButtonStack = styled.SafeAreaView`
-    margin-top: 5%;
+    margin-top: 3%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;

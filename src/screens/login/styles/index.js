@@ -41,7 +41,7 @@ export const Spacer = styled.View`
 
 export const Header = styled.SafeAreaView`
     width: ${DIMENSION_WIDTH}px;
-    height: 100px;
+    height: 130px;
     background-color: ${props => props.theme.primary};
     align-items: center;
     justify-content: center;
