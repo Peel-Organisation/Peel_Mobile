@@ -6,7 +6,7 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 export const Header = styled.SafeAreaView`
     width: ${DIMENSION_WIDTH}px;
-    height: 100px;
+    height: 115px;
     background-color: ${props => props.theme.primary};
     align-items: center;
     justify-content: center;
