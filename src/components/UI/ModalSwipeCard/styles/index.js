@@ -5,32 +5,31 @@ import { Dimensions } from "react-native";
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const Container = styled.View`
-    top: 15%;
-    left: 10%;
-    padding: 15px;
-    width: ${DIMENSION_WIDTH - 78}px;
+export const Container = styled.SafeAreaView`
+    top: 16%;
+    width: 70%;
+    align-self: center;
     border-radius: 15px;
-    z-index: 999999;
+    z-index: 99999999;
     background: ${props => props.theme.background_light_blur};
 `
-export const Content = styled.View`
+export const Content = styled.SafeAreaView`
     padding: 15px;
 `
 
 export const Overlay = styled.TouchableOpacity`
     position: absolute;
-    width: ${DIMENSION_WIDTH - 70}px;
-    height: ${DIMENSION_HEIGHT - 250}px;
+    width: 100%;
+    height: ${DIMENSION_HEIGHT}px; 
     background: rgba(0,0,0,0.5);
-    z-index: 999998;
+    z-index: 99999999;
     border-radius: 15px;
 `
 
 export const Button = styled.TouchableOpacity`
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 2%;
+    right: 2%;
     z-index: 2;
 `
 

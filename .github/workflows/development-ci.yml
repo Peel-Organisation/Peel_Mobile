@@ -2,10 +2,8 @@ name: Android - Build & Publish Release APK - DEV
 
 on:
   push:
-    branches: 
-      - 'development'
-      - '!main'
-      - '!master'
+    branches:
+      - development
       - '!feature*'
       - '!feature/*'
       - '!fix*'
@@ -16,9 +14,7 @@ on:
       - '!feat/*'
   pull_request:
     branches: 
-      - 'development'
-      - '!main'
-      - '!master'
+      - development
       - '!feature*'
       - '!feature/*'
       - '!fix*'
