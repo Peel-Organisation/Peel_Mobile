@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components/native';
 
-import HomeImage from '../../assets/images/logo/peel_logo-48px.png';
-import HomeSelectedImage from '../../assets/images/logo/peel_logo3-48px-color.png';
+import HomeImage from '../../assets/images/logo/peel_logo3-shadow.png';
+import HomeSelectedImage from '../../assets/images/logo/peel_logo3.png';
 import ChatImage from '../../assets/images/icons/chat.png';
 import ChatSelectedImage from '../../assets/images/icons/chatSelected.png';
 import SettingsImage from '../../assets/images/icons/settings.png';
