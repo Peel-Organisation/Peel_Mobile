@@ -4,6 +4,7 @@ const sendpng = require('./styles/send.png');
 import { sendMessage } from "../../functions/api_request";
 import { addStorageMessage, getStorage } from "../../functions/storage";
 import crashlytics from '@react-native-firebase/crashlytics';
+import { KeyboardAvoidingView } from 'react-native';
 
 const MessageInput = ({ conversation_id, messages, setMessages }) => {
   const [value, setValue] = useState('');
@@ -36,6 +37,7 @@ const MessageInput = ({ conversation_id, messages, setMessages }) => {
       <MessageButton onPress={() => submitMessage()}>
         <SendIcon source={sendpng} />
       </MessageButton>
+      <KeyboardAvoidingView />
     </ViewCustom>
   );
 };

@@ -11,9 +11,7 @@ const Chat = ({ route }) => {
             <MessageList conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
             <MessageInput conversation_id={conversation._id} messages={messages} setMessages={setMessages} />
         </>
-
     );
-
 }
 
 export default Chat;
