@@ -1,4 +1,4 @@
-import Biographie from '../../screens/profile/profile_biographie';
+// Usage: import en from 'config/translations/en.js';
 
 export default {
   translation: {
@@ -16,6 +16,7 @@ export default {
       edit_profile: 'Edit profile',
       edit_profile_title: 'Customize your profile',
       contact: 'Contact us',
+      return: 'Return',
     },
     navbar: {
       home: 'Home',
@@ -29,6 +30,8 @@ export default {
       title: 'Login',
       email: 'Email',
       password: 'Password',
+      email_placeholder: 'Enter your email',
+      password_placeholder: 'Enter your password',
       button_login: 'Login',
       no_account: "Don't have an account yet ?",
       button_register: 'Register',
@@ -36,9 +39,12 @@ export default {
     register: {
       title: 'Register',
       email: 'Email',
+      email_placeholder: 'Enter your email',
       password: 'Password',
+      password_placeholder: 'Enter your password',
       password_confirm: 'Confirm password',
       button_register: 'Register',
+      button_register_text: 'Register',
       already_account: 'Already have an account ?',
       button_login: 'Login',
     },
@@ -60,9 +66,10 @@ export default {
       hetero_search: 'Heterosexual',
       bi_search: 'Bisexual',
       biography: 'Fill your biography',
-      interest: 'Please choose 5 hobbies',
+      interest_choice: 'Please choose 5 hobbies',
       search_zone: 'Search area',
       question_title: 'Describe yourself in 3 questions',
+      question_choice: 'Choose 3 questions',
       question_select: 'Select a question !',
       question_placeholder: 'Answer the question !',
       question_save: 'Save',
@@ -72,9 +79,15 @@ export default {
       movie_placeholder: 'Search a movie',
       music_condition: 'Choose a music',
       music_placeholder: 'Search a music',
+      type_of_search: 'what are you looking for?',
+      search_love: 'Search love',
+      search_friend: 'Search friends',
+      modify_name: 'Change your name',
+      modify_firstname: 'Change your surname',
       custom: {
-        title: 'Customize your profile !',
-        text: 'Select the elements you want other users to see when they want to check on your profile',
+        title: 'Modify Profile',
+        blocs: 'Personalize your profile blocks',
+        text: 'Choose the blocks you want to be visible and their order on your profile.',
         biography: 'Biography',
         gifs: 'Gifs',
         interests: 'Interests',
@@ -122,5 +135,14 @@ export default {
       no_more_swipe_text: 'You will be able to start again tomorrow',
       no_more_swipe_button: 'OK',
     },
+    Filter:{
+      interest: "Interests",
+      music: "Music",
+      sport: "Sport",
+      movie: "Films",
+      games: "Games",
+      cancel: "Cancel",
+      apply: "Apply",
+    }
   },
 };
