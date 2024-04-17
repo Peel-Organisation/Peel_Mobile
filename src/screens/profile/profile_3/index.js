@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { UpdateButton } from '../../../components/Update_User';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getStorage } from '../../../functions/storage';
 
 import { Slider } from '@miblanchard/react-native-slider';
-
-import {
-  SwitchSelectorCustom,
-  SliderCustom,
-} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
-import { CustomView } from '../../../components/StyledComponents/Profile/General/CustomView';
-import { InputView } from '../../../components/StyledComponents/Profile/General/InputView';
-import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
-import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
-import { PageTitle } from '../../../components/StyledComponents/Profile/General/PageTitle';
 import {
   HeaderView,
   HeaderText,
-} from '../../../components/StyledComponents/Profile/General/Header';
-import { ContentView } from '../../../components/StyledComponents/Profile/General/ContentView';
+  HeaderTextView,
+  BarStyle,
+  GoBackArrow,
+  GoBackArrowImage,
+} from '../styles/header.js'
+import {
+  CustomView,
+  ContentView,
+  FieldInput,
+  LabelInput,
+  SwitchSelectorCustom,
+  DatePickerCustom,
+} from '../styles/content.js';
+
+import {
+  SliderCustom,
+} from '../../../components/StyledComponents/Profile/General/ConditionText/Test';
+import { UpdateButton } from '../../../components/UpdateUser';
+import settings from '../../../../assets/images/icons/settings-white.png';
+import { ConditionText } from '../../../components/StyledComponents/Profile/General/ConditionText';
+import { MainText } from '../../../components/StyledComponents/Profile/General/MainText';
+
 
 const Recherche = ({ route, navigation }) => {
   const [user, setUser] = useState({});
@@ -98,7 +107,13 @@ const Recherche = ({ route, navigation }) => {
   return (
     <CustomView>
       <HeaderView>
-        <HeaderText>{t('profile.title')}</HeaderText>
+        <GoBackArrow onPress={() => navigation.navigate('Settings')}>
+          <GoBackArrowImage source={settings} />
+        </GoBackArrow>
+        <HeaderTextView> 
+          <HeaderText>{t('profile.title')}</HeaderText>
+          <BarStyle />
+        </HeaderTextView>
       </HeaderView>
       <ContentView>
         <PageTitle>{t('profile.age')}</PageTitle>
