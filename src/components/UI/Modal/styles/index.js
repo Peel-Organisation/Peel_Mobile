@@ -5,10 +5,10 @@ import { Dimensions } from "react-native";
 const DIMENSION_WIDTH = Dimensions.get("window").width;
 const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     background: white;
     padding: 15px;
-    z-index: 999999;
+    z-index: 999998;
     width: 90%;
     top: 25%;
     left: 5%;
@@ -24,7 +24,7 @@ export const Overlay = styled.TouchableOpacity`
     height: ${DIMENSION_HEIGHT}px;
     background: rgba(0,0,0,0.5);
     top: 0;
-    z-index: 999998;
+    z-index: 999999;
 `
 
 export const Button = styled.TouchableOpacity`
